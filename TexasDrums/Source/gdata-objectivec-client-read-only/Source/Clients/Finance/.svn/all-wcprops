@@ -1,0 +1,155 @@
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Finance
+END
+GDataEntryFinancePortfolio.m
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Finance/GDataEntryFinancePortfolio.m
+END
+GDataFinanceSymbol.h
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Finance/GDataFinanceSymbol.h
+END
+GDataMoneyElements.m
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Finance/GDataMoneyElements.m
+END
+GDataQueryFinance.h
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Finance/GDataQueryFinance.h
+END
+GDataFeedFinancePortfolio.m
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Finance/GDataFeedFinancePortfolio.m
+END
+GDataEntryFinanceTransaction.h
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Finance/GDataEntryFinanceTransaction.h
+END
+GDataFeedFinanceTransaction.h
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Finance/GDataFeedFinanceTransaction.h
+END
+GDataFinanceSymbol.m
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Finance/GDataFinanceSymbol.m
+END
+GDataQueryFinance.m
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Finance/GDataQueryFinance.m
+END
+GDataEntryFinanceTransaction.m
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Finance/GDataEntryFinanceTransaction.m
+END
+GDataFeedFinanceTransaction.m
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Finance/GDataFeedFinanceTransaction.m
+END
+GDataFinanceTransactionData.h
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Finance/GDataFinanceTransactionData.h
+END
+GDataFinance.h
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Finance/GDataFinance.h
+END
+GDataFinanceTransactionData.m
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Finance/GDataFinanceTransactionData.m
+END
+GDataEntryFinancePosition.h
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Finance/GDataEntryFinancePosition.h
+END
+GDataPortfolioElements.h
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Finance/GDataPortfolioElements.h
+END
+GDataFeedFinancePosition.h
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Finance/GDataFeedFinancePosition.h
+END
+GDataEntryFinancePosition.m
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Finance/GDataEntryFinancePosition.m
+END
+GDataPortfolioElements.m
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Finance/GDataPortfolioElements.m
+END
+GDataFeedFinancePosition.m
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Finance/GDataFeedFinancePosition.m
+END
+GDataServiceGoogleFinance.h
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Finance/GDataServiceGoogleFinance.h
+END
+GDataEntryFinancePortfolio.h
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Finance/GDataEntryFinancePortfolio.h
+END
+GDataMoneyElements.h
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Finance/GDataMoneyElements.h
+END
+GDataFeedFinancePortfolio.h
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Finance/GDataFeedFinancePortfolio.h
+END
+GDataServiceGoogleFinance.m
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Finance/GDataServiceGoogleFinance.m
+END

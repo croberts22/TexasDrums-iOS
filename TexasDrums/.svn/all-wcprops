@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/texasdrums-ios/!svn/ver/80/trunk/TexasDrums
+END
+main.m
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/texasdrums-ios/!svn/ver/3/trunk/TexasDrums/main.m
+END
+TexasDrumsAppDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/texasdrums-ios/!svn/ver/3/trunk/TexasDrums/TexasDrumsAppDelegate.h
+END
+TexasDrums-Info.plist
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/texasdrums-ios/!svn/ver/110/trunk/TexasDrums/TexasDrums-Info.plist
+END
+TexasDrums-Prefix.pch
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/texasdrums-ios/!svn/ver/3/trunk/TexasDrums/TexasDrums-Prefix.pch
+END
+rounded_table_cell@2x.png
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/texasdrums-ios/!svn/ver/40/trunk/TexasDrums/rounded_table_cell@2x.png
+END
+rounded_table_cell_top@2x.png
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/texasdrums-ios/!svn/ver/49/trunk/TexasDrums/rounded_table_cell_top@2x.png
+END
+TexasDrumsAppDelegate.m
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/texasdrums-ios/!svn/ver/3/trunk/TexasDrums/TexasDrumsAppDelegate.m
+END
+rounded_table_cell_bottom@2x.png
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/texasdrums-ios/!svn/ver/49/trunk/TexasDrums/rounded_table_cell_bottom@2x.png
+END
+rounded_table_cell.png
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/texasdrums-ios/!svn/ver/40/trunk/TexasDrums/rounded_table_cell.png
+END
+rounded_table_cell_top.png
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/texasdrums-ios/!svn/ver/33/trunk/TexasDrums/rounded_table_cell_top.png
+END
+rounded_table_cell_bottom.png
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/texasdrums-ios/!svn/ver/33/trunk/TexasDrums/rounded_table_cell_bottom.png
+END

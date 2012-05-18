@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/JSON
+END
+JSON.h
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/JSON/JSON.h
+END
+SBJSON.h
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/JSON/SBJSON.h
+END
+NSObject+SBJSON.h
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/JSON/NSObject+SBJSON.h
+END
+NSString+SBJSON.h
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/JSON/NSString+SBJSON.h
+END
+SBJSON.m
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/JSON/SBJSON.m
+END
+NSObject+SBJSON.m
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/JSON/NSObject+SBJSON.m
+END
+NSString+SBJSON.m
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/JSON/NSString+SBJSON.m
+END

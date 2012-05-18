@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Examples/SpreadsheetTableSample
+END
+buildCopyScript
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Examples/SpreadsheetTableSample/buildCopyScript
+END
+main.m
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Examples/SpreadsheetTableSample/main.m
+END
+SpreadsheetTableSampleAppController.m
+K 25
+svn:wc:ra_dav:version-url
+V 159
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Examples/SpreadsheetTableSample/SpreadsheetTableSampleAppController.m
+END
+SpreadsheetTableSampleWindowController.h
+K 25
+svn:wc:ra_dav:version-url
+V 162
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Examples/SpreadsheetTableSample/SpreadsheetTableSampleWindowController.h
+END
+Info.plist
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Examples/SpreadsheetTableSample/Info.plist
+END
+SpreadsheetTableSample_Prefix.pch
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Examples/SpreadsheetTableSample/SpreadsheetTableSample_Prefix.pch
+END
+SpreadsheetTableSampleWindowController.m
+K 25
+svn:wc:ra_dav:version-url
+V 162
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Examples/SpreadsheetTableSample/SpreadsheetTableSampleWindowController.m
+END
+DEPRECATION_NOTE-IMPORTANT.txt
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Examples/SpreadsheetTableSample/DEPRECATION_NOTE-IMPORTANT.txt
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Examples/SpreadsheetTableSample/README.txt
+END
+SpreadsheetTableSampleAppController.h
+K 25
+svn:wc:ra_dav:version-url
+V 159
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Examples/SpreadsheetTableSample/SpreadsheetTableSampleAppController.h
+END
+buildStripHeaders
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Examples/SpreadsheetTableSample/buildStripHeaders
+END

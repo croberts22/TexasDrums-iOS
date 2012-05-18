@@ -1,0 +1,251 @@
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar
+END
+GDataServiceGoogleCalendar.m
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataServiceGoogleCalendar.m
+END
+GDataRecurrence.h
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataRecurrence.h
+END
+GDataEntryCalendarEvent.h
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataEntryCalendarEvent.h
+END
+GDataFeedCalendar.h
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataFeedCalendar.h
+END
+GDataQueryCalendar.h
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataQueryCalendar.h
+END
+GDataCalendarSettingsProperty.h
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataCalendarSettingsProperty.h
+END
+GDataFeedCalendar.m
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataFeedCalendar.m
+END
+GDataEntryCalendarEvent.m
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataEntryCalendarEvent.m
+END
+GDataRecurrence.m
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataRecurrence.m
+END
+GDataQueryCalendar.m
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataQueryCalendar.m
+END
+GDataCalendarSettingsProperty.m
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataCalendarSettingsProperty.m
+END
+GDataFeedEvent.h
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataFeedEvent.h
+END
+GDataReminder.h
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataReminder.h
+END
+GDataOriginalEvent.h
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataOriginalEvent.h
+END
+GDataEntryMessage.h
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataEntryMessage.h
+END
+GDataFeedFreeBusy.h
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataFeedFreeBusy.h
+END
+GDataWebContent.h
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataWebContent.h
+END
+GDataFeedEvent.m
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataFeedEvent.m
+END
+GDataReminder.m
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataReminder.m
+END
+GDataOriginalEvent.m
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataOriginalEvent.m
+END
+GDataEntryMessage.m
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataEntryMessage.m
+END
+GDataEntryCalendarSettings.h
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataEntryCalendarSettings.h
+END
+GDataRecurrenceException.h
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataRecurrenceException.h
+END
+GDataFeedFreeBusy.m
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataFeedFreeBusy.m
+END
+GDataWebContent.m
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataWebContent.m
+END
+GDataEntryCalendarSettings.m
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataEntryCalendarSettings.m
+END
+GDataRecurrenceException.m
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataRecurrenceException.m
+END
+GDataEntryCalendar.h
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataEntryCalendar.h
+END
+GDataFeedCalendarEvent.h
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataFeedCalendarEvent.h
+END
+GDataEntryCalendar.m
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataEntryCalendar.m
+END
+GDataEntryEvent.h
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataEntryEvent.h
+END
+GDataFeedCalendarEvent.m
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataFeedCalendarEvent.m
+END
+GDataEntryFreeBusy.h
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataEntryFreeBusy.h
+END
+GDataFeedMessage.h
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataFeedMessage.h
+END
+GDataEntryEvent.m
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataEntryEvent.m
+END
+GDataCalendar.h
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataCalendar.h
+END
+GDataEntryFreeBusy.m
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataEntryFreeBusy.m
+END
+GDataFeedMessage.m
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataFeedMessage.m
+END
+GDataFeedCalendarSettings.h
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataFeedCalendarSettings.h
+END
+GDataFeedCalendarSettings.m
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataFeedCalendarSettings.m
+END
+GDataServiceGoogleCalendar.h
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Calendar/GDataServiceGoogleCalendar.h
+END

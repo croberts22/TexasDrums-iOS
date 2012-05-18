@@ -1,0 +1,215 @@
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics
+END
+GDataFeedAnalyticsAccount.h
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataFeedAnalyticsAccount.h
+END
+GDataAnalyticsConstants.m
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataAnalyticsConstants.m
+END
+GDataAnalyticsGoal.h
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataAnalyticsGoal.h
+END
+GDataFeedAnalyticsAccount.m
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataFeedAnalyticsAccount.m
+END
+GDataAnalyticsGoal.m
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataAnalyticsGoal.m
+END
+GDataAnalyticsDataSource.h
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataAnalyticsDataSource.h
+END
+GDataFeedAnalyticsData.h
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataFeedAnalyticsData.h
+END
+GDataServiceGoogleAnalytics.h
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataServiceGoogleAnalytics.h
+END
+GDataAnalyticsDataSource.m
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataAnalyticsDataSource.m
+END
+GDataFeedAnalyticsData.m
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataFeedAnalyticsData.m
+END
+GDataServiceGoogleAnalytics.m
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataServiceGoogleAnalytics.m
+END
+GDataAnalyticsAggregateGroup.h
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataAnalyticsAggregateGroup.h
+END
+GDataQueryAnalytics.h
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataQueryAnalytics.h
+END
+GDataAnalyticsAggregateGroup.m
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataAnalyticsAggregateGroup.m
+END
+GDataQueryAnalytics.m
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataQueryAnalytics.m
+END
+GDataAnalyticsStep.h
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataAnalyticsStep.h
+END
+GDataAnalyticsElements.h
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataAnalyticsElements.h
+END
+GDataEntryAnalyticsAccount.h
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataEntryAnalyticsAccount.h
+END
+GDataAnalyticsStep.m
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataAnalyticsStep.m
+END
+GDataAnalyticsCustomVariable.h
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataAnalyticsCustomVariable.h
+END
+GDataAnalyticsDestination.h
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataAnalyticsDestination.h
+END
+GDataAnalyticsElements.m
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataAnalyticsElements.m
+END
+GDataEntryAnalyticsAccount.m
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataEntryAnalyticsAccount.m
+END
+GDataAnalyticsMetric.h
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataAnalyticsMetric.h
+END
+GDataAnalyticsCustomVariable.m
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataAnalyticsCustomVariable.m
+END
+GDataAnalyticsDestination.m
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataAnalyticsDestination.m
+END
+GDataAnalyticsMetric.m
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataAnalyticsMetric.m
+END
+GDataEntryAnalyticsData.h
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataEntryAnalyticsData.h
+END
+GDataEntryAnalyticsData.m
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataEntryAnalyticsData.m
+END
+GDataAnalyticsSegment.h
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataAnalyticsSegment.h
+END
+GDataAnalyticsSegment.m
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataAnalyticsSegment.m
+END
+GDataAnalyticsEngagement.h
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataAnalyticsEngagement.h
+END
+GDataAnalyticsConstants.h
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataAnalyticsConstants.h
+END
+GDataAnalytics.h
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataAnalytics.h
+END
+GDataAnalyticsEngagement.m
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Analytics/GDataAnalyticsEngagement.m
+END

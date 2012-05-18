@@ -1,0 +1,383 @@
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests
+END
+main.m
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/main.m
+END
+FeedYouTubePlaylist1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedYouTubePlaylist1.xml
+END
+FeedBlogTest1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedBlogTest1.xml
+END
+GDataNormalPlayTimeTest.m
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/GDataNormalPlayTimeTest.m
+END
+GDataServiceTest.m
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/GDataServiceTest.m
+END
+FeedBooksVolumesTest1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedBooksVolumesTest1.xml
+END
+FeedBlogPostTest1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedBlogPostTest1.xml
+END
+GDataTestHTTPServer.py
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/GDataTestHTTPServer.py
+END
+FeedYouTubeContacts1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedYouTubeContacts1.xml
+END
+FeedWebmasterToolsSitemap1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedWebmasterToolsSitemap1.xml
+END
+FeedWebmasterToolsCrawlIssues1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedWebmasterToolsCrawlIssues1.xml
+END
+FeedCodeSearchTest1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedCodeSearchTest1.xml
+END
+FeedWebmasterToolsMessages1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedWebmasterToolsMessages1.xml
+END
+FeedWebmasterToolsKeywords1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedWebmasterToolsKeywords1.xml
+END
+FeedSpreadsheetTest1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedSpreadsheetTest1.xml
+END
+FeedYouTubeUserProfile1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedYouTubeUserProfile1.xml
+END
+FeedYouTubeFavorites1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedYouTubeFavorites1.xml
+END
+FeedAnalyticsDataTest1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedAnalyticsDataTest1.xml
+END
+FeedYouTubeVideo1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedYouTubeVideo1.xml
+END
+FeedServiceDocTest2.xml
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedServiceDocTest2.xml
+END
+FeedFinancePositionTest1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedFinancePositionTest1.xml
+END
+FeedPhotosUserAlbum1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedPhotosUserAlbum1.xml
+END
+FeedYouTubeUserEventTest1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedYouTubeUserEventTest1.xml
+END
+GDataElementsTest.h
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/GDataElementsTest.h
+END
+FeedWebmasterToolsSite1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedWebmasterToolsSite1.xml
+END
+FeedPhotosSearch1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedPhotosSearch1.xml
+END
+FeedSpreadsheetWorksheetTest1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedSpreadsheetWorksheetTest1.xml
+END
+GDataElementsTest.m
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/GDataElementsTest.m
+END
+FeedSpreadsheetRecordTest1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedSpreadsheetRecordTest1.xml
+END
+FeedPhotosUserTag1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedPhotosUserTag1.xml
+END
+GDataServerErrorTest.m
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/GDataServerErrorTest.m
+END
+FeedFinanceTransactionTest1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedFinanceTransactionTest1.xml
+END
+FeedPhotosPhotoComment1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedPhotosPhotoComment1.xml
+END
+FeedCalendarEventTest0.xml
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedCalendarEventTest0.xml
+END
+FeedCalendarEventTest1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedCalendarEventTest1.xml
+END
+FeedYouTubeCaptionTracks1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedYouTubeCaptionTracks1.xml
+END
+GDataDateTimeTest.m
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/GDataDateTimeTest.m
+END
+FeedSpreadsheetCellsTest1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedSpreadsheetCellsTest1.xml
+END
+FeedYouTubePlaylistLink1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedYouTubePlaylistLink1.xml
+END
+FeedPhotosUserEntry1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedPhotosUserEntry1.xml
+END
+FeedACLTest1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedACLTest1.xml
+END
+GDataProgressMonitorInputStreamTest.m
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/GDataProgressMonitorInputStreamTest.m
+END
+FeedDocListTest1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedDocListTest1.xml
+END
+FeedFinancePortfolioTest1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedFinancePortfolioTest1.xml
+END
+GDataUtilitiesTest.m
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/GDataUtilitiesTest.m
+END
+FeedSpreadsheetListTest1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedSpreadsheetListTest1.xml
+END
+FeedAnalyticsAccountTest1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedAnalyticsAccountTest1.xml
+END
+FeedPhotosAlbumPhoto1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedPhotosAlbumPhoto1.xml
+END
+FeedMapFeaturesTest1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedMapFeaturesTest1.xml
+END
+FeedSpreadsheetTableTest1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedSpreadsheetTableTest1.xml
+END
+FeedYouTubeSubscriptions1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedYouTubeSubscriptions1.xml
+END
+FeedMessageTest1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedMessageTest1.xml
+END
+GDataXMLSupportTest.m
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/GDataXMLSupportTest.m
+END
+GDataFrameworkTest.m
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/GDataFrameworkTest.m
+END
+GDataFeedTest.h
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/GDataFeedTest.h
+END
+FeedBlogCommentsTest1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedBlogCommentsTest1.xml
+END
+GDataFeedTest.m
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/GDataFeedTest.m
+END
+FeedContactTest1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedContactTest1.xml
+END
+FeedContactTest2.xml
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedContactTest2.xml
+END
+GDataQueryTest.m
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/GDataQueryTest.m
+END
+EntryDocListMetadataTest1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/EntryDocListMetadataTest1.xml
+END
+EntrySpreadsheetCellTest1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/EntrySpreadsheetCellTest1.xml
+END
+FeedCalendarTest1.xml
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Tests/FeedCalendarTest1.xml
+END

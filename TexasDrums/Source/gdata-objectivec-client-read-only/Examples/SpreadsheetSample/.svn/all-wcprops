@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Examples/SpreadsheetSample
+END
+SpreadsheetSample_Prefix.pch
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Examples/SpreadsheetSample/SpreadsheetSample_Prefix.pch
+END
+buildCopyScript
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Examples/SpreadsheetSample/buildCopyScript
+END
+main.m
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Examples/SpreadsheetSample/main.m
+END
+SpreadsheetSampleWindowController.m
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Examples/SpreadsheetSample/SpreadsheetSampleWindowController.m
+END
+SpreadsheetSampleAppController.h
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Examples/SpreadsheetSample/SpreadsheetSampleAppController.h
+END
+Info.plist
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Examples/SpreadsheetSample/Info.plist
+END
+SpreadsheetSampleAppController.m
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Examples/SpreadsheetSample/SpreadsheetSampleAppController.m
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Examples/SpreadsheetSample/README.txt
+END
+SpreadsheetSampleWindowController.h
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Examples/SpreadsheetSample/SpreadsheetSampleWindowController.h
+END
+buildStripHeaders
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Examples/SpreadsheetSample/buildStripHeaders
+END

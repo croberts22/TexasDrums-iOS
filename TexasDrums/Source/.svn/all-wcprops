@@ -1,0 +1,725 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/texasdrums-ios/!svn/ver/80/trunk/TexasDrums/Source
+END
+StaffView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/StaffView.xib
+END
+TexasDrumsWebViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/texasdrums-ios/!svn/ver/108/trunk/TexasDrums/Source/TexasDrumsWebViewController.h
+END
+VideoView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/texasdrums-ios/!svn/ver/95/trunk/TexasDrums/Source/VideoView.xib
+END
+FAQView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/FAQView.xib
+END
+MemberView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/texasdrums-ios/!svn/ver/106/trunk/TexasDrums/Source/MemberView.xib
+END
+DownloadMusicView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/texasdrums-ios/!svn/ver/100/trunk/TexasDrums/Source/DownloadMusicView.xib
+END
+AddressBookViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/AddressBookViewController.h
+END
+TexasDrumsWebViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/texasdrums-ios/!svn/ver/109/trunk/TexasDrums/Source/TexasDrumsWebViewController.m
+END
+PictureView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/texasdrums-ios/!svn/ver/68/trunk/TexasDrums/Source/PictureView.xib
+END
+AboutThisAppViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/texasdrums-ios/!svn/ver/67/trunk/TexasDrums/Source/AboutThisAppViewController.h
+END
+NewsView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/texasdrums-ios/!svn/ver/82/trunk/TexasDrums/Source/NewsView.xib
+END
+AddressBookViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/AddressBookViewController.m
+END
+SingleMemberView.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/texasdrums-ios/!svn/ver/62/trunk/TexasDrums/Source/SingleMemberView.h
+END
+RosterView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/texasdrums-ios/!svn/ver/110/trunk/TexasDrums/Source/RosterView.xib
+END
+Video.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/texasdrums-ios/!svn/ver/95/trunk/TexasDrums/Source/Video.h
+END
+AddMemberView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/texasdrums-ios/!svn/ver/76/trunk/TexasDrums/Source/AddMemberView.xib
+END
+AboutThisAppViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/AboutThisAppViewController.m
+END
+SingleMemberView.m
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/SingleMemberView.m
+END
+Video.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/texasdrums-ios/!svn/ver/95/trunk/TexasDrums/Source/Video.m
+END
+News.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/texasdrums-ios/!svn/ver/76/trunk/TexasDrums/Source/News.h
+END
+PaymentViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/texasdrums-ios/!svn/ver/62/trunk/TexasDrums/Source/PaymentViewController.h
+END
+MediaViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/texasdrums-ios/!svn/ver/33/trunk/TexasDrums/Source/MediaViewController.h
+END
+Roster.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/texasdrums-ios/!svn/ver/44/trunk/TexasDrums/Source/Roster.h
+END
+News.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/texasdrums-ios/!svn/ver/76/trunk/TexasDrums/Source/News.m
+END
+PaymentViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/texasdrums-ios/!svn/ver/84/trunk/TexasDrums/Source/PaymentViewController.m
+END
+MediaViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/texasdrums-ios/!svn/ver/97/trunk/TexasDrums/Source/MediaViewController.m
+END
+Roster.m
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/texasdrums-ios/!svn/ver/44/trunk/TexasDrums/Source/Roster.m
+END
+ProfileView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/texasdrums-ios/!svn/ver/68/trunk/TexasDrums/Source/ProfileView.xib
+END
+StaffMemberViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/texasdrums-ios/!svn/ver/107/trunk/TexasDrums/Source/StaffMemberViewController.h
+END
+EditEmailViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/texasdrums-ios/!svn/ver/75/trunk/TexasDrums/Source/EditEmailViewController.h
+END
+EditPasswordView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/texasdrums-ios/!svn/ver/106/trunk/TexasDrums/Source/EditPasswordView.xib
+END
+MemberLoginViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/MemberLoginViewController.h
+END
+StaffMemberViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/texasdrums-ios/!svn/ver/107/trunk/TexasDrums/Source/StaffMemberViewController.m
+END
+AudioViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/texasdrums-ios/!svn/ver/95/trunk/TexasDrums/Source/AudioViewController.h
+END
+Profile.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/Profile.h
+END
+EditEmailViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/texasdrums-ios/!svn/ver/84/trunk/TexasDrums/Source/EditEmailViewController.m
+END
+StaffViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/StaffViewController.h
+END
+EditBirthdayView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/texasdrums-ios/!svn/ver/106/trunk/TexasDrums/Source/EditBirthdayView.xib
+END
+MemberLoginViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/MemberLoginViewController.m
+END
+AudioViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/AudioViewController.m
+END
+Profile.m
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/texasdrums-ios/!svn/ver/30/trunk/TexasDrums/Source/Profile.m
+END
+VideoViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/texasdrums-ios/!svn/ver/95/trunk/TexasDrums/Source/VideoViewController.h
+END
+MemberViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/MemberViewController.h
+END
+FAQViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/FAQViewController.h
+END
+DownloadMusicViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/texasdrums-ios/!svn/ver/100/trunk/TexasDrums/Source/DownloadMusicViewController.h
+END
+StaffViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/StaffViewController.m
+END
+PictureViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/texasdrums-ios/!svn/ver/68/trunk/TexasDrums/Source/PictureViewController.h
+END
+VideoViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/VideoViewController.m
+END
+MemberViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/MemberViewController.m
+END
+FAQViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/FAQViewController.m
+END
+NewsViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/texasdrums-ios/!svn/ver/101/trunk/TexasDrums/Source/NewsViewController.h
+END
+NSURLConnectionWithTag.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/NSURLConnectionWithTag.h
+END
+EditNameView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/texasdrums-ios/!svn/ver/106/trunk/TexasDrums/Source/EditNameView.xib
+END
+DownloadMusicViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/DownloadMusicViewController.m
+END
+NSString+RegEx.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/texasdrums-ios/!svn/ver/98/trunk/TexasDrums/Source/NSString+RegEx.h
+END
+RosterViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/texasdrums-ios/!svn/ver/110/trunk/TexasDrums/Source/RosterViewController.h
+END
+AddMemberViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/texasdrums-ios/!svn/ver/76/trunk/TexasDrums/Source/AddMemberViewController.h
+END
+PictureViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/texasdrums-ios/!svn/ver/84/trunk/TexasDrums/Source/PictureViewController.m
+END
+NewsViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/NewsViewController.m
+END
+NSURLConnectionWithTag.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/NSURLConnectionWithTag.m
+END
+InfoView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/texasdrums-ios/!svn/ver/68/trunk/TexasDrums/Source/InfoView.xib
+END
+NSString+RegEx.m
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/texasdrums-ios/!svn/ver/98/trunk/TexasDrums/Source/NSString+RegEx.m
+END
+RosterViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/texasdrums-ios/!svn/ver/110/trunk/TexasDrums/Source/RosterViewController.m
+END
+AddressBookMemberViewController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/texasdrums-ios/!svn/ver/107/trunk/TexasDrums/Source/AddressBookMemberViewController.xib
+END
+AddMemberViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/texasdrums-ios/!svn/ver/84/trunk/TexasDrums/Source/AddMemberViewController.m
+END
+TexasDrumsWebViewController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/texasdrums-ios/!svn/ver/109/trunk/TexasDrums/Source/TexasDrumsWebViewController.xib
+END
+AddressBookMemberViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/texasdrums-ios/!svn/ver/106/trunk/TexasDrums/Source/AddressBookMemberViewController.h
+END
+TexasDrumsAppDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/TexasDrumsAppDelegate.h
+END
+StaffMember.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/texasdrums-ios/!svn/ver/100/trunk/TexasDrums/Source/StaffMember.h
+END
+AddressBookMemberViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/texasdrums-ios/!svn/ver/106/trunk/TexasDrums/Source/AddressBookMemberViewController.m
+END
+ProfileViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/texasdrums-ios/!svn/ver/27/trunk/TexasDrums/Source/ProfileViewController.h
+END
+SingleMemberView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/texasdrums-ios/!svn/ver/99/trunk/TexasDrums/Source/SingleMemberView.xib
+END
+TexasDrumsAppDelegate.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/TexasDrumsAppDelegate.m
+END
+StaffMember.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/texasdrums-ios/!svn/ver/100/trunk/TexasDrums/Source/StaffMember.m
+END
+Audio.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/texasdrums-ios/!svn/ver/89/trunk/TexasDrums/Source/Audio.h
+END
+TexasDrumsTableViewCell.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/texasdrums-ios/!svn/ver/98/trunk/TexasDrums/Source/TexasDrumsTableViewCell.h
+END
+ProfileViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/texasdrums-ios/!svn/ver/84/trunk/TexasDrums/Source/ProfileViewController.m
+END
+EditPhoneView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/texasdrums-ios/!svn/ver/106/trunk/TexasDrums/Source/EditPhoneView.xib
+END
+RosterMember.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/texasdrums-ios/!svn/ver/12/trunk/TexasDrums/Source/RosterMember.h
+END
+SingleRosterView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/texasdrums-ios/!svn/ver/82/trunk/TexasDrums/Source/SingleRosterView.xib
+END
+Audio.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/texasdrums-ios/!svn/ver/89/trunk/TexasDrums/Source/Audio.m
+END
+FAQ.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/texasdrums-ios/!svn/ver/53/trunk/TexasDrums/Source/FAQ.h
+END
+EditPasswordViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/texasdrums-ios/!svn/ver/44/trunk/TexasDrums/Source/EditPasswordViewController.h
+END
+TexasDrumsTableViewCell.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/texasdrums-ios/!svn/ver/98/trunk/TexasDrums/Source/TexasDrumsTableViewCell.m
+END
+AboutUsView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/AboutUsView.xib
+END
+NewsPostView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/texasdrums-ios/!svn/ver/82/trunk/TexasDrums/Source/NewsPostView.xib
+END
+EditBirthdayViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/texasdrums-ios/!svn/ver/88/trunk/TexasDrums/Source/EditBirthdayViewController.h
+END
+RosterMember.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/texasdrums-ios/!svn/ver/11/trunk/TexasDrums/Source/RosterMember.m
+END
+FAQ.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/texasdrums-ios/!svn/ver/53/trunk/TexasDrums/Source/FAQ.m
+END
+EditPasswordViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/texasdrums-ios/!svn/ver/84/trunk/TexasDrums/Source/EditPasswordViewController.m
+END
+NewsPostView.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/texasdrums-ios/!svn/ver/74/trunk/TexasDrums/Source/NewsPostView.h
+END
+EditBirthdayViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/texasdrums-ios/!svn/ver/106/trunk/TexasDrums/Source/EditBirthdayViewController.m
+END
+Music.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/texasdrums-ios/!svn/ver/83/trunk/TexasDrums/Source/Music.h
+END
+NewsPostView.m
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/texasdrums-ios/!svn/ver/100/trunk/TexasDrums/Source/NewsPostView.m
+END
+EditNameViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/texasdrums-ios/!svn/ver/35/trunk/TexasDrums/Source/EditNameViewController.h
+END
+Music.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/texasdrums-ios/!svn/ver/83/trunk/TexasDrums/Source/Music.m
+END
+StaffMemberViewController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/texasdrums-ios/!svn/ver/107/trunk/TexasDrums/Source/StaffMemberViewController.xib
+END
+AddressBookView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/AddressBookView.xib
+END
+Common.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/texasdrums-ios/!svn/ver/83/trunk/TexasDrums/Source/Common.h
+END
+TexasDrumsGroupedTableViewCell.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/texasdrums-ios/!svn/ver/99/trunk/TexasDrums/Source/TexasDrumsGroupedTableViewCell.h
+END
+AboutThisAppView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/texasdrums-ios/!svn/ver/110/trunk/TexasDrums/Source/AboutThisAppView.xib
+END
+InfoViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/texasdrums-ios/!svn/ver/104/trunk/TexasDrums/Source/InfoViewController.h
+END
+EditNameViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/texasdrums-ios/!svn/ver/84/trunk/TexasDrums/Source/EditNameViewController.m
+END
+Common.m
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/texasdrums-ios/!svn/ver/98/trunk/TexasDrums/Source/Common.m
+END
+TexasDrumsGroupedTableViewCell.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/texasdrums-ios/!svn/ver/99/trunk/TexasDrums/Source/TexasDrumsGroupedTableViewCell.m
+END
+InfoViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/texasdrums-ios/!svn/ver/105/trunk/TexasDrums/Source/InfoViewController.m
+END
+PaymentView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/texasdrums-ios/!svn/ver/74/trunk/TexasDrums/Source/PaymentView.xib
+END
+MediaView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/texasdrums-ios/!svn/ver/109/trunk/TexasDrums/Source/MediaView.xib
+END
+MusicViewController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/texasdrums-ios/!svn/ver/83/trunk/TexasDrums/Source/MusicViewController.xib
+END
+EditPhoneViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/texasdrums-ios/!svn/ver/71/trunk/TexasDrums/Source/EditPhoneViewController.h
+END
+SingleRosterViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/texasdrums-ios/!svn/ver/36/trunk/TexasDrums/Source/SingleRosterViewController.h
+END
+MusicViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/texasdrums-ios/!svn/ver/83/trunk/TexasDrums/Source/MusicViewController.h
+END
+AboutUsViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/AboutUsViewController.h
+END
+EditPhoneViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/texasdrums-ios/!svn/ver/84/trunk/TexasDrums/Source/EditPhoneViewController.m
+END
+EditEmailView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/texasdrums-ios/!svn/ver/106/trunk/TexasDrums/Source/EditEmailView.xib
+END
+SingleRosterViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/texasdrums-ios/!svn/ver/99/trunk/TexasDrums/Source/SingleRosterViewController.m
+END
+MusicViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/texasdrums-ios/!svn/ver/84/trunk/TexasDrums/Source/MusicViewController.m
+END
+AboutUsViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/AboutUsViewController.m
+END
+MemberLoginView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/texasdrums-ios/!svn/ver/111/trunk/TexasDrums/Source/MemberLoginView.xib
+END
+AudioView.xib
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/texasdrums-ios/!svn/ver/95/trunk/TexasDrums/Source/AudioView.xib
+END

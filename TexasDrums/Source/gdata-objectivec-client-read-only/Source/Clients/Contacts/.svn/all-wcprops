@@ -1,0 +1,263 @@
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts
+END
+GDataContactConstants.h
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataContactConstants.h
+END
+GDataGroupMembershipInfo.m
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataGroupMembershipInfo.m
+END
+GDataEntryContactGroup.h
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataEntryContactGroup.h
+END
+GDataContactConstants.m
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataContactConstants.m
+END
+GDataContactPriority.h
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataContactPriority.h
+END
+GDataEntryContactGroup.m
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataEntryContactGroup.m
+END
+GDataFeedContactProfile.h
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataFeedContactProfile.h
+END
+GDataContactPriority.m
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataContactPriority.m
+END
+GDataFeedContactProfile.m
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataFeedContactProfile.m
+END
+GDataContactSensitivity.h
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataContactSensitivity.h
+END
+GDataEntryContactBase.h
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataEntryContactBase.h
+END
+GDataContactLink.h
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataContactLink.h
+END
+GDataServiceGoogleContact.h
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataServiceGoogleContact.h
+END
+GDataContactSensitivity.m
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataContactSensitivity.m
+END
+GDataEntryContactBase.m
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataEntryContactBase.m
+END
+GDataContactUserDefinedField.h
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataContactUserDefinedField.h
+END
+GDataContacts.h
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataContacts.h
+END
+GDataContactLink.m
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataContactLink.m
+END
+GDataServiceGoogleContact.m
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataServiceGoogleContact.m
+END
+GDataFeedContact.h
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataFeedContact.h
+END
+GDataQueryContact.h
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataQueryContact.h
+END
+GDataContactUserDefinedField.m
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataContactUserDefinedField.m
+END
+GDataFeedContact.m
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataFeedContact.m
+END
+GDataQueryContact.m
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataQueryContact.m
+END
+GDataContactElements.h
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataContactElements.h
+END
+GDataContactRelation.h
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataContactRelation.h
+END
+GDataFeedContactGroup.h
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataFeedContactGroup.h
+END
+GDataContactElements.m
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataContactElements.m
+END
+GDataContactEvent.h
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataContactEvent.h
+END
+GDataEntryContactProfile.h
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataEntryContactProfile.h
+END
+GDataContactRelation.m
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataContactRelation.m
+END
+GDataContactLanguage.h
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataContactLanguage.h
+END
+GDataFeedContactGroup.m
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataFeedContactGroup.m
+END
+GDataContactEvent.m
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataContactEvent.m
+END
+GDataEntryContactProfile.m
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataEntryContactProfile.m
+END
+GDataContactLanguage.m
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataContactLanguage.m
+END
+GDataContactJot.h
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataContactJot.h
+END
+GDataContactExternalID.h
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataContactExternalID.h
+END
+GDataEntryContact.h
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataEntryContact.h
+END
+GDataContactJot.m
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataContactJot.m
+END
+GDataContactExternalID.m
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataContactExternalID.m
+END
+GDataEntryContact.m
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataEntryContact.m
+END
+GDataGroupMembershipInfo.h
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Contacts/GDataGroupMembershipInfo.h
+END

@@ -1,0 +1,9 @@
+
+--This line, and those below, will be ignored--
+
+M    Source/SingleMemberView.m
+M    Source/RosterViewController.m
+M    Source/SingleMemberView.xib
+A    Source/TexasDrumsGroupedTableViewCell.h
+A    Source/TexasDrumsGroupedTableViewCell.m
+M    Source/SingleRosterViewController.m

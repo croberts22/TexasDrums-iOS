@@ -1,0 +1,131 @@
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Books
+END
+GDataEntryVolume.h
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Books/GDataEntryVolume.h
+END
+GDataVolumePrice.h
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Books/GDataVolumePrice.h
+END
+GDataServiceGoogleBooks.h
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Books/GDataServiceGoogleBooks.h
+END
+GDataFeedVolume.h
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Books/GDataFeedVolume.h
+END
+GDataDublinCore.m
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Books/GDataDublinCore.m
+END
+GDataVolumeReadingPosition.m
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Books/GDataVolumeReadingPosition.m
+END
+GDataBookConstants.m
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Books/GDataBookConstants.m
+END
+GDataEntryVolume.m
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Books/GDataEntryVolume.m
+END
+GDataVolumePrice.m
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Books/GDataVolumePrice.m
+END
+GDataFeedVolume.m
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Books/GDataFeedVolume.m
+END
+GDataServiceGoogleBooks.m
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Books/GDataServiceGoogleBooks.m
+END
+GDataQueryBooks.h
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Books/GDataQueryBooks.h
+END
+GDataQueryBooks.m
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Books/GDataQueryBooks.m
+END
+GDataEntryCollection.h
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Books/GDataEntryCollection.h
+END
+GDataBooks.h
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Books/GDataBooks.h
+END
+GDataFeedCollection.h
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Books/GDataFeedCollection.h
+END
+GDataEntryCollection.m
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Books/GDataEntryCollection.m
+END
+GDataFeedCollection.m
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Books/GDataFeedCollection.m
+END
+GDataDublinCore.h
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Books/GDataDublinCore.h
+END
+GDataVolumeReadingPosition.h
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Books/GDataVolumeReadingPosition.h
+END
+GDataBookConstants.h
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/Clients/Books/GDataBookConstants.h
+END

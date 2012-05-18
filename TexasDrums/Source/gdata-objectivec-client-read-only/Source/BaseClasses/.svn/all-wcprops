@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/BaseClasses
+END
+GDataQuery.m
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/BaseClasses/GDataQuery.m
+END
+GDataObject.m
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/BaseClasses/GDataObject.m
+END
+GDataServiceBase.h
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/BaseClasses/GDataServiceBase.h
+END
+GDataEntryBase.h
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/BaseClasses/GDataEntryBase.h
+END
+GDataServiceGoogle.h
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/BaseClasses/GDataServiceGoogle.h
+END
+GDataFeedBase.h
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/BaseClasses/GDataFeedBase.h
+END
+GDataServiceBase.m
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/BaseClasses/GDataServiceBase.m
+END
+GDataEntryBase.m
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/BaseClasses/GDataEntryBase.m
+END
+GDataServiceGoogle.m
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/BaseClasses/GDataServiceGoogle.m
+END
+GDataFeedBase.m
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/BaseClasses/GDataFeedBase.m
+END
+GDataQuery.h
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/BaseClasses/GDataQuery.h
+END
+GDataObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/texasdrums-ios/!svn/ver/60/trunk/TexasDrums/Source/gdata-objectivec-client-read-only/Source/BaseClasses/GDataObject.h
+END
