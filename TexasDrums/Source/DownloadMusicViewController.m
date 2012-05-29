@@ -3,7 +3,7 @@
 //  TexasDrums
 //
 //  Created by Corey Roberts on 3/22/12.
-//  Copyright (c) 2012 University of Texas at Austin. All rights reserved.
+//  Copyright (c) 2012 SpacePyro Productions. All rights reserved.
 //
 
 #import "DownloadMusicViewController.h"
@@ -152,23 +152,36 @@
         cell = [[[TexasDrumsGroupedTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    // Configure the cell...
+    // Overriding TexasDrumsGroupedTableViewCell properties.
     cell.textLabel.text = [[musicArray objectAtIndex:indexPath.row] filename];
     cell.textLabel.font = [UIFont fontWithName:@"Georgia-Bold" size:16];
-
-    if(indexPath.row == 0) {
-        cell.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"top_table_cell.png"]] autorelease];
-        ((UIImageView *)cell.backgroundView).image = [UIImage imageNamed:@"top_table_cell.png"];
-        cell.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"top_table_cell.png"]] autorelease];
-        ((UIImageView *)cell.selectedBackgroundView).image = [UIImage imageNamed:@"top_table_cell.png"];
+    
+    UIImage *background;
+    UIImage *selected_background;
+    
+    // Since a cell's background views are not compatible with UIImageView,
+    // set them both as UIImageView.
+    cell.backgroundView = [[[UIImageView alloc] init] autorelease];
+    cell.selectedBackgroundView = [[[UIImageView alloc] init] autorelease];
+    
+    // Cell Background images.
+    // TODO: Change the selected background image to something else.
+    if(indexPath.row == 0){
+        background = [UIImage imageNamed:@"top_table_cell.png"];
+        selected_background = [UIImage imageNamed:@"top_table_cell.png"];
+    }
+    else if(indexPath.row == [musicArray count]-1){
+        background = [UIImage imageNamed:@"bottom_table_cell.png"];
+        selected_background = [UIImage imageNamed:@"bottom_table_cell.png"];
+    }
+    else {
+        background = [UIImage imageNamed:@"table_cell.png"];
+        selected_background = [UIImage imageNamed:@"table_cell.png"];
     }
     
-    if(indexPath.row == [musicArray count] - 1) {
-        cell.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bottom_table_cell.png"]] autorelease];
-        ((UIImageView *)cell.backgroundView).image = [UIImage imageNamed:@"bottom_table_cell.png"];
-        cell.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bottom_table_cell.png"]] autorelease];
-        ((UIImageView *)cell.selectedBackgroundView).image = [UIImage imageNamed:@"bottom_table_cell.png"];
-    }
+    // Set the images.
+    ((UIImageView *)cell.backgroundView).image = background;
+    ((UIImageView *)cell.selectedBackgroundView).image = selected_background;
     
     return cell;
 }

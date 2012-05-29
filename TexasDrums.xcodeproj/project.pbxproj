@@ -64,6 +64,7 @@
 		AE3A234A15619336009B8F4B /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AE3A234715619336009B8F4B /* SVProgressHUD.bundle */; };
 		AE3A234B15619336009B8F4B /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3A234915619336009B8F4B /* SVProgressHUD.m */; };
 		AE3A23591562D1AC009B8F4B /* NSURLConnectionWithTag.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3A23581562D1AB009B8F4B /* NSURLConnectionWithTag.m */; };
+		AE3A5E64156B464200A7DEF3 /* UserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3A5E63156B464200A7DEF3 /* UserProfile.m */; };
 		AE3F7EC8152682B000CAA448 /* Music.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3F7EC7152682B000CAA448 /* Music.m */; };
 		AE4B350B14C120EE00519280 /* StaffViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B350914C120EE00519280 /* StaffViewController.m */; };
 		AE4B350C14C120EE00519280 /* StaffView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE4B350A14C120EE00519280 /* StaffView.xib */; };
@@ -291,6 +292,10 @@
 		AE3A234915619336009B8F4B /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		AE3A23571562D1AB009B8F4B /* NSURLConnectionWithTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSURLConnectionWithTag.h; sourceTree = "<group>"; };
 		AE3A23581562D1AB009B8F4B /* NSURLConnectionWithTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSURLConnectionWithTag.m; sourceTree = "<group>"; };
+		AE3A5E5F156B3F4900A7DEF3 /* TexasDrumsTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TexasDrumsTable.h; sourceTree = "<group>"; };
+		AE3A5E60156B405900A7DEF3 /* TexasDrumsAPIConnection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TexasDrumsAPIConnection.h; sourceTree = "<group>"; };
+		AE3A5E62156B464200A7DEF3 /* UserProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfile.h; sourceTree = "<group>"; };
+		AE3A5E63156B464200A7DEF3 /* UserProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfile.m; sourceTree = "<group>"; };
 		AE3F7EC6152682B000CAA448 /* Music.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Music.h; sourceTree = "<group>"; };
 		AE3F7EC7152682B000CAA448 /* Music.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Music.m; sourceTree = "<group>"; };
 		AE4B350814C120EE00519280 /* StaffViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffViewController.h; sourceTree = "<group>"; };
@@ -653,6 +658,7 @@
 		047E924C13E59FD100B3DC9A /* Media */ = {
 			isa = PBXGroup;
 			children = (
+				AE3A5E61156B42F100A7DEF3 /* Classes */,
 				04E9AB2C13B4E5B700F207EA /* MediaViewController.h */,
 				04E9AB2D13B4E5B700F207EA /* MediaViewController.m */,
 				AEF20D3815218D4600C6427D /* MediaView.xib */,
@@ -665,10 +671,6 @@
 				AEF3A97D150A718700E25177 /* PictureViewController.h */,
 				AEF3A97E150A718700E25177 /* PictureViewController.m */,
 				AEF3A97F150A718700E25177 /* PictureView.xib */,
-				AEB0AECC1538E486008CE123 /* Video.h */,
-				AEB0AECD1538E486008CE123 /* Video.m */,
-				AEA5E5CB153785B40025A227 /* Audio.h */,
-				AEA5E5CC153785B40025A227 /* Audio.m */,
 			);
 			name = Media;
 			sourceTree = "<group>";
@@ -709,6 +711,10 @@
 				AE7564CB153CDC8200D04368 /* TexasDrumsWebViewController.xib */,
 				AE3A23571562D1AB009B8F4B /* NSURLConnectionWithTag.h */,
 				AE3A23581562D1AB009B8F4B /* NSURLConnectionWithTag.m */,
+				AE3A5E5F156B3F4900A7DEF3 /* TexasDrumsTable.h */,
+				AE3A5E60156B405900A7DEF3 /* TexasDrumsAPIConnection.h */,
+				AE3A5E62156B464200A7DEF3 /* UserProfile.h */,
+				AE3A5E63156B464200A7DEF3 /* UserProfile.m */,
 			);
 			name = Globals;
 			sourceTree = "<group>";
@@ -894,6 +900,17 @@
 				AE3A234915619336009B8F4B /* SVProgressHUD.m */,
 			);
 			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
+		AE3A5E61156B42F100A7DEF3 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				AEB0AECC1538E486008CE123 /* Video.h */,
+				AEB0AECD1538E486008CE123 /* Video.m */,
+				AEA5E5CB153785B40025A227 /* Audio.h */,
+				AEA5E5CC153785B40025A227 /* Audio.m */,
+			);
+			name = Classes;
 			sourceTree = "<group>";
 		};
 		AE6521E4154B7DC8002220D9 /* UINavigationBar */ = {
@@ -1145,7 +1162,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0430;
-				ORGANIZATIONNAME = "University of Texas at Austin";
+				ORGANIZATIONNAME = "Corey Roberts";
 			};
 			buildConfigurationList = 045646B913ADBD2F00681573 /* Build configuration list for PBXProject "TexasDrums" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1376,6 +1393,7 @@
 				AE37F2971548B9EA001EA3A8 /* AddressBookMemberViewController.m in Sources */,
 				AE3A234B15619336009B8F4B /* SVProgressHUD.m in Sources */,
 				AE3A23591562D1AC009B8F4B /* NSURLConnectionWithTag.m in Sources */,
+				AE3A5E64156B464200A7DEF3 /* UserProfile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

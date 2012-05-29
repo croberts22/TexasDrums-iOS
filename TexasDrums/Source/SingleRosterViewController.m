@@ -3,7 +3,7 @@
 //  TexasDrums
 //
 //  Created by Corey Roberts on 6/28/11.
-//  Copyright 2011 University of Texas at Austin. All rights reserved.
+//  Copyright 2011 SpacePyro Productions. All rights reserved.
 //
 
 #import "SingleRosterViewController.h"
@@ -194,29 +194,36 @@
             
     }
     
-    //Configure UI
+    // Overriding TexasDrumsGroupedTableViewCell properties.
     cell.textLabel.font = [UIFont fontWithName:@"Georgia" size:16];
     cell.textLabel.text = [[instrument objectAtIndex:indexPath.row] fullname];
     
-    // Background View for top and bottom cells
+    UIImage *background;
+    UIImage *selected_background;
+    
+    // Since a cell's background views are not compatible with UIImageView,
+    // set them both as UIImageView.
+    cell.backgroundView = [[[UIImageView alloc] init] autorelease];
+    cell.selectedBackgroundView = [[[UIImageView alloc] init] autorelease];
+    
+    // Cell Background images.
+    // TODO: Change the selected background image to something else.
     if(indexPath.row == 0){
-        cell.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"top_table_cell.png"]] autorelease];
-        ((UIImageView *)cell.backgroundView).image = [UIImage imageNamed:@"top_table_cell.png"];
+        background = [UIImage imageNamed:@"top_table_cell.png"];
+        selected_background = [UIImage imageNamed:@"top_table_cell.png"];
     }
-    if(indexPath.row == [instrument count]-1){
-        cell.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bottom_table_cell.png"]] autorelease];
-        ((UIImageView *)cell.backgroundView).image = [UIImage imageNamed:@"bottom_table_cell.png"];
+    else if(indexPath.row == [instrument count]-1){
+        background = [UIImage imageNamed:@"bottom_table_cell.png"];
+        selected_background = [UIImage imageNamed:@"bottom_table_cell.png"];
+    }
+    else {
+        background = [UIImage imageNamed:@"table_cell.png"];
+        selected_background = [UIImage imageNamed:@"table_cell.png"];
     }
     
-    // Selected Background View for top and bottom cells
-    if(indexPath.row == 0){
-        cell.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"top_table_cell.png"]] autorelease];
-        ((UIImageView *)cell.selectedBackgroundView).image = [UIImage imageNamed:@"top_table_cell.png"];
-    }
-    if(indexPath.row == [instrument count]-1){
-        cell.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bottom_table_cell.png"]] autorelease];
-        ((UIImageView *)cell.selectedBackgroundView).image = [UIImage imageNamed:@"bottom_table_cell.png"];
-    }
+    // Set the images.
+    ((UIImageView *)cell.backgroundView).image = background;
+    ((UIImageView *)cell.selectedBackgroundView).image = selected_background;
     
     return cell;
 }

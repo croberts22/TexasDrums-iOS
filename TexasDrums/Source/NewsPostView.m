@@ -3,7 +3,7 @@
 //  TexasDrums
 //
 //  Created by Corey Roberts on 6/27/11.
-//  Copyright 2011 University of Texas at Austin. All rights reserved.
+//  Copyright 2011 SpacePyro Productions. All rights reserved.
 //
 
 #import "NewsPostView.h"

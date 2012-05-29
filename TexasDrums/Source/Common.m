@@ -3,7 +3,7 @@
 //  TexasDrums
 //
 //  Created by Corey Roberts on 6/24/11.
-//  Copyright 2011 University of Texas at Austin. All rights reserved.
+//  Copyright 2011 SpacePyro Productions. All rights reserved.
 //
 
 #import "Common.h"
@@ -16,10 +16,10 @@ NSString *const TEXAS_DRUMS_API_KEY = @"LwtP6NB2Y0hooXVZj29fwceVfp93D";
 NSString *const TEXAS_DRUMS_API_NEWS = @"http://www.texasdrums.com/api/v1/news.php?";
 NSString *const TEXAS_DRUMS_API_ROSTER = @"http://www.texasdrums.com/api/v1/roster.php?";
 
-//not available
+// not available
 NSString *const TEXAS_DRUMS_API_MEDIA = @"http://www.texasdrums.com/api/v1/media.php?";
 
-//Members-only API functions
+// Members-only API functions
 NSString *const TEXAS_DRUMS_API_LOGIN = @"http://www.texasdrums.com/api/v1/login.php?";
 NSString *const TEXAS_DRUMS_API_LOGOUT = @"http://www.texasdrums.com/api/v1/logout.php?";
 NSString *const TEXAS_DRUMS_API_PROFILE = @"http://www.texasdrums.com/api/v1/profile.php?";
@@ -32,10 +32,10 @@ NSString *const TEXAS_DRUMS_API_FAQ = @"http://www.texasdrums.com/api/v1/faq.php
 NSString *const TEXAS_DRUMS_API_STAFF = @"http://www.texasdrums.com/api/v1/staff.php?";
 
 
-//User Profile
+// User Profile
 Profile *_Profile;
 
-//Debug Mode; this will include NSLog statements in the console.
+// Debug Mode; this will include NSLog statements in the console.
 BOOL const DEBUG_MODE = NO;
 
 @end

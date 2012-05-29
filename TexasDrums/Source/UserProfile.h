@@ -1,16 +1,18 @@
 //
-//  Profile.h
+//  UserProfile.h
 //  TexasDrums
 //
-//  Created by Corey Roberts on 8/9/11.
-//  Copyright 2011 SpacePyro Productions. All rights reserved.
+//  Created by Corey Roberts on 5/21/12.
+//  Copyright (c) 2012 Corey Roberts. All rights reserved.
 //
 
-@interface Profile : NSObject {
+#import <Foundation/Foundation.h>
+
+@interface UserProfile : NSObject {
     NSString *firstname;
     NSString *lastname;
     NSString *username;
-    NSString *password;
+    NSString *hash;
     NSString *section;
     NSString *years;
     NSString *status;
@@ -23,14 +25,12 @@
     BOOL valid;
     NSString *lastlogin;
     BOOL paid;
-    NSString *alphabet_first;
-    NSString *alphabet_last;    
 }
 
 @property (nonatomic, retain) NSString *firstname;
 @property (nonatomic, retain) NSString *lastname;
 @property (nonatomic, retain) NSString *username;
-@property (nonatomic, retain) NSString *password;
+@property (nonatomic, retain) NSString *hash;
 @property (nonatomic, retain) NSString *section;
 @property (nonatomic, retain) NSString *years;
 @property (nonatomic, retain) NSString *status;
@@ -43,7 +43,5 @@
 @property (nonatomic, assign) BOOL valid;
 @property (nonatomic, retain) NSString *lastlogin;
 @property (nonatomic, assign) BOOL paid;
-@property (nonatomic, retain) NSString *alphabet_first;
-@property (nonatomic, retain) NSString *alphabet_last;
 
 @end

@@ -3,7 +3,7 @@
 //  TexasDrumsTests
 //
 //  Created by Corey Roberts on 2/2/12.
-//  Copyright 2011 University of Texas at Austin. All rights reserved.
+//  Copyright 2011 SpacePyro Productions. All rights reserved.
 //
 
 #import "TexasDrumsTests.h"

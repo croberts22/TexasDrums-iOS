@@ -3,14 +3,16 @@
 //  TexasDrums
 //
 //  Created by Corey Roberts on 6/19/11.
-//  Copyright 2011 University of Texas at Austin. All rights reserved.
+//  Copyright 2011 SpacePyro Productions. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "Common.h"
 #import "News.h"
+#import "TexasDrumsTable.h"
+#import "TexasDrumsAPIConnection.h"
 
-@interface NewsViewController : UIViewController<NSURLConnectionDelegate> {
+@interface NewsViewController : UIViewController<NSURLConnectionDelegate, TexasDrumsTable, TexasDrumsAPIConnection> {
     IBOutlet UITableView *newsTable;
     NSMutableArray *posts;
     NSMutableArray *allposts;

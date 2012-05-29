@@ -3,16 +3,14 @@
 //  TexasDrums
 //
 //  Created by Corey Roberts on 6/24/11.
-//  Copyright 2011 University of Texas at Austin. All rights reserved.
+//  Copyright 2011 SpacePyro Productions. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import "Profile.h"
 
 
-@interface Common : NSObject {
-    
-}
+@interface Common : NSObject
 
 extern NSString *const TEXAS_DRUMS_API_KEY;
 
