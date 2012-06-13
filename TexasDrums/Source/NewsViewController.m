@@ -16,18 +16,13 @@
 #import "GANTracker.h"
 #import "TexasDrumsTableViewCell.h"
 #import "NSString+RegEx.h"
-
-#define UIColorFromRGB(rgbValue) [UIColor \
-colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
-green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
-blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+#import "UIColor+TexasDrums.h"
+#import "TexasDrumsGetNews.h"
+#import "SVProgressHUD.h"
 
 @implementation NewsViewController
 
 @synthesize newsTable, posts, allposts, since, reloadIndicator, refresh, loading, num_member_posts, received_data;
-
-#define CELL_HEIGHT 10.0f
-#define CELL_WIDTH 270.0f
 
 - (void)dealloc
 {
@@ -72,66 +67,96 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     [self setTitle:@"News"];
 
+    since = 0;
+    
     self.newsTable.alpha = 0.0f;
     
-    self.refresh = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshPressed)] autorelease];
+    self.refresh = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(connect)] autorelease];
     
     self.navigationItem.rightBarButtonItem = refresh;
     
-    //reload indicator replaces reload button (in button called loading) when reload button is pressed.
-    self.reloadIndicator = [[[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)] autorelease];
-
-    [self.reloadIndicator sizeToFit];
-    [self.reloadIndicator setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin)];
-    
-    self.loading = [[[UIBarButtonItem alloc] initWithCustomView:reloadIndicator] autorelease];
-    
     self.newsTable.separatorColor = [UIColor darkGrayColor];
   
-    [self performSelectorOnMainThread:@selector(hideRefreshButton) withObject:nil waitUntilDone:NO];
-    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(refreshPressed) userInfo:nil repeats:NO];
+    [self connect];
 }
 
 - (void)refreshPressed {
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    
     //we haven't stored anything in the posts array, so since is 0.
     if(posts == nil || [posts count] == 0){
         since = 0;
     }
-    else{
-        [self updateTimestamp];
+    
+    [self connect];
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    // Google Analytics
+    [[GANTracker sharedTracker] trackPageview:@"News (NewsView)" withError:nil];
+    
+    // If we're coming back from reading a news post, deselect the cell.
+    NSIndexPath *indexPath = [self.newsTable indexPathForSelectedRow];
+    if(indexPath) {
+        [self.newsTable deselectRowAtIndexPath:indexPath animated:YES];
     }
     
-    [self performSelectorOnMainThread:@selector(hideRefreshButton) withObject:nil waitUntilDone:NO];
-    [self fetchNews];
+    // changing UINavBar graphics
+    //UIImage *bgImage = [UIImage imageNamed:@"UINavigationBar.png"];
+    //[self.navigationController.navigationBar setBackgroundImage:bgImage forBarMetrics:UIBarMetricsDefault];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.newsTable reloadData];
+}
+
+- (void)connect {
+    [self hideRefreshButton];
+    TexasDrumsGetNews *get = [[TexasDrumsGetNews alloc] initWithTimestamp:since];
+    get.delegate = self;
+    [get startRequest];    
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 - (void)hideRefreshButton {
-    [reloadIndicator startAnimating];
-    self.navigationItem.rightBarButtonItem = loading;
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+    [SVProgressHUD showWithStatus:@"Loading..." maskType:SVProgressHUDMaskTypeGradient];
 }
 
-- (void)showRefreshButton {
-    [reloadIndicator stopAnimating];
-    self.navigationItem.rightBarButtonItem = refresh;
+- (void)dismissWithSuccess {
+    self.navigationItem.rightBarButtonItem.enabled = YES;
+    [SVProgressHUD dismiss];
 }
 
-- (void)fetchNews {
-    [self startConnection];
-}
-
-- (void)startConnection {
-    NSString *API_Call = [NSString stringWithFormat:@"%@apikey=%@&since=%d", TEXAS_DRUMS_API_NEWS, TEXAS_DRUMS_API_KEY, since];
-    NSLog(@"%@", API_Call);
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:API_Call] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
-    
-    NSURLConnection *urlconnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
-    if(urlconnection) {
-        received_data = [[NSMutableData data] retain];
-    }
+- (void)dismissWithError {
+    self.navigationItem.rightBarButtonItem.enabled = YES;
+    [SVProgressHUD showErrorWithStatus:@"Could not fetch data."];
 }
 
 - (void)parseNewsData:(NSDictionary *)results {
@@ -143,9 +168,18 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
         allposts = [[NSMutableArray alloc] init];
     }
     
+    BOOL timestamp_updated = NO;
+    
     for(NSDictionary *item in results){
         // NSLog(@"%@", item);
+        
         News *post = [self createNewPost:item];
+        
+        if(!timestamp_updated){
+            self.since = post.timestamp;
+            timestamp_updated = YES;
+            NSLog(@"Timestamp updated to most recent post: %d", post.timestamp);
+        }
         
         if(!post.memberPost){
             [posts addObject:post];
@@ -154,11 +188,9 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
         [allposts addObject:post];
     }
     
-    //news is already sorted through the API.
-    //[self sortTable];
-    
-    //Any changes to UI must be done on main thread.
-    [self performSelectorOnMainThread:@selector(displayTable) withObject:nil waitUntilDone:YES];
+    // Still need to sort the data in the event that we have new posts coming up through the refresh.
+    [self sortTable];
+    [self displayTable];
 
 }
 
@@ -178,72 +210,28 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     return post;
 }
 
-
-/* newsTable is already sorted through the API.
-   ***DEPRECATED***
 - (void)sortTable {
     NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:NO];
+    [allposts sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
     [posts sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
     [descriptor release];
 }
-*/
 
 - (void)updateTimestamp{
     NSString *timestampString = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
     self.since = [timestampString intValue];
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [[GANTracker sharedTracker] trackPageview:@"News (NewsView)" withError:nil];
-    NSIndexPath *indexPath = [self.newsTable indexPathForSelectedRow];
-    if(indexPath) {
-        [self.newsTable deselectRowAtIndexPath:indexPath animated:YES];
-    }
-    //UIImage *bgImage = [UIImage imageNamed:@"UINavigationBar.png"];
-    //[self.navigationController.navigationBar setBackgroundImage:bgImage forBarMetrics:UIBarMetricsDefault];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    [self.newsTable reloadData];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
+    // If user logged in, show all posts. Otherwise, just regular posts.
     if(_Profile != nil){
         return [allposts count];
     }
@@ -277,8 +265,8 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
         cell.detailTextLabel.text = [[allposts objectAtIndex:indexPath.row] subtitle];
 
         if([[allposts objectAtIndex:indexPath.row] memberPost]){
-            cell.textLabel.textColor = UIColorFromRGB(0xFF792A);
-            cell.detailTextLabel.textColor = UIColorFromRGB(0xCE792A);
+            cell.textLabel.textColor = [UIColor TexasDrumsOrangeColor];
+            cell.detailTextLabel.textColor = [UIColor TexasDrumsOrangeColor];
         }
     }
     else{
@@ -296,7 +284,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     [UIView setAnimationDelay:delay];
     self.newsTable.alpha = 1.0f;
     [UIView commitAnimations];
-    [NSTimer scheduledTimerWithTimeInterval:delay+.25 target:self selector:@selector(showRefreshButton) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:delay target:self selector:@selector(dismissWithSuccess) userInfo:nil repeats:NO];
 }
 
 #pragma mark - Table view delegate
@@ -304,6 +292,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NewsPostView *newsPostViewController = [[NewsPostView alloc] initWithNibName:@"NewsPostView" bundle:[NSBundle mainBundle]];
+    
     if(_Profile == nil){
         newsPostViewController.content = [[posts objectAtIndex:indexPath.row] post]; 
         newsPostViewController.post = [posts objectAtIndex:indexPath.row];
@@ -319,65 +308,20 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     [newsPostViewController release];
 }
 
-#pragma mark - NSURLConnection delegate methods
+#pragma mark -
+#pragma mark TexasDrumsGetRequestDelegate Methods
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    // This method is called when the server has determined that it
-    // has enough information to create the NSURLResponse.
-    
-    // It can be called multiple times, for example in the case of a
-    // redirect, so each time we reset the data.
-    [received_data setLength:0];
-    
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    // Append the new data to received_data.
-    [received_data appendData:data];
-}
-
-
-- (void)connection:(NSURLConnection *)connection
-  didFailWithError:(NSError *)error
-{
-    // release the connection, and the data object
-    [connection release];
-    [received_data release];
-    
-    // inform the user
-    NSLog(@"Connection failed! Error - %@ %@",
-          [error localizedDescription],
-          [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" 
-                                                    message:[error localizedDescription] 
-                                                   delegate:self 
-                                          cancelButtonTitle:@":( Okay" 
-                                          otherButtonTitles:nil, nil];
-    [alert show];
-    [alert release];
-    
-    [self performSelectorOnMainThread:@selector(showRefreshButton) withObject:nil waitUntilDone:NO];
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
+- (void)request:(TexasDrumsGetRequest *)request receivedData:(id)data {
+    NSLog(@"Obtained news successfully.");
     NSError *error = nil;
-    NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:received_data error:&error];
-    
+    NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
     [self parseNewsData:results];
-    
-    NSLog(@"Succeeded! Received %d bytes of data.", [received_data length]);
-    
-    // release the connection, and the data object
-    [connection release];
-    [received_data release];
-    
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+}
+
+- (void)request:(TexasDrumsGetRequest *)request failedWithError:(NSError *)error {
+    NSLog(@"request error: %@", error);
+    // Show error message?
+    [self dismissWithError];
 }
 
 @end

@@ -10,6 +10,6 @@
 
 @implementation StaffMember
 
-@synthesize first, last, fullname, instrument, year, bio, email, sortfield;
+@synthesize first, last, fullname, instrument, year, bio, email, sortfield, image_url;
 
 @end

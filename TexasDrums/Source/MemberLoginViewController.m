@@ -181,6 +181,7 @@ typedef enum {
     else {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [self performSelectorOnMainThread:@selector(enableUI) withObject:nil waitUntilDone:NO];
+        [indicator performSelectorOnMainThread:@selector(stopAnimating) withObject:nil waitUntilDone:NO];
         [defaults setObject:@"" forKey:@"login_username"];
         [defaults setObject:@"" forKey:@"login_password"];
         [defaults setBool:NO forKey:@"member"];

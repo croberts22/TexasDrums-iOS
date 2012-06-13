@@ -16,6 +16,7 @@
 #import "CJSONDeserializer.h"
 #import "RegexKitLite.h"
 #import "GANTracker.h"
+#import "TexasDrumsGetRosters.h"
 
 @implementation RosterViewController
 
@@ -102,7 +103,6 @@
     self.rosterTable.separatorColor = [UIColor clearColor];
     if(rosters == nil){
         rosters = [[NSMutableArray alloc] init];
-        [self fetchRosters];
     }
 }
 
@@ -131,7 +131,9 @@
     }
 }
 
+// this needs to be fixed for API 1.1
 - (void)parseRosterData:(NSDictionary *)results {
+    // result is nsdictionary 
     for(NSString *year in results){
         Roster *roster = [[Roster alloc] init];
         roster.snares = [[[NSMutableArray alloc] init] autorelease];
@@ -262,6 +264,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [self connect];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -280,17 +283,21 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (void)connect {
+    TexasDrumsGetRosters *get = [[TexasDrumsGetRosters alloc] init];
+    get.delegate = self;
+    [get startRequest]; 
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
+{   
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
     return [rosters count];
 }
 
@@ -379,7 +386,7 @@
     [self.navigationController pushViewController:srvc animated:YES];
     [srvc release];
 }
-
+/*
 #pragma mark - NSURLConnection delegate methods
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -441,5 +448,21 @@
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
+*/
+
+#pragma mark -
+#pragma mark TexasDrumsGetRequestDelegate Methods
+
+- (void)request:(TexasDrumsGetRequest *)request receivedData:(id)data {
+    NSLog(@"Obtained rosters successfully.");
+    NSError *error = nil;
+    NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
+    [self parseRosterData:results];
+}
+
+- (void)request:(TexasDrumsGetRequest *)request failedWithError:(NSError *)error {
+    NSLog(@"Request error: %@", error);
+}
+
 
 @end

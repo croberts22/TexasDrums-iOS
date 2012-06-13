@@ -11,7 +11,7 @@
 @protocol TexasDrumsAPIConnection <NSObject>
 
 - (void)startConnection;
-- (NSDictionary *)parseData;
+//- (NSDictionary *)parseData;
 
 // NSURLConnection Delegate Methods
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;

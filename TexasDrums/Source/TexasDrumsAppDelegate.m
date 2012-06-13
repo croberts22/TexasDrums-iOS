@@ -10,6 +10,7 @@
 #import "MemberLoginViewController.h"
 #import "CJSONDeserializer.h"
 #import "GANTracker.h"
+#import "Crittercism.h"
 
 // Dispatch period in seconds
 static const NSInteger kGANDispatchPeriodSec = 10;
@@ -22,7 +23,6 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {   
-    
     [[GANTracker sharedTracker] startTrackerWithAccountID:@"UA-30605087-1"
                                            dispatchPeriod:kGANDispatchPeriodSec
                                                  delegate:nil];
@@ -50,6 +50,8 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 	[UIView commitAnimations];
     
     [self startConnection];
+    
+    [Crittercism initWithAppID:@"4fca4280067e7c223100000d" andKey:@"qmqprnyvfwt1txkj96zhlofnksr0" andSecret:@"pat1ikup9agryyrlhh7mt2cv5k8gsnjx" andMainViewController:self.window.rootViewController];
     
     return YES;
 }
@@ -243,7 +245,6 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     [alert show];
     [alert release];
     
-    [self performSelectorOnMainThread:@selector(showRefreshButton) withObject:nil waitUntilDone:NO];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 

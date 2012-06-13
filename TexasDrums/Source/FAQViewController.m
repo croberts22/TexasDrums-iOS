@@ -8,6 +8,7 @@
 
 #import "FAQViewController.h"
 #import "GANTracker.h"
+#import "TexasDrumsGetFAQ.h"
 
 @implementation FAQViewController
 
@@ -89,8 +90,10 @@
     self.indicator.alpha = 1.0f;
     self.status.alpha = 1.0f;
     self.status.text = @"Loading...";
-    
-    [self fetchFAQ];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [self connect];
 }
 
 - (void)viewDidUnload
@@ -106,6 +109,13 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (void)connect {
+    TexasDrumsGetFAQ *get = [[TexasDrumsGetFAQ alloc] init];
+    get.delegate = self;
+    [get startRequest];    
+}
+
+/*
 - (void)fetchFAQ {
     [self startConnection];
 }
@@ -120,6 +130,7 @@
         received_data = [[NSMutableData data] retain];
     }
 }
+*/
 
 - (void)parseFAQData:(NSDictionary *)results {
     for(NSDictionary *item in results){
@@ -309,7 +320,7 @@
     
     return cell;
 }
-
+/*
 #pragma mark - NSURLConnection delegate methods
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -369,6 +380,21 @@
     [received_data release];
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+}
+ */
+
+#pragma mark -
+#pragma mark TexasDrumsGetRequestDelegate Methods
+
+- (void)request:(TexasDrumsGetRequest *)request receivedData:(id)data {
+    NSLog(@"Obtained FAQ successfully.");
+    NSError *error = nil;
+    NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
+    [self parseFAQData:results];
+}
+
+- (void)request:(TexasDrumsGetRequest *)request failedWithError:(NSError *)error {
+    NSLog(@"request error: %@", error);
 }
 
 @end

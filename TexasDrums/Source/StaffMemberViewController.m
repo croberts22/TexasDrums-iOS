@@ -11,7 +11,7 @@
 #import "GANTracker.h"
 #import "TexasDrumsWebViewController.h"
 
-#define IMG_PATH (@"http://www.texasdrums.com/img/app/about/11-12/")
+#define DOMAIN_PATH (@"http://www.texasdrums.com/")
 
 @interface StaffMemberViewController ()
 
@@ -72,7 +72,7 @@
 }
 
 - (void)initializePicture {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@.png", IMG_PATH, member.first]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", DOMAIN_PATH, member.image_url]];
     
     // Since the UIImageView is set first, set the inital coordinates to (0,0).
     picture = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)] autorelease];
@@ -82,8 +82,6 @@
     // Set UIImageView properties.
     self.picture.contentMode = UIViewContentModeScaleAspectFill;
     self.picture.clipsToBounds = YES;
-    self.picture.layer.borderColor = [UIColor blackColor].CGColor;
-    self.picture.layer.borderWidth = 1.0f;
 }
 
 - (void)initializeBio {

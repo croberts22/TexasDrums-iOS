@@ -22,7 +22,7 @@
 #define FONT_SIZE (16.0f)
 #define BIO_FONT_SIZE (12.0f)
 //this will need to be changed. add 11-12 extension in the API for current_year.
-#define IMG_PATH (@"http://www.texasdrums.com/img/app/about/11-12/")
+#define DOMAIN_PATH (@"http://www.texasdrums.com/")
 
 @synthesize staffTable, staff, indicator, status, received_data;
 
@@ -128,6 +128,7 @@
         member.instrument = [item objectForKey:@"section"];
         member.year = [item objectForKey:@"year"];
         member.bio = [item objectForKey:@"bio"];
+        member.image_url = [item objectForKey:@"image"];
         member.email = [item objectForKey:@"email"];
         member.sortfield = [[item objectForKey:@"sortfield"] intValue];
         
@@ -184,7 +185,7 @@
     
     // Asynchronously fetch the Staff image; in the mean time, use a thumbnail        
     // until the image is fetched.
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@_tn.png", IMG_PATH, [[staff objectAtIndex:indexPath.row] first]]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", DOMAIN_PATH, [[staff objectAtIndex:indexPath.row] image_url]]];
     
     [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"Thumbnail.png"]];
     cell.textLabel.text = [[staff objectAtIndex:indexPath.row] fullname];

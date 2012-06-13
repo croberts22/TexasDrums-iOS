@@ -131,7 +131,9 @@
 - (void)parseAddressBookData:(NSDictionary *)results {    
     for(NSDictionary *item in results){
         Profile *profile = [self createNewProfile:item];
-        [addressBook addObject:profile];
+        if(profile.valid){
+            [addressBook addObject:profile];
+        }
     }
     [self sortMembersByName];
     //Any changes to UI must be done on main thread.
@@ -153,6 +155,7 @@
     member_profile.email = [item objectForKey:@"email"];
     member_profile.phonenumber = [item objectForKey:@"phonenumber"];
     member_profile.sl = [[item objectForKey:@"sl"] intValue];
+    member_profile.valid = [[item objectForKey:@"valid"] boolValue];
     
     member_profile.alphabet_first = [NSString stringWithFormat:@"%c", [member_profile.firstname characterAtIndex:0]];
     member_profile.alphabet_last = [NSString stringWithFormat:@"%c", [member_profile.lastname characterAtIndex:0]];

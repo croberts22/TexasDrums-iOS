@@ -15,6 +15,7 @@
     NSString *instrument;
     NSString *year;
     NSString *bio;
+    NSString *image_url;
     NSString *email;
     int sortfield;
 }
@@ -25,6 +26,7 @@
 @property (nonatomic, retain) NSString *instrument;
 @property (nonatomic, retain) NSString *year;
 @property (nonatomic, retain) NSString *bio;
+@property (nonatomic, retain) NSString *image_url;
 @property (nonatomic, retain) NSString *email;
 @property (nonatomic) int sortfield;
 

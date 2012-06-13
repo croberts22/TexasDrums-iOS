@@ -40,7 +40,7 @@
 - (void)updateTimestamp;
 - (void)fetchNews;
 - (void)parseNewsData:(NSDictionary *)results;
-//- (void)sortTable; //**DEPRECATED**//
+- (void)sortTable;
 - (void)hideRefreshButton;
 - (void)showRefreshButton;
 - (void)refreshPressed;
