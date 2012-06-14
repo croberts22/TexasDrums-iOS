@@ -15,7 +15,6 @@
     IBOutlet UIWebView <UIWebViewDelegate> *webView;
     IBOutlet UILabel *titleOfPost;
     IBOutlet UILabel *dateAndAuthor;
-    IBOutlet UIActivityIndicatorView *indicator;
     NSString *content;
     BOOL isMemberPost;
     BOOL loadPost;
@@ -27,7 +26,6 @@
 @property (nonatomic, retain) UILabel *titleOfPost;
 @property (nonatomic, retain) UILabel *dateAndAuthor;
 @property (nonatomic, retain) NSString *content;
-@property (nonatomic, retain) UIActivityIndicatorView *indicator;
 @property (nonatomic, assign) BOOL isMemberPost;
 @property (nonatomic, assign) BOOL loadPost;
 

@@ -13,7 +13,7 @@
 
 @implementation NewsPostView
 
-@synthesize webView, titleOfPost, dateAndAuthor, content, post, indicator, isMemberPost, loadPost;
+@synthesize webView, titleOfPost, dateAndAuthor, content, post, isMemberPost, loadPost;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,7 +31,6 @@
     [titleOfPost release];
     [dateAndAuthor release];
     [webView release];
-    [indicator release];
     [super dealloc];
 }
 
@@ -61,7 +60,6 @@
     
     //for black background on webview
     //make everything hidden; once everything is loaded, load animation for everything on delegate method
-    self.indicator.alpha = 1.0f;
     self.webView.alpha = 0.0f;
     self.titleOfPost.alpha = 0.0f;
     self.dateAndAuthor.alpha = 0.0f;
@@ -70,8 +68,6 @@
     }
     self.webView.opaque = NO;
     self.webView.backgroundColor = [UIColor clearColor];
-    
-    [self.indicator performSelectorInBackground:@selector(startAnimating) withObject:nil];
 
     self.titleOfPost.text = post.titleOfPost;
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:post.timestamp];
@@ -87,11 +83,10 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     self.loadPost = TRUE;
     [UIView beginAnimations:@"webview" context:NULL];
-    [UIView setAnimationDelay:1.0f];
+    [UIView setAnimationDuration:0.5f];
     self.webView.alpha = 1.0f;
     self.titleOfPost.alpha = 1.0f;
     self.dateAndAuthor.alpha = 1.0f;
-    self.indicator.alpha = 0.0f;
     [UIView commitAnimations];
 }
 

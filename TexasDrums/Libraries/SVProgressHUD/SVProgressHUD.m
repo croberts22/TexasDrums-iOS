@@ -8,6 +8,7 @@
 //
 
 #import "SVProgressHUD.h"
+#import "UIFont+TexasDrums.h"
 #import <QuartzCore/QuartzCore.h>
 
 #if ! __has_feature(objc_arc)
@@ -464,7 +465,7 @@
 		stringLabel.adjustsFontSizeToFitWidth = YES;
 		stringLabel.textAlignment = UITextAlignmentCenter;
 		stringLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
-		stringLabel.font = [UIFont boldSystemFontOfSize:16];
+		stringLabel.font = [UIFont TexasDrumsBoldFontOfSize:16];
 		stringLabel.shadowColor = [UIColor blackColor];
 		stringLabel.shadowOffset = CGSizeMake(0, -1);
         stringLabel.numberOfLines = 0;

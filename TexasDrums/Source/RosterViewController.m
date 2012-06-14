@@ -17,12 +17,13 @@
 #import "RegexKitLite.h"
 #import "GANTracker.h"
 #import "TexasDrumsGetRosters.h"
+#import "SVProgressHUD.h"
 
 @implementation RosterViewController
 
 #define _HEADER_HEIGHT_ (50)
 
-@synthesize rosters, indicator, rosterTable, received_data, status, refresh;
+@synthesize rosters, rosterTable, refresh;
 
 - (void)didReceiveMemoryWarning
 {
@@ -55,29 +56,21 @@
     [titleView sizeToFit];
 }
 
-- (void)setStatusText:(NSString *)text {
-    self.status.text = text;
-}
-
 - (void)displayTable {
-    float delay = 1.0f;
+    float duration = 0.5f;
     [self.rosterTable reloadData];
+    
     [UIView beginAnimations:@"displayRosterTable" context:NULL];
+    [UIView setAnimationDuration:duration];
     if([rosters count] > 0){
-        [UIView setAnimationDelay:delay];
         self.rosterTable.alpha = 1.0f;
-        self.status.alpha = 0.0f;
-        self.indicator.alpha = 0.0f;
     }
     else {
-        [UIView setAnimationDelay:delay];
         self.rosterTable.alpha = 0.0f;
-        self.status.alpha = 1.0f;
-        self.indicator.alpha = 0.0f;
-        [self setStatusText:@"Nothing was found. Please try again."];
     }
     [UIView commitAnimations];
-    [self.indicator performSelector:@selector(stopAnimating) withObject:nil afterDelay:delay+.25];
+    
+    [SVProgressHUD dismiss];
 }
 
 - (void)hideRefreshButton {
@@ -98,25 +91,68 @@
     self.navigationItem.rightBarButtonItem = refresh;
     
     self.rosterTable.alpha = 0.0f;
-    self.status.alpha = 1.0f;
     self.rosterTable.backgroundColor = [UIColor clearColor];
     self.rosterTable.separatorColor = [UIColor clearColor];
+    
     if(rosters == nil){
         rosters = [[NSMutableArray alloc] init];
     }
 }
 
-- (void)refreshPressed {
-    [self hideRefreshButton];
-    [self fetchRosters];
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
 }
 
-- (void)fetchRosters {
-    self.indicator.alpha = 1.0f;
-    [indicator startAnimating];
-    [self setStatusText:@"Loading..."];
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[GANTracker sharedTracker] trackPageview:@"Roster (RosterView)" withError:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if([rosters count] == 0){
+        [self connect];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)connect {
     [self hideRefreshButton];
-    
+    [SVProgressHUD showWithStatus:@"Loading..."];
+    TexasDrumsGetRosters *get = [[TexasDrumsGetRosters alloc] init];
+    get.delegate = self;
+    [get startRequest]; 
+}
+
+- (void)refreshPressed {
+    [self connect];
+}
+
+
+/*
+
+- (void)fetchRosters {
+    [self hideRefreshButton];
     [self startConnection];
 }
 
@@ -130,50 +166,62 @@
         received_data = [[NSMutableData data] retain];
     }
 }
+ */
 
-// this needs to be fixed for API 1.1
 - (void)parseRosterData:(NSDictionary *)results {
-    // result is nsdictionary 
-    for(NSString *year in results){
-        Roster *roster = [[Roster alloc] init];
-        roster.snares = [[[NSMutableArray alloc] init] autorelease];
-        roster.tenors = [[[NSMutableArray alloc] init] autorelease];
-        roster.basses = [[[NSMutableArray alloc] init] autorelease];
-        roster.cymbals = [[[NSMutableArray alloc] init] autorelease];
-        roster.instructor = [[[NSMutableArray alloc] init] autorelease];
-        roster.the_year = [NSString stringWithString:year];
+    NSString *current_year = @"";
+    for(NSDictionary *member in results) {
         
-        NSString *API_Call = [NSString stringWithFormat:@"%@apikey=%@&year=%@", TEXAS_DRUMS_API_ROSTER, TEXAS_DRUMS_API_KEY, year];
-        //NSLog(@"%@", API_Call);
-        NSError *error = nil;
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:API_Call]];
-        NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-        NSDictionary *roster_results = [[CJSONDeserializer deserializer] deserialize:response error:&error];
+        Roster *roster;
 
-        for(NSDictionary *this_member in roster_results){
-            RosterMember *member = [self createNewRosterMember:this_member];
-
-            if([member.instrument isEqualToString:@"Snare"]){
-                [roster.snares addObject:member];
-            }
-            else if([member.instrument isEqualToString:@"Tenors"]){
-                [roster.tenors addObject:member];
-            }
-            else if([member.instrument isEqualToString:@"Bass"]){
-                [roster.basses addObject:member];
-            }
-            else if([member.instrument isEqualToString:@"Cymbals"]){
-                [roster.cymbals addObject:member];
-            }
+        // If the year is not set, set it.
+        if([current_year isEqualToString:@""]){
+            current_year = [member objectForKey:@"year"];    
+            roster = [[Roster alloc] initWithYear:current_year];
         }
         
-        [self sortSections:roster];
-        [rosters addObject:roster];
-        [roster release];
+        // Grab the current year.  If it's different, we know it's a new year/roster.
+        NSString *this_year = [member objectForKey:@"year"];        
+        
+        if(![current_year isEqualToString:this_year]){
+            
+            // Set the new current year.
+            current_year = [member objectForKey:@"year"];
+            
+            // Sort and add the roster to the full roster list.
+            [self sortSections:roster];
+            [rosters addObject:roster];
+            [roster release];
+            
+            // If last object in the JSON response is NULL, break the loop.
+            if([member objectForKey:@"year"] == [NSNull null]){
+                break;
+            }
+            
+            // After adding the roster to the rosters array, create a new one.
+            roster = [[Roster alloc] initWithYear:current_year];
+        }
+        
+        // Create a roster member and add it to the respective group.
+        RosterMember *roster_member = [self createNewRosterMember:member];
+        
+        if([roster_member.instrument isEqualToString:@"Snare"]){
+            [roster.snares addObject:roster_member];
+        }
+        else if([roster_member.instrument isEqualToString:@"Tenors"]){
+            [roster.tenors addObject:roster_member];
+        }
+        else if([roster_member.instrument isEqualToString:@"Bass"]){
+            [roster.basses addObject:roster_member];
+        }
+        else if([roster_member.instrument isEqualToString:@"Cymbals"]){
+            [roster.cymbals addObject:roster_member];
+        }
     }
-    [self performSelectorOnMainThread:@selector(displayTable) withObject:nil waitUntilDone:NO];
+    
+    // Display the table after all data is acquired.
+    [self displayTable];
     if(DEBUG_MODE) NSLog(@"Roster table configured. Reloading...");
-
 }
 
 - (RosterMember *)createNewRosterMember:(NSDictionary *)item {
@@ -248,47 +296,6 @@
     [descriptor release];
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [[GANTracker sharedTracker] trackPageview:@"Roster (RosterView)" withError:nil];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    [self connect];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (void)connect {
-    TexasDrumsGetRosters *get = [[TexasDrumsGetRosters alloc] init];
-    get.delegate = self;
-    [get startRequest]; 
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -320,7 +327,6 @@
     }
     headerTitle.textAlignment = UITextAlignmentCenter;
     headerTitle.textColor = [UIColor orangeColor];
-    //headerTitle.shadowColor = [UIColor darkGrayColor];
     headerTitle.shadowOffset = CGSizeMake(0, 1);
     headerTitle.font = [UIFont fontWithName:@"Georgia-Bold" size:18];
     headerTitle.backgroundColor = [UIColor clearColor];
@@ -378,77 +384,14 @@
 {
     [self.rosterTable deselectRowAtIndexPath:indexPath animated:YES];
     SingleRosterViewController *srvc = [[SingleRosterViewController alloc] initWithNibName:@"SingleRosterView" bundle:[NSBundle mainBundle]];
-    srvc.snares = [NSArray arrayWithArray:[[rosters objectAtIndex:indexPath.row] snares]];
+    srvc.snares = [[rosters objectAtIndex:indexPath.row] snares];
     srvc.tenors = [[rosters objectAtIndex:indexPath.row] tenors];
     srvc.basses = [[rosters objectAtIndex:indexPath.row] basses];
     srvc.cymbals = [[rosters objectAtIndex:indexPath.row] cymbals];
-    srvc.year = [NSString stringWithFormat:@"%@", [[rosters objectAtIndex:indexPath.row] the_year]];
+    srvc.year = [[rosters objectAtIndex:indexPath.row] the_year];
     [self.navigationController pushViewController:srvc animated:YES];
     [srvc release];
 }
-/*
-#pragma mark - NSURLConnection delegate methods
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    // This method is called when the server has determined that it
-    // has enough information to create the NSURLResponse.
-    
-    // It can be called multiple times, for example in the case of a
-    // redirect, so each time we reset the data.
-    [received_data setLength:0];
-    
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    // Append the new data to received_data.
-    [received_data appendData:data];
-}
-
-
-- (void)connection:(NSURLConnection *)connection
-  didFailWithError:(NSError *)error
-{
-    // release the connection, and the data object
-    [connection release];
-    [received_data release];
-    
-    // inform the user
-    NSLog(@"Connection failed! Error - %@ %@",
-          [error localizedDescription],
-          [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" 
-                                                    message:[error localizedDescription] 
-                                                   delegate:self 
-                                          cancelButtonTitle:@":( Okay" 
-                                          otherButtonTitles:nil, nil];
-    [alert show];
-    [alert release];
-    
-    [self displayTable];
-    [self showRefreshButton];
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    NSError *error = nil;
-    NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:received_data error:&error];
-    
-    [self parseRosterData:results];
-    
-    NSLog(@"Succeeded! Received %d bytes of data.", [received_data length]);
-    
-    // release the connection, and the data object
-    [connection release];
-    [received_data release];
-    
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-}
-*/
 
 #pragma mark -
 #pragma mark TexasDrumsGetRequestDelegate Methods
@@ -462,6 +405,8 @@
 
 - (void)request:(TexasDrumsGetRequest *)request failedWithError:(NSError *)error {
     NSLog(@"Request error: %@", error);
+    [self showRefreshButton];
+    [SVProgressHUD showErrorWithStatus:@"Could not fetch data."];
 }
 
 

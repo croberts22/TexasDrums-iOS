@@ -25,4 +25,6 @@
 @property (nonatomic, retain) NSMutableArray *cymbals;
 @property (nonatomic, retain) NSMutableArray *instructor;
 
+- (id)initWithYear:(NSString *)year;
+
 @end

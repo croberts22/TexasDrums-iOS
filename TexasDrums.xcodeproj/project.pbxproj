@@ -56,6 +56,7 @@
 		04FD5E3A13FACF8400482FCD /* AddMemberView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FD5E3813FACF8400482FCD /* AddMemberView.xib */; };
 		632D90881586F3B5008B106A /* TexasDrumsGetProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 632D90871586F3B4008B106A /* TexasDrumsGetProfile.m */; };
 		632D909B1586F856008B106A /* TexasDrumsGetRosters.m in Sources */ = {isa = PBXBuildFile; fileRef = 632D909A1586F856008B106A /* TexasDrumsGetRosters.m */; };
+		635296C2158985D800E62787 /* UIFont+TexasDrums.m in Sources */ = {isa = PBXBuildFile; fileRef = 635296C1158985D800E62787 /* UIFont+TexasDrums.m */; };
 		6398DF0F157BA724004A11DA /* TexasDrumsGetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DF0E157BA724004A11DA /* TexasDrumsGetRequest.m */; };
 		6398DF69157BA80E004A11DA /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DF12157BA80E004A11DA /* ASIAuthenticationDialog.m */; };
 		6398DF6A157BA80E004A11DA /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DF15157BA80E004A11DA /* ASIDataCompressor.m */; };
@@ -385,6 +386,8 @@
 		632D90871586F3B4008B106A /* TexasDrumsGetProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsGetProfile.m; sourceTree = "<group>"; };
 		632D90991586F855008B106A /* TexasDrumsGetRosters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexasDrumsGetRosters.h; sourceTree = "<group>"; };
 		632D909A1586F856008B106A /* TexasDrumsGetRosters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsGetRosters.m; sourceTree = "<group>"; };
+		635296C0158985D800E62787 /* UIFont+TexasDrums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+TexasDrums.h"; sourceTree = "<group>"; };
+		635296C1158985D800E62787 /* UIFont+TexasDrums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+TexasDrums.m"; sourceTree = "<group>"; };
 		6398DF0D157BA724004A11DA /* TexasDrumsGetRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexasDrumsGetRequest.h; sourceTree = "<group>"; };
 		6398DF0E157BA724004A11DA /* TexasDrumsGetRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsGetRequest.m; sourceTree = "<group>"; };
 		6398DF11157BA80E004A11DA /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
@@ -992,6 +995,8 @@
 				AE3A5E63156B464200A7DEF3 /* UserProfile.m */,
 				6398DFA2157C1A65004A11DA /* UIColor+TexasDrums.h */,
 				6398DFA3157C1A65004A11DA /* UIColor+TexasDrums.m */,
+				635296C0158985D800E62787 /* UIFont+TexasDrums.h */,
+				635296C1158985D800E62787 /* UIFont+TexasDrums.m */,
 			);
 			name = Globals;
 			sourceTree = "<group>";
@@ -2022,6 +2027,7 @@
 				632D90881586F3B5008B106A /* TexasDrumsGetProfile.m in Sources */,
 				632D909B1586F856008B106A /* TexasDrumsGetRosters.m in Sources */,
 				63BD89A7158848E600593E48 /* TexasDrumsGetFAQ.m in Sources */,
+				635296C2158985D800E62787 /* UIFont+TexasDrums.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

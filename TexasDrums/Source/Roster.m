@@ -12,17 +12,18 @@
 @implementation Roster
 
 @synthesize the_year, snares, tenors, basses, cymbals, instructor;
-/*
--(id)init {
-    if((self = [super init])){
-        year = [[NSString alloc] init];
+
+- (id)initWithYear:(NSString *)year {
+    if ((self = [super init])) {
         snares = [[NSMutableArray alloc] init];
         tenors = [[NSMutableArray alloc] init];
         basses = [[NSMutableArray alloc] init];
         cymbals = [[NSMutableArray alloc] init];
         instructor = [[NSMutableArray alloc] init];
+        the_year = year;
     }
+    
     return self;
 }
- */
+
 @end
