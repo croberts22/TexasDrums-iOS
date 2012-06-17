@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Corey Roberts. All rights reserved.
 //
 
-#import "TexasDrumsGetRequest.h"
+#import "TexasDrumsRequest.h"
 
-@interface TexasDrumsGetNews : TexasDrumsGetRequest {
+@interface TexasDrumsGetNews : TexasDrumsRequest {
     NSInteger _timestamp;
 }
 

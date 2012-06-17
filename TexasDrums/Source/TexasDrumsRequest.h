@@ -1,5 +1,5 @@
 //
-//  TexasDrumsGetRequest.h
+//  TexasDrumsRequest.h
 //  TexasDrums
 //
 //  Created by Corey Roberts on 6/3/12.
@@ -9,16 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "ASIHTTPRequest.h"
 
-@protocol TexasDrumsGetRequestDelegate;
+@protocol TexasDrumsRequestDelegate;
 
-@interface TexasDrumsGetRequest : NSObject {
+@interface TexasDrumsRequest : NSObject {
     ASIHTTPRequest *request;
     NSData *downloaded_data;
     
     NSUInteger retry_count;
     NSInteger response_code;
     
-    id<TexasDrumsGetRequestDelegate> delegate;
+    id<TexasDrumsRequestDelegate> delegate;
     
     BOOL request_succeeded;
 }
@@ -38,9 +38,9 @@
 
 @end
 
-@protocol TexasDrumsGetRequestDelegate <NSObject>
+@protocol TexasDrumsRequestDelegate <NSObject>
 @required
-- (void)request:(TexasDrumsGetRequest *)request receivedData:(id)data;
-- (void)request:(TexasDrumsGetRequest *)request failedWithError:(NSError *)error;
+- (void)request:(TexasDrumsRequest *)request receivedData:(id)data;
+- (void)request:(TexasDrumsRequest *)request failedWithError:(NSError *)error;
 
 @end

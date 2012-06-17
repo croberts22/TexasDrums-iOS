@@ -36,7 +36,7 @@
 /***************************************************************************
  News Tests
  ***************************************************************************/
-
+/*
 - (void)testNewsClassImplementation
 {
     News *news = [[News alloc] init];
@@ -263,6 +263,7 @@
     
     STAssertTrue(expected_result == NVC.since, @"testUpdateTimestamp failed");
 }
+ */
 
 /***************************************************************************
  Roster Tests

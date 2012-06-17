@@ -384,16 +384,16 @@
  */
 
 #pragma mark -
-#pragma mark TexasDrumsGetRequestDelegate Methods
+#pragma mark TexasDrumsRequestDelegate Methods
 
-- (void)request:(TexasDrumsGetRequest *)request receivedData:(id)data {
+- (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
     NSLog(@"Obtained FAQ successfully.");
     NSError *error = nil;
     NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
     [self parseFAQData:results];
 }
 
-- (void)request:(TexasDrumsGetRequest *)request failedWithError:(NSError *)error {
+- (void)request:(TexasDrumsRequest *)request failedWithError:(NSError *)error {
     NSLog(@"request error: %@", error);
 }
 

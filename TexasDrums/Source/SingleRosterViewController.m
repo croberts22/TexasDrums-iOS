@@ -7,23 +7,25 @@
 //
 
 #import "SingleRosterViewController.h"
+#import "Roster.h"
 #import "RosterMember.h"
 #import "SingleMemberView.h"
 #import "TexasDrumsGroupedTableViewCell.h"
+
 #import "GANTracker.h"
+
+#import "UIFont+TexasDrums.h"
+#import "UIColor+TexasDrums.h"
 
 @implementation SingleRosterViewController
 
 #define _HEADER_HEIGHT_ (50)
 
-@synthesize snares, tenors, basses, cymbals, year, singleRosterTable;
+@synthesize roster, year, singleRosterTable;
 
 - (void)dealloc
 {
-    [snares release];
-    [tenors release];
-    [basses release];
-    [cymbals release];
+    [roster release];
     [year release];
     [singleRosterTable release];
     [super dealloc];
@@ -46,7 +48,7 @@
     if (!titleView) {
         titleView = [[UILabel alloc] initWithFrame:CGRectZero];
         titleView.backgroundColor = [UIColor clearColor];
-        titleView.font = [UIFont fontWithName:@"Georgia-Bold" size:20];
+        titleView.font = [UIFont TexasDrumsBoldFontOfSize:20];
         titleView.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
         titleView.textColor = [UIColor whiteColor]; 
         
@@ -60,6 +62,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     [self setTitle:year];
 
     self.singleRosterTable.backgroundColor = [UIColor clearColor];
@@ -73,6 +76,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    // Google Analytics
     [[GANTracker sharedTracker] trackPageview:[NSString stringWithFormat:@"%@ Roster (SingleRosterView)", year] withError:nil];
 }
 
@@ -101,8 +106,28 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
     return 4;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    switch(section){
+        case 0:
+            return [[roster snares] count];
+            break;
+        case 1:
+            return [[roster tenors] count];
+            break;
+        case 2:
+            return [[roster basses] count];
+            break;
+        case 3:
+            return [[roster cymbals] count];
+            break;
+        default:
+            return 0;
+            break;
+    }
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -110,20 +135,12 @@
 	return _HEADER_HEIGHT_;
 }
 
-    //this overrides the titleForHeaderInSection method.
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section 
 {
     
-    //create a new view of size _HEADER_HEIGHT_, and place a label inside.
+    // Create a custom header.
     UIView *containerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, _HEADER_HEIGHT_)] autorelease];
     UILabel *headerTitle = [[[UILabel alloc] initWithFrame:CGRectMake(10, 20, 300, 30)] autorelease];
-    headerTitle.textAlignment = UITextAlignmentLeft;
-    headerTitle.textColor = [UIColor orangeColor];
-    //headerTitle.shadowColor = [UIColor darkGrayColor];
-    headerTitle.shadowOffset = CGSizeMake(0, 1);
-    headerTitle.font = [UIFont fontWithName:@"Georgia-Bold" size:18];
-    headerTitle.backgroundColor = [UIColor clearColor];
-    [containerView addSubview:headerTitle];
     
     switch(section){
         case 0:
@@ -142,28 +159,16 @@
             break;
     }
     
+    // Set header title properties.
+    headerTitle.backgroundColor = [UIColor clearColor];
+    headerTitle.textAlignment = UITextAlignmentLeft;
+    headerTitle.textColor = [UIColor TexasDrumsOrangeColor];
+    headerTitle.font = [UIFont TexasDrumsBoldFontOfSize:18];
+    headerTitle.shadowOffset = CGSizeMake(0, 1);
+    
+    [containerView addSubview:headerTitle];
+    
 	return containerView;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    switch(section){
-        case 0:
-            return [snares count];
-            break;
-        case 1:
-            return [tenors count];
-            break;
-        case 2:
-            return [basses count];
-            break;
-        case 3:
-            return [cymbals count];
-            break;
-        default:
-            return 0;
-            break;
-    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -177,26 +182,24 @@
     }
     
     switch(indexPath.section){
-        case 0: //snares
-            instrument = snares;
+        case 0: 
+            instrument = [roster snares];
             break;
-        case 1: //tenors
-            instrument = tenors;
+        case 1: 
+            instrument = [roster tenors];
             break;
-        case 2: //basses
-            instrument = basses;
+        case 2: 
+            instrument = [roster basses];
             break;
-        case 3: //cymbals
-            instrument = cymbals;
+        case 3: 
+            instrument = [roster cymbals];
             break;
         default:
             break;
-            
     }
     
-    // Overriding TexasDrumsGroupedTableViewCell properties.
-    cell.textLabel.font = [UIFont fontWithName:@"Georgia" size:16];
-    cell.textLabel.text = [[instrument objectAtIndex:indexPath.row] fullname];
+    // Override TexasDrumsGroupedTableViewCell properties.
+    cell.textLabel.font = [UIFont TexasDrumsFontOfSize:16];
     
     UIImage *background;
     UIImage *selected_background;
@@ -225,6 +228,8 @@
     ((UIImageView *)cell.backgroundView).image = background;
     ((UIImageView *)cell.selectedBackgroundView).image = selected_background;
     
+    cell.textLabel.text = [[instrument objectAtIndex:indexPath.row] fullname];
+    
     return cell;
 }
 
@@ -232,59 +237,30 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // *** Consider moving this out and doing an animation in viewWillAppear when popping.
     [self.singleRosterTable deselectRowAtIndexPath:indexPath animated:YES];
     
-    SingleMemberView *smv = [[SingleMemberView alloc] initWithNibName:@"SingleMemberView" bundle:[NSBundle mainBundle]];
-    switch (indexPath.section){
-        case 0: //snares
-            smv.firstname = [[snares objectAtIndex:indexPath.row] firstname];
-            smv.nickname = [[snares objectAtIndex:indexPath.row] nickname];
-            smv.lastname = [[snares objectAtIndex:indexPath.row] lastname];
-            smv.classification = [[snares objectAtIndex:indexPath.row] classification];
-            smv.amajor = [[snares objectAtIndex:indexPath.row] amajor];
-            smv.hometown = [[snares objectAtIndex:indexPath.row] hometown];
-            smv.quote = [[snares objectAtIndex:indexPath.row] quote];
-            smv.email = [[snares objectAtIndex:indexPath.row] email];
-            smv.phonenumber = [[snares objectAtIndex:indexPath.row] phone];
+    SingleMemberView *SMV = [[SingleMemberView alloc] initWithNibName:@"SingleMemberView" bundle:[NSBundle mainBundle]];
+    
+    switch (indexPath.section) {
+        case 0:
+            SMV.member = [roster.snares objectAtIndex:indexPath.row];
             break;
-        case 1: //tenors
-            smv.firstname = [[tenors objectAtIndex:indexPath.row] firstname];
-            smv.nickname = [[tenors objectAtIndex:indexPath.row] nickname];
-            smv.lastname = [[tenors objectAtIndex:indexPath.row] lastname];
-            smv.classification = [[tenors objectAtIndex:indexPath.row] classification];
-            smv.amajor = [[tenors objectAtIndex:indexPath.row] amajor];
-            smv.hometown = [[tenors objectAtIndex:indexPath.row] hometown];
-            smv.quote = [[tenors objectAtIndex:indexPath.row] quote];
-            smv.email = [[tenors objectAtIndex:indexPath.row] email];
-            smv.phonenumber = [[tenors objectAtIndex:indexPath.row] phone];
+        case 1:
+            SMV.member = [roster.tenors objectAtIndex:indexPath.row];
             break;
-        case 2: //basses
-            smv.firstname = [[basses objectAtIndex:indexPath.row] firstname];
-            smv.nickname = [[basses objectAtIndex:indexPath.row] nickname];
-            smv.lastname = [[basses objectAtIndex:indexPath.row] lastname];            
-            smv.classification = [[basses objectAtIndex:indexPath.row] classification];
-            smv.amajor = [[basses objectAtIndex:indexPath.row] amajor];
-            smv.hometown = [[basses objectAtIndex:indexPath.row] hometown];
-            smv.quote = [[basses objectAtIndex:indexPath.row] quote];
-            smv.email = [[basses objectAtIndex:indexPath.row] email];
-            smv.phonenumber = [[basses objectAtIndex:indexPath.row] phone];
+        case 2:
+            SMV.member = [roster.basses objectAtIndex:indexPath.row];
             break;
-        case 3: //cymbals
-            smv.firstname = [[cymbals objectAtIndex:indexPath.row] firstname];
-            smv.nickname = [[cymbals objectAtIndex:indexPath.row] nickname];
-            smv.lastname = [[cymbals objectAtIndex:indexPath.row] lastname];
-            smv.classification = [[cymbals objectAtIndex:indexPath.row] classification];
-            smv.amajor = [[cymbals objectAtIndex:indexPath.row] amajor];
-            smv.hometown = [[cymbals objectAtIndex:indexPath.row] hometown];
-            smv.quote = [[cymbals objectAtIndex:indexPath.row] quote];
-            smv.email = [[cymbals objectAtIndex:indexPath.row] email];
-            smv.phonenumber = [[cymbals objectAtIndex:indexPath.row] phone];
+        case 3:
+            SMV.member = [roster.cymbals objectAtIndex:indexPath.row];
             break;
         default:
             break;
     }
-    [self.navigationController pushViewController:smv animated:YES];
-    [smv release];
+    
+    [self.navigationController pushViewController:SMV animated:YES];
+    [SMV release];
 }
 
 @end

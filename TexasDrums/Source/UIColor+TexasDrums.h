@@ -11,5 +11,6 @@
 @interface UIColor (TexasDrums)
 
 + (UIColor *)TexasDrumsOrangeColor;
++ (UIColor *)TexasDrumsGrayColor;
 
 @end

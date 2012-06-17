@@ -57,7 +57,111 @@
 		632D90881586F3B5008B106A /* TexasDrumsGetProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 632D90871586F3B4008B106A /* TexasDrumsGetProfile.m */; };
 		632D909B1586F856008B106A /* TexasDrumsGetRosters.m in Sources */ = {isa = PBXBuildFile; fileRef = 632D909A1586F856008B106A /* TexasDrumsGetRosters.m */; };
 		635296C2158985D800E62787 /* UIFont+TexasDrums.m in Sources */ = {isa = PBXBuildFile; fileRef = 635296C1158985D800E62787 /* UIFont+TexasDrums.m */; };
-		6398DF0F157BA724004A11DA /* TexasDrumsGetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DF0E157BA724004A11DA /* TexasDrumsGetRequest.m */; };
+		637CF8C7158C4ABB00838F9A /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 637CF8C6158C4ABB00838F9A /* GHUnitIOS.framework */; };
+		637CF8C8158C4AEA00838F9A /* TexasDrumsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DF0E157BA724004A11DA /* TexasDrumsRequest.m */; };
+		637CF8C9158C4AEA00838F9A /* TexasDrumsGetNews.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DF98157BAA6B004A11DA /* TexasDrumsGetNews.m */; };
+		637CF8CA158C4AEA00838F9A /* TexasDrumsGetRosters.m in Sources */ = {isa = PBXBuildFile; fileRef = 632D909A1586F856008B106A /* TexasDrumsGetRosters.m */; };
+		637CF8CB158C4AEA00838F9A /* TexasDrumsGetProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 632D90871586F3B4008B106A /* TexasDrumsGetProfile.m */; };
+		637CF8CC158C4AEA00838F9A /* TexasDrumsGetFAQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 63BD89A6158848E600593E48 /* TexasDrumsGetFAQ.m */; };
+		637CF8CD158C4B0B00838F9A /* TexasDrumsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7564C4153CCE0800D04368 /* TexasDrumsTableViewCell.m */; };
+		637CF8CE158C4B0B00838F9A /* TexasDrumsGroupedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7564CF153CEDBF00D04368 /* TexasDrumsGroupedTableViewCell.m */; };
+		637CF8CF158C4B0B00838F9A /* NSString+RegEx.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7564C7153CD56D00D04368 /* NSString+RegEx.m */; };
+		637CF8D0158C4B0B00838F9A /* UIColor+TexasDrums.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DFA3157C1A65004A11DA /* UIColor+TexasDrums.m */; };
+		637CF8D1158C4B0B00838F9A /* UIFont+TexasDrums.m in Sources */ = {isa = PBXBuildFile; fileRef = 635296C1158985D800E62787 /* UIFont+TexasDrums.m */; };
+		637CF8D2158C4B0B00838F9A /* TexasDrumsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E9AB3B13B4E5B700F207EA /* TexasDrumsAppDelegate.m */; };
+		637CF8D3158C4B0B00838F9A /* TexasDrumsWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7564CA153CDC8100D04368 /* TexasDrumsWebViewController.m */; };
+		637CF8D4158C4B0B00838F9A /* NSURLConnectionWithTag.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3A23581562D1AB009B8F4B /* NSURLConnectionWithTag.m */; };
+		637CF8D5158C4B0B00838F9A /* UserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3A5E63156B464200A7DEF3 /* UserProfile.m */; };
+		637CF8D6158C4B2800838F9A /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3A234915619336009B8F4B /* SVProgressHUD.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		637CF8D7158C4B4B00838F9A /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DF12157BA80E004A11DA /* ASIAuthenticationDialog.m */; };
+		637CF8D8158C4B4B00838F9A /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DF15157BA80E004A11DA /* ASIDataCompressor.m */; };
+		637CF8D9158C4B4B00838F9A /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DF17157BA80E004A11DA /* ASIDataDecompressor.m */; };
+		637CF8DA158C4B4B00838F9A /* ASIDownloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DF19157BA80E004A11DA /* ASIDownloadCache.m */; };
+		637CF8DB158C4B4B00838F9A /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DF1B157BA80E004A11DA /* ASIFormDataRequest.m */; };
+		637CF8DC158C4B4B00838F9A /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DF1D157BA80E004A11DA /* ASIHTTPRequest.m */; };
+		637CF8DD158C4B4B00838F9A /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DF21157BA80E004A11DA /* ASIInputStream.m */; };
+		637CF8DE158C4B4B00838F9A /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DF23157BA80E004A11DA /* ASINetworkQueue.m */; };
+		637CF8DF158C4B7900838F9A /* ASIS3Bucket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DF3A157BA80E004A11DA /* ASIS3Bucket.m */; };
+		637CF8E0158C4B7900838F9A /* ASIS3BucketObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DF3C157BA80E004A11DA /* ASIS3BucketObject.m */; };
+		637CF8E1158C4B7900838F9A /* ASIS3BucketRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DF3E157BA80E004A11DA /* ASIS3BucketRequest.m */; };
+		637CF8E2158C4B7900838F9A /* ASIS3ObjectRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DF40157BA80E004A11DA /* ASIS3ObjectRequest.m */; };
+		637CF8E3158C4B7900838F9A /* ASIS3Request.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DF42157BA80E004A11DA /* ASIS3Request.m */; };
+		637CF8E4158C4B7900838F9A /* ASIS3ServiceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DF44157BA80E004A11DA /* ASIS3ServiceRequest.m */; };
+		637CF8E5158C4B7900838F9A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DF68157BA80E004A11DA /* Reachability.m */; };
+		637CF8E6158C4B7900838F9A /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF20D0615218CB000C6427D /* CDataScanner.m */; };
+		637CF8E7158C4B7900838F9A /* CJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF20D0815218CB000C6427D /* CJSONDeserializer.m */; };
+		637CF8E8158C4B7900838F9A /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF20D0A15218CB000C6427D /* CJSONScanner.m */; };
+		637CF8E9158C4B7900838F9A /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF20D0C15218CB000C6427D /* CJSONSerializer.m */; };
+		637CF8EA158C4B7900838F9A /* CFilteringJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF20D0F15218CB000C6427D /* CFilteringJSONSerializer.m */; };
+		637CF8EB158C4B7900838F9A /* CJSONDeserializer_BlocksExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF20D1115218CB000C6427D /* CJSONDeserializer_BlocksExtensions.m */; };
+		637CF8EC158C4B7900838F9A /* CJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF20D1315218CB000C6427D /* CJSONSerialization.m */; };
+		637CF8ED158C4B7900838F9A /* CJSONSerializedData.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF20D1515218CB000C6427D /* CJSONSerializedData.m */; };
+		637CF8EE158C4B7900838F9A /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF20D1815218CB000C6427D /* CDataScanner_Extensions.m */; };
+		637CF8EF158C4B7900838F9A /* NSDictionary_JSONExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF20D1A15218CB000C6427D /* NSDictionary_JSONExtensions.m */; };
+		637CF8F0158C4B7900838F9A /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF20D2115218CB000C6427D /* RegexKitLite.m */; };
+		637CF8F1158C4B7900838F9A /* Roster.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E9AB3513B4E5B700F207EA /* Roster.m */; };
+		637CF8F2158C4B7900838F9A /* RosterMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E9AB3713B4E5B700F207EA /* RosterMember.m */; };
+		637CF8F3158C4B7900838F9A /* RosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E9AB3913B4E5B700F207EA /* RosterViewController.m */; };
+		637CF8F4158C4B7900838F9A /* SingleRosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC008213B998B200890150 /* SingleRosterViewController.m */; };
+		637CF8F5158C4B7900838F9A /* SingleMemberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E9AB7713B854DA00F207EA /* SingleMemberView.m */; };
+		637CF8F6158C4B7900838F9A /* Video.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB0AECD1538E486008CE123 /* Video.m */; };
+		637CF8F7158C4B7900838F9A /* Audio.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA5E5CC153785B40025A227 /* Audio.m */; };
+		637CF8F8158C4B7900838F9A /* MediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E9AB2D13B4E5B700F207EA /* MediaViewController.m */; };
+		637CF8F9158C4B7900838F9A /* AudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF3A973150A716900E25177 /* AudioViewController.m */; };
+		637CF8FA158C4B7900838F9A /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF3A979150A717200E25177 /* VideoViewController.m */; };
+		637CF8FB158C4B7900838F9A /* PictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF3A97E150A718700E25177 /* PictureViewController.m */; };
+		637CF8FC158C4B7900838F9A /* Music.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3F7EC7152682B000CAA448 /* Music.m */; };
+		637CF8FD158C4B7900838F9A /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A0D86813F23AD90020AD25 /* Profile.m */; };
+		637CF8FE158C4B7900838F9A /* DownloadMusicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF9CA4D151B70D800C8A028 /* DownloadMusicViewController.m */; };
+		637CF8FF158C4B7900838F9A /* AddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0489006513F82A8B00AD687C /* AddressBookViewController.m */; };
+		637CF900158C4B7900838F9A /* AddressBookMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE37F2951548B9EA001EA3A8 /* AddressBookMemberViewController.m */; };
+		637CF901158C4B7900838F9A /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A0D86313F23A610020AD25 /* ProfileViewController.m */; };
+		637CF902158C4B7900838F9A /* MusicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF25867152F55070019D5BD /* MusicViewController.m */; };
+		637CF903158C4B7900838F9A /* EditNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044E643414473D97000080B4 /* EditNameViewController.m */; };
+		637CF904158C4B7900838F9A /* EditPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044E643914473DA2000080B4 /* EditPasswordViewController.m */; };
+		637CF905158C4B7900838F9A /* EditPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044E643E14473DB7000080B4 /* EditPhoneViewController.m */; };
+		637CF906158C4B7900838F9A /* EditBirthdayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044E644314473DFE000080B4 /* EditBirthdayViewController.m */; };
+		637CF907158C4B7900838F9A /* EditEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044E644814473E2C000080B4 /* EditEmailViewController.m */; };
+		637CF908158C4B7900838F9A /* AddMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5E3713FACF8400482FCD /* AddMemberViewController.m */; };
+		637CF909158C4B7900838F9A /* PaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0458EBAC1430F73300E9BD54 /* PaymentViewController.m */; };
+		637CF90A158C4B7900838F9A /* MemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E9AB2F13B4E5B700F207EA /* MemberViewController.m */; };
+		637CF90B158C4B7900838F9A /* MemberLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04319F5713BCC3DB0058333E /* MemberLoginViewController.m */; };
+		637CF90C158C4B7900838F9A /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0452057D13EFA9DC0022B083 /* InfoViewController.m */; };
+		637CF90D158C4B7900838F9A /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AECDBC6C14BD431F00A077B4 /* AboutUsViewController.m */; };
+		637CF90E158C4B7900838F9A /* FAQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE30B08014BE73590059B71B /* FAQViewController.m */; };
+		637CF90F158C4B7900838F9A /* StaffViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B350914C120EE00519280 /* StaffViewController.m */; };
+		637CF910158C4B7900838F9A /* StaffMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA939C915420134000E66F4 /* StaffMemberViewController.m */; };
+		637CF911158C4B7900838F9A /* AboutThisAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B350F14C120F900519280 /* AboutThisAppViewController.m */; };
+		637CF912158C4B8900838F9A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6398DF9C157BB8EA004A11DA /* libz.dylib */; };
+		637CF913158C4BA600838F9A /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE723CE61539D19B00D081F4 /* libGoogleAnalytics.a */; };
+		637CF914158C4BD100838F9A /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE723CE21539CF0500D081F4 /* libSDWebImage.a */; };
+		637CF915158C4BE400838F9A /* libCrittercism_v3_1_5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 63BE6C31157D7AF300E4097B /* libCrittercism_v3_1_5.a */; };
+		637CF916158C4BF200838F9A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA5E5CE15378A7F0025A227 /* AVFoundation.framework */; };
+		637CF917158C4BF600838F9A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6398DF9A157BB8CF004A11DA /* MobileCoreServices.framework */; };
+		637CF918158C4BFC00838F9A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB361FB1540C23D00FE479E /* QuartzCore.framework */; };
+		637CF919158C4C0400838F9A /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB4A99414DAEBBE007FE4CA /* SenTestingKit.framework */; };
+		637CF91A158C4C0A00838F9A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE723CE31539CF4700D081F4 /* MapKit.framework */; };
+		637CF91B158C4C1000838F9A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA5E5BB153641E70025A227 /* CFNetwork.framework */; };
+		637CF91C158C4C1F00838F9A /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA5E5BD153641EC0025A227 /* libsqlite3.0.dylib */; };
+		637CF91D158C4C2500838F9A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE4B351C14C2239700519280 /* MessageUI.framework */; };
+		637CF91E158C4C3200838F9A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04BD2DF013C13832006D7637 /* SystemConfiguration.framework */; };
+		637CF91F158C4CCB00838F9A /* FAQ.m in Sources */ = {isa = PBXBuildFile; fileRef = AE30B08514BE7DB50059B71B /* FAQ.m */; };
+		637CF920158C4CCB00838F9A /* StaffMember.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B352014C8802500519280 /* StaffMember.m */; };
+		6388F2C4158D97F000DF20F4 /* TexasDrumsGetAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388F2C3158D97F000DF20F4 /* TexasDrumsGetAudio.m */; };
+		6388F2C7158D991000DF20F4 /* TexasDrumsGetVideos.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388F2C6158D991000DF20F4 /* TexasDrumsGetVideos.m */; };
+		6388F2E2158E802600DF20F4 /* BuckBuck.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6388F2D6158E802600DF20F4 /* BuckBuck.mp3 */; };
+		6388F2E3158E802600DF20F4 /* Cheerleader.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6388F2D7158E802600DF20F4 /* Cheerleader.mp3 */; };
+		6388F2E4158E802600DF20F4 /* D-D-DDefense.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6388F2D8158E802600DF20F4 /* D-D-DDefense.mp3 */; };
+		6388F2E5158E802600DF20F4 /* Defense.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6388F2D9158E802600DF20F4 /* Defense.mp3 */; };
+		6388F2E6158E802600DF20F4 /* FullCadenceRun.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6388F2DA158E802600DF20F4 /* FullCadenceRun.mp3 */; };
+		6388F2E7158E802600DF20F4 /* GoGoHorns.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6388F2DB158E802600DF20F4 /* GoGoHorns.mp3 */; };
+		6388F2E8158E802600DF20F4 /* GoHornsGo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6388F2DC158E802600DF20F4 /* GoHornsGo.mp3 */; };
+		6388F2E9158E802600DF20F4 /* Gourdhead.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6388F2DD158E802600DF20F4 /* Gourdhead.mp3 */; };
+		6388F2EA158E802600DF20F4 /* HoldEmHornsHoldEm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6388F2DE158E802600DF20F4 /* HoldEmHornsHoldEm.mp3 */; };
+		6388F2EB158E802600DF20F4 /* PushEmBack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6388F2DF158E802600DF20F4 /* PushEmBack.mp3 */; };
+		6388F2EC158E802600DF20F4 /* TenorIntro.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6388F2E0158E802600DF20F4 /* TenorIntro.mp3 */; };
+		6388F2ED158E802600DF20F4 /* TexasTexasYeeHaw.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6388F2E1158E802600DF20F4 /* TexasTexasYeeHaw.mp3 */; };
+		6398DF0F157BA724004A11DA /* TexasDrumsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DF0E157BA724004A11DA /* TexasDrumsRequest.m */; };
 		6398DF69157BA80E004A11DA /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DF12157BA80E004A11DA /* ASIAuthenticationDialog.m */; };
 		6398DF6A157BA80E004A11DA /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DF15157BA80E004A11DA /* ASIDataCompressor.m */; };
 		6398DF6B157BA80E004A11DA /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DF17157BA80E004A11DA /* ASIDataDecompressor.m */; };
@@ -242,7 +346,6 @@
 		AED8325814F3670D00BC8928 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AED8325714F3670D00BC8928 /* main.m */; };
 		AED8325F14F3670D00BC8928 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AED8325E14F3670D00BC8928 /* ViewController.m */; };
 		AED8326214F3670D00BC8928 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED8326014F3670D00BC8928 /* ViewController.xib */; };
-		AED8326714F3673F00BC8928 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AED8326614F3673F00BC8928 /* GHUnitIOS.framework */; };
 		AED8326A14F3677400BC8928 /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = AED8326914F3677400BC8928 /* Tests.m */; };
 		AED8326E14F3685300BC8928 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E9AB2B13B4E5B700F207EA /* Common.m */; };
 		AED8326F14F3685300BC8928 /* News.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E9AB3113B4E5B700F207EA /* News.m */; };
@@ -366,13 +469,13 @@
 		04E9AB3013B4E5B700F207EA /* News.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = News.h; sourceTree = "<group>"; };
 		04E9AB3113B4E5B700F207EA /* News.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = News.m; sourceTree = "<group>"; };
 		04E9AB3213B4E5B700F207EA /* NewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsViewController.h; sourceTree = "<group>"; };
-		04E9AB3313B4E5B700F207EA /* NewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewController.m; sourceTree = "<group>"; };
+		04E9AB3313B4E5B700F207EA /* NewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = NewsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		04E9AB3413B4E5B700F207EA /* Roster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Roster.h; sourceTree = "<group>"; };
 		04E9AB3513B4E5B700F207EA /* Roster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Roster.m; sourceTree = "<group>"; };
 		04E9AB3613B4E5B700F207EA /* RosterMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterMember.h; sourceTree = "<group>"; };
 		04E9AB3713B4E5B700F207EA /* RosterMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterMember.m; sourceTree = "<group>"; };
 		04E9AB3813B4E5B700F207EA /* RosterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterViewController.h; sourceTree = "<group>"; };
-		04E9AB3913B4E5B700F207EA /* RosterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterViewController.m; sourceTree = "<group>"; };
+		04E9AB3913B4E5B700F207EA /* RosterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = RosterViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		04E9AB3A13B4E5B700F207EA /* TexasDrumsAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexasDrumsAppDelegate.h; sourceTree = "<group>"; };
 		04E9AB3B13B4E5B700F207EA /* TexasDrumsAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsAppDelegate.m; sourceTree = "<group>"; };
 		04E9AB7113B847E900F207EA /* NewsPostView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsPostView.h; sourceTree = "<group>"; };
@@ -388,8 +491,25 @@
 		632D909A1586F856008B106A /* TexasDrumsGetRosters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsGetRosters.m; sourceTree = "<group>"; };
 		635296C0158985D800E62787 /* UIFont+TexasDrums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+TexasDrums.h"; sourceTree = "<group>"; };
 		635296C1158985D800E62787 /* UIFont+TexasDrums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+TexasDrums.m"; sourceTree = "<group>"; };
-		6398DF0D157BA724004A11DA /* TexasDrumsGetRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexasDrumsGetRequest.h; sourceTree = "<group>"; };
-		6398DF0E157BA724004A11DA /* TexasDrumsGetRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsGetRequest.m; sourceTree = "<group>"; };
+		637CF8C6158C4ABB00838F9A /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = UnitTests/GHUnitIOS.framework; sourceTree = "<group>"; };
+		6388F2C2158D97F000DF20F4 /* TexasDrumsGetAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexasDrumsGetAudio.h; sourceTree = "<group>"; };
+		6388F2C3158D97F000DF20F4 /* TexasDrumsGetAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsGetAudio.m; sourceTree = "<group>"; };
+		6388F2C5158D991000DF20F4 /* TexasDrumsGetVideos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexasDrumsGetVideos.h; sourceTree = "<group>"; };
+		6388F2C6158D991000DF20F4 /* TexasDrumsGetVideos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsGetVideos.m; sourceTree = "<group>"; };
+		6388F2D6158E802600DF20F4 /* BuckBuck.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = BuckBuck.mp3; path = Media/Audio/BuckBuck.mp3; sourceTree = "<group>"; };
+		6388F2D7158E802600DF20F4 /* Cheerleader.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Cheerleader.mp3; path = Media/Audio/Cheerleader.mp3; sourceTree = "<group>"; };
+		6388F2D8158E802600DF20F4 /* D-D-DDefense.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "D-D-DDefense.mp3"; path = "Media/Audio/D-D-DDefense.mp3"; sourceTree = "<group>"; };
+		6388F2D9158E802600DF20F4 /* Defense.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Defense.mp3; path = Media/Audio/Defense.mp3; sourceTree = "<group>"; };
+		6388F2DA158E802600DF20F4 /* FullCadenceRun.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = FullCadenceRun.mp3; path = Media/Audio/FullCadenceRun.mp3; sourceTree = "<group>"; };
+		6388F2DB158E802600DF20F4 /* GoGoHorns.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = GoGoHorns.mp3; path = Media/Audio/GoGoHorns.mp3; sourceTree = "<group>"; };
+		6388F2DC158E802600DF20F4 /* GoHornsGo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = GoHornsGo.mp3; path = Media/Audio/GoHornsGo.mp3; sourceTree = "<group>"; };
+		6388F2DD158E802600DF20F4 /* Gourdhead.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Gourdhead.mp3; path = Media/Audio/Gourdhead.mp3; sourceTree = "<group>"; };
+		6388F2DE158E802600DF20F4 /* HoldEmHornsHoldEm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = HoldEmHornsHoldEm.mp3; path = Media/Audio/HoldEmHornsHoldEm.mp3; sourceTree = "<group>"; };
+		6388F2DF158E802600DF20F4 /* PushEmBack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = PushEmBack.mp3; path = Media/Audio/PushEmBack.mp3; sourceTree = "<group>"; };
+		6388F2E0158E802600DF20F4 /* TenorIntro.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = TenorIntro.mp3; path = Media/Audio/TenorIntro.mp3; sourceTree = "<group>"; };
+		6388F2E1158E802600DF20F4 /* TexasTexasYeeHaw.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = TexasTexasYeeHaw.mp3; path = Media/Audio/TexasTexasYeeHaw.mp3; sourceTree = "<group>"; };
+		6398DF0D157BA724004A11DA /* TexasDrumsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexasDrumsRequest.h; sourceTree = "<group>"; };
+		6398DF0E157BA724004A11DA /* TexasDrumsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsRequest.m; sourceTree = "<group>"; };
 		6398DF11157BA80E004A11DA /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		6398DF12157BA80E004A11DA /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
 		6398DF13157BA80E004A11DA /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
@@ -551,7 +671,7 @@
 		63BE6C95157D7AF300E4097B /* CrittercismRootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CrittercismRootViewController.xib; sourceTree = "<group>"; };
 		63BE6C96157D7AF300E4097B /* CrittercismViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CrittercismViewController.xib; sourceTree = "<group>"; };
 		AE30B07F14BE73590059B71B /* FAQViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAQViewController.h; sourceTree = "<group>"; };
-		AE30B08014BE73590059B71B /* FAQViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAQViewController.m; sourceTree = "<group>"; };
+		AE30B08014BE73590059B71B /* FAQViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FAQViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AE30B08114BE73590059B71B /* FAQView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FAQView.xib; sourceTree = "<group>"; };
 		AE30B08414BE7DB50059B71B /* FAQ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAQ.h; sourceTree = "<group>"; };
 		AE30B08514BE7DB50059B71B /* FAQ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAQ.m; sourceTree = "<group>"; };
@@ -668,7 +788,6 @@
 		AED8325D14F3670D00BC8928 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		AED8325E14F3670D00BC8928 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		AED8326114F3670D00BC8928 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
-		AED8326614F3673F00BC8928 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = GHUnit/GHUnitIOS.framework; sourceTree = SOURCE_ROOT; };
 		AED8326914F3677400BC8928 /* Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		AED9E4C414F21BC2005064FA /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		AED9E4C614F21BC8005064FA /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -768,10 +887,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				637CF91E158C4C3200838F9A /* SystemConfiguration.framework in Frameworks */,
+				637CF91D158C4C2500838F9A /* MessageUI.framework in Frameworks */,
+				637CF91C158C4C1F00838F9A /* libsqlite3.0.dylib in Frameworks */,
+				637CF91B158C4C1000838F9A /* CFNetwork.framework in Frameworks */,
+				637CF91A158C4C0A00838F9A /* MapKit.framework in Frameworks */,
+				637CF919158C4C0400838F9A /* SenTestingKit.framework in Frameworks */,
+				637CF918158C4BFC00838F9A /* QuartzCore.framework in Frameworks */,
+				637CF917158C4BF600838F9A /* MobileCoreServices.framework in Frameworks */,
+				637CF916158C4BF200838F9A /* AVFoundation.framework in Frameworks */,
+				637CF915158C4BE400838F9A /* libCrittercism_v3_1_5.a in Frameworks */,
+				637CF914158C4BD100838F9A /* libSDWebImage.a in Frameworks */,
+				637CF913158C4BA600838F9A /* libGoogleAnalytics.a in Frameworks */,
+				637CF912158C4B8900838F9A /* libz.dylib in Frameworks */,
 				AED8324E14F3670D00BC8928 /* UIKit.framework in Frameworks */,
 				AED8324F14F3670D00BC8928 /* Foundation.framework in Frameworks */,
 				AED8325014F3670D00BC8928 /* CoreGraphics.framework in Frameworks */,
-				AED8326714F3673F00BC8928 /* GHUnitIOS.framework in Frameworks */,
+				637CF8C7158C4ABB00838F9A /* GHUnitIOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -828,6 +960,7 @@
 		045646C213ADBD2F00681573 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				637CF8C6158C4ABB00838F9A /* GHUnitIOS.framework */,
 				6398DF9C157BB8EA004A11DA /* libz.dylib */,
 				6398DF9A157BB8CF004A11DA /* MobileCoreServices.framework */,
 				AEB361FB1540C23D00FE479E /* QuartzCore.framework */,
@@ -835,7 +968,6 @@
 				AEA5E5CE15378A7F0025A227 /* AVFoundation.framework */,
 				AEA5E5BD153641EC0025A227 /* libsqlite3.0.dylib */,
 				AEA5E5BB153641E70025A227 /* CFNetwork.framework */,
-				AED8326614F3673F00BC8928 /* GHUnitIOS.framework */,
 				AE4B351C14C2239700519280 /* MessageUI.framework */,
 				04BD2DF013C13832006D7637 /* SystemConfiguration.framework */,
 				045646C313ADBD2F00681573 /* UIKit.framework */,
@@ -973,17 +1105,13 @@
 		047E924E13E5A01600B3DC9A /* Globals */ = {
 			isa = PBXGroup;
 			children = (
+				63F966E8158AAEB4002AD634 /* UITableView */,
+				63F966E7158AAEA6002AD634 /* Categories */,
 				045646D513ADBD3000681573 /* MainWindow.xib */,
 				04E9AB2A13B4E5B700F207EA /* Common.h */,
 				04E9AB2B13B4E5B700F207EA /* Common.m */,
 				04E9AB3A13B4E5B700F207EA /* TexasDrumsAppDelegate.h */,
 				04E9AB3B13B4E5B700F207EA /* TexasDrumsAppDelegate.m */,
-				AE7564C3153CCE0800D04368 /* TexasDrumsTableViewCell.h */,
-				AE7564C4153CCE0800D04368 /* TexasDrumsTableViewCell.m */,
-				AE7564CE153CEDBF00D04368 /* TexasDrumsGroupedTableViewCell.h */,
-				AE7564CF153CEDBF00D04368 /* TexasDrumsGroupedTableViewCell.m */,
-				AE7564C6153CD56D00D04368 /* NSString+RegEx.h */,
-				AE7564C7153CD56D00D04368 /* NSString+RegEx.m */,
 				AE7564C9153CDC8100D04368 /* TexasDrumsWebViewController.h */,
 				AE7564CA153CDC8100D04368 /* TexasDrumsWebViewController.m */,
 				AE7564CB153CDC8200D04368 /* TexasDrumsWebViewController.xib */,
@@ -993,10 +1121,6 @@
 				AE3A5E60156B405900A7DEF3 /* TexasDrumsAPIConnection.h */,
 				AE3A5E62156B464200A7DEF3 /* UserProfile.h */,
 				AE3A5E63156B464200A7DEF3 /* UserProfile.m */,
-				6398DFA2157C1A65004A11DA /* UIColor+TexasDrums.h */,
-				6398DFA3157C1A65004A11DA /* UIColor+TexasDrums.m */,
-				635296C0158985D800E62787 /* UIFont+TexasDrums.h */,
-				635296C1158985D800E62787 /* UIFont+TexasDrums.m */,
 			);
 			name = Globals;
 			sourceTree = "<group>";
@@ -1079,8 +1203,8 @@
 		6398DF09157BA547004A11DA /* Requests */ = {
 			isa = PBXGroup;
 			children = (
-				6398DF0D157BA724004A11DA /* TexasDrumsGetRequest.h */,
-				6398DF0E157BA724004A11DA /* TexasDrumsGetRequest.m */,
+				6398DF0D157BA724004A11DA /* TexasDrumsRequest.h */,
+				6398DF0E157BA724004A11DA /* TexasDrumsRequest.m */,
 				6398DF97157BAA6B004A11DA /* TexasDrumsGetNews.h */,
 				6398DF98157BAA6B004A11DA /* TexasDrumsGetNews.m */,
 				632D90991586F855008B106A /* TexasDrumsGetRosters.h */,
@@ -1089,6 +1213,10 @@
 				632D90871586F3B4008B106A /* TexasDrumsGetProfile.m */,
 				63BD89A5158848E600593E48 /* TexasDrumsGetFAQ.h */,
 				63BD89A6158848E600593E48 /* TexasDrumsGetFAQ.m */,
+				6388F2C2158D97F000DF20F4 /* TexasDrumsGetAudio.h */,
+				6388F2C3158D97F000DF20F4 /* TexasDrumsGetAudio.m */,
+				6388F2C5158D991000DF20F4 /* TexasDrumsGetVideos.h */,
+				6388F2C6158D991000DF20F4 /* TexasDrumsGetVideos.m */,
 			);
 			name = Requests;
 			sourceTree = "<group>";
@@ -1323,6 +1451,30 @@
 			path = Nibs;
 			sourceTree = "<group>";
 		};
+		63F966E7158AAEA6002AD634 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				AE7564C6153CD56D00D04368 /* NSString+RegEx.h */,
+				AE7564C7153CD56D00D04368 /* NSString+RegEx.m */,
+				6398DFA2157C1A65004A11DA /* UIColor+TexasDrums.h */,
+				6398DFA3157C1A65004A11DA /* UIColor+TexasDrums.m */,
+				635296C0158985D800E62787 /* UIFont+TexasDrums.h */,
+				635296C1158985D800E62787 /* UIFont+TexasDrums.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		63F966E8158AAEB4002AD634 /* UITableView */ = {
+			isa = PBXGroup;
+			children = (
+				AE7564C3153CCE0800D04368 /* TexasDrumsTableViewCell.h */,
+				AE7564C4153CCE0800D04368 /* TexasDrumsTableViewCell.m */,
+				AE7564CE153CEDBF00D04368 /* TexasDrumsGroupedTableViewCell.h */,
+				AE7564CF153CEDBF00D04368 /* TexasDrumsGroupedTableViewCell.m */,
+			);
+			name = UITableView;
+			sourceTree = "<group>";
+		};
 		AE105843150663B5001D3792 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -1418,6 +1570,18 @@
 		AE256D6C154C3EB2007776A1 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				6388F2D6158E802600DF20F4 /* BuckBuck.mp3 */,
+				6388F2D7158E802600DF20F4 /* Cheerleader.mp3 */,
+				6388F2D8158E802600DF20F4 /* D-D-DDefense.mp3 */,
+				6388F2D9158E802600DF20F4 /* Defense.mp3 */,
+				6388F2DA158E802600DF20F4 /* FullCadenceRun.mp3 */,
+				6388F2DB158E802600DF20F4 /* GoGoHorns.mp3 */,
+				6388F2DC158E802600DF20F4 /* GoHornsGo.mp3 */,
+				6388F2DD158E802600DF20F4 /* Gourdhead.mp3 */,
+				6388F2DE158E802600DF20F4 /* HoldEmHornsHoldEm.mp3 */,
+				6388F2DF158E802600DF20F4 /* PushEmBack.mp3 */,
+				6388F2E0158E802600DF20F4 /* TenorIntro.mp3 */,
+				6388F2E1158E802600DF20F4 /* TexasTexasYeeHaw.mp3 */,
 			);
 			name = Audio;
 			sourceTree = "<group>";
@@ -1896,6 +2060,18 @@
 				63BE6CDE157D7AF400E4097B /* CrittercismGridViewController.xib in Resources */,
 				63BE6CDF157D7AF400E4097B /* CrittercismRootViewController.xib in Resources */,
 				63BE6CE0157D7AF400E4097B /* CrittercismViewController.xib in Resources */,
+				6388F2E2158E802600DF20F4 /* BuckBuck.mp3 in Resources */,
+				6388F2E3158E802600DF20F4 /* Cheerleader.mp3 in Resources */,
+				6388F2E4158E802600DF20F4 /* D-D-DDefense.mp3 in Resources */,
+				6388F2E5158E802600DF20F4 /* Defense.mp3 in Resources */,
+				6388F2E6158E802600DF20F4 /* FullCadenceRun.mp3 in Resources */,
+				6388F2E7158E802600DF20F4 /* GoGoHorns.mp3 in Resources */,
+				6388F2E8158E802600DF20F4 /* GoHornsGo.mp3 in Resources */,
+				6388F2E9158E802600DF20F4 /* Gourdhead.mp3 in Resources */,
+				6388F2EA158E802600DF20F4 /* HoldEmHornsHoldEm.mp3 in Resources */,
+				6388F2EB158E802600DF20F4 /* PushEmBack.mp3 in Resources */,
+				6388F2EC158E802600DF20F4 /* TenorIntro.mp3 in Resources */,
+				6388F2ED158E802600DF20F4 /* TexasTexasYeeHaw.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1999,7 +2175,7 @@
 				AE3A234B15619336009B8F4B /* SVProgressHUD.m in Sources */,
 				AE3A23591562D1AC009B8F4B /* NSURLConnectionWithTag.m in Sources */,
 				AE3A5E64156B464200A7DEF3 /* UserProfile.m in Sources */,
-				6398DF0F157BA724004A11DA /* TexasDrumsGetRequest.m in Sources */,
+				6398DF0F157BA724004A11DA /* TexasDrumsRequest.m in Sources */,
 				6398DF69157BA80E004A11DA /* ASIAuthenticationDialog.m in Sources */,
 				6398DF6A157BA80E004A11DA /* ASIDataCompressor.m in Sources */,
 				6398DF6B157BA80E004A11DA /* ASIDataDecompressor.m in Sources */,
@@ -2028,6 +2204,8 @@
 				632D909B1586F856008B106A /* TexasDrumsGetRosters.m in Sources */,
 				63BD89A7158848E600593E48 /* TexasDrumsGetFAQ.m in Sources */,
 				635296C2158985D800E62787 /* UIFont+TexasDrums.m in Sources */,
+				6388F2C4158D97F000DF20F4 /* TexasDrumsGetAudio.m in Sources */,
+				6388F2C7158D991000DF20F4 /* TexasDrumsGetVideos.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2043,6 +2221,82 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				637CF91F158C4CCB00838F9A /* FAQ.m in Sources */,
+				637CF920158C4CCB00838F9A /* StaffMember.m in Sources */,
+				637CF8DF158C4B7900838F9A /* ASIS3Bucket.m in Sources */,
+				637CF8E0158C4B7900838F9A /* ASIS3BucketObject.m in Sources */,
+				637CF8E1158C4B7900838F9A /* ASIS3BucketRequest.m in Sources */,
+				637CF8E2158C4B7900838F9A /* ASIS3ObjectRequest.m in Sources */,
+				637CF8E3158C4B7900838F9A /* ASIS3Request.m in Sources */,
+				637CF8E4158C4B7900838F9A /* ASIS3ServiceRequest.m in Sources */,
+				637CF8E5158C4B7900838F9A /* Reachability.m in Sources */,
+				637CF8E6158C4B7900838F9A /* CDataScanner.m in Sources */,
+				637CF8E7158C4B7900838F9A /* CJSONDeserializer.m in Sources */,
+				637CF8E8158C4B7900838F9A /* CJSONScanner.m in Sources */,
+				637CF8E9158C4B7900838F9A /* CJSONSerializer.m in Sources */,
+				637CF8EA158C4B7900838F9A /* CFilteringJSONSerializer.m in Sources */,
+				637CF8EB158C4B7900838F9A /* CJSONDeserializer_BlocksExtensions.m in Sources */,
+				637CF8EC158C4B7900838F9A /* CJSONSerialization.m in Sources */,
+				637CF8ED158C4B7900838F9A /* CJSONSerializedData.m in Sources */,
+				637CF8EE158C4B7900838F9A /* CDataScanner_Extensions.m in Sources */,
+				637CF8EF158C4B7900838F9A /* NSDictionary_JSONExtensions.m in Sources */,
+				637CF8F0158C4B7900838F9A /* RegexKitLite.m in Sources */,
+				637CF8F1158C4B7900838F9A /* Roster.m in Sources */,
+				637CF8F2158C4B7900838F9A /* RosterMember.m in Sources */,
+				637CF8F3158C4B7900838F9A /* RosterViewController.m in Sources */,
+				637CF8F4158C4B7900838F9A /* SingleRosterViewController.m in Sources */,
+				637CF8F5158C4B7900838F9A /* SingleMemberView.m in Sources */,
+				637CF8F6158C4B7900838F9A /* Video.m in Sources */,
+				637CF8F7158C4B7900838F9A /* Audio.m in Sources */,
+				637CF8F8158C4B7900838F9A /* MediaViewController.m in Sources */,
+				637CF8F9158C4B7900838F9A /* AudioViewController.m in Sources */,
+				637CF8FA158C4B7900838F9A /* VideoViewController.m in Sources */,
+				637CF8FB158C4B7900838F9A /* PictureViewController.m in Sources */,
+				637CF8FC158C4B7900838F9A /* Music.m in Sources */,
+				637CF8FD158C4B7900838F9A /* Profile.m in Sources */,
+				637CF8FE158C4B7900838F9A /* DownloadMusicViewController.m in Sources */,
+				637CF8FF158C4B7900838F9A /* AddressBookViewController.m in Sources */,
+				637CF900158C4B7900838F9A /* AddressBookMemberViewController.m in Sources */,
+				637CF901158C4B7900838F9A /* ProfileViewController.m in Sources */,
+				637CF902158C4B7900838F9A /* MusicViewController.m in Sources */,
+				637CF903158C4B7900838F9A /* EditNameViewController.m in Sources */,
+				637CF904158C4B7900838F9A /* EditPasswordViewController.m in Sources */,
+				637CF905158C4B7900838F9A /* EditPhoneViewController.m in Sources */,
+				637CF906158C4B7900838F9A /* EditBirthdayViewController.m in Sources */,
+				637CF907158C4B7900838F9A /* EditEmailViewController.m in Sources */,
+				637CF908158C4B7900838F9A /* AddMemberViewController.m in Sources */,
+				637CF909158C4B7900838F9A /* PaymentViewController.m in Sources */,
+				637CF90A158C4B7900838F9A /* MemberViewController.m in Sources */,
+				637CF90B158C4B7900838F9A /* MemberLoginViewController.m in Sources */,
+				637CF90C158C4B7900838F9A /* InfoViewController.m in Sources */,
+				637CF90D158C4B7900838F9A /* AboutUsViewController.m in Sources */,
+				637CF90E158C4B7900838F9A /* FAQViewController.m in Sources */,
+				637CF90F158C4B7900838F9A /* StaffViewController.m in Sources */,
+				637CF910158C4B7900838F9A /* StaffMemberViewController.m in Sources */,
+				637CF911158C4B7900838F9A /* AboutThisAppViewController.m in Sources */,
+				637CF8D7158C4B4B00838F9A /* ASIAuthenticationDialog.m in Sources */,
+				637CF8D8158C4B4B00838F9A /* ASIDataCompressor.m in Sources */,
+				637CF8D9158C4B4B00838F9A /* ASIDataDecompressor.m in Sources */,
+				637CF8DA158C4B4B00838F9A /* ASIDownloadCache.m in Sources */,
+				637CF8DB158C4B4B00838F9A /* ASIFormDataRequest.m in Sources */,
+				637CF8DC158C4B4B00838F9A /* ASIHTTPRequest.m in Sources */,
+				637CF8DD158C4B4B00838F9A /* ASIInputStream.m in Sources */,
+				637CF8DE158C4B4B00838F9A /* ASINetworkQueue.m in Sources */,
+				637CF8D6158C4B2800838F9A /* SVProgressHUD.m in Sources */,
+				637CF8CD158C4B0B00838F9A /* TexasDrumsTableViewCell.m in Sources */,
+				637CF8CE158C4B0B00838F9A /* TexasDrumsGroupedTableViewCell.m in Sources */,
+				637CF8CF158C4B0B00838F9A /* NSString+RegEx.m in Sources */,
+				637CF8D0158C4B0B00838F9A /* UIColor+TexasDrums.m in Sources */,
+				637CF8D1158C4B0B00838F9A /* UIFont+TexasDrums.m in Sources */,
+				637CF8D2158C4B0B00838F9A /* TexasDrumsAppDelegate.m in Sources */,
+				637CF8D3158C4B0B00838F9A /* TexasDrumsWebViewController.m in Sources */,
+				637CF8D4158C4B0B00838F9A /* NSURLConnectionWithTag.m in Sources */,
+				637CF8D5158C4B0B00838F9A /* UserProfile.m in Sources */,
+				637CF8C8158C4AEA00838F9A /* TexasDrumsRequest.m in Sources */,
+				637CF8C9158C4AEA00838F9A /* TexasDrumsGetNews.m in Sources */,
+				637CF8CA158C4AEA00838F9A /* TexasDrumsGetRosters.m in Sources */,
+				637CF8CB158C4AEA00838F9A /* TexasDrumsGetProfile.m in Sources */,
+				637CF8CC158C4AEA00838F9A /* TexasDrumsGetFAQ.m in Sources */,
 				AED8327214F3686600BC8928 /* NewsPostView.m in Sources */,
 				AED8326E14F3685300BC8928 /* Common.m in Sources */,
 				AED8326F14F3685300BC8928 /* News.m in Sources */,
@@ -2269,7 +2523,9 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(DEVELOPER_DIR)/Projects/texasdrums-ios/trunk/GHUnit\"",
+					"\"$(SRCROOT)/GHUnit\"",
+					"\"$(SRCROOT)/UnitTests\"",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2281,9 +2537,16 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				INFOPLIST_FILE = "UnitTests/UnitTests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/TexasDrums/Libraries/Google Analytics SDK/Library\"",
+					"\"$(SRCROOT)/TexasDrums/Libraries/CrittercismSDK\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
+					"-licucore",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -2298,16 +2561,25 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(DEVELOPER_DIR)/Projects/texasdrums-ios/trunk/GHUnit\"",
+					"\"$(SRCROOT)/GHUnit\"",
+					"\"$(SRCROOT)/UnitTests\"",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UnitTests/UnitTests-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				INFOPLIST_FILE = "UnitTests/UnitTests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/TexasDrums/Libraries/Google Analytics SDK/Library\"",
+					"\"$(SRCROOT)/TexasDrums/Libraries/CrittercismSDK\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
+					"-licucore",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;

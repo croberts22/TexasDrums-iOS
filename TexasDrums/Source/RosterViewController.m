@@ -7,21 +7,25 @@
 //
 
 #import "RosterViewController.h"
-#import "TexasDrumsAppDelegate.h"
-#import "Common.h"
 #import "Roster.h"
 #import "RosterMember.h"
+#import "TexasDrumsAppDelegate.h"
+#import "Common.h"
 #import "SingleRosterViewController.h"
 #import "TexasDrumsGroupedTableViewCell.h"
+#import "TexasDrumsGetRosters.h"
+
 #import "CJSONDeserializer.h"
 #import "RegexKitLite.h"
 #import "GANTracker.h"
-#import "TexasDrumsGetRosters.h"
 #import "SVProgressHUD.h"
 
-@implementation RosterViewController
+#import "UIFont+TexasDrums.h"
+#import "UIColor+TexasDrums.h"
 
 #define _HEADER_HEIGHT_ (50)
+
+@implementation RosterViewController
 
 @synthesize rosters, rosterTable, refresh;
 
@@ -35,67 +39,45 @@
 
 #pragma mark - View lifecycle
 
-#pragma mark - UI methods
-
-
-- (void)setTitle:(NSString *)title
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super setTitle:title];
-    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
-    if (!titleView) {
-        titleView = [[UILabel alloc] initWithFrame:CGRectZero];
-        titleView.backgroundColor = [UIColor clearColor];
-        titleView.font = [UIFont fontWithName:@"Georgia-Bold" size:20];
-        titleView.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-        titleView.textColor = [UIColor whiteColor]; 
-        
-        self.navigationItem.titleView = titleView;
-        [titleView release];
-    }
-    titleView.text = title;
-    [titleView sizeToFit];
-}
-
-- (void)displayTable {
-    float duration = 0.5f;
-    [self.rosterTable reloadData];
+    [super viewWillAppear:animated];
     
-    [UIView beginAnimations:@"displayRosterTable" context:NULL];
-    [UIView setAnimationDuration:duration];
-    if([rosters count] > 0){
-        self.rosterTable.alpha = 1.0f;
-    }
-    else {
-        self.rosterTable.alpha = 0.0f;
-    }
-    [UIView commitAnimations];
-    
-    [SVProgressHUD dismiss];
-}
-
-- (void)hideRefreshButton {
-    self.navigationItem.rightBarButtonItem = nil;
-}
-
-- (void)showRefreshButton {
-    self.navigationItem.rightBarButtonItem = refresh;
+    // Google Analytics
+    [[GANTracker sharedTracker] trackPageview:@"Roster (RosterView)" withError:nil];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     [self setTitle:@"Roster"];
     
+    // Set properties.
+    self.rosterTable.alpha = 0.0f;
+    self.rosterTable.backgroundColor = [UIColor clearColor];
+    self.rosterTable.separatorColor = [UIColor clearColor];
+
+    // Allocate things as necessary.
+    if(rosters == nil){
+        rosters = [[NSMutableArray alloc] init];
+    }
+    
+    // Create refresh button.
     self.refresh = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshPressed)] autorelease];
     
     self.navigationItem.rightBarButtonItem = refresh;
     
-    self.rosterTable.alpha = 0.0f;
-    self.rosterTable.backgroundColor = [UIColor clearColor];
-    self.rosterTable.separatorColor = [UIColor clearColor];
+    // Begin fetching roster from the server.
+    //[self connect];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     
-    if(rosters == nil){
-        rosters = [[NSMutableArray alloc] init];
+    if([rosters count] == 0){
+        [self connect];
     }
 }
 
@@ -104,20 +86,6 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [[GANTracker sharedTracker] trackPageview:@"Roster (RosterView)" withError:nil];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    if([rosters count] == 0){
-        [self connect];
-    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -136,6 +104,62 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark - UI Methods
+
+- (void)setTitle:(NSString *)title
+{
+    [super setTitle:title];
+    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
+    if (!titleView) {
+        titleView = [[UILabel alloc] initWithFrame:CGRectZero];
+        titleView.backgroundColor = [UIColor clearColor];
+        titleView.font = [UIFont TexasDrumsBoldFontOfSize:20];
+        titleView.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+        titleView.textColor = [UIColor whiteColor]; 
+        
+        self.navigationItem.titleView = titleView;
+        [titleView release];
+    }
+    titleView.text = title;
+    [titleView sizeToFit];
+}
+
+- (void)refreshPressed {
+    // Fetch roster from the server.
+    [self connect];
+}
+
+- (void)hideRefreshButton {
+    self.navigationItem.rightBarButtonItem = nil;
+}
+
+- (void)dismissWithSuccess {
+    self.navigationItem.rightBarButtonItem = nil;
+    [SVProgressHUD dismiss];
+}
+
+- (void)dismissWithError {
+    self.navigationItem.rightBarButtonItem = refresh;
+    self.navigationItem.rightBarButtonItem.enabled = YES;
+    [SVProgressHUD showErrorWithStatus:@"Could not fetch data."];
+}
+
+- (void)displayTable {
+    float duration = 0.5f;
+    [self.rosterTable reloadData];
+    [UIView beginAnimations:@"displayRosterTable" context:NULL];
+    [UIView setAnimationDuration:duration];
+    if([rosters count] > 0){
+        self.rosterTable.alpha = 1.0f;
+    }
+    else {
+        self.rosterTable.alpha = 0.0f;
+    }
+    [UIView commitAnimations];
+}
+
+#pragma mark - Data Methods
+
 - (void)connect {
     [self hideRefreshButton];
     [SVProgressHUD showWithStatus:@"Loading..."];
@@ -144,36 +168,12 @@
     [get startRequest]; 
 }
 
-- (void)refreshPressed {
-    [self connect];
-}
-
-
-/*
-
-- (void)fetchRosters {
-    [self hideRefreshButton];
-    [self startConnection];
-}
-
-- (void)startConnection {
-     NSString *API_Call = [NSString stringWithFormat:@"%@apikey=%@&count=yes", TEXAS_DRUMS_API_ROSTER, TEXAS_DRUMS_API_KEY];
-    NSLog(@"%@", API_Call);
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:API_Call] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
-    
-    NSURLConnection *urlconnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
-    if(urlconnection) {
-        received_data = [[NSMutableData data] retain];
-    }
-}
- */
-
 - (void)parseRosterData:(NSDictionary *)results {
     NSString *current_year = @"";
     for(NSDictionary *member in results) {
         
         Roster *roster;
-
+        
         // If the year is not set, set it.
         if([current_year isEqualToString:@""]){
             current_year = [member objectForKey:@"year"];    
@@ -226,6 +226,7 @@
 
 - (RosterMember *)createNewRosterMember:(NSDictionary *)item {
     RosterMember *member = [[[RosterMember alloc] init] autorelease];
+    
     member.firstname = [item objectForKey:@"firstname"];
     member.nickname = [item objectForKey:@"nickname"];
     member.lastname = [item objectForKey:@"lastname"];
@@ -258,8 +259,6 @@
     
     replacedString = [searchString stringByReplacingOccurrencesOfRegex:regexString withString:replaceWithString];
     
-    //NSLog(@"replaced string: '%@'", replacedString);
-    
     return replacedString;
 }
 
@@ -267,6 +266,9 @@
     NSString *areacode;
     NSString *first;
     NSString *last;
+    
+    // A number is only valid if it is 10 or 7 digits long.
+    // Anything else returns 'n/a'.
     
     if([number length] == 10){
         areacode = [number substringWithRange:NSMakeRange(0, 3)];
@@ -279,10 +281,7 @@
         last = [number substringWithRange:NSMakeRange(3, 4)];
         return [NSString stringWithFormat:@"%@-%@", first, last];
     }
-    else if([number length] <= 1){
-        return @"n/a";
-    }
-    return number;
+    else return @"n/a";
 }
 
 - (void)sortSections:(Roster *)roster {
@@ -308,28 +307,29 @@
     return [rosters count];
 }
 
-- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
 	return _HEADER_HEIGHT_;
 }
 
-- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section 
 {
-    
-    //create a new view of size _HEADER_HEIGHT_, and place a label inside.
+    // Create a custom header.
     UIView *containerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, _HEADER_HEIGHT_)] autorelease];
     UILabel *headerTitle = [[[UILabel alloc] initWithFrame:CGRectMake(10, 20, 300, 30)] autorelease];
+
+    headerTitle.text = @"";
     if([rosters count] > 0){
         headerTitle.text = @"Select a year:";
     }
-    else {
-        headerTitle.text = @"";
-    }
-    headerTitle.textAlignment = UITextAlignmentCenter;
-    headerTitle.textColor = [UIColor orangeColor];
-    headerTitle.shadowOffset = CGSizeMake(0, 1);
-    headerTitle.font = [UIFont fontWithName:@"Georgia-Bold" size:18];
+    
+    // Set header title properties.
     headerTitle.backgroundColor = [UIColor clearColor];
+    headerTitle.textAlignment = UITextAlignmentCenter;
+    headerTitle.textColor = [UIColor TexasDrumsOrangeColor];
+    headerTitle.font = [UIFont TexasDrumsBoldFontOfSize:18];
+    headerTitle.shadowOffset = CGSizeMake(0, 1);
+    
     [containerView addSubview:headerTitle];
     
 	return containerView;
@@ -344,9 +344,8 @@
         cell = [[[TexasDrumsGroupedTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    // Overriding TexasDrumsGroupedTableViewCell properties.
+    // Override TexasDrumsGroupedTableViewCell properties.
     cell.textLabel.textAlignment = UITextAlignmentCenter;
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", [[rosters objectAtIndex:indexPath.row] the_year]];
     
     UIImage *background;
     UIImage *selected_background;
@@ -357,7 +356,8 @@
     cell.selectedBackgroundView = [[[UIImageView alloc] init] autorelease];
     
     // Cell Background images.
-    // TODO: Change the selected background image to something else.
+    // TODO: Change the selected background image to something else; 
+    // preferably something with an orange tint.
     if(indexPath.row == 0){
         background = [UIImage imageNamed:@"top_table_cell.png"];
         selected_background = [UIImage imageNamed:@"top_table_cell.png"];
@@ -375,6 +375,8 @@
     ((UIImageView *)cell.backgroundView).image = background;
     ((UIImageView *)cell.selectedBackgroundView).image = selected_background;
     
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", [[rosters objectAtIndex:indexPath.row] the_year]];
+    
     return cell;
 }
 
@@ -382,32 +384,38 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // *** Consider moving this out and doing an animation in viewWillAppear when popping.
     [self.rosterTable deselectRowAtIndexPath:indexPath animated:YES];
-    SingleRosterViewController *srvc = [[SingleRosterViewController alloc] initWithNibName:@"SingleRosterView" bundle:[NSBundle mainBundle]];
-    srvc.snares = [[rosters objectAtIndex:indexPath.row] snares];
-    srvc.tenors = [[rosters objectAtIndex:indexPath.row] tenors];
-    srvc.basses = [[rosters objectAtIndex:indexPath.row] basses];
-    srvc.cymbals = [[rosters objectAtIndex:indexPath.row] cymbals];
-    srvc.year = [[rosters objectAtIndex:indexPath.row] the_year];
-    [self.navigationController pushViewController:srvc animated:YES];
-    [srvc release];
+    
+    SingleRosterViewController *SRVC = [[SingleRosterViewController alloc] initWithNibName:@"SingleRosterView" bundle:[NSBundle mainBundle]];
+    
+    SRVC.roster = [rosters objectAtIndex:indexPath.row];
+    SRVC.year = [[rosters objectAtIndex:indexPath.row] the_year];
+    
+    [self.navigationController pushViewController:SRVC animated:YES];
+    [SRVC release];
 }
 
-#pragma mark -
-#pragma mark TexasDrumsGetRequestDelegate Methods
+#pragma mark TexasDrumsRequestDelegate Methods
 
-- (void)request:(TexasDrumsGetRequest *)request receivedData:(id)data {
+- (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
     NSLog(@"Obtained rosters successfully.");
+    
     NSError *error = nil;
     NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
-    [self parseRosterData:results];
+    
+    if([results count] > 0){
+        [self parseRosterData:results];
+    }
+    
+    [self dismissWithSuccess];
 }
 
-- (void)request:(TexasDrumsGetRequest *)request failedWithError:(NSError *)error {
+- (void)request:(TexasDrumsRequest *)request failedWithError:(NSError *)error {
     NSLog(@"Request error: %@", error);
-    [self showRefreshButton];
-    [SVProgressHUD showErrorWithStatus:@"Could not fetch data."];
+    
+    // Show refresh button and error message.
+    [self dismissWithError];
 }
-
 
 @end

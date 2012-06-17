@@ -7,8 +7,12 @@
 //
 
 #import "NewsPostView.h"
+#import "News.h"
 #import "TexasDrumsWebViewController.h"
+
 #import "GANTracker.h"
+
+#import "UIColor+TexasDrums.h"
 
 
 @implementation NewsPostView
@@ -38,8 +42,6 @@
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 #pragma mark - View lifecycle
@@ -51,31 +53,60 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // Set properties.
     self.webView.delegate = self;
-    
-    NSString *header = [NSString stringWithString:@"<html><body link=#FF792A vlink=#CE792A alink=#FF792A><p style = 'font-family: Georgia; font-size: 14px; background-color: #000000; color: #999999'><br />"];
-    NSString *footer = [NSString stringWithString:@"</p><br /></body></html>"];
-    NSString *HTMLString = [NSString stringWithFormat:@"%@%@%@", header, post.post, footer];
-    [self.webView loadHTMLString:HTMLString baseURL:nil];
-    
-    //for black background on webview
-    //make everything hidden; once everything is loaded, load animation for everything on delegate method
     self.webView.alpha = 0.0f;
-    self.titleOfPost.alpha = 0.0f;
-    self.dateAndAuthor.alpha = 0.0f;
-    if(isMemberPost){
-        self.titleOfPost.textColor = [UIColor orangeColor];
-    }
     self.webView.opaque = NO;
-    self.webView.backgroundColor = [UIColor clearColor];
+    self.webView.backgroundColor = [UIColor clearColor];    
+    
+    if(isMemberPost){
+        self.titleOfPost.textColor = [UIColor TexasDrumsOrangeColor];
+    }
+    
+    // Create header
+    [self createHeader];
+    
+    // Create body
+    NSString *HTMLString = [self createPost];
+    
+    // Load WebView
+    [self.webView loadHTMLString:HTMLString baseURL:nil];
+}
 
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - User Methods
+
+- (void)createHeader {
     self.titleOfPost.text = post.titleOfPost;
+    
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:post.timestamp];
     NSDateFormatter *format = [[[NSDateFormatter alloc] init] autorelease];
     [format setDateStyle:NSDateFormatterMediumStyle];
     [format setTimeStyle:NSDateFormatterShortStyle];
+    
     NSString *dateString = [format stringFromDate:date];
+    
     self.dateAndAuthor.text = [NSString stringWithFormat:@"Posted by %@ on %@", post.author, dateString];
+}
+
+- (NSString *)createPost {
+    NSString *header = [NSString stringWithString:@"<html><body link=#FF792A vlink=#CE792A alink=#FF792A><p style = 'font-family: Georgia; font-size: 14px; background-color: #000000; color: #999999'><br />"];
+    NSString *footer = [NSString stringWithString:@"</p><br /></body></html>"];
+    
+    return [NSString stringWithFormat:@"%@%@%@", header, post.post, footer];
 }
 
 #pragma mark - UIWebView Delegate Methods
@@ -101,19 +132,6 @@
         [self.navigationController pushViewController:TDWBC animated:YES];
         return NO;
     }
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 @end

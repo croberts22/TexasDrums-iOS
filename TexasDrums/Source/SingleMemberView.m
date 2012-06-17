@@ -8,7 +8,11 @@
 
 #import "SingleMemberView.h"
 #import "TexasDrumsGroupedTableViewCell.h"
+#import "RosterMember.h"
 #import "GANTracker.h"
+
+#import "UIFont+TexasDrums.h"
+#import "UIColor+TexasDrums.h"
 
 #define SMALL_FONT_SIZE (12.0f)
 #define FONT_SIZE (14.0f)
@@ -17,7 +21,9 @@
 
 @implementation SingleMemberView
 
-@synthesize memberData, memberNameCell, name, firstname, nickname, lastname, data, classification, amajor, hometown, quote, phonenumber, email, categories;
+
+@synthesize member;
+@synthesize memberData, memberName, data, categories;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,12 +36,8 @@
 
 - (void)dealloc
 {
-    [memberNameCell release];
+    [memberName release];
     [memberData release];
-    [name release];
-    [firstname release];
-    [nickname release];
-    [lastname release];
     [super dealloc];
 }
 
@@ -50,26 +52,39 @@
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    // Google Analytics
     [[GANTracker sharedTracker] trackPageview:@"Member (SingleMemberView)" withError:nil];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // Set properties.
     self.memberData.backgroundColor = [UIColor clearColor];
+    self.memberName.font = [UIFont TexasDrumsBoldFontOfSize:20];
+    self.memberName.textColor = [UIColor TexasDrumsOrangeColor];
+    self.memberName.textAlignment = UITextAlignmentCenter;
+    self.memberName.lineBreakMode = UILineBreakModeTailTruncation;
+    
+    // Set up categories for the table cells.
     if(categories == nil){
         categories = [[NSArray alloc] initWithObjects:@"Year", @"Major", @"Hometown", @"Quote", @"Email", @"Phone", nil];
     }
-    NSString *combinedname;
-    if(![nickname isEqualToString:@""]){
-        combinedname = [NSString stringWithFormat:@"%@ \"%@\" %@", firstname, nickname, lastname];
-    }
-    else{
-        combinedname = [NSString stringWithFormat:@"%@ %@", firstname, lastname];
+    
+    NSString *combined_name = [NSString stringWithFormat:@"%@ %@", member.firstname, member.lastname];
+    
+    // If member has a nickname, create the full name.
+    if(![member.nickname isEqualToString:@""]){
+        combined_name = [NSString stringWithFormat:@"%@ \"%@\" %@", member.firstname, member.nickname, member.lastname];
     }
     
-    data = [[NSArray alloc] initWithObjects:combinedname, classification, amajor, hometown, quote, email, phonenumber, nil];
-    // Do any additional setup after loading the view from its nib.
+    self.memberName.text = combined_name;
+    
+    // Allocate things as necessary.
+    data = [[NSArray alloc] initWithObjects:member.year, member.amajor, member.hometown, member.quote, member.email, member.phone, nil];
 }
 
 - (void)viewDidUnload
@@ -85,25 +100,21 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark - UITableView Data Source Methods
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if([defaults boolForKey:@"member"]){
-        return 3;
-    }
-    else {
+    // If user is a member, display additional section for contact information.
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"member"]){
         return 2;
     }
+
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
     if(section == 0){
-        return 1;
-    }
-    else if(section == 1){
         return 4;
     }
     else{
@@ -113,60 +124,41 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellName = @"Name";
     static NSString *CellData = @"Profile";
     
-    UITableViewCell *cell;
-    if(indexPath.section == 0){
-        cell = [tableView dequeueReusableCellWithIdentifier:CellName];
-        if (cell == nil) {
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellName] autorelease];
-        }
-    }
-    else{
-        cell = [tableView dequeueReusableCellWithIdentifier:CellData];
-        if (cell == nil) {
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellData] autorelease];
-        }
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellData];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellData] autorelease];
     }
     
     //UITableViewCell Properties
-    cell.detailTextLabel.textColor = [UIColor lightGrayColor];
-    cell.textLabel.textColor = [UIColor orangeColor];
-    cell.detailTextLabel.font = [UIFont fontWithName:@"Georgia" size:FONT_SIZE];
-    cell.textLabel.font = [UIFont fontWithName:@"Georgia" size:SMALL_FONT_SIZE];
+    cell.detailTextLabel.textColor = [UIColor TexasDrumsGrayColor];
+    cell.textLabel.textColor = [UIColor TexasDrumsOrangeColor];
+    cell.detailTextLabel.font = [UIFont TexasDrumsFontOfSize:FONT_SIZE];
+    cell.textLabel.font = [UIFont TexasDrumsFontOfSize:SMALL_FONT_SIZE];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+
+    cell.detailTextLabel.numberOfLines = 0;
+    cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;    
     
     if(indexPath.section == 0){
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.backgroundColor = [UIColor clearColor];
-        cell.textLabel.textAlignment = UITextAlignmentCenter;
-        cell.textLabel.font = [UIFont fontWithName:@"Georgia" size:16]; 
-        cell.textLabel.text = [data objectAtIndex:0];
-    }
-    else{
-        cell.detailTextLabel.numberOfLines = 0;
-        cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;    
-        
-        if(indexPath.section == 1){
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.textLabel.text = [categories objectAtIndex:indexPath.row];
-            if([[data objectAtIndex:indexPath.row+1] isEqualToString:@""]){
-                cell.detailTextLabel.text = @"n/a";
-            }
-            else{
-                cell.detailTextLabel.text = [data objectAtIndex:indexPath.row+1];
-            }
+        cell.textLabel.text = [categories objectAtIndex:indexPath.row];
+        if([[data objectAtIndex:indexPath.row] isEqualToString:@""]){
+            cell.detailTextLabel.text = @"n/a";
         }
         else{
-            cell.textLabel.text = [categories objectAtIndex:indexPath.row+4];
-            cell.detailTextLabel.text = [data objectAtIndex:indexPath.row+5];
-            //cell.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"uitableviewselection-orange-44.png"]] autorelease];
-            if([cell.detailTextLabel.text isEqualToString:@"n/a"]){
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            }
+            cell.detailTextLabel.text = [data objectAtIndex:indexPath.row];
         }
     }
-    
+    else{
+        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+        cell.textLabel.text = [categories objectAtIndex:indexPath.row+4];
+        cell.detailTextLabel.text = [data objectAtIndex:indexPath.row+4];
+        if([cell.detailTextLabel.text isEqualToString:@"n/a"]){
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+    }   
     return cell;
 }
 
@@ -178,44 +170,72 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //the UILabel is 280px in width.
-    //so, the constraint must be WIDTH - ((MARGIN*2)*2)
-    //i.e., 320px - (((10px*2)*2)) = 280px
-    if(indexPath.section == 0){
-        return 100.0f;
+    if(indexPath.row == 3){
+        NSString *text = [data objectAtIndex:indexPath.row];
+        CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
+        CGSize size = [text sizeWithFont:[UIFont TexasDrumsFontOfSize:FONT_SIZE+4] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+        
+        CGFloat height = MAX(size.height, 44.0f) + CELL_CONTENT_MARGIN * 2;
+        
+        return height;
     }
-    else if(indexPath.section == 1){
-        if(indexPath.row == 3){
-            NSString *text = [data objectAtIndex:indexPath.row+1];
-            CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
-            CGSize size = [text sizeWithFont:[UIFont fontWithName:@"Georgia" size:FONT_SIZE+4] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
-            NSLog(@"%f", size.height);
-            CGFloat height = MAX(size.height, 44.0f);
-            NSLog(@"%f", height + CELL_CONTENT_MARGIN * 2);
-            return height + CELL_CONTENT_MARGIN * 2;
-            //max(size.height, 44.0f); // + CELL_CONTENT_MARGIN*2;
-        }
-        else{
-            return 44.0f;
-        }
-    }
-    else return 44.0f;
+    
+    return 44.0f;
+
 }
 
+#pragma mark - UITableView Delegate Methods
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [self.memberData deselectRowAtIndexPath:indexPath animated:YES];
+    
+    // Display an action sheet based on what the user chose.
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@""
+                                                             delegate:self 
+                                                    cancelButtonTitle:@"Nah." 
+                                               destructiveButtonTitle:nil 
+                                                    otherButtonTitles:@"Yes!", nil];
+    
+    if(indexPath.section == 1){
+        if([[[[self.memberData cellForRowAtIndexPath:indexPath] detailTextLabel] text] isEqualToString:@"n/a"]){
+            return;
+        }
+        if(indexPath.row == 0){ //email
+            if(DEBUG_MODE) NSLog(@"Prompting user for sending %@ an email.", member.firstname);
+            actionSheet.title = [NSString stringWithFormat:@"Would you like to send an email to %@?", member.firstname];
+            actionSheet.tag = 1;
+        }
+        else if(indexPath.row == 1){ //phone
+            if(DEBUG_MODE) NSLog(@"Prompting user for calling %@.", member.firstname);
+            actionSheet.title = [NSString stringWithFormat:@"Would you like to call %@?", member.firstname];
+            actionSheet.tag = 2;
+        }
+
+        [actionSheet showFromTabBar:self.parentViewController.tabBarController.tabBar];
+        [actionSheet release];
+    }
+}
+
+#pragma mark - UIActionSheet Delegate Methods
+
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
     switch(actionSheet.tag){
         case 1:
-            if(buttonIndex == 0){ //User wants to send an email
+            if(buttonIndex == 0){ // User wants to send an email.
                 if(DEBUG_MODE) NSLog(@"User accepts email response. Pushing modal view only if user has configured mail client...");
-                //if mail client is configured, set up modal view and present it to the user.
+                // If mail client is configured, set up modal view and present it to the user.
                 if([MFMailComposeViewController canSendMail]){
+                    
                     MFMailComposeViewController *mailVC = [[MFMailComposeViewController alloc] init];
                     mailVC.mailComposeDelegate = self;
-                    [mailVC setToRecipients:[NSArray arrayWithObject:email]];
+                    [mailVC setToRecipients:[NSArray arrayWithObject:member.email]];
                     [self presentModalViewController:mailVC animated:YES];
                     [mailVC release];
+                    
                 }
-                else{ //user has not set up mail.
+                else{ // User has not set up mail.
                     NSLog(@"Mail client not configured.");
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" 
                                                                     message:@"You have not configured your mail client yet. Please open up the Mail app and configure your settings, and try again." 
@@ -226,58 +246,31 @@
                     [alert release];
                 }
             }
-            else { //user declines
-               if(DEBUG_MODE) NSLog(@"User declined email response. Rolling back to member screen.");
+            else { // User declines.
+                if(DEBUG_MODE) NSLog(@"User declined email response. Rolling back to member screen.");
             }
+            
             break;
+            
         case 2:
             if(buttonIndex == 0){
                 if(DEBUG_MODE) NSLog(@"User accepted phone response. Switching to Phone app and dialing...");
-                //this must be done on a device. will not work in a simulator.
-                NSString *telephoneStr = [NSString stringWithFormat:@"tel:%@", phonenumber];
+                // This must be done on a device. It will not work in a simulator.
+                NSString *telephoneStr = [NSString stringWithFormat:@"tel:%@", member.phone];
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telephoneStr]];
             }
             else {
                 if(DEBUG_MODE) NSLog(@"User declined phone response. Rolling back to member screen.");
             }
-
+            
+            break;
+            
+        default:
+            break;
     }
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    [self.memberData deselectRowAtIndexPath:indexPath animated:YES];
-    
-    if(indexPath.section == 2){
-        if([[[[self.memberData cellForRowAtIndexPath:indexPath] detailTextLabel] text] isEqualToString:@"n/a"]){
-            return;
-        }
-        if(indexPath.row == 0){ //email
-            //prompt the user on whether or not he/she would like to email this person.
-            //event captured by UIActionSheetDelegate method.
-            if(DEBUG_MODE) NSLog(@"Prompting user for sending %@ an email.", firstname);
-            UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"Would you like to send an email to %@?", firstname]
-                                                                     delegate:self 
-                                                            cancelButtonTitle:@"Nah." 
-                                                       destructiveButtonTitle:nil 
-                                                            otherButtonTitles:@"Yes!", nil];
-            actionSheet.tag = 1;
-            [actionSheet showFromTabBar:self.parentViewController.tabBarController.tabBar];
-            [actionSheet release];
-        }
-        else if(indexPath.row == 1){ //phone
-            if(DEBUG_MODE) NSLog(@"Prompting user for calling %@.", firstname);
-            UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"Would you like to call %@?", firstname]
-                                                                     delegate:self 
-                                                            cancelButtonTitle:@"Nah." 
-                                                       destructiveButtonTitle:nil 
-                                                            otherButtonTitles:@"Yes!", nil];
-            actionSheet.tag = 2;
-            [actionSheet showFromTabBar:self.parentViewController.tabBarController.tabBar];
-            [actionSheet release];
-        }
-    }
-}
+#pragma mark - MFMailComposeViewController Delegate Methods
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
     [self dismissModalViewControllerAnimated:YES];

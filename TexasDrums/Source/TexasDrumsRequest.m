@@ -1,12 +1,12 @@
  //
-//  TexasDrumsGetRequest.m
+//  TexasDrumsRequest.m
 //  TexasDrums
 //
 //  Created by Corey Roberts on 6/3/12.
 //  Copyright (c) 2012 Corey Roberts. All rights reserved.
 //
 
-#import "TexasDrumsGetRequest.h"
+#import "TexasDrumsRequest.h"
 #import "ASIDownloadCache.h"
 
 static NSURL *TexasDrumsServerURL;
@@ -14,12 +14,12 @@ static NSString *TexasDrumsAPIVersion;
 static NSString *TexasDrumsAPIKey;
 static int max_retry_count = 3;
 
-@interface TexasDrumsGetRequest ()
+@interface TexasDrumsRequest ()
 @property (nonatomic, assign) BOOL request_succeeded;
 @property (nonatomic, assign) NSUInteger retry_count;
 @end
 
-@implementation TexasDrumsGetRequest
+@implementation TexasDrumsRequest
 
 @synthesize request = _request;
 @synthesize downloaded_data = _downloaded_data;
@@ -29,7 +29,7 @@ static int max_retry_count = 3;
 @synthesize request_succeeded = _request_succeeded;
 
 + (void)initialize {
-    if (self == [TexasDrumsGetRequest class]) {
+    if (self == [TexasDrumsRequest class]) {
         TexasDrumsAPIVersion = [[NSString alloc] initWithString:@"1.1"];
         TexasDrumsServerURL = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://www.texasdrums.com/api/%@/", TexasDrumsAPIVersion]];
         TexasDrumsAPIKey = [[NSString alloc] initWithString:@"LwtP6NB2Y0hooXVZj29fwceVfp93D"];

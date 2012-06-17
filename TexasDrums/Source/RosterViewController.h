@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
-#import "Roster.h"
-#import "RosterMember.h"
 
+@class Roster;
+@class RosterMember;
 
 @interface RosterViewController : UIViewController<NSURLConnectionDelegate> {
     NSMutableArray *rosters;
@@ -22,9 +22,17 @@
 @property (nonatomic, retain) UITableView *rosterTable;
 @property (nonatomic, retain) UIBarButtonItem *refresh;
 
-- (void)sortSections:(Roster *)roster;
-- (void)fetchRosters;
+- (void)refreshPressed;
+- (void)hideRefreshButton;
+- (void)dismissWithSuccess;
+- (void)dismissWithError;
+- (void)displayTable;
+
+- (void)connect;
+- (void)parseRosterData:(NSDictionary *)results;
+- (RosterMember *)createNewRosterMember:(NSDictionary *)item;
 - (NSString *)convertHTML:(NSString *)quote;
 - (NSString *)parsePhoneNumber:(NSString *)number;
+- (void)sortSections:(Roster *)roster;
 
 @end

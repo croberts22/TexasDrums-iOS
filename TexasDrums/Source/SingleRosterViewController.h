@@ -8,21 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class Roster;
 
 @interface SingleRosterViewController : UIViewController {
     NSString *year;
-    NSArray *snares;
-    NSArray *tenors;
-    NSArray *basses;
-    NSArray *cymbals;
+    Roster *roster;
     IBOutlet UITableView *singleRosterTable;
 }
 
 @property (nonatomic, retain) NSString *year;
-@property (nonatomic, retain) NSArray *snares;
-@property (nonatomic, retain) NSArray *tenors;
-@property (nonatomic, retain) NSArray *basses;
-@property (nonatomic, retain) NSArray *cymbals;
+@property (nonatomic, retain) Roster *roster;
 @property (nonatomic, retain) UITableView *singleRosterTable;
 
 @end

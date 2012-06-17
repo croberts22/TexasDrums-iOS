@@ -8,15 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+@class TexasDrumsRequest;
+
 @protocol TexasDrumsAPIConnection <NSObject>
 
-- (void)startConnection;
-//- (NSDictionary *)parseData;
+- (void)connect;
 
-// NSURLConnection Delegate Methods
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data;
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection;
+// SVProgressHUD Methods
+- (void)dismissWithSuccess;
+- (void)dismissWithError;
+
+// TexasDrumsRequestDelegate Methods
+- (void)request:(TexasDrumsRequest *)request receivedData:(id)data;
+- (void)request:(TexasDrumsRequest *)request failedWithError:(NSError *)error;
 
 @end

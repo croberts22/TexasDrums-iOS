@@ -14,9 +14,9 @@
 #pragma mark Instance Methods
 
 - (NSURL *)requestURL {
-    NSString *server = [[TexasDrumsGetRequest TexasDrumsServerURL] absoluteString];
+    NSString *server = [[TexasDrumsRequest TexasDrumsServerURL] absoluteString];
     
-    NSString *request_URL = [NSString stringWithFormat:@"%@faq.php?apikey=%@", server, [TexasDrumsGetRequest TexasDrumsAPIKey]]; 
+    NSString *request_URL = [NSString stringWithFormat:@"%@faq.php?apikey=%@", server, [TexasDrumsRequest TexasDrumsAPIKey]]; 
     NSLog(@"request: %@", request_URL);
     return [NSURL URLWithString:request_URL];
 }
@@ -36,7 +36,7 @@
 }
 
 #pragma mark -
-#pragma mark TexasDrumsGetRequest Methods
+#pragma mark TexasDrumsRequest Methods
 
 - (void)startRequest {
     

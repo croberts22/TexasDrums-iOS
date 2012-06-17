@@ -8,6 +8,8 @@
 
 #import "TexasDrumsGroupedTableViewCell.h"
 
+#import "UIFont+TexasDrums.h"
+
 @implementation TexasDrumsGroupedTableViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -16,7 +18,7 @@
     if (self) {
         self.textLabel.backgroundColor = [UIColor clearColor];
         self.textLabel.textColor = [UIColor lightGrayColor];
-        self.textLabel.font = [UIFont fontWithName:@"Georgia-Bold" size:18];
+        self.textLabel.font = [UIFont TexasDrumsBoldFontOfSize:18];
         self.backgroundColor = [UIColor clearColor];
     }
     return self;

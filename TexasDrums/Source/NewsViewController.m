@@ -7,22 +7,25 @@
 //
 
 #import "NewsViewController.h"
+#import "TexasDrumsAppDelegate.h"
 #import "Common.h"
-#import "CJSONDeserializer.h"
 #import "News.h"
 #import "NewsPostView.h"
-#import "RegexKitLite.h"
-#import "TexasDrumsAppDelegate.h"
-#import "GANTracker.h"
 #import "TexasDrumsTableViewCell.h"
-#import "NSString+RegEx.h"
-#import "UIColor+TexasDrums.h"
 #import "TexasDrumsGetNews.h"
+
+#import "CJSONDeserializer.h"
+#import "RegexKitLite.h"
+#import "GANTracker.h"
 #import "SVProgressHUD.h"
+
+#import "NSString+RegEx.h"
+#import "UIFont+TexasDrums.h"
+#import "UIColor+TexasDrums.h"
 
 @implementation NewsViewController
 
-@synthesize newsTable, posts, allposts, since, reloadIndicator, refresh, loading, num_member_posts, received_data;
+@synthesize newsTable, posts, allposts, timestamp, reloadIndicator, refresh, loading, num_member_posts, received_data;
 
 - (void)dealloc
 {
@@ -45,62 +48,10 @@
 
 #pragma mark - View lifecycle
 
-- (void)setTitle:(NSString *)title
-{
-    [super setTitle:title];
-    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
-    if (!titleView) {
-        titleView = [[UILabel alloc] initWithFrame:CGRectZero];
-        titleView.backgroundColor = [UIColor clearColor];
-        titleView.font = [UIFont fontWithName:@"Georgia-Bold" size:20];
-        titleView.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-        titleView.textColor = [UIColor whiteColor]; 
-        
-        self.navigationItem.titleView = titleView;
-        [titleView release];
-    }
-    titleView.text = title;
-    [titleView sizeToFit];
-}
-
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-
-    [self setTitle:@"News"];
-
-    since = 0;
-    
-    self.newsTable.alpha = 0.0f;
-    
-    self.refresh = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(connect)] autorelease];
-    
-    self.navigationItem.rightBarButtonItem = refresh;
-    
-    self.newsTable.separatorColor = [UIColor darkGrayColor];
-  
-    [self connect];
-}
-
-- (void)refreshPressed {
-    //we haven't stored anything in the posts array, so since is 0.
-    if(posts == nil || [posts count] == 0){
-        since = 0;
-    }
-    
-    [self connect];
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
     // Google Analytics
     [[GANTracker sharedTracker] trackPageview:@"News (NewsView)" withError:nil];
     
@@ -115,17 +66,46 @@
     //[self.navigationController.navigationBar setBackgroundImage:bgImage forBarMetrics:UIBarMetricsDefault];
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    [self setTitle:@"News"];
+
+    // Set properties.
+    self.timestamp = 0;
+    self.newsTable.alpha = 0.0f;
+    self.newsTable.separatorColor = [UIColor darkGrayColor];
+    
+    // Allocate things as necessary.
+    if(posts == nil){
+        posts = [[NSMutableArray alloc] init];
+    }
+    if(allposts == nil){
+        allposts = [[NSMutableArray alloc] init];
+    }
+    
+    // Create refresh button.
+    self.refresh = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(connect)] autorelease];
+    
+    self.navigationItem.rightBarButtonItem = refresh;
+  
+    // Begin fetching news from the server.
+    [self connect];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
     [self.newsTable reloadData];
 }
 
-- (void)connect {
-    [self hideRefreshButton];
-    TexasDrumsGetNews *get = [[TexasDrumsGetNews alloc] initWithTimestamp:since];
-    get.delegate = self;
-    [get startRequest];    
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -144,6 +124,36 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark - UI Methods
+
+- (void)setTitle:(NSString *)title
+{
+    [super setTitle:title];
+    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
+    if (!titleView) {
+        titleView = [[UILabel alloc] initWithFrame:CGRectZero];
+        titleView.backgroundColor = [UIColor clearColor];
+        titleView.font = [UIFont TexasDrumsBoldFontOfSize:20];
+        titleView.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+        titleView.textColor = [UIColor whiteColor]; 
+        
+        self.navigationItem.titleView = titleView;
+        [titleView release];
+    }
+    titleView.text = title;
+    [titleView sizeToFit];
+}
+
+- (void)refreshPressed {
+    // We haven't stored anything in the posts array, so timestamp is 0.
+    if(posts == nil || [posts count] == 0){
+        timestamp = 0;
+    }
+    
+    // Begin fetching news from the server.
+    [self connect];
+}
+
 - (void)hideRefreshButton {
     self.navigationItem.rightBarButtonItem.enabled = NO;
     [SVProgressHUD showWithStatus:@"Loading..." maskType:SVProgressHUDMaskTypeClear];
@@ -159,26 +169,41 @@
     [SVProgressHUD showErrorWithStatus:@"Could not fetch data."];
 }
 
+- (void)displayTable {
+    float duration = 0.5f;
+    [self.newsTable reloadData];
+    [UIView beginAnimations:@"displayNewsTable" context:NULL];
+    [UIView setAnimationDuration:duration];
+    self.newsTable.alpha = 1.0f;
+    [UIView commitAnimations];
+}
+
+#pragma mark - Data Methods
+
+- (void)connect {
+    [self hideRefreshButton];
+    TexasDrumsGetNews *get = [[TexasDrumsGetNews alloc] initWithTimestamp:timestamp];
+    get.delegate = self;
+    [get startRequest];    
+}
+
 - (void)parseNewsData:(NSDictionary *)results {
     num_member_posts = 0;
-    if(posts == nil){
-        posts = [[NSMutableArray alloc] init];
-    }
-    if(allposts == nil){
-        allposts = [[NSMutableArray alloc] init];
-    }
-    
+
     BOOL timestamp_updated = NO;
-    
+
+    // Iterate through the results and create News objects.
     for(NSDictionary *item in results){
         // NSLog(@"%@", item);
         
         News *post = [self createNewPost:item];
         
+        // If we make it in this loop, then we know this post
+        // to be the most recent timestamp.
         if(!timestamp_updated){
-            self.since = post.timestamp;
+            self.timestamp = post.timestamp;
             timestamp_updated = YES;
-            NSLog(@"Timestamp updated to most recent post: %d", post.timestamp);
+            NSLog(@"Timestamp updated to %d.", post.timestamp);
         }
         
         if(!post.memberPost){
@@ -191,11 +216,11 @@
     // Still need to sort the data in the event that we have new posts coming up through the refresh.
     [self sortTable];
     [self displayTable];
-
 }
 
 - (News *)createNewPost:(NSDictionary *)item {
     News *post = [[[News alloc] init] autorelease];
+    
     post.post = [item objectForKey:@"content"];
     post.postDate = [item objectForKey:@"date"];
     post.author = [item objectForKey:@"firstname"];
@@ -215,11 +240,6 @@
     [allposts sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
     [posts sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
     [descriptor release];
-}
-
-- (void)updateTimestamp{
-    NSString *timestampString = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
-    self.since = [timestampString intValue];
 }
 
 #pragma mark - Table view data source
@@ -277,50 +297,51 @@
     return cell;
 }
 
-- (void)displayTable {
-    float delay = 1.0f;
-    [newsTable reloadData];
-    [UIView beginAnimations:@"displayNewsTable" context:NULL];
-    [UIView setAnimationDelay:delay];
-    self.newsTable.alpha = 1.0f;
-    [UIView commitAnimations];
-    [NSTimer scheduledTimerWithTimeInterval:delay target:self selector:@selector(dismissWithSuccess) userInfo:nil repeats:NO];
-}
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NewsPostView *newsPostViewController = [[NewsPostView alloc] initWithNibName:@"NewsPostView" bundle:[NSBundle mainBundle]];
+    NewsPostView *NPV = [[NewsPostView alloc] initWithNibName:@"NewsPostView" bundle:[NSBundle mainBundle]];
     
     if(_Profile == nil){
-        newsPostViewController.content = [[posts objectAtIndex:indexPath.row] post]; 
-        newsPostViewController.post = [posts objectAtIndex:indexPath.row];
+        NPV.content = [[posts objectAtIndex:indexPath.row] post]; 
+        NPV.post = [posts objectAtIndex:indexPath.row];
     }
     else {
-        newsPostViewController.content = [[allposts objectAtIndex:indexPath.row] post]; 
-        newsPostViewController.post = [allposts objectAtIndex:indexPath.row];
+        NPV.content = [[allposts objectAtIndex:indexPath.row] post]; 
+        NPV.post = [allposts objectAtIndex:indexPath.row];
+        
         if([[allposts objectAtIndex:indexPath.row] memberPost]){
-            newsPostViewController.isMemberPost = TRUE;
+            NPV.isMemberPost = TRUE;
         }
     }
-    [self.navigationController pushViewController:newsPostViewController animated:YES];
-    [newsPostViewController release];
+    
+    [self.navigationController pushViewController:NPV animated:YES];
+    [NPV release];
 }
 
-#pragma mark -
-#pragma mark TexasDrumsGetRequestDelegate Methods
+#pragma mark - TexasDrumsRequestDelegate Methods
 
-- (void)request:(TexasDrumsGetRequest *)request receivedData:(id)data {
+- (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
     NSLog(@"Obtained news successfully.");
+    
     NSError *error = nil;
     NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
-    [self parseNewsData:results];
+    
+    if([results count] > 0){
+        NSLog(@"New news found. Parsing..");
+        // Deserialize JSON results and parse them into News objects.
+        [self parseNewsData:results];
+    }
+    
+    [self dismissWithSuccess];
 }
 
-- (void)request:(TexasDrumsGetRequest *)request failedWithError:(NSError *)error {
+- (void)request:(TexasDrumsRequest *)request failedWithError:(NSError *)error {
     NSLog(@"request error: %@", error);
-    // Show error message?
+    
+    // Show error message.
     [self dismissWithError];
 }
 

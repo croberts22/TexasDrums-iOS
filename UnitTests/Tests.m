@@ -28,7 +28,7 @@
     self.news = nil;
 }
 
-/* tests don't work due to regexkit_lite not behaving properly with this...hmm 
+
 - (void)testCreateNewsPost {
     NSArray *objects = [NSArray arrayWithObjects:@"Content", @"Date", @"FirstName", @"Time", @"Timestamp", @"Title", @"MemberNews", nil];
     NSArray *keys    = [NSArray arrayWithObjects:@"content", @"date", @"firstName", @"time", @"timestamp", @"title", @"membernews", nil];
@@ -44,7 +44,7 @@
     
     GHAssertTrue([result isEqualToString:expected_result], @"testExtractHTMLFromPostDefaultHTML failed");
 }
-*/
+
 
 
 

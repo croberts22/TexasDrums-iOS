@@ -15,7 +15,7 @@
 
 @implementation MediaViewController
 
-@synthesize mediaOptions, mediaTable;
+@synthesize mediaOptions;
 
 - (void)dealloc
 {
@@ -56,9 +56,9 @@
     [super viewDidLoad];
     
     [self setTitle:@"Media"];
+    
+    // Allocate things as necessary.
     mediaOptions = [[NSArray alloc] initWithObjects:@"Audio", @"Video", nil];
-    //mediaOptions = [[NSArray alloc] initWithObjects:@"Audio", @"Video", @"Pictures", nil];
-    self.mediaTable.backgroundColor = [UIColor clearColor];
 }
 
 - (void)viewDidUnload
@@ -95,102 +95,22 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark - Table view data source
+#pragma mark - UIButton Methods
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return 1;
+- (IBAction)audioButtonPressed:(id)sender {
+    AudioViewController *AVC = [[AudioViewController alloc] initWithNibName:@"AudioView" bundle:[NSBundle mainBundle]];
+    
+    [self.navigationController pushViewController:AVC animated:YES];
+    
+    [AVC release];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    return [mediaOptions count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
+- (IBAction)videoButtonPressed:(id)sender {
+    VideoViewController *VVC = [[VideoViewController alloc] initWithNibName:@"VideoView" bundle:[NSBundle mainBundle]];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
-
-    //set text to center, light gray with a clear background in the cell
-    cell.textLabel.text = [mediaOptions objectAtIndex:indexPath.row];
-    cell.textLabel.textColor = [UIColor lightGrayColor];
-    cell.textLabel.font = [UIFont fontWithName:@"Georgia-Bold" size:18];    
-    cell.textLabel.textAlignment = UITextAlignmentCenter;
-    cell.backgroundColor = [UIColor clearColor];
-    cell.backgroundView.clipsToBounds = YES;
+    [self.navigationController pushViewController:VVC animated:YES];
     
-    //configure cell background images
-    if(indexPath.row == 0){
-        cell.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"top_table_cell.png"]] autorelease];
-        ((UIImageView *)cell.backgroundView).image = [UIImage imageNamed:@"top_table_cell.png"];
-    }
-    if(indexPath.row == 1){
-        cell.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bottom_table_cell.png"]] autorelease];
-        ((UIImageView *)cell.backgroundView).image = [UIImage imageNamed:@"bottom_table_cell.png"];
-        /*
-        cell.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"table_cell.png"]] autorelease];
-        ((UIImageView *)cell.backgroundView).image = [UIImage imageNamed:@"table_cell.png"];
-         */
-    }
-/*
-    if(indexPath.row == 2){
-        cell.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bottom_table_cell.png"]] autorelease];
-        ((UIImageView *)cell.backgroundView).image = [UIImage imageNamed:@"bottom_table_cell.png"];
-    }
- */
-    
-    //configure cell selection background images here
-    if(indexPath.row == 0){
-        cell.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"top_table_cell.png"]] autorelease];
-        ((UIImageView *)cell.selectedBackgroundView).image = [UIImage imageNamed:@"top_table_cell.png"];
-    }
-    if(indexPath.row == 1){
-        cell.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bottom_table_cell.png"]] autorelease];
-        ((UIImageView *)cell.selectedBackgroundView).image = [UIImage imageNamed:@"bottom_table_cell.png"];
-        /*
-        cell.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"table_cell.png"]] autorelease];
-        ((UIImageView *)cell.selectedBackgroundView).image = [UIImage imageNamed:@"table_cell.png"];
-         */
-    }
-    /*
-    if(indexPath.row == 2){
-        cell.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bottom_table_cell.png"]] autorelease];
-        ((UIImageView *)cell.selectedBackgroundView).image = [UIImage imageNamed:@"bottom_table_cell.png"];
-    }
-     */
-
-    return cell;
-}
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    [self.mediaTable deselectRowAtIndexPath:indexPath animated:YES];
-    
-    if(indexPath.row == 0) {
-        AudioViewController *AVC = [[[AudioViewController alloc] initWithNibName:@"AudioView" bundle:[NSBundle mainBundle]] autorelease];
-        [self.navigationController pushViewController:AVC animated:YES];
-    }
-    else if(indexPath.row == 1) {
-        VideoViewController *VVC = [[[VideoViewController alloc] initWithNibName:@"VideoView" bundle:[NSBundle mainBundle]] autorelease];
-        [self.navigationController pushViewController:VVC animated:YES];
-    }
-    else if(indexPath.row == 2) {
-        PictureViewController *PVC = [[[PictureViewController alloc] initWithNibName:@"PictureView" bundle:[NSBundle mainBundle]] autorelease];
-        [self.navigationController pushViewController:PVC animated:YES];
-    }
-    else {
-        return;
-    }
+    [VVC release];
 }
 
 @end

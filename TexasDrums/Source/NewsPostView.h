@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "News.h"
 
+@class News;
 
 @interface NewsPostView : UIViewController<UIWebViewDelegate> {
     News *post;
@@ -28,5 +28,8 @@
 @property (nonatomic, retain) NSString *content;
 @property (nonatomic, assign) BOOL isMemberPost;
 @property (nonatomic, assign) BOOL loadPost;
+
+- (void)createHeader;
+- (NSString *)createPost;
 
 @end

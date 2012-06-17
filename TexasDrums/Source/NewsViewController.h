@@ -7,16 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Common.h"
-#import "News.h"
 #import "TexasDrumsTable.h"
 #import "TexasDrumsAPIConnection.h"
+
+@class News;
 
 @interface NewsViewController : UIViewController<NSURLConnectionDelegate, TexasDrumsTable, TexasDrumsAPIConnection> {
     IBOutlet UITableView *newsTable;
     NSMutableArray *posts;
     NSMutableArray *allposts;
-    int since;
+    int timestamp;
     int num_member_posts;
     UIActivityIndicatorView *reloadIndicator;
     UIBarButtonItem *refresh;
@@ -27,23 +27,22 @@
 @property (nonatomic, retain) UITableView *newsTable;
 @property (nonatomic, retain) NSMutableArray *posts;
 @property (nonatomic, retain) NSMutableArray *allposts;
-@property (nonatomic) int since;
-@property (nonatomic) int num_member_posts;
+@property (nonatomic, assign) int timestamp;
+@property (nonatomic, assign) int num_member_posts;
 @property (nonatomic, retain) UIActivityIndicatorView *reloadIndicator;
 @property (nonatomic, retain) UIBarButtonItem *refresh;
 @property (nonatomic, retain) UIBarButtonItem *loading;
 @property (nonatomic, retain) NSMutableData *received_data;
 
-//overridden
-- (void)setTitle:(NSString *)title;
-//custom
-- (void)updateTimestamp;
-- (void)fetchNews;
-- (void)parseNewsData:(NSDictionary *)results;
-- (void)sortTable;
-- (void)hideRefreshButton;
-- (void)showRefreshButton;
 - (void)refreshPressed;
+- (void)hideRefreshButton;
+- (void)dismissWithSuccess;
+- (void)dismissWithError;
+- (void)displayTable;
+
+- (void)connect;
+- (void)parseNewsData:(NSDictionary *)results;
 - (News *)createNewPost:(NSDictionary *)item;
+- (void)sortTable;
 
 @end

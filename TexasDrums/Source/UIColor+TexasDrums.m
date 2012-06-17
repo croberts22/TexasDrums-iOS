@@ -19,4 +19,8 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     return UIColorFromRGB(0xFF792A);
 }
 
++ (UIColor *)TexasDrumsGrayColor {
+    return [UIColor lightGrayColor];
+}
+
 @end

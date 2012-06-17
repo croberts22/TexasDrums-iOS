@@ -11,10 +11,8 @@
 
 @interface MediaViewController : UIViewController {
     NSArray *mediaOptions;
-    IBOutlet UITableView *mediaTable;
 }
 
 @property (nonatomic, retain) NSArray *mediaOptions;
-@property (nonatomic, retain) UITableView *mediaTable;
 
 @end
