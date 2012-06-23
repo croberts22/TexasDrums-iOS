@@ -22,7 +22,7 @@
 
 @implementation AudioViewController
 
-@synthesize audioArray, audioTable, audioPlayer, mediaFinishedLoading, currentCell, pauseButton, playButton, indicator, status, yearArray, statusBar;
+@synthesize audioArray, audioTable, audioPlayer, currentCell, pauseButton, playButton, yearArray;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
