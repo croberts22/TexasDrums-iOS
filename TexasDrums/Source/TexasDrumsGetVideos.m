@@ -16,7 +16,7 @@
 - (NSURL *)requestURL {
     NSString *server = [[TexasDrumsRequest TexasDrumsServerURL] absoluteString];
     
-    NSString *request_URL = [NSString stringWithFormat:@"%@media.php?apikey=%@&type=video1", server, [TexasDrumsRequest TexasDrumsAPIKey]]; 
+    NSString *request_URL = [NSString stringWithFormat:@"%@media.php?apikey=%@&type=video", server, [TexasDrumsRequest TexasDrumsAPIKey]]; 
     NSLog(@"request: %@", request_URL);
     return [NSURL URLWithString:request_URL];
 }

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface AudioViewController : UIViewController<NSURLConnectionDelegate, AVAudioPlayerDelegate> {
+@interface AudioViewController : UIViewController<AVAudioPlayerDelegate> {
     IBOutlet UITableView *audioTable;
     IBOutlet UIActivityIndicatorView *indicator;
     IBOutlet UILabel *status;
@@ -24,7 +24,6 @@
     NSMutableArray *audioArray;
     NSMutableArray *yearArray;
     
-    NSMutableData *received_data;
     BOOL mediaFinishedLoading;
 }
 
@@ -38,7 +37,6 @@
 @property (nonatomic, retain) AVAudioPlayer *audioPlayer;
 @property (nonatomic, retain) NSMutableArray *audioArray;
 @property (nonatomic, retain) NSMutableArray *yearArray;
-@property (nonatomic, retain) NSMutableData *received_data;
 @property (nonatomic, assign) BOOL mediaFinishedLoading;
 
 @end

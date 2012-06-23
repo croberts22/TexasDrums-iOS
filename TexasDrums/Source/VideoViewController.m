@@ -13,6 +13,13 @@
 #import "RegexKitLite.h"
 #import "TexasDrumsWebViewController.h"
 #import "NSString+RegEx.h"
+#import "SVProgressHUD.h"
+#import "UIColor+TexasDrums.h"
+#import "UIFont+TexasDrums.h"
+#import "TexasDrumsGetVideos.h"
+
+#import "Common.h"
+#import "CJSONDeserializer.h"
 
 #define CELL_CONTENT_WIDTH (320.0f)
 #define CELL_CONTENT_MARGIN (10.0f)
@@ -21,7 +28,7 @@
 
 @implementation VideoViewController
 
-@synthesize videoArray, videoTable, indicator, status, received_data, yearArray;
+@synthesize videoArray, videoTable, yearArray;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,6 +49,51 @@
 
 #pragma mark - View lifecycle
 
+- (void)viewWillAppear:(BOOL)animated {
+    [[GANTracker sharedTracker] trackPageview:@"Videos (VideoView)" withError:nil];
+    NSIndexPath *indexPath = [self.videoTable indexPathForSelectedRow];
+    if(indexPath) {
+        [self.videoTable deselectRowAtIndexPath:indexPath animated:YES];
+    }
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [self setTitle:@"Videos"];
+    
+    // Allocate things as necessary.
+    if(videoArray == nil){
+        self.videoArray = [[[NSMutableArray alloc] init] autorelease];
+    }
+    if(yearArray == nil){
+        self.yearArray = [[[NSMutableArray alloc] init] autorelease];
+    }
+    
+    // Set properties.
+    self.videoTable.alpha = 0.0f;
+    self.videoTable.backgroundColor = [UIColor clearColor];
+    
+    [self connect];
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+
+#pragma mark - UI Methods
+
 - (void)setTitle:(NSString *)title
 {
     [super setTitle:title];
@@ -60,50 +112,48 @@
     [titleView sizeToFit];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [[GANTracker sharedTracker] trackPageview:@"Videos (VideoView)" withError:nil];
-    NSIndexPath *indexPath = [self.videoTable indexPathForSelectedRow];
-    if(indexPath) {
-        [self.videoTable deselectRowAtIndexPath:indexPath animated:YES];
-    }
+- (void)refreshPressed {
+    // Fetch videos from the server.
+    [self connect];
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self setTitle:@"Videos"];
-    
-    // Initialize
-    if(videoArray == nil){
-        self.videoArray = [[[NSMutableArray alloc] init] autorelease];
-    }
-    if(yearArray == nil){
-        self.yearArray = [[[NSMutableArray alloc] init] autorelease];
-    }
-    
-    // Set instance variable properties
-    self.videoTable.alpha = 0.0f;
-    self.videoTable.backgroundColor = [UIColor clearColor];
-    self.indicator.alpha = 1.0f;
-    self.status.text = @"Loading...";
-    self.status.alpha = 1.0f;
-    
-    [self fetchVideo];
+- (void)hideRefreshButton {
+    self.navigationItem.rightBarButtonItem = nil;
 }
 
-- (void)fetchVideo {
-    [self startConnection];
+- (void)dismissWithSuccess {
+    self.navigationItem.rightBarButtonItem = nil;
+    [SVProgressHUD dismiss];
 }
 
-- (void)startConnection {
-    NSString *API_Call = [NSString stringWithFormat:@"%@apikey=%@&type=video", TEXAS_DRUMS_API_MEDIA, TEXAS_DRUMS_API_KEY];
-    NSLog(@"%@", API_Call);
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:API_Call] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
-    
-    NSURLConnection *urlconnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
-    if(urlconnection) {
-        received_data = [[NSMutableData data] retain];
+- (void)dismissWithError {
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshPressed)] autorelease];
+    self.navigationItem.rightBarButtonItem.enabled = YES;
+    [SVProgressHUD showErrorWithStatus:@"Could not fetch data."];
+}
+
+- (void)displayTable {
+    float duration = 0.5f;
+    [self.videoTable reloadData];
+    [UIView beginAnimations:@"displayVideoTable" context:NULL];
+    [UIView setAnimationDuration:duration];
+    if([videoArray count] > 0){
+        self.videoTable.alpha = 1.0f;
     }
+    else {
+        self.videoTable.alpha = 0.0f;
+    }
+    [UIView commitAnimations];
+}
+
+#pragma mark - Data Methods
+
+- (void)connect {
+    [self hideRefreshButton];
+    [SVProgressHUD showWithStatus:@"Loading..."];
+    TexasDrumsGetVideos *get = [[TexasDrumsGetVideos alloc] init];
+    get.delegate = self;
+    [get startRequest]; 
 }
 
 - (void)parseVideoData:(NSDictionary *)results {
@@ -142,8 +192,7 @@
         }
     }
     
-    // Any changes to UI must be done on main thread.
-    [self performSelectorOnMainThread:@selector(displayTable) withObject:nil waitUntilDone:YES];
+    [self displayTable];
     
 }
 
@@ -174,40 +223,15 @@
     return [url autorelease];
 }
 
-
-- (void)displayTable {
-    float delay = 1.0f;
-    [videoTable reloadData];
-    [UIView beginAnimations:@"displayVideoTable" context:NULL];
-    [UIView setAnimationDelay:delay];
-    self.videoTable.alpha = 1.0f;
-    self.status.alpha = 0.0f;
-    self.indicator.alpha = 0.0f;
-    [UIView commitAnimations];
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
+#pragma mark - UITableView Data Source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
     return [yearArray count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
     return [[videoArray objectAtIndex:section] count];
 }
 
@@ -216,21 +240,24 @@
     return 80;
 }
 
-- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section 
 {
-    //create a new view of size _HEADER_HEIGHT_, and place a label inside.
+    // Create a custom header.
     UIView *containerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, _HEADER_HEIGHT_)] autorelease];
     UILabel *headerTitle = [[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, 20)] autorelease];
+    
+    // Set header title properties.
     headerTitle.text = [yearArray objectAtIndex:section];
     headerTitle.textAlignment = UITextAlignmentCenter;
-    headerTitle.textColor = [UIColor orangeColor];
-    headerTitle.shadowOffset = CGSizeMake(0, 1);
-    headerTitle.font = [UIFont fontWithName:@"Georgia-Bold" size:18];
+    headerTitle.textColor = [UIColor TexasDrumsOrangeColor];
+    headerTitle.font = [UIFont TexasDrumsBoldFontOfSize:18];
     headerTitle.backgroundColor = [UIColor clearColor];
+    headerTitle.shadowOffset = CGSizeMake(0, 1);
     
+    // Set black gradient background behind header.
     UIImage *headerImage = [UIImage imageNamed:@"header.png"];
     UIImageView *headerImageView = [[[UIImageView alloc] initWithImage:headerImage] autorelease];
-    headerImageView.frame = CGRectMake(0, 0, 320, 30);
+    headerImageView.frame = CGRectMake(0, 0, self.view.frame.size.width, 30);
     
     [containerView addSubview:headerImageView];
     [containerView addSubview:headerTitle];
@@ -247,12 +274,13 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
     
+    // Set cell properties.
     cell.textLabel.numberOfLines = 1;
-    cell.textLabel.font = [UIFont fontWithName:@"Georgia-Bold" size:14];
-    cell.textLabel.textColor = [UIColor lightGrayColor];
+    cell.textLabel.font = [UIFont TexasDrumsBoldFontOfSize:14];
+    cell.textLabel.textColor = [UIColor TexasDrumsGrayColor];
     
     cell.detailTextLabel.numberOfLines = 3;
-    cell.detailTextLabel.font = [UIFont fontWithName:@"Georgia" size:12];
+    cell.detailTextLabel.font = [UIFont TexasDrumsFontOfSize:12];
     
     cell.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"uitableviewselection-orange-60.png"]] autorelease];
     
@@ -262,78 +290,49 @@
     cell.textLabel.text = this_video.videoTitle;
     cell.detailTextLabel.text = this_video.description;
 
-    // Asynchronously fetch the YouTube image; in the mean time, use a thumbnail
-    // until the image is fetched.
+    // Asynchronously fetch the YouTube image. Use a thumbnail until the image is fetched. 
     [cell.imageView setImageWithURL:this_video.thumbnail placeholderImage:[UIImage imageNamed:@"ThumbnailSmall.png"]];
     
     return cell;
 }
 
-#pragma mark - Table view delegate
+#pragma mark - UITableView Delegate Methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Video *this_video = [[videoArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     TexasDrumsWebViewController *TDWVC = [[TexasDrumsWebViewController alloc] init];
+    
     TDWVC.url = [NSURLRequest requestWithURL:[NSURL URLWithString:this_video.link]];
+    
+    // When going to the video, hide the tab bar.
     TDWVC.hidesBottomBarWhenPushed = YES;
+    
     [self.navigationController pushViewController:TDWVC animated:YES];
     [TDWVC release];
 }
 
+#pragma mark - TexasDrumsRequest Delegate Methods
 
-#pragma mark - NSURLConnection delegate methods
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    [received_data setLength:0];
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    // Append the new data to received_data.
-    [received_data appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection
-  didFailWithError:(NSError *)error
-{
-    // release the connection, and the data object
-    [connection release];
-    [received_data release];
+- (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
+    NSLog(@"Obtained videos successfully.");
     
-    // inform the user
-    NSLog(@"Connection failed! Error - %@ %@",
-          [error localizedDescription],
-          [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" 
-                                                    message:[error localizedDescription] 
-                                                   delegate:self 
-                                          cancelButtonTitle:@":( Okay" 
-                                          otherButtonTitles:nil, nil];
-    [alert show];
-    [alert release];
-    
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
     NSError *error = nil;
-    if([videoArray count] == 0){
-        NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:received_data error:&error];
+    NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
+    NSLog(@"%@", results);
+    
+    if([results count] > 0){
         [self parseVideoData:results];
     }
-    NSLog(@"Succeeded! Received %d bytes of data", [received_data length]);
     
-    // release the connection, and the data object
-    [connection release];
-    [received_data release];
-    
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    [self dismissWithSuccess];
 }
 
+- (void)request:(TexasDrumsRequest *)request failedWithError:(NSError *)error {
+    NSLog(@"Request error: %@", error);
+    
+    // Show refresh button and error message.
+    [self dismissWithError];
+}
 
 @end

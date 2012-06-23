@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+
 #import "TexasDrumsTable.h"
 #import "TexasDrumsAPIConnection.h"
 
 @class News;
 
-@interface NewsViewController : UIViewController<NSURLConnectionDelegate, TexasDrumsTable, TexasDrumsAPIConnection> {
+@interface NewsViewController : UIViewController<TexasDrumsTable, TexasDrumsAPIConnection> {
     IBOutlet UITableView *newsTable;
     NSMutableArray *posts;
     NSMutableArray *allposts;

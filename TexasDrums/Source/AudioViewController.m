@@ -22,7 +22,7 @@
 
 @implementation AudioViewController
 
-@synthesize received_data, audioArray, audioTable, audioPlayer, mediaFinishedLoading, currentCell, pauseButton, playButton, indicator, status, yearArray, statusBar;
+@synthesize audioArray, audioTable, audioPlayer, mediaFinishedLoading, currentCell, pauseButton, playButton, indicator, status, yearArray, statusBar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,27 +41,10 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (void)setTitle:(NSString *)title
-{
-    [super setTitle:title];
-    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
-    if (!titleView) {
-        titleView = [[UILabel alloc] initWithFrame:CGRectZero];
-        titleView.backgroundColor = [UIColor clearColor];
-        titleView.font = [UIFont fontWithName:@"Georgia-Bold" size:20];
-        titleView.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-        titleView.textColor = [UIColor whiteColor]; 
-        
-        self.navigationItem.titleView = titleView;
-        [titleView release];
-    }
-    titleView.text = title;
-    [titleView sizeToFit];
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
+    // Google Analytics.
     [[GANTracker sharedTracker] trackPageview:@"Audio (AudioView)" withError:nil];
 }
 
@@ -74,6 +57,7 @@
     self.pauseButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPause target:self action:@selector(pausePlayer)] autorelease];
     self.playButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(resumePlayer)] autorelease];
     
+    // Set properties.
     self.audioTable.alpha = 1.0f;
     self.audioTable.backgroundColor = [UIColor clearColor];
     
@@ -109,6 +93,24 @@
 }
 
 #pragma mark - UI Methods
+
+- (void)setTitle:(NSString *)title
+{
+    [super setTitle:title];
+    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
+    if (!titleView) {
+        titleView = [[UILabel alloc] initWithFrame:CGRectZero];
+        titleView.backgroundColor = [UIColor clearColor];
+        titleView.font = [UIFont fontWithName:@"Georgia-Bold" size:20];
+        titleView.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+        titleView.textColor = [UIColor whiteColor]; 
+        
+        self.navigationItem.titleView = titleView;
+        [titleView release];
+    }
+    titleView.text = title;
+    [titleView sizeToFit];
+}
 
 - (void)pausePlayer {
     if([audioPlayer isPlaying]){

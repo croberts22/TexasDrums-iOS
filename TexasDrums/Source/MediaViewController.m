@@ -54,7 +54,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     [self setTitle:@"Media"];
     
     // Allocate things as necessary.

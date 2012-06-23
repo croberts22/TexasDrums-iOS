@@ -169,7 +169,9 @@
 }
 
 - (void)parseRosterData:(NSDictionary *)results {
+    
     NSString *current_year = @"";
+    
     for(NSDictionary *member in results) {
         
         Roster *roster;
@@ -324,10 +326,10 @@
     }
     
     // Set header title properties.
-    headerTitle.backgroundColor = [UIColor clearColor];
     headerTitle.textAlignment = UITextAlignmentCenter;
     headerTitle.textColor = [UIColor TexasDrumsOrangeColor];
     headerTitle.font = [UIFont TexasDrumsBoldFontOfSize:18];
+    headerTitle.backgroundColor = [UIColor clearColor];
     headerTitle.shadowOffset = CGSizeMake(0, 1);
     
     [containerView addSubview:headerTitle];
@@ -396,7 +398,7 @@
     [SRVC release];
 }
 
-#pragma mark TexasDrumsRequestDelegate Methods
+#pragma mark - TexasDrumsRequestDelegate Methods
 
 - (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
     NSLog(@"Obtained rosters successfully.");

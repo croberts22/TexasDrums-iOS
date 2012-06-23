@@ -242,7 +242,7 @@
     [descriptor release];
 }
 
-#pragma mark - Table view data source
+#pragma mark - UITableView Data Source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -298,7 +298,7 @@
 }
 
 
-#pragma mark - Table view delegate
+#pragma mark - UITableView Delegate Methods 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -321,7 +321,7 @@
     [NPV release];
 }
 
-#pragma mark - TexasDrumsRequestDelegate Methods
+#pragma mark - TexasDrumsRequest Delegate Methods
 
 - (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
     NSLog(@"Obtained news successfully.");

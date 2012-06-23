@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
+#import "TexasDrumsAPIConnection.h"
+
 @class Roster;
 @class RosterMember;
+@class TexasDrumsGetVideos;
 
-@interface RosterViewController : UIViewController<NSURLConnectionDelegate> {
+@interface RosterViewController : UIViewController<TexasDrumsAPIConnection> {
     NSMutableArray *rosters;
     IBOutlet UITableView *rosterTable;
     UIBarButtonItem *refresh;
