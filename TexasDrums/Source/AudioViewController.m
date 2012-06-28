@@ -83,6 +83,7 @@
         [audioPlayer stop];
         [audioPlayer release];
         self.audioPlayer = nil;
+        self.navigationItem.rightBarButtonItem = self.playButton;
     }
 }
 
@@ -249,6 +250,11 @@
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
     self.navigationItem.rightBarButtonItem = self.playButton;
     [audioPlayer setCurrentTime:0.0f];
+
+    NSIndexPath *indexPath = [self.audioTable indexPathForSelectedRow];
+    if(indexPath) {
+        [self.audioTable deselectRowAtIndexPath:indexPath animated:YES];
+    }
 }
 
 @end

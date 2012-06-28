@@ -262,7 +262,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60;
+    return 80;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -276,6 +276,10 @@
 
     cell.textLabel.textColor = [UIColor lightGrayColor];
     cell.detailTextLabel.textColor = [UIColor grayColor];
+    
+    cell.textLabel.font = [UIFont TexasDrumsBoldFontOfSize:14];
+    
+    cell.detailTextLabel.numberOfLines = 3;
     
     // If logged in, set defaults and allow member posts to be displayed.
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

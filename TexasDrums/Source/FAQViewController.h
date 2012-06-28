@@ -13,19 +13,13 @@
 
 @interface FAQViewController : UIViewController {
     IBOutlet UITableView *FAQTable;
-    IBOutlet UIActivityIndicatorView *indicator;
-    IBOutlet UILabel *status;
     NSMutableArray *faq;
     NSMutableDictionary *categories;
-    NSMutableData *received_data;
 }
 
 @property (nonatomic, retain) UITableView *FAQTable;
-@property (nonatomic, retain) UIActivityIndicatorView *indicator;
-@property (nonatomic, retain) UILabel *status;
 @property (nonatomic, retain) NSMutableArray *faq;
 @property (nonatomic, retain) NSMutableDictionary *categories;
-@property (nonatomic, retain) NSMutableData *received_data;
 
 - (void)fetchFAQ;
 - (void)parseFAQData:(NSDictionary *)results;

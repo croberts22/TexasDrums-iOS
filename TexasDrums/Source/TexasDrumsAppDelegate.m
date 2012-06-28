@@ -42,7 +42,7 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 	[_window addSubview:splashView]; //adds a subview so image can be seen; bring it forward
 	[_window bringSubviewToFront:splashView];
 	[UIView beginAnimations:nil context:nil]; //animations are stoic at at this point
-	[UIView setAnimationDuration:1.0]; //set duration of animation to 2 seconds
+	[UIView setAnimationDuration:0.75]; //set duration of animation to 2 seconds
 	[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:_window cache:YES];
 	[UIView setAnimationDelegate:self]; 
 	[UIView setAnimationDidStopSelector:@selector(startupAnimationDone:finished:context:)];
