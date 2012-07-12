@@ -17,6 +17,7 @@
     NSString *postDate;
     NSString *time;
     BOOL memberPost;
+    BOOL sticky;
     int timestamp;
 }
 
@@ -26,7 +27,8 @@
 @property (nonatomic, retain) NSString *author;
 @property (nonatomic, retain) NSString *postDate;
 @property (nonatomic, retain) NSString *time;
-@property (nonatomic) BOOL memberPost;
-@property (nonatomic) int timestamp;
+@property (nonatomic, assign) BOOL memberPost;
+@property (nonatomic, assign) BOOL sticky;
+@property (nonatomic, assign) int timestamp;
 
 @end

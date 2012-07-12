@@ -11,6 +11,6 @@
 
 @implementation News
 
-@synthesize titleOfPost, post, author, time, timestamp, postDate, subtitle, memberPost;
+@synthesize titleOfPost, post, author, time, timestamp, postDate, subtitle, memberPost, sticky;
 
 @end

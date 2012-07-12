@@ -194,7 +194,7 @@
 
     // Iterate through the results and create News objects.
     for(NSDictionary *item in results){
-        // NSLog(@"%@", item);
+         NSLog(@"%@", item);
         
         News *post = [self createNewPost:item];
         
@@ -228,7 +228,8 @@
     post.timestamp = [[item objectForKey:@"timestamp"] intValue];
     post.titleOfPost = [item objectForKey:@"title"];
     post.memberPost = [[item objectForKey:@"membernews"] boolValue];
-
+    post.sticky = [[item objectForKey:@"sticky"] boolValue];
+    NSLog(@"sticky: %@", [item objectForKey:@"sticky"]);
     post.subtitle = [NSString extractHTML:post.post];
     post.subtitle = [NSString stripExcessEscapes:post.subtitle];
     
@@ -239,6 +240,11 @@
     NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:NO];
     [allposts sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
     [posts sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
+    [descriptor release];
+    
+    descriptor = [[NSSortDescriptor alloc] initWithKey:@"sticky" ascending:NO];
+    [allposts sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
+    [posts sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];    
     [descriptor release];
 }
 
@@ -292,8 +298,17 @@
             cell.textLabel.textColor = [UIColor TexasDrumsOrangeColor];
             cell.detailTextLabel.textColor = [UIColor TexasDrumsOrangeColor];
         }
+        
+        if([[allposts objectAtIndex:indexPath.row] sticky]){
+            cell.textLabel.textColor = [UIColor whiteColor];
+            cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+        }
     }
     else{
+        if([[posts objectAtIndex:indexPath.row] sticky]){
+            cell.textLabel.textColor = [UIColor whiteColor];
+            cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+        }
         cell.textLabel.text = [[posts objectAtIndex:indexPath.row] titleOfPost];
         cell.detailTextLabel.text = [[posts objectAtIndex:indexPath.row] subtitle];
     }
