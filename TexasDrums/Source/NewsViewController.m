@@ -347,8 +347,14 @@
     
     NSError *error = nil;
     NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
-    
+
     if([results count] > 0){
+        if([results respondsToSelector:@selector(objectForKey:)] ){
+            if([[results objectForKey:@"status"] isEqualToString:_NEWS_API_NO_NEW_ARTICLES]) {
+                [self dismissWithSuccess];
+                return;
+            }
+        }
         NSLog(@"New news found. Parsing..");
         // Deserialize JSON results and parse them into News objects.
         [self parseNewsData:results];

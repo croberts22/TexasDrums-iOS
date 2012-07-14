@@ -11,8 +11,11 @@
 
 #define HEADER_HEIGHT 50
 
+
+// Defined API Values
 #define _200OK           @"200 OK"
 #define _404UNAUTHORIZED @"404 UNAUTHORIZED"
+#define _NEWS_API_NO_NEW_ARTICLES @"No new articles."
 
 @interface Common : NSObject
 
