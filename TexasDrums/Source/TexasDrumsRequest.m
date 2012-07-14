@@ -8,6 +8,7 @@
 
 #import "TexasDrumsRequest.h"
 #import "ASIDownloadCache.h"
+#import "Common.h"
 
 static NSURL *TexasDrumsServerURL;
 static NSString *TexasDrumsAPIVersion;
@@ -98,10 +99,10 @@ static int max_retry_count = 3;
          (ASIRequestTimedOutErrorType == [error code])) && (self.retry_count < max_retry_count)) {
         self.retry_count++;
         [self startRequest];
-        NSLog(@"Failure type: %d. Failure count: %d", request.responseStatusCode, self.retry_count);
+        TDLog(@"Failure type: %d. Failure count: %d", request.responseStatusCode, self.retry_count);
     }
     else {
-        NSLog(@"Giving up on request. Failure count: %d", self.retry_count);
+        TDLog(@"Giving up on request. Failure count: %d", self.retry_count);
         
         self.request_succeeded = NO;
         
@@ -158,7 +159,7 @@ static int max_retry_count = 3;
 }
 
 - (void)handleUnexpectedResponse {
-    NSLog(@"Unexpected HTTP response code: %u", self.response_code);
+    TDLog(@"Unexpected HTTP response code: %u", self.response_code);
     NSAssert(NO, @"");
 }
 

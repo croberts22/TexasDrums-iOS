@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Common.h"
+#import "TexasDrumsAPIConnection.h"
 
-@interface StaffViewController : UIViewController {
+@interface StaffViewController : UIViewController<TexasDrumsAPIConnection> {
     IBOutlet UITableView *staffTable;
     IBOutlet UIActivityIndicatorView *indicator;
     IBOutlet UILabel *status;

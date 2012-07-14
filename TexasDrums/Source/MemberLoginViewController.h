@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TexasDrumsAPIConnection.h"
 
-
-@interface MemberLoginViewController : UIViewController<UITextFieldDelegate, NSURLConnectionDelegate> {
+@interface MemberLoginViewController : UIViewController<TexasDrumsAPIConnection, UITextFieldDelegate, NSURLConnectionDelegate> {
     IBOutlet UITextField <UITextFieldDelegate> *username;
     IBOutlet UITextField <UITextFieldDelegate> *password;
     IBOutlet UIBarButtonItem *cancel;

@@ -147,6 +147,8 @@
 		637CF91E158C4C3200838F9A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04BD2DF013C13832006D7637 /* SystemConfiguration.framework */; };
 		637CF91F158C4CCB00838F9A /* FAQ.m in Sources */ = {isa = PBXBuildFile; fileRef = AE30B08514BE7DB50059B71B /* FAQ.m */; };
 		637CF920158C4CCB00838F9A /* StaffMember.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B352014C8802500519280 /* StaffMember.m */; };
+		637FD11F15B1013F0069AA53 /* TexasDrumsGetMemberLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 637FD11E15B1013F0069AA53 /* TexasDrumsGetMemberLogin.m */; };
+		637FD12215B1034D0069AA53 /* TexasDrumsGetMemberLogout.m in Sources */ = {isa = PBXBuildFile; fileRef = 637FD12115B1034C0069AA53 /* TexasDrumsGetMemberLogout.m */; };
 		6388F2C4158D97F000DF20F4 /* TexasDrumsGetAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388F2C3158D97F000DF20F4 /* TexasDrumsGetAudio.m */; };
 		6388F2C7158D991000DF20F4 /* TexasDrumsGetVideos.m in Sources */ = {isa = PBXBuildFile; fileRef = 6388F2C6158D991000DF20F4 /* TexasDrumsGetVideos.m */; };
 		6388F2E2158E802600DF20F4 /* BuckBuck.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6388F2D6158E802600DF20F4 /* BuckBuck.mp3 */; };
@@ -492,6 +494,10 @@
 		635296C0158985D800E62787 /* UIFont+TexasDrums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+TexasDrums.h"; sourceTree = "<group>"; };
 		635296C1158985D800E62787 /* UIFont+TexasDrums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+TexasDrums.m"; sourceTree = "<group>"; };
 		637CF8C6158C4ABB00838F9A /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = UnitTests/GHUnitIOS.framework; sourceTree = "<group>"; };
+		637FD11D15B1013E0069AA53 /* TexasDrumsGetMemberLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexasDrumsGetMemberLogin.h; sourceTree = "<group>"; };
+		637FD11E15B1013F0069AA53 /* TexasDrumsGetMemberLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsGetMemberLogin.m; sourceTree = "<group>"; };
+		637FD12015B1034C0069AA53 /* TexasDrumsGetMemberLogout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexasDrumsGetMemberLogout.h; sourceTree = "<group>"; };
+		637FD12115B1034C0069AA53 /* TexasDrumsGetMemberLogout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsGetMemberLogout.m; sourceTree = "<group>"; };
 		6388F2C2158D97F000DF20F4 /* TexasDrumsGetAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexasDrumsGetAudio.h; sourceTree = "<group>"; };
 		6388F2C3158D97F000DF20F4 /* TexasDrumsGetAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsGetAudio.m; sourceTree = "<group>"; };
 		6388F2C5158D991000DF20F4 /* TexasDrumsGetVideos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexasDrumsGetVideos.h; sourceTree = "<group>"; };
@@ -1217,6 +1223,10 @@
 				6388F2C3158D97F000DF20F4 /* TexasDrumsGetAudio.m */,
 				6388F2C5158D991000DF20F4 /* TexasDrumsGetVideos.h */,
 				6388F2C6158D991000DF20F4 /* TexasDrumsGetVideos.m */,
+				637FD11D15B1013E0069AA53 /* TexasDrumsGetMemberLogin.h */,
+				637FD11E15B1013F0069AA53 /* TexasDrumsGetMemberLogin.m */,
+				637FD12015B1034C0069AA53 /* TexasDrumsGetMemberLogout.h */,
+				637FD12115B1034C0069AA53 /* TexasDrumsGetMemberLogout.m */,
 			);
 			name = Requests;
 			sourceTree = "<group>";
@@ -2206,6 +2216,8 @@
 				635296C2158985D800E62787 /* UIFont+TexasDrums.m in Sources */,
 				6388F2C4158D97F000DF20F4 /* TexasDrumsGetAudio.m in Sources */,
 				6388F2C7158D991000DF20F4 /* TexasDrumsGetVideos.m in Sources */,
+				637FD11F15B1013F0069AA53 /* TexasDrumsGetMemberLogin.m in Sources */,
+				637FD12215B1034D0069AA53 /* TexasDrumsGetMemberLogout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,19 +15,25 @@
 #import "TexasDrumsGroupedTableViewCell.h"
 #import "TexasDrumsGetRosters.h"
 
+// Utilities
 #import "CJSONDeserializer.h"
 #import "RegexKitLite.h"
 #import "GANTracker.h"
 #import "SVProgressHUD.h"
 
+// Categories
 #import "UIFont+TexasDrums.h"
 #import "UIColor+TexasDrums.h"
 
+
+#warning - move this
 #define _HEADER_HEIGHT_ (50)
 
 @implementation RosterViewController
 
 @synthesize rosters, rosterTable, refresh;
+
+#pragma mark - Memory Management
 
 - (void)didReceiveMemoryWarning
 {
@@ -253,6 +259,8 @@
     return member;
 }
 
+
+#warning - move to category?
 - (NSString *)convertHTML:(NSString *)quote {
     NSString *searchString = quote;
     NSString *regexString = @"<br>|<br />";

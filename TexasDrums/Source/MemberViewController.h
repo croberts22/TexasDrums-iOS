@@ -8,21 +8,29 @@
 
 #import <UIKit/UIKit.h>
 #import "Common.h"
+#import "TexasDrumsAPIConnection.h"
 
-@interface MemberViewController : UIViewController<NSURLConnectionDelegate> {
+typedef enum {
+    kLogin,
+    kLogout
+} ButtonType;
+
+@interface MemberViewController : UIViewController<TexasDrumsAPIConnection, NSURLConnectionDelegate> {
     IBOutlet UITableView *memberTable;
-    IBOutlet UITextView *loginText;
+    IBOutlet UIView *loginPrompt;
     NSArray *membersOptions;
-    NSMutableData *received_data;
+    NSArray *adminOptions;
 }
 
 @property (nonatomic, retain) UITableView *memberTable;
-@property (nonatomic, retain) UITextView *loginText;
+@property (nonatomic, retain) UIView *loginPrompt;
 @property (nonatomic, retain) NSArray *membersOptions;
-@property (nonatomic, retain) NSMutableData *received_data;
+@property (nonatomic, retain) NSArray *adminOptions;
 
+- (void)setButton:(ButtonType)buttonType;
 - (void)showMemberLoginScreen;
+- (void)logoutButtonPressed;
+- (void)destroyProfile;
 - (void)logout;
-- (IBAction)logoutButtonPressed:(id)sender;
 
 @end

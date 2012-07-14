@@ -14,7 +14,9 @@
     NSString *server = [[TexasDrumsRequest TexasDrumsServerURL] absoluteString];
     
     NSString *request_URL = [NSString stringWithFormat:@"%@roster.php?apikey=%@", server, [TexasDrumsRequest TexasDrumsAPIKey]]; 
-    NSLog(@"request: %@", request_URL);
+    
+    TDLog(@"Request: %@", request_URL);
+    
     return [NSURL URLWithString:request_URL];
 }
 

@@ -17,7 +17,9 @@
     NSString *server = [[TexasDrumsRequest TexasDrumsServerURL] absoluteString];
     
     NSString *request_URL = [NSString stringWithFormat:@"%@news.php?apikey=%@&since=%d", server, [TexasDrumsRequest TexasDrumsAPIKey], _timestamp]; 
+    
     TDLog(@"Request: %@", request_URL);
+    
     return [NSURL URLWithString:request_URL];
 }
 

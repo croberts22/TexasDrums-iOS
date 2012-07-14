@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "Profile.h"
 
+#define HEADER_HEIGHT 50
+
+#define _200OK @"200 OK"
 
 @interface Common : NSObject
 

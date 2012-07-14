@@ -10,8 +10,9 @@
 #import "FAQ.h"
 #import "Common.h"
 #import "CJSONDeserializer.h"
+#import "TexasDrumsAPIConnection.h"
 
-@interface FAQViewController : UIViewController {
+@interface FAQViewController : UIViewController<TexasDrumsAPIConnection> {
     IBOutlet UITableView *FAQTable;
     NSMutableArray *faq;
     NSMutableDictionary *categories;

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Common.h"
+#import "TexasDrumsAPIConnection.h"
 
-@interface AboutUsViewController : UIViewController {
+@interface AboutUsViewController : UIViewController<TexasDrumsAPIConnection> {
     IBOutlet UIImageView *image;
     IBOutlet UITextView *info;
     IBOutlet UIActivityIndicatorView *large_indicator;
