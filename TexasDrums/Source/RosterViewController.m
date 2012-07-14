@@ -26,9 +26,6 @@
 #import "UIColor+TexasDrums.h"
 
 
-#warning - move this
-#define _HEADER_HEIGHT_ (50)
-
 @implementation RosterViewController
 
 @synthesize rosters, rosterTable, refresh;
@@ -319,13 +316,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-	return _HEADER_HEIGHT_;
+	return HEADER_HEIGHT;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section 
 {
     // Create a custom header.
-    UIView *containerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, _HEADER_HEIGHT_)] autorelease];
+    UIView *containerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, HEADER_HEIGHT)] autorelease];
     UILabel *headerTitle = [[[UILabel alloc] initWithFrame:CGRectMake(10, 20, 300, 30)] autorelease];
 
     headerTitle.text = @"";
@@ -409,7 +406,7 @@
 #pragma mark - TexasDrumsRequestDelegate Methods
 
 - (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
-    NSLog(@"Obtained rosters successfully.");
+    TDLog(@"Obtained rosters successfully.");
     
     NSError *error = nil;
     NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
@@ -422,7 +419,7 @@
 }
 
 - (void)request:(TexasDrumsRequest *)request failedWithError:(NSError *)error {
-    NSLog(@"Request error: %@", error);
+    TDLog(@"Request error: %@", error);
     
     // Show refresh button and error message.
     [self dismissWithError];

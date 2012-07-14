@@ -11,7 +11,6 @@
 
 @implementation EditPhoneViewController
 
-#define _200OK (@"200 OK")
 #define _403 (@"403 ERROR: No input given")
 
 @synthesize phone, status, submit, background_button;

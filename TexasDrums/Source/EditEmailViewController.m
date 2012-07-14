@@ -11,7 +11,6 @@
 
 @implementation EditEmailViewController
 
-#define _200OK (@"200 OK")
 #define _403 (@"403 ERROR: No input given")
 
 @synthesize email, submit, status, backgroundButton;

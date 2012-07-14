@@ -25,11 +25,7 @@
 
 - (void)refreshPressed;
 - (void)hideRefreshButton;
-- (void)dismissWithSuccess;
-- (void)dismissWithError;
 - (void)displayTable;
-
-- (void)connect;
 - (void)parseRosterData:(NSDictionary *)results;
 - (RosterMember *)createNewRosterMember:(NSDictionary *)item;
 - (NSString *)convertHTML:(NSString *)quote;

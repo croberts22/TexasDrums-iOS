@@ -11,7 +11,8 @@
 
 #define HEADER_HEIGHT 50
 
-#define _200OK @"200 OK"
+#define _200OK           @"200 OK"
+#define _404UNAUTHORIZED @"404 UNAUTHORIZED"
 
 @interface Common : NSObject
 

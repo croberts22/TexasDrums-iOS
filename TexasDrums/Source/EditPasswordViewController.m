@@ -11,7 +11,6 @@
 
 @implementation EditPasswordViewController
 
-#define _200OK (@"200 OK")
 #define _403 (@"403 ERROR: No input given")
 
 @synthesize original_password, a_new_password, a_new_password_again, length_constraint, alpha_constraint, numerical_constraint, background_button, status;

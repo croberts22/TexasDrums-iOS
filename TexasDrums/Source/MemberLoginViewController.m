@@ -9,20 +9,23 @@
 #import "MemberLoginViewController.h"
 #import "Common.h"
 #import "Profile.h"
+#import "TexasDrumsGetMemberLogin.h"
+#import "TexasDrumsGetProfile.h"
+
+// Utilities
 #import "CJSONDeserializer.h"
 #import "GANTracker.h"
-#import "NSURLConnectionWithTag.h"
+#import "SVProgressHUD.h"
 
-#define _200OK (@"200 OK")
-
-typedef enum {
-    LoginConnection = 0,
-    ProfileConnection = 1,
-} ConnectionTypes;
+// Categories
+#import "UIFont+TexasDrums.h"
+#import "UIColor+TexasDrums.h"
 
 @implementation MemberLoginViewController
 
-@synthesize username, password, cancel, login, indicator, error_label, background, navbar, received_data, loggedIn, dataFromConnectionsByTag;
+@synthesize username, password, cancel, login, background, navbar;
+
+#pragma mark - Memory Management
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,8 +38,6 @@ typedef enum {
 
 - (void)dealloc
 {
-    [error_label release];
-    [indicator release];
     [username release];
     [password release];
     [cancel release];
@@ -54,40 +55,20 @@ typedef enum {
 
 #pragma mark - View lifecycle
 
-- (void)setTitle:(NSString *)title
-{
-    [super setTitle:title];
-    UILabel *titleView = (UILabel *)self.navbar.titleView;
-    if (!titleView) {
-        titleView = [[UILabel alloc] initWithFrame:CGRectZero];
-        titleView.backgroundColor = [UIColor clearColor];
-        titleView.font = [UIFont fontWithName:@"Georgia-Bold" size:20];
-        titleView.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-        titleView.textColor = [UIColor whiteColor]; 
-        
-        self.navbar.titleView = titleView;
-        [titleView release];
-    }
-    titleView.text = title;
-    [titleView sizeToFit];
-}
-
 - (void)viewWillAppear:(BOOL)animated {
+    // Google Analytics
     [[GANTracker sharedTracker] trackPageview:@"Member Login (MemberLoginView)" withError:nil];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     [self setTitle:@"Login"];
-    self.error_label.alpha = 0.0;
+    
+    // Set properties.
     username.delegate = self;
     password.delegate = self;
-    loggedIn = FALSE;
-    
-    if(dataFromConnectionsByTag == nil){
-        dataFromConnectionsByTag = [[[NSMutableDictionary alloc] init] autorelease];
-    }
 }
 
 - (void)viewDidUnload
@@ -104,27 +85,33 @@ typedef enum {
 }
 
 
-/************************
- * User Defined Methods
- ************************/
+#pragma mark - UI Methods
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{	
-	if(textField == username){
-		[password becomeFirstResponder];
-	}
-	else {
-		[password resignFirstResponder];
-        [self loginButtonPressed:nil];
-	}
-    
-	return YES;
+- (void)setTitle:(NSString *)title
+{
+    [super setTitle:title];
+    UILabel *titleView = (UILabel *)self.navbar.titleView;
+    if (!titleView) {
+        titleView = [[UILabel alloc] initWithFrame:CGRectZero];
+        titleView.backgroundColor = [UIColor clearColor];
+        titleView.font = [UIFont TexasDrumsBoldFontOfSize:20];
+        titleView.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+        titleView.textColor = [UIColor whiteColor]; 
+        
+        self.navbar.titleView = titleView;
+        [titleView release];
+    }
+    titleView.text = title;
+    [titleView sizeToFit];
 }
 
-- (void)prepareToRemoveLoginScreen {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(removeLoginScreen) userInfo:nil repeats:NO];
-    [pool release];
+- (void)dismissWithError {
+    [self enableUI];
+    [SVProgressHUD showErrorWithStatus:@"Could not log in."];    
+}
+
+- (void)dismissWithSuccess {
+    [SVProgressHUD showSuccessWithStatus:@"You are now logged in."];
 }
 
 - (void)removeLoginScreen {
@@ -150,10 +137,7 @@ typedef enum {
 }
 
 - (IBAction)loginButtonPressed:(id)sender {
-    [self disableUI];
-    [self removeError];
-    [indicator startAnimating];
-    [self performSelectorInBackground:@selector(startConnection) withObject:nil];
+    [self connect];
 }
 
 - (IBAction)backgroundPressed:(id)sender {
@@ -161,73 +145,17 @@ typedef enum {
     [password resignFirstResponder];
 }
 
-- (void)startConnection {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    NSError *error = nil;
-    NSString *API_Call = [NSString stringWithFormat:@"%@apikey=%@&username=%@&password=%@&device=mobile", TEXAS_DRUMS_API_LOGIN, TEXAS_DRUMS_API_KEY, username.text, password.text];
-    
-    NSLog(@"%@", API_Call);
-    
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:API_Call] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:20.0];
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&error];
-    NSString *get = [[[NSString alloc] initWithData:response encoding:NSASCIIStringEncoding] autorelease];
-    
-    if(DEBUG_MODE) NSLog(@"Member Login response from server: %@", response);
-    
-    if([get isEqualToString:_200OK]) {
-        [self performSelectorOnMainThread:@selector(getProfileData) withObject:nil waitUntilDone:NO];
-    }
-    else {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [self performSelectorOnMainThread:@selector(enableUI) withObject:nil waitUntilDone:NO];
-        [indicator performSelectorOnMainThread:@selector(stopAnimating) withObject:nil waitUntilDone:NO];
-        [defaults setObject:@"" forKey:@"login_username"];
-        [defaults setObject:@"" forKey:@"login_password"];
-        [defaults setBool:NO forKey:@"member"];
-        [defaults setBool:NO forKey:@"login_valid"];
-        [self displayText:@"Error: Incorrect username or password."];
-    }
-    [pool release];
-}
-/*
-- (void)checkLoginResponse:(NSData *)data {
-    NSString *response = [[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding] autorelease]; 
-
-    if(DEBUG_MODE) NSLog(@"Member Login response from server: %@", response);
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    if([response isEqualToString:_200OK]){
-        loggedIn = TRUE;
-        [self getProfileData];
-    }
-    else{
-        [self performSelectorOnMainThread:@selector(enableUI) withObject:nil waitUntilDone:NO];
-        [defaults setObject:@"" forKey:@"login_username"];
-        [defaults setObject:@"" forKey:@"login_password"];
-        [defaults setBool:NO forKey:@"member"];
-        [defaults setBool:NO forKey:@"login_valid"];
-        [self displayText:@"Error: Incorrect username or password."];
-    }
-}
- */
-
-- (void)getProfileData {
-    // Login first
-    NSString *API_Call = [NSString stringWithFormat:@"%@apikey=%@&username=%@&password=%@", TEXAS_DRUMS_API_PROFILE, TEXAS_DRUMS_API_KEY, username.text, password.text];
-    NSLog(@"%@", API_Call);
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:API_Call] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
-    
-    NSURLConnection *urlconnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
-    if(urlconnection) {
-        received_data = [[NSMutableData data] retain];
-    }
+- (void)connect {
+    [self disableUI];
+    TexasDrumsGetMemberLogin *get = [[TexasDrumsGetMemberLogin alloc] initWithUsername:username.text andPassword:password.text];
+    get.delegate = self;
+    [get startRequest];
 }
 
 - (void)parseProfile:(NSDictionary *)results {
-    //store data into _Profile
+
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
     if(_Profile == nil){
         //NSLog(@"results: %@", results);
         _Profile = [[Profile alloc] init];
@@ -252,6 +180,7 @@ typedef enum {
         
         // This shouldn't be saved, and will not be able to be saved in the new
         // implementation of the database.
+#warning - backend issue; needs to retrieve the hash.
         _Profile.password = [results objectForKey:@"password"];
         [defaults setObject:_Profile.password forKey:@"password"];
         
@@ -300,85 +229,55 @@ typedef enum {
     
     [defaults setBool:YES forKey:@"member"];
     [defaults setBool:YES forKey:@"login_valid"];
-
-    [self performSelectorOnMainThread:@selector(displayText:) withObject:@"You are now logged in." waitUntilDone:YES];
-    [self performSelectorOnMainThread:@selector(prepareToRemoveLoginScreen) withObject:nil waitUntilDone:NO];
-    [indicator performSelectorOnMainThread:@selector(stopAnimating) withObject:nil waitUntilDone:NO];
     
-    NSLog(@"Profile fetched and saved.");
+    TDLog(@"Profile for user '%@' has been fetched and saved.", username.text);
 }
 
-- (void)displayText:(NSString *)text {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    self.error_label.text = text;
-    [UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:.50];
-    self.error_label.alpha = 1.0;
-	[UIView commitAnimations];
-    [pool release];
+#pragma mark - UITextFieldDelegate Methods
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{	
+	if(textField == username){
+		[password becomeFirstResponder];
+	}
+	else {
+		[password resignFirstResponder];
+        [self loginButtonPressed:nil];
+	}
+    
+	return YES;
 }
 
-- (void)removeError {
-    [UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:.5];
-    self.error_label.alpha = 0.0;
-	[UIView commitAnimations];
-}
+#pragma mark - TexasDrumsRequestDelegate Methods
 
-#pragma mark - NSURLConnection delegate methods
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    [received_data setLength:0];
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    // Append the new data to received_data.
-    [received_data appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection
-  didFailWithError:(NSError *)error
-{
-    // inform the user
-    NSLog(@"Connection failed! Error - %@ %@",
-          [error localizedDescription],
-          [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" 
-                                                    message:[error localizedDescription] 
-                                                   delegate:self 
-                                          cancelButtonTitle:@":( Okay" 
-                                          otherButtonTitles:nil, nil];
-    
-    [alert show];
-    [alert release];
-    
-    [indicator stopAnimating];
-    
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    
-    // release the connection, and the data object
-    [connection release];
-    [received_data release];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
+#warning - need a better backend solution.
+- (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
     NSError *error = nil;
-
-    NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:received_data error:&error];
-    [self parseProfile:results];
     
-    NSLog(@"Succeeded! Received %d bytes of data", [received_data length]);
-
-    // release the connection, and the data object
-    [connection release];
-    [received_data release];
+    NSString *responseString = [NSString stringWithUTF8String:[data bytes]];
+    if([responseString isEqualToString:_404UNAUTHORIZED] || responseString == nil){
+        [self dismissWithError];
+        return;
+    }
     
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
+    if([results count] > 0) {
+        TDLog(@"Successfully logged in and obtained profile data.");
+        [self parseProfile:results];
+        [self dismissWithSuccess];
+        [self removeLoginScreen];
+    }
+    else {
+        TDLog(@"Failed to log in.");
+        [self dismissWithError];
+    }
+}
+
+- (void)request:(TexasDrumsRequest *)request failedWithError:(NSError *)error {
+    TDLog(@"Request error: %@", error);
+    
+    [self dismissWithError];
 }
 
 
