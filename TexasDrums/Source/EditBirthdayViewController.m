@@ -83,7 +83,7 @@
 - (void)startConnection {
     
     NSString *API_Call = [NSString stringWithFormat:@"%@apikey=%@&username=%@&password=%@&birthday=%@", TEXAS_DRUMS_API_EDIT_PROFILE, TEXAS_DRUMS_API_KEY, _Profile.username, _Profile.password, updatedBirthday];
-    NSLog(@"%@", API_Call);
+    TDLog(@"%@", API_Call);
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:API_Call] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
     
     NSURLConnection *urlconnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
@@ -104,7 +104,7 @@
     int year = [[calendar components:NSYearCalendarUnit fromDate:picker.date] year];
     int month = [[calendar components:NSMonthCalendarUnit fromDate:picker.date] month];
     int day = [[calendar components:NSDayCalendarUnit fromDate:picker.date] day];
-    NSLog(@"%d %d %d", month, day, year);
+    TDLog(@"%d %d %d", month, day, year);
     
     NSString *month_str = [NSString stringWithFormat:@"%d", month];
     NSString *day_str = [NSString stringWithFormat:@"%d", day];
@@ -130,7 +130,7 @@
     }
 
     self.updatedBirthday = date;
-    NSLog(@"%@", date);
+    TDLog(@"%@", date);
     [self startConnection];
     
 }
@@ -201,7 +201,7 @@
     int year = [[calendar components:NSYearCalendarUnit fromDate:picker.date] year];
     int month = [[calendar components:NSMonthCalendarUnit fromDate:picker.date] month];
     int day = [[calendar components:NSDayCalendarUnit fromDate:picker.date] day];
-    NSLog(@"%d %d %d", month, day, year);
+    TDLog(@"%d %d %d", month, day, year);
     
     self.birthdayLabel.text = [NSString stringWithFormat:@"%@ %d, %d", [self convertIntToMonth:month], day, year];
 }   
@@ -253,7 +253,7 @@
     [received_data release];
     
     // inform the user
-    NSLog(@"Connection failed! Error - %@ %@",
+    TDLog(@"Connection failed! Error - %@ %@",
           [error localizedDescription],
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
     
@@ -278,7 +278,7 @@
     [self performSelectorOnMainThread:@selector(displayText:) withObject:@"Your birthday has been updated." waitUntilDone:YES];
     [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(sendToProfileView) userInfo:nil repeats:NO];
     
-    NSLog(@"Succeeded! Received %d bytes of data", [received_data length]);
+    TDLog(@"Succeeded! Received %d bytes of data", [received_data length]);
     
     // release the connection, and the data object
     [connection release];

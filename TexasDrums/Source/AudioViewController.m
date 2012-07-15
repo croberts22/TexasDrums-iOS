@@ -233,7 +233,7 @@
     // Fetch the file directory path.
     NSString *filename = [self grabFilenameWithIndex:indexPath.row];
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], filename]];
-    NSLog(@"%@", url);
+    TDLog(@"%@", url);
     
     if(audioPlayer == nil){
         self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];

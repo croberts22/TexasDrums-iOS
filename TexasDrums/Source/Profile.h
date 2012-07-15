@@ -7,6 +7,7 @@
 //
 
 @interface Profile : NSObject {
+    int user_id;
     NSString *firstname;
     NSString *lastname;
     NSString *username;
@@ -27,6 +28,7 @@
     NSString *alphabet_last;    
 }
 
+@property (nonatomic, retain) int user_id;
 @property (nonatomic, retain) NSString *firstname;
 @property (nonatomic, retain) NSString *lastname;
 @property (nonatomic, retain) NSString *username;

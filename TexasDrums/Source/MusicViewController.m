@@ -86,7 +86,7 @@
 - (void)print_PDF {
     void (^completionHandler)(UIPrintInteractionController *, BOOL, NSError *) =
     ^(UIPrintInteractionController *pic, BOOL completed, NSError *error) {
-        if (!completed && error) NSLog(@"Print error: %@", error);
+        if (!completed && error) TDLog(@"Print error: %@", error);
     };
     
     NSData *pdfData = [self generatePDFDataForPrinting];

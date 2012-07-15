@@ -154,7 +154,7 @@
         return YES;
     }
     else {
-        NSLog(@"%@", request);
+        TDLog(@"%@", request);
         if([[[request URL] absoluteString] rangeOfString:@"mailto:"].location == NSNotFound){
             TexasDrumsWebViewController *TDWBC = [[[TexasDrumsWebViewController alloc] init] autorelease];
             TDWBC.url = request;

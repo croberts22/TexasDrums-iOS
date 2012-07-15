@@ -244,7 +244,7 @@
 
 - (void)updatePassword:(NSString *)password {
     NSString *API_Call = [NSString stringWithFormat:@"%@apikey=%@&username=%@&password=%@&new_password=%@", TEXAS_DRUMS_API_EDIT_PROFILE, TEXAS_DRUMS_API_KEY, _Profile.username, _Profile.password, password];
-    NSLog(@"%@", API_Call);
+    TDLog(@"%@", API_Call);
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:API_Call]];
     NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     NSString *get = [[[NSString alloc] initWithData:response encoding:NSASCIIStringEncoding] autorelease];

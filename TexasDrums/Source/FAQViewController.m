@@ -355,7 +355,7 @@
 #pragma mark TexasDrumsRequestDelegate Methods
 
 - (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
-    NSLog(@"Obtained FAQ successfully.");
+    TDLog(@"Obtained FAQ successfully.");
     
     NSError *error = nil;
     NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
@@ -365,7 +365,7 @@
 }
 
 - (void)request:(TexasDrumsRequest *)request failedWithError:(NSError *)error {
-    NSLog(@"request error: %@", error);
+    TDLog(@"request error: %@", error);
     
     // Show refresh button and error message.
     [self dismissWithError];

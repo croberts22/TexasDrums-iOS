@@ -428,7 +428,7 @@
     [received_data release];
     
     // inform the user
-    NSLog(@"Connection failed! Error - %@ %@",
+    TDLog(@"Connection failed! Error - %@ %@",
           [error localizedDescription],
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
     
@@ -452,7 +452,7 @@
     
     [self parseAddressBookData:results];
     
-    NSLog(@"Succeeded! Received %d bytes of data.", [received_data length]);
+    TDLog(@"Succeeded! Received %d bytes of data.", [received_data length]);
     
     // release the connection, and the data object
     [connection release];

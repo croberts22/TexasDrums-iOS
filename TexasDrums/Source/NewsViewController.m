@@ -194,7 +194,7 @@
 
     // Iterate through the results and create News objects.
     for(NSDictionary *item in results){
-         NSLog(@"%@", item);
+         TDLog(@"%@", item);
         
         News *post = [self createNewPost:item];
         
@@ -203,7 +203,7 @@
         if(!timestamp_updated){
             self.timestamp = post.timestamp;
             timestamp_updated = YES;
-            NSLog(@"Timestamp updated to %d.", post.timestamp);
+            TDLog(@"Timestamp updated to %d.", post.timestamp);
         }
         
         if(!post.memberPost){
@@ -229,7 +229,7 @@
     post.titleOfPost = [item objectForKey:@"title"];
     post.memberPost = [[item objectForKey:@"membernews"] boolValue];
     post.sticky = [[item objectForKey:@"sticky"] boolValue];
-    NSLog(@"sticky: %@", [item objectForKey:@"sticky"]);
+    TDLog(@"sticky: %@", [item objectForKey:@"sticky"]);
     post.subtitle = [NSString extractHTML:post.post];
     post.subtitle = [NSString stripExcessEscapes:post.subtitle];
     
@@ -343,19 +343,26 @@
 #pragma mark - TexasDrumsRequest Delegate Methods
 
 - (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
-    NSLog(@"Obtained news successfully.");
+    TDLog(@"Obtained news successfully.");
     
     NSError *error = nil;
     NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
 
     if([results count] > 0){
+        // Check if the response is just a dictionary value of one.
+        // This implies that the key value pair follows the format:
+        // status -> 'message'
+        // We use respondsToSelector since the API returns a dictionary
+        // of length one for any status messages, but an array of 
+        // dictionary responses for valid data. 
+        // CJSONDeserializer interprets actual data as NSArrays.
         if([results respondsToSelector:@selector(objectForKey:)] ){
             if([[results objectForKey:@"status"] isEqualToString:_NEWS_API_NO_NEW_ARTICLES]) {
                 [self dismissWithSuccess];
                 return;
             }
         }
-        NSLog(@"New news found. Parsing..");
+        TDLog(@"New news found. Parsing..");
         // Deserialize JSON results and parse them into News objects.
         [self parseNewsData:results];
     }
@@ -364,7 +371,7 @@
 }
 
 - (void)request:(TexasDrumsRequest *)request failedWithError:(NSError *)error {
-    NSLog(@"request error: %@", error);
+    TDLog(@"request error: %@", error);
     
     // Show error message.
     [self dismissWithError];

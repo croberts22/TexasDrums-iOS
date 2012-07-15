@@ -165,7 +165,7 @@
     [videoArray addObject:first_year];
     
     for(NSDictionary *item in results) {
-        //NSLog(@"%@", item);
+        //TDLog(@"%@", item);
         
         // Create a new video object.
         Video *video = [self createNewVideo:item];
@@ -315,11 +315,11 @@
 #pragma mark - TexasDrumsRequest Delegate Methods
 
 - (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
-    NSLog(@"Obtained videos successfully.");
+    TDLog(@"Obtained videos successfully.");
     
     NSError *error = nil;
     NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
-    NSLog(@"%@", results);
+    TDLog(@"%@", results);
     
     if([results count] > 0){
         [self parseVideoData:results];
@@ -329,7 +329,7 @@
 }
 
 - (void)request:(TexasDrumsRequest *)request failedWithError:(NSError *)error {
-    NSLog(@"Request error: %@", error);
+    TDLog(@"Request error: %@", error);
     
     // Show refresh button and error message.
     [self dismissWithError];

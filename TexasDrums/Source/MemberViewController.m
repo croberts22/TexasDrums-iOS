@@ -379,7 +379,7 @@
 }
 
 - (void)request:(TexasDrumsRequest *)request failedWithError:(NSError *)error {
-    NSLog(@"Request error: %@", error);
+    TDLog(@"Request error: %@", error);
     
     // Show refresh button and error message.
     [self dismissWithError];

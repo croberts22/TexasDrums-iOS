@@ -226,7 +226,7 @@
     
     // Display the table after all data is acquired.
     [self displayTable];
-    if(DEBUG_MODE) NSLog(@"Roster table configured. Reloading...");
+    if(DEBUG_MODE) TDLog(@"Roster table configured. Reloading...");
 }
 
 - (RosterMember *)createNewRosterMember:(NSDictionary *)item {

@@ -71,7 +71,7 @@
     
     //store results into dictionary
     NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:response error:&error];
-    NSLog(@"%@", results);
+    TDLog(@"%@", results);
     for(NSDictionary *member in results){
         if([[member objectForKey:@"status"] isEqualToString:@"Current"]){
             Profile *member_profile = [[Profile alloc] init];
@@ -101,7 +101,7 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:API_Call]];
     NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     NSString *get = [[[NSString alloc] initWithData:response encoding:NSASCIIStringEncoding] autorelease]; 
-    NSLog(@"Payment response from server: %@", get);
+    TDLog(@"Payment response from server: %@", get);
 }
 
 - (void)viewDidUnload

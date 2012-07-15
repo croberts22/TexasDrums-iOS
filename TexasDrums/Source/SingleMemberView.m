@@ -202,12 +202,12 @@
             return;
         }
         if(indexPath.row == 0){ //email
-            if(DEBUG_MODE) NSLog(@"Prompting user for sending %@ an email.", member.firstname);
+            if(DEBUG_MODE) TDLog(@"Prompting user for sending %@ an email.", member.firstname);
             actionSheet.title = [NSString stringWithFormat:@"Would you like to send an email to %@?", member.firstname];
             actionSheet.tag = 1;
         }
         else if(indexPath.row == 1){ //phone
-            if(DEBUG_MODE) NSLog(@"Prompting user for calling %@.", member.firstname);
+            if(DEBUG_MODE) TDLog(@"Prompting user for calling %@.", member.firstname);
             actionSheet.title = [NSString stringWithFormat:@"Would you like to call %@?", member.firstname];
             actionSheet.tag = 2;
         }
@@ -224,7 +224,7 @@
     switch(actionSheet.tag){
         case 1:
             if(buttonIndex == 0){ // User wants to send an email.
-                if(DEBUG_MODE) NSLog(@"User accepts email response. Pushing modal view only if user has configured mail client...");
+                if(DEBUG_MODE) TDLog(@"User accepts email response. Pushing modal view only if user has configured mail client...");
                 // If mail client is configured, set up modal view and present it to the user.
                 if([MFMailComposeViewController canSendMail]){
                     
@@ -236,7 +236,7 @@
                     
                 }
                 else{ // User has not set up mail.
-                    NSLog(@"Mail client not configured.");
+                    TDLog(@"Mail client not configured.");
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" 
                                                                     message:@"You have not configured your mail client yet. Please open up the Mail app and configure your settings, and try again." 
                                                                    delegate:self 
@@ -247,20 +247,20 @@
                 }
             }
             else { // User declines.
-                if(DEBUG_MODE) NSLog(@"User declined email response. Rolling back to member screen.");
+                if(DEBUG_MODE) TDLog(@"User declined email response. Rolling back to member screen.");
             }
             
             break;
             
         case 2:
             if(buttonIndex == 0){
-                if(DEBUG_MODE) NSLog(@"User accepted phone response. Switching to Phone app and dialing...");
+                if(DEBUG_MODE) TDLog(@"User accepted phone response. Switching to Phone app and dialing...");
                 // This must be done on a device. It will not work in a simulator.
                 NSString *telephoneStr = [NSString stringWithFormat:@"tel:%@", member.phone];
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telephoneStr]];
             }
             else {
-                if(DEBUG_MODE) NSLog(@"User declined phone response. Rolling back to member screen.");
+                if(DEBUG_MODE) TDLog(@"User declined phone response. Rolling back to member screen.");
             }
             
             break;

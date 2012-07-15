@@ -264,7 +264,7 @@
         NSString *generated_username = [self generateUsernameWithFirstName:firstname AndLastName:lastname];
         if(![self.username isEqualToString:generated_username]){
             self.username = generated_username;
-            NSLog(@"Generating username = %@", self.username);
+            TDLog(@"Generating username = %@", self.username);
             [self.addMemberTable performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
         }
     }

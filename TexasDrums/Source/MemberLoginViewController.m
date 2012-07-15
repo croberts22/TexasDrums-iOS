@@ -157,7 +157,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     if(_Profile == nil){
-        //NSLog(@"results: %@", results);
+        //TDLog(@"results: %@", results);
         _Profile = [[Profile alloc] init];
         
         _Profile.firstname = [results objectForKey:@"firstname"];

@@ -78,7 +78,7 @@
     self.backButton.enabled = NO;
     self.nextButton.enabled = NO;
     [self.browser loadRequest:url];
-    NSLog(@"%@", url.URL);
+    TDLog(@"%@", url.URL);
 }
 
 - (void)viewDidUnload

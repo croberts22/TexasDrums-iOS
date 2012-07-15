@@ -108,7 +108,7 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     if(![defaults boolForKey:@"login_valid"]){
-        NSLog(@"User has not logged in. Not fetching profile.");
+        TDLog(@"User has not logged in. Not fetching profile.");
         return;
     }
     
@@ -116,7 +116,7 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     NSString *password = [defaults objectForKey:@"login_password"];
     
     NSString *API_Call = [NSString stringWithFormat:@"%@apikey=%@&username=%@&password=%@", TEXAS_DRUMS_API_PROFILE, TEXAS_DRUMS_API_KEY, username, password];
-    NSLog(@"%@", API_Call);
+    TDLog(@"%@", API_Call);
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:API_Call] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
     
     NSURLConnection *urlconnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
@@ -130,12 +130,12 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     if([results isEqual:@"404"] || [results count] == 0){
-        NSLog(@"Could not fetch current profile. Using the one stored in NSUserDefaults.");
+        TDLog(@"Could not fetch current profile. Using the one stored in NSUserDefaults.");
         return;
     }
     
     if(_Profile == nil){
-        //NSLog(@"results: %@", results);
+        //TDLog(@"results: %@", results);
         _Profile = [[Profile alloc] init];
         
         _Profile.firstname = [results objectForKey:@"firstname"];
@@ -201,7 +201,7 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     
     [defaults setBool:YES forKey:@"member"];
     
-    NSLog(@"Profile fetched and saved.");
+    TDLog(@"Profile fetched and saved.");
 }
 
 #pragma mark - NSURLConnection delegate methods
@@ -233,7 +233,7 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     [received_data release];
     
     // inform the user
-    NSLog(@"Connection failed! Error - %@ %@",
+    TDLog(@"Connection failed! Error - %@ %@",
           [error localizedDescription],
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
     
@@ -255,7 +255,7 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     
     [self createProfile:results];
     
-    NSLog(@"Succeeded! Received %d bytes of data.", [received_data length]);
+    TDLog(@"Succeeded! Received %d bytes of data.", [received_data length]);
     
     // release the connection, and the data object
     [connection release];

@@ -94,8 +94,8 @@
 /*
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string 
 {
-    NSLog(@"textField:|%@|", textField.text);
-    NSLog(@"string:|%@|", string);
+    TDLog(@"textField:|%@|", textField.text);
+    TDLog(@"string:|%@|", string);
     
     NSString *result;
     
@@ -114,7 +114,7 @@
     
     textField.text = result;
     
-    NSLog(@"new textField:|%@|", textField.text);
+    TDLog(@"new textField:|%@|", textField.text);
     
     return NO;
 }
@@ -167,7 +167,7 @@
 
 - (void)updatePhone {
     NSString *API_Call = [NSString stringWithFormat:@"%@apikey=%@&username=%@&password=%@&phone=%@", TEXAS_DRUMS_API_EDIT_PROFILE, TEXAS_DRUMS_API_KEY, _Profile.username, _Profile.password, phone.text];
-    NSLog(@"%@", API_Call);
+    TDLog(@"%@", API_Call);
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:API_Call]];
     NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     NSString *get = [[[NSString alloc] initWithData:response encoding:NSASCIIStringEncoding] autorelease];

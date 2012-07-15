@@ -86,7 +86,7 @@
 
 - (void)startConnection {
     NSString *API_Call = [NSString stringWithFormat:@"%@apikey=%@&username=%@&password=%@", TEXAS_DRUMS_API_MUSIC, TEXAS_DRUMS_API_KEY, _Profile.username, _Profile.password];
-    NSLog(@"%@", API_Call);
+    TDLog(@"%@", API_Call);
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:API_Call] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
     
     NSURLConnection *urlconnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
@@ -97,7 +97,7 @@
 
 - (void)parseMusicData:(NSDictionary *)results {
     for(NSDictionary *item in results) {
-        if(DEBUG_MODE) NSLog(@"%@", item);
+        if(DEBUG_MODE) TDLog(@"%@", item);
         Music *music = [self createNewMusic:item];
         [musicArray addObject:music];
     }
@@ -247,7 +247,7 @@
     [received_data release];
     
     // inform the user
-    NSLog(@"Connection failed! Error - %@ %@",
+    TDLog(@"Connection failed! Error - %@ %@",
           [error localizedDescription],
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
     
@@ -271,7 +271,7 @@
     
     [self parseMusicData:results];
     
-    NSLog(@"Succeeded! Received %d bytes of data", [received_data length]);
+    TDLog(@"Succeeded! Received %d bytes of data", [received_data length]);
     
     // release the connection, and the data object
     [connection release];

@@ -109,7 +109,7 @@
 
 - (void)startConnection {
     NSString *API_Call = [NSString stringWithFormat:@"%@apikey=%@", TEXAS_DRUMS_API_ABOUT, TEXAS_DRUMS_API_KEY];
-    NSLog(@"%@", API_Call);
+    TDLog(@"%@", API_Call);
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:API_Call] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
     
     NSURLConnection *urlconnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
@@ -184,7 +184,7 @@
     [received_data release];
     
     // inform the user
-    NSLog(@"Connection failed! Error - %@ %@",
+    TDLog(@"Connection failed! Error - %@ %@",
           [error localizedDescription],
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
     
@@ -210,7 +210,7 @@
     NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:received_data error:&error];
     
     [self parseAboutData:results];
-    NSLog(@"Succeeded! Received %d bytes of data", [received_data length]);
+    TDLog(@"Succeeded! Received %d bytes of data", [received_data length]);
     
     // release the connection, and the data object
     [connection release];
