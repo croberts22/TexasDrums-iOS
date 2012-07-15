@@ -121,10 +121,13 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 }
 
 - (void)forceLogout {
+    TDLog(@"Forcing logout.");
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:@"" forKey:@"username"];
     [defaults setObject:@"" forKey:@"password"];
     [defaults setBool:NO forKey:@"login_valid"];
+    
+    [self destroyProfile];
 }
 
 - (void)createProfile:(NSDictionary *)results {
@@ -201,6 +204,12 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     [defaults setBool:YES forKey:@"login_valid"];
     
     TDLog(@"Profile for user '%@' has been fetched and saved.", _Profile.username);
+}
+
+- (void)destroyProfile {
+    TDLog(@"Destroying profile.");
+    [_Profile release];
+    _Profile = nil;
 }
 
 - (void)request:(TexasDrumsRequest *)request receivedData:(id)data {

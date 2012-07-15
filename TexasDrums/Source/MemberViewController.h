@@ -10,6 +10,8 @@
 #import "Common.h"
 #import "TexasDrumsAPIConnection.h"
 
+@class TexasDrumsAppDelegate;
+
 typedef enum {
     kLogin,
     kLogout
@@ -20,12 +22,15 @@ typedef enum {
     IBOutlet UIView *loginPrompt;
     NSArray *membersOptions;
     NSArray *adminOptions;
+    
+    TexasDrumsAppDelegate *delegate;
 }
 
 @property (nonatomic, retain) UITableView *memberTable;
 @property (nonatomic, retain) UIView *loginPrompt;
 @property (nonatomic, retain) NSArray *membersOptions;
 @property (nonatomic, retain) NSArray *adminOptions;
+@property (nonatomic, retain) TexasDrumsAppDelegate *delegate;
 
 - (void)setButton:(ButtonType)buttonType;
 - (void)showMemberLoginScreen;

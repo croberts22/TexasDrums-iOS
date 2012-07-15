@@ -10,14 +10,10 @@
 #import "TexasDrumsGroupedTableViewCell.h"
 #import "RosterMember.h"
 #import "GANTracker.h"
+#import "Common.h"
 
 #import "UIFont+TexasDrums.h"
 #import "UIColor+TexasDrums.h"
-
-#define SMALL_FONT_SIZE (12.0f)
-#define FONT_SIZE (14.0f)
-#define CELL_CONTENT_WIDTH (320.0f)
-#define CELL_CONTENT_MARGIN (10.0f)
 
 @implementation SingleMemberView
 

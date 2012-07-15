@@ -7,7 +7,6 @@
 //
 
 #import "NewsViewController.h"
-#import "TexasDrumsAppDelegate.h"
 #import "Common.h"
 #import "News.h"
 #import "NewsPostView.h"
@@ -194,7 +193,7 @@
 
     // Iterate through the results and create News objects.
     for(NSDictionary *item in results){
-         TDLog(@"%@", item);
+        if(DEBUG_MODE) TDLog(@"%@", item);
         
         News *post = [self createNewPost:item];
         

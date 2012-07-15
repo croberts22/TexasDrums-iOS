@@ -42,9 +42,10 @@
 {
     [super viewDidLoad];
     
+    [self setTitle:@"Gigs"];
+    
     // Set properties.
     self.gigsTable.backgroundColor = [UIColor clearColor];
-    self.gigsTable.separatorColor = [UIColor clearColor];
     self.gigsTable.alpha = 0.0f;
     
     // Begin fetching news from the server.
@@ -92,7 +93,6 @@
 }
 
 - (void)displayTable {
-    float duration = 0.5f;
     [self.gigsTable reloadData];
     [UIView animateWithDuration:0.5f animations:^{
         self.gigsTable.alpha = 1.0f;
@@ -112,13 +112,24 @@
     for(NSDictionary *item in results) {
         Gig *gig = [[[Gig alloc] init] autorelease];
         
-        gig.gig_id = [item objectForKey:@"gig_id"];
         gig.gig_name = [item objectForKey:@"name"];
+        gig.gig_id = [[item objectForKey:@"gig_id"] intValue];
+        gig.location = [item objectForKey:@"location"];
+        gig.description = [item objectForKey:@"description"];
+        gig.timestamp = [[item objectForKey:@"time"] intValue];
+        gig.snares_required = [[item objectForKey:@"snares_required"] intValue];
+        gig.tenors_required = [[item objectForKey:@"tenors_required"] intValue];
+        gig.basses_required = [[item objectForKey:@"basses_required"] intValue];
+        gig.cymbals_required = [[item objectForKey:@"cymbals_required"] intValue];
+        
+        // Parse timestamp.
+        [gig convertTimestampToString];
         
         for(NSDictionary *users in [item objectForKey:@"users"]) {
             GigUser *user = [[[GigUser alloc] init] autorelease];
             user.firstname = [users objectForKey:@"first_name"];
             user.lastname = [users objectForKey:@"last_name"];
+            user.section = [users objectForKey:@"section"];
             user.user_id = [[users objectForKey:@"user_id"] intValue];
 
             [gig.users addObject:user];
@@ -134,12 +145,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return [gigs count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [gigs count];
+    return 5;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -153,7 +164,9 @@
     UIView *containerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, HEADER_HEIGHT)] autorelease];
     UILabel *headerTitle = [[[UILabel alloc] initWithFrame:CGRectMake(10, 20, 300, 30)] autorelease];
     
-    headerTitle.text = @"Header";
+    Gig *gig = [gigs objectAtIndex:section];
+    
+    headerTitle.text = gig.gig_name;
     
     headerTitle.textAlignment = UITextAlignmentLeft;
     headerTitle.textColor = [UIColor TexasDrumsOrangeColor];
@@ -166,18 +179,61 @@
 	return containerView;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Gig *gig = [gigs objectAtIndex:indexPath.section];
+    NSString *text;
+    
+    switch (indexPath.row) {
+        case 0:
+            text = [NSString stringWithFormat:@"%d", gig.timestamp_string];
+            break;
+        case 1:
+            text = gig.location;
+            break;
+        case 2:
+            text = gig.description;
+            break;
+        case 3:
+            text = [gig createRequiredText];
+            break;
+        case 4:
+            text = [gig createCurrentText];
+            break;
+        default:
+            text = @""; // Should never get hit.
+            break;
+    }
+    
+    CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
+    CGSize size = [text sizeWithFont:[UIFont TexasDrumsFontOfSize:15] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+    
+    CGFloat height = MAX(size.height, 20.0f) + CELL_CONTENT_MARGIN * 2;
+    
+    return height;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     
-    TexasDrumsGroupedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[TexasDrumsGroupedTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+        
+        // Override TexasDrumsGroupedTableViewCell properties. 
+        cell.detailTextLabel.textColor = [UIColor TexasDrumsGrayColor];
+        cell.textLabel.textColor = [UIColor TexasDrumsOrangeColor];
+        
+        cell.detailTextLabel.font = [UIFont TexasDrumsFontOfSize:14];
+        cell.textLabel.font = [UIFont TexasDrumsFontOfSize:12];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    // Override TexasDrumsGroupedTableViewCell properties.
-    cell.textLabel.font = [UIFont TexasDrumsBoldFontOfSize:16];
+
     
+    /*
     UIImage *background;
     UIImage *selected_background;
     
@@ -193,7 +249,7 @@
         background = [UIImage imageNamed:@"top_table_cell.png"];
         selected_background = [UIImage imageNamed:@"top_table_cell.png"];
     }
-    else if(indexPath.row == [gigs count]-1){
+    else if(indexPath.row == 4){
         background = [UIImage imageNamed:@"bottom_table_cell.png"];
         selected_background = [UIImage imageNamed:@"bottom_table_cell.png"];
     }
@@ -205,13 +261,46 @@
     // Set the images.
     ((UIImageView *)cell.backgroundView).image = background;
     ((UIImageView *)cell.selectedBackgroundView).image = selected_background;
+    */
+    Gig *gig = [gigs objectAtIndex:indexPath.section];
+
+    cell.detailTextLabel.numberOfLines = 0;
     
-    Gig *gig = [gigs objectAtIndex:indexPath.row];
-    
-    cell.textLabel.text = gig.gig_name;
+    switch(indexPath.row) {
+        case 0:
+            cell.textLabel.text = @"Date";
+            cell.detailTextLabel.text = gig.timestamp_string;
+            break;
+        case 1:
+            cell.textLabel.text = @"Location";
+            cell.detailTextLabel.text = gig.location;
+            break;
+        case 2:
+            cell.textLabel.text = @"Description";
+            cell.detailTextLabel.text = gig.description;
+            break;
+        case 3:
+            cell.textLabel.text = @"Required";
+            cell.detailTextLabel.text = [gig createRequiredText];
+            break;
+        case 4:
+            cell.textLabel.text = @"Need";
+            cell.detailTextLabel.text = [gig createCurrentText];
+            break;
+        default:
+            break;
+    }
     
     return cell;
 }
+
+#warning - this needs to be improved; we need to custom draw these cells to improve performance.
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.contentView.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.1f];
+    cell.backgroundColor = [UIColor clearColor];
+    cell.backgroundView.backgroundColor = [UIColor clearColor];
+}
+
 
 #pragma mark - Table view delegate
 

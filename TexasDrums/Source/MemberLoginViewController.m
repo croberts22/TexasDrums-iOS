@@ -32,7 +32,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        delegate = (TexasDrumsAppDelegate *)[[UIApplication sharedApplication] delegate];
     }
     return self;
 }
@@ -274,7 +274,7 @@
         
         TDLog(@"Logged in successfully. Establishing profile...");
         // Deserialize JSON results and parse them into News objects.
-        [delegate createProfile:results];
+        [self.delegate createProfile:results];
         [self dismissWithSuccess];
         [self removeLoginScreen];
     }

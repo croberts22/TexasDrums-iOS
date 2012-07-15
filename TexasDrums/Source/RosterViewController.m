@@ -9,7 +9,6 @@
 #import "RosterViewController.h"
 #import "Roster.h"
 #import "RosterMember.h"
-#import "TexasDrumsAppDelegate.h"
 #import "Common.h"
 #import "SingleRosterViewController.h"
 #import "TexasDrumsGroupedTableViewCell.h"

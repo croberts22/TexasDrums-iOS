@@ -46,7 +46,6 @@
 						<string key="NSFrameSize">{320, 367}</string>
 						<reference key="NSSuperview" ref="294310517"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="266387141">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
@@ -56,10 +55,8 @@
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<bool key="IBUIBounces">NO</bool>
-						<bool key="IBUIScrollEnabled">NO</bool>
+						<bool key="IBUIAlwaysBounceVertical">YES</bool>
 						<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
-						<bool key="IBUIShowsVerticalScrollIndicator">NO</bool>
 						<bool key="IBUIBouncesZoom">NO</bool>
 						<int key="IBUIStyle">1</int>
 						<int key="IBUISeparatorStyle">2</int>
@@ -279,17 +276,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">MemberViewController</string>
 					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">logoutButtonPressed:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">logoutButtonPressed:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">logoutButtonPressed:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">

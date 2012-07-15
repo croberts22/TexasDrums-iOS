@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Common.h"
 
-@interface TexasDrumsAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate, NSURLConnectionDelegate> {
+@interface TexasDrumsAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
     UIImageView *splashView;
     NSMutableData *received_data;
 }
@@ -21,7 +21,8 @@ extern Profile *_Profile;
 @property (nonatomic, retain) UIImageView *splashView;
 @property (nonatomic, retain) NSMutableData *received_data;
 
-- (void)startConnection;
 - (void)createProfile:(NSDictionary *)results;
+- (void)destroyProfile;
+
 
 @end

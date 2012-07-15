@@ -16,6 +16,7 @@
 #import "DownloadMusicViewController.h"
 #import "TexasDrumsGroupedTableViewCell.h"
 #import "TexasDrumsGetMemberLogout.h"
+#import "TexasDrumsAppDelegate.h"
 #import "Common.h"
 
 // Utilities
@@ -28,9 +29,18 @@
 
 @implementation MemberViewController
 
-@synthesize membersOptions, memberTable, loginPrompt, adminOptions;
+@synthesize membersOptions, memberTable, loginPrompt, adminOptions, delegate;
 
 #pragma mark - Memory Management
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        delegate = (TexasDrumsAppDelegate *)[[UIApplication sharedApplication] delegate];
+    }
+    return self;
+}
 
 - (void)dealloc
 {
@@ -191,19 +201,13 @@
     [get startRequest];
 }
 
-- (void)destroyProfile {
-    [_Profile release];
-    _Profile = nil;
-}
-
 - (void)logout {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     [defaults setBool:NO forKey:@"login_valid"];
     [defaults setBool:NO forKey:@"member"];
     
-    //this should be a class method; change later.
-    [self destroyProfile];
+    [delegate destroyProfile];
     
     // Smoothly transition back into the login prompt.
     self.loginPrompt.alpha = 0.0f;
