@@ -372,16 +372,30 @@
 #pragma mark - TexasDrumsRequestDelegate Methods
 
 - (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
-    NSString *responseString = [NSString stringWithUTF8String:[data bytes]];
     
-    if([responseString isEqualToString:_200OK]) {
-        TDLog(@"Logged out successfully.");
-        [self logout];
-        [self dismissWithSuccess];
-    }
-    else {
-        TDLog(@"Could not log out.");
-        [self dismissWithError];
+    NSError *error = nil;
+    NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
+    
+    if([results count] > 0){
+        // Check if the response is just a dictionary value of one.
+        // This implies that the key value pair follows the format:
+        // status -> 'message'
+        // We use respondsToSelector since the API returns a dictionary
+        // of length one for any status messages, but an array of 
+        // dictionary responses for valid data. 
+        // CJSONDeserializer interprets actual data as NSArrays.
+        if([results respondsToSelector:@selector(objectForKey:)] ){
+            if([[results objectForKey:@"status"] isEqualToString:_200OK]) {
+                TDLog(@"Logged out successfully. Request returned: %@", [results objectForKey:@"status"]);
+                [self logout];
+                [self dismissWithSuccess];
+                return;
+            }
+        }
+        else {
+            TDLog(@"Could not log out.");
+            [self dismissWithError];
+        }
     }
 }
 

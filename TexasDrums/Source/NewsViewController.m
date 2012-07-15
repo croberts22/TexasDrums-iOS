@@ -285,6 +285,8 @@
     
     cell.detailTextLabel.numberOfLines = 3;
     
+    cell.backgroundView = nil;
+    
     // If logged in, set defaults and allow member posts to be displayed.
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
@@ -300,12 +302,16 @@
         if([[allposts objectAtIndex:indexPath.row] sticky]){
             cell.textLabel.textColor = [UIColor whiteColor];
             cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+            cell.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"uitableviewselection-orange-60.png"]] autorelease];
+            cell.backgroundView.alpha = 0.6f;
         }
     }
     else{
         if([[posts objectAtIndex:indexPath.row] sticky]){
             cell.textLabel.textColor = [UIColor whiteColor];
             cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+            cell.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"uitableviewselection-orange-60.png"]] autorelease];
+            cell.backgroundView.alpha = 0.6f;
         }
         cell.textLabel.text = [[posts objectAtIndex:indexPath.row] titleOfPost];
         cell.detailTextLabel.text = [[posts objectAtIndex:indexPath.row] subtitle];
