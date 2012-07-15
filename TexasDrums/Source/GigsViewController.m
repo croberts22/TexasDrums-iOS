@@ -1,16 +1,17 @@
 //
-//  ViewGigsViewController.m
+//  GigsViewController.m
 //  TexasDrums
 //
 //  Created by Corey Roberts on 7/14/12.
 //  Copyright (c) 2012 Corey Roberts. All rights reserved.
 //
 
-#import "ViewGigsViewController.h"
+#import "GigsViewController.h"
 #import "TexasDrumsRequest.h"
 #import "SVProgressHUD.h"
 #import "GANTracker.h"
 #import "TexasDrumsGroupedTableViewCell.h"
+#import "CJSONDeserializer.h"
 
 #import "UIFont+TexasDrums.h"
 #import "UIColor+TexasDrums.h"
@@ -20,19 +21,19 @@
 #import "Gig.h"
 #import "GigUser.h"
 
-@interface ViewGigsViewController ()
+@interface GigsViewController ()
 
 @end
 
-@implementation ViewGigsViewController
+@implementation GigsViewController
 
-@synthesize gigsTable;
+@synthesize gigsTable, gigs;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        gigs = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -40,7 +41,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    // Set properties.
+    self.gigsTable.backgroundColor = [UIColor clearColor];
+    self.gigsTable.separatorColor = [UIColor clearColor];
+    self.gigsTable.alpha = 0.0f;
+    
+    // Begin fetching news from the server.
+    [self connect];
 }
 
 - (void)viewDidUnload
@@ -83,8 +91,12 @@
     [SVProgressHUD showErrorWithStatus:@"Could not get gigs."];
 }
 
-- (void)logoutButtonPressed {
-    [self connect];
+- (void)displayTable {
+    float duration = 0.5f;
+    [self.gigsTable reloadData];
+    [UIView animateWithDuration:0.5f animations:^{
+        self.gigsTable.alpha = 1.0f;
+    }];
 }
 
 #pragma mark - Data Methods
@@ -114,6 +126,8 @@
         
         [gigs addObject:gig];
     }
+    
+    [self displayTable];
 }
 
 #pragma mark - Table view data source
@@ -139,12 +153,7 @@
     UIView *containerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, HEADER_HEIGHT)] autorelease];
     UILabel *headerTitle = [[[UILabel alloc] initWithFrame:CGRectMake(10, 20, 300, 30)] autorelease];
     
-    if(section == 0){
-        headerTitle.text = @"Member Options";
-    }
-    else if(section == 1){
-        headerTitle.text = @"Administrative Options";
-    }
+    headerTitle.text = @"Header";
     
     headerTitle.textAlignment = UITextAlignmentLeft;
     headerTitle.textColor = [UIColor TexasDrumsOrangeColor];
@@ -184,7 +193,7 @@
         background = [UIImage imageNamed:@"top_table_cell.png"];
         selected_background = [UIImage imageNamed:@"top_table_cell.png"];
     }
-    else if(indexPath.row == [options count]-1){
+    else if(indexPath.row == [gigs count]-1){
         background = [UIImage imageNamed:@"bottom_table_cell.png"];
         selected_background = [UIImage imageNamed:@"bottom_table_cell.png"];
     }
@@ -197,7 +206,9 @@
     ((UIImageView *)cell.backgroundView).image = background;
     ((UIImageView *)cell.selectedBackgroundView).image = selected_background;
     
-    cell.textLabel.text = [options objectAtIndex:indexPath.row];
+    Gig *gig = [gigs objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = gig.gig_name;
     
     return cell;
 }
@@ -212,15 +223,33 @@
 #pragma mark - TexasDrumsRequestDelegate Methods
 
 - (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
-    NSString *responseString = [NSString stringWithUTF8String:[data bytes]];
-    
-    if([responseString isEqualToString:_200OK]) {
-        TDLog(@"Logged out successfully.");
 
+    NSError *error = nil;
+    NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
+    
+    if([results count] > 0){
+        // Check if the response is just a dictionary value of one.
+        // This implies that the key value pair follows the format:
+        // status -> 'message'
+        // We use respondsToSelector since the API returns a dictionary
+        // of length one for any status messages, but an array of 
+        // dictionary responses for valid data. 
+        // CJSONDeserializer interprets actual data as NSArrays.
+        if([results respondsToSelector:@selector(objectForKey:)] ){
+            if([[results objectForKey:@"status"] isEqualToString:_GIGS_API_NO_GIGS_AVAILABLE]) {
+                TDLog(@"No gigs found. Request returned: %@", [results objectForKey:@"status"]);
+                [self dismissWithSuccess];
+                return;
+            }
+        }
+        
+        TDLog(@"Gigs found. Parsing..");
+        // Deserialize JSON results and parse them into News objects.
+        [self parseGigData:results];
         [self dismissWithSuccess];
     }
     else {
-        TDLog(@"Could not log out.");
+        TDLog(@"Could not retrieve gigs.");
         [self dismissWithError];
     }
 }

@@ -11,6 +11,7 @@
 #import "CJSONDeserializer.h"
 #import "GANTracker.h"
 #import "Crittercism.h"
+#import "TexasDrumsGetMemberLogin.h"
 
 // Dispatch period in seconds
 static const NSInteger kGANDispatchPeriodSec = 10;
@@ -29,9 +30,8 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 
     [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSArray *keys = [[[NSArray alloc] initWithObjects:@"login_username", @"login_password", @"login_valid", 
-                                                      @"SL", @"instructor", @"admin", @"member", nil] autorelease];
-    NSArray *objects = [[[NSArray alloc] initWithObjects:@"", @"", @"NO", @"NO", @"NO", @"NO", @"NO", nil] autorelease];
+    NSArray *keys = [[[NSArray alloc] initWithObjects:@"login_valid", @"SL", @"instructor", @"admin", @"member", nil] autorelease];
+    NSArray *objects = [[[NSArray alloc] initWithObjects:@"NO", @"NO", @"NO", @"NO", @"NO", nil] autorelease];
     NSDictionary *appDefaults = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
     [defaults registerDefaults:appDefaults];
     self.window.rootViewController = self.tabBarController;
@@ -49,7 +49,7 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 	splashView.alpha = 0.0;
 	[UIView commitAnimations];
     
-    [self startConnection];
+    [self connect];
     
     [Crittercism initWithAppID:@"4fca4280067e7c223100000d" andKey:@"qmqprnyvfwt1txkj96zhlofnksr0" andSecret:@"pat1ikup9agryyrlhh7mt2cv5k8gsnjx" andMainViewController:self.window.rootViewController];
     
@@ -104,35 +104,32 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 }
 
 
-- (void)startConnection {
+- (void)connect {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     if(![defaults boolForKey:@"login_valid"]){
-        TDLog(@"User has not logged in. Not fetching profile.");
+        TDLog(@"User is not logged in. Not retrieving profile.");
         return;
     }
     
-    NSString *username = [defaults objectForKey:@"login_username"];
-    NSString *password = [defaults objectForKey:@"login_password"];
+    NSString *username = [defaults objectForKey:@"username"];
+    NSString *password = [defaults objectForKey:@"password"];
     
-    NSString *API_Call = [NSString stringWithFormat:@"%@apikey=%@&username=%@&password=%@", TEXAS_DRUMS_API_PROFILE, TEXAS_DRUMS_API_KEY, username, password];
-    TDLog(@"%@", API_Call);
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:API_Call] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
-    
-    NSURLConnection *urlconnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
-    if(urlconnection) {
-        received_data = [[NSMutableData data] retain];
-    }
+    TexasDrumsGetMemberLogin *get = [[TexasDrumsGetMemberLogin alloc] initWithUsername:username andPassword:password];
+    get.delegate = self;
+    [get startRequest];
+}
+
+- (void)forceLogout {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@"" forKey:@"username"];
+    [defaults setObject:@"" forKey:@"password"];
+    [defaults setBool:NO forKey:@"login_valid"];
 }
 
 - (void)createProfile:(NSDictionary *)results {
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    if([results isEqual:@"404"] || [results count] == 0){
-        TDLog(@"Could not fetch current profile. Using the one stored in NSUserDefaults.");
-        return;
-    }
     
     if(_Profile == nil){
         //TDLog(@"results: %@", results);
@@ -158,6 +155,7 @@ static const NSInteger kGANDispatchPeriodSec = 10;
         
         // This shouldn't be saved, and will not be able to be saved in the new
         // implementation of the database.
+#warning - backend issue; needs to retrieve the hash.
         _Profile.password = [results objectForKey:@"password"];
         [defaults setObject:_Profile.password forKey:@"password"];
         
@@ -170,7 +168,7 @@ static const NSInteger kGANDispatchPeriodSec = 10;
         _Profile.sl = [[results objectForKey:@"sl"] boolValue];
         _Profile.instructor = [[results objectForKey:@"instructor"] boolValue];
         _Profile.admin = [[results objectForKey:@"admin"] boolValue];
-
+        
         _Profile.status = [results objectForKey:@"status"];
         [defaults setObject:_Profile.status forKey:@"status"];
         
@@ -200,68 +198,47 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     else [defaults setBool:NO forKey:@"admin"];
     
     [defaults setBool:YES forKey:@"member"];
+    [defaults setBool:YES forKey:@"login_valid"];
     
-    TDLog(@"Profile fetched and saved.");
+    TDLog(@"Profile for user '%@' has been fetched and saved.", _Profile.username);
 }
 
-#pragma mark - NSURLConnection delegate methods
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    // This method is called when the server has determined that it
-    // has enough information to create the NSURLResponse.
+- (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
+    TDLog(@"Login request succeeded.");
     
-    // It can be called multiple times, for example in the case of a
-    // redirect, so each time we reset the data.
-    [received_data setLength:0];
-    
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    // Append the new data to received_data.
-    [received_data appendData:data];
-}
-
-
-- (void)connection:(NSURLConnection *)connection
-  didFailWithError:(NSError *)error
-{
-    // release the connection, and the data object
-    [connection release];
-    [received_data release];
-    
-    // inform the user
-    TDLog(@"Connection failed! Error - %@ %@",
-          [error localizedDescription],
-          [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" 
-                                                    message:[error localizedDescription] 
-                                                   delegate:self 
-                                          cancelButtonTitle:@":( Okay" 
-                                          otherButtonTitles:nil, nil];
-    [alert show];
-    [alert release];
-    
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
     NSError *error = nil;
-    NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:received_data error:&error];
+    NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
     
-    [self createProfile:results];
-    
-    TDLog(@"Succeeded! Received %d bytes of data.", [received_data length]);
-    
-    // release the connection, and the data object
-    [connection release];
-    [received_data release];
-    
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    if([results count] > 0) {
+        // Check if the response is just a dictionary value of one.
+        // This implies that the key value pair follows the format:
+        // status -> 'message'
+        // We use respondsToSelector since the API returns a dictionary
+        // of length one for any status messages, but an array of 
+        // dictionary responses for valid data. 
+        // CJSONDeserializer interprets actual data as NSArrays.
+        if([results respondsToSelector:@selector(objectForKey:)] ){
+            if([[results objectForKey:@"status"] isEqualToString:_404UNAUTHORIZED]) {
+                TDLog(@"Unable to retrieve profile. Request returned: %@", [results objectForKey:@"status"]);
+                [self forceLogout];
+                return;
+            }
+        }
+        
+        TDLog(@"Logged in successfully. Establishing profile...");
+        // Deserialize JSON results and parse them into News objects.
+        [self createProfile:results];
+    }
+    else {
+        TDLog(@"Failed to log in. Forcing logout.");
+        [self forceLogout];
+    }
 }
+
+- (void)request:(TexasDrumsRequest *)request failedWithError:(NSError *)error {
+    TDLog(@"Login request error: %@", error);
+    [self forceLogout];
+}
+
 
 @end

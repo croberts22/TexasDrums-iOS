@@ -12,6 +12,16 @@
 
 @synthesize gig_id, gig_name, users;
 
-#warning add init to initialize users mutable array.
+- (id)init {
+    if (self = [super init]) {
+        users = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
+
+- (void)dealloc {
+    [users release];
+    [super dealloc];
+}
 
 @end

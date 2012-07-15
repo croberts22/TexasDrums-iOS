@@ -265,8 +265,8 @@
 		63BE6CDE157D7AF400E4097B /* CrittercismGridViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63BE6C94157D7AF300E4097B /* CrittercismGridViewController.xib */; };
 		63BE6CDF157D7AF400E4097B /* CrittercismRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63BE6C95157D7AF300E4097B /* CrittercismRootViewController.xib */; };
 		63BE6CE0157D7AF400E4097B /* CrittercismViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63BE6C96157D7AF300E4097B /* CrittercismViewController.xib */; };
-		63FC645D15B2729900919537 /* ViewGigsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC645B15B2729900919537 /* ViewGigsViewController.m */; };
-		63FC645E15B2729900919537 /* ViewGigsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63FC645C15B2729900919537 /* ViewGigsViewController.xib */; };
+		63FC645D15B2729900919537 /* GigsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC645B15B2729900919537 /* GigsViewController.m */; };
+		63FC645E15B2729900919537 /* GigsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63FC645C15B2729900919537 /* GigsViewController.xib */; };
 		63FC646115B2749600919537 /* TexasDrumsGetGigs.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC646015B2749600919537 /* TexasDrumsGetGigs.m */; };
 		63FC646415B2788100919537 /* Gig.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC646315B2788100919537 /* Gig.m */; };
 		63FC646715B27A4100919537 /* GigUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC646615B27A4100919537 /* GigUser.m */; };
@@ -681,9 +681,9 @@
 		63BE6C94157D7AF300E4097B /* CrittercismGridViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CrittercismGridViewController.xib; sourceTree = "<group>"; };
 		63BE6C95157D7AF300E4097B /* CrittercismRootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CrittercismRootViewController.xib; sourceTree = "<group>"; };
 		63BE6C96157D7AF300E4097B /* CrittercismViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CrittercismViewController.xib; sourceTree = "<group>"; };
-		63FC645A15B2729900919537 /* ViewGigsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewGigsViewController.h; sourceTree = "<group>"; };
-		63FC645B15B2729900919537 /* ViewGigsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewGigsViewController.m; sourceTree = "<group>"; };
-		63FC645C15B2729900919537 /* ViewGigsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewGigsViewController.xib; sourceTree = "<group>"; };
+		63FC645A15B2729900919537 /* GigsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GigsViewController.h; sourceTree = "<group>"; };
+		63FC645B15B2729900919537 /* GigsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GigsViewController.m; sourceTree = "<group>"; };
+		63FC645C15B2729900919537 /* GigsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GigsViewController.xib; sourceTree = "<group>"; };
 		63FC645F15B2749600919537 /* TexasDrumsGetGigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexasDrumsGetGigs.h; sourceTree = "<group>"; };
 		63FC646015B2749600919537 /* TexasDrumsGetGigs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsGetGigs.m; sourceTree = "<group>"; };
 		63FC646215B2788100919537 /* Gig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gig.h; sourceTree = "<group>"; };
@@ -1545,9 +1545,9 @@
 				AEF25866152F55060019D5BD /* MusicViewController.h */,
 				AEF25867152F55070019D5BD /* MusicViewController.m */,
 				AEF25868152F55070019D5BD /* MusicViewController.xib */,
-				63FC645A15B2729900919537 /* ViewGigsViewController.h */,
-				63FC645B15B2729900919537 /* ViewGigsViewController.m */,
-				63FC645C15B2729900919537 /* ViewGigsViewController.xib */,
+				63FC645A15B2729900919537 /* GigsViewController.h */,
+				63FC645B15B2729900919537 /* GigsViewController.m */,
+				63FC645C15B2729900919537 /* GigsViewController.xib */,
 			);
 			name = "Member Options";
 			sourceTree = "<group>";
@@ -2105,7 +2105,7 @@
 				6388F2EB158E802600DF20F4 /* PushEmBack.mp3 in Resources */,
 				6388F2EC158E802600DF20F4 /* TenorIntro.mp3 in Resources */,
 				6388F2ED158E802600DF20F4 /* TexasTexasYeeHaw.mp3 in Resources */,
-				63FC645E15B2729900919537 /* ViewGigsViewController.xib in Resources */,
+				63FC645E15B2729900919537 /* GigsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2242,7 +2242,7 @@
 				6388F2C7158D991000DF20F4 /* TexasDrumsGetVideos.m in Sources */,
 				637FD11F15B1013F0069AA53 /* TexasDrumsGetMemberLogin.m in Sources */,
 				637FD12215B1034D0069AA53 /* TexasDrumsGetMemberLogout.m in Sources */,
-				63FC645D15B2729900919537 /* ViewGigsViewController.m in Sources */,
+				63FC645D15B2729900919537 /* GigsViewController.m in Sources */,
 				63FC646115B2749600919537 /* TexasDrumsGetGigs.m in Sources */,
 				63FC646415B2788100919537 /* Gig.m in Sources */,
 				63FC646715B27A4100919537 /* GigUser.m in Sources */,

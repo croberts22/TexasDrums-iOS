@@ -229,7 +229,6 @@
     post.titleOfPost = [item objectForKey:@"title"];
     post.memberPost = [[item objectForKey:@"membernews"] boolValue];
     post.sticky = [[item objectForKey:@"sticky"] boolValue];
-    TDLog(@"sticky: %@", [item objectForKey:@"sticky"]);
     post.subtitle = [NSString extractHTML:post.post];
     post.subtitle = [NSString stripExcessEscapes:post.subtitle];
     
@@ -343,7 +342,7 @@
 #pragma mark - TexasDrumsRequest Delegate Methods
 
 - (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
-    TDLog(@"Obtained news successfully.");
+    TDLog(@"News request succeeded.");
     
     NSError *error = nil;
     NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
@@ -358,10 +357,12 @@
         // CJSONDeserializer interprets actual data as NSArrays.
         if([results respondsToSelector:@selector(objectForKey:)] ){
             if([[results objectForKey:@"status"] isEqualToString:_NEWS_API_NO_NEW_ARTICLES]) {
+                TDLog(@"No news found. Request returned: %@", [results objectForKey:@"status"]);
                 [self dismissWithSuccess];
                 return;
             }
         }
+        
         TDLog(@"New news found. Parsing..");
         // Deserialize JSON results and parse them into News objects.
         [self parseNewsData:results];
@@ -371,7 +372,7 @@
 }
 
 - (void)request:(TexasDrumsRequest *)request failedWithError:(NSError *)error {
-    TDLog(@"request error: %@", error);
+    TDLog(@"News request error: %@", error);
     
     // Show error message.
     [self dismissWithError];

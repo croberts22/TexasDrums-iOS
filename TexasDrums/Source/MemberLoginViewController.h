@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "TexasDrumsAPIConnection.h"
 
+@class TexasDrumsAppDelegate;
+
 @interface MemberLoginViewController : UIViewController<TexasDrumsAPIConnection, UITextFieldDelegate> {
     IBOutlet UITextField *username;
     IBOutlet UITextField *password;
@@ -16,6 +18,8 @@
     IBOutlet UIBarButtonItem *login;
     IBOutlet UIButton *background;
     IBOutlet UINavigationItem *navbar;
+    
+    TexasDrumsAppDelegate *delegate;
 }
 
 @property (nonatomic, retain) IBOutlet UITextField *username;
@@ -24,6 +28,8 @@
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *login;;
 @property (nonatomic, retain) IBOutlet UIButton *background;
 @property (nonatomic, retain) UINavigationItem *navbar;
+
+@property (nonatomic, retain) TexasDrumsAppDelegate *delegate;
 
 - (void)removeLoginScreen;
 - (void)disableUI;

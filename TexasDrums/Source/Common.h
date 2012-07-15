@@ -16,6 +16,7 @@
 #define _200OK           @"200 OK"
 #define _404UNAUTHORIZED @"404 UNAUTHORIZED"
 #define _NEWS_API_NO_NEW_ARTICLES @"No new articles."
+#define _GIGS_API_NO_GIGS_AVAILABLE @"No gigs available."
 
 @interface Common : NSObject
 

@@ -11,6 +11,7 @@
 #import "Profile.h"
 #import "TexasDrumsGetMemberLogin.h"
 #import "TexasDrumsGetProfile.h"
+#import "TexasDrumsAppDelegate.h"
 
 // Utilities
 #import "CJSONDeserializer.h"
@@ -23,7 +24,7 @@
 
 @implementation MemberLoginViewController
 
-@synthesize username, password, cancel, login, background, navbar;
+@synthesize username, password, cancel, login, background, navbar, delegate;
 
 #pragma mark - Memory Management
 
@@ -224,9 +225,6 @@
     
     [defaults setBool:YES forKey:@"member"];
     
-    [defaults setObject:username.text forKey:@"login_username"];
-    [defaults setObject:password.text forKey:@"login_password"];
-    
     [defaults setBool:YES forKey:@"member"];
     [defaults setBool:YES forKey:@"login_valid"];
     
@@ -253,18 +251,30 @@
 
 #warning - need a better backend solution.
 - (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
+    TDLog(@"Login request succeeded.");
+    
     NSError *error = nil;
-    
-    NSString *responseString = [NSString stringWithUTF8String:[data bytes]];
-    if([responseString isEqualToString:_404UNAUTHORIZED] || responseString == nil){
-        [self dismissWithError];
-        return;
-    }
-    
     NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
+    
     if([results count] > 0) {
-        TDLog(@"Successfully logged in and obtained profile data.");
-        [self parseProfile:results];
+        // Check if the response is just a dictionary value of one.
+        // This implies that the key value pair follows the format:
+        // status -> 'message'
+        // We use respondsToSelector since the API returns a dictionary
+        // of length one for any status messages, but an array of 
+        // dictionary responses for valid data. 
+        // CJSONDeserializer interprets actual data as NSArrays.
+        if([results respondsToSelector:@selector(objectForKey:)] ){
+            if([[results objectForKey:@"status"] isEqualToString:_404UNAUTHORIZED]) {
+                TDLog(@"Unable to retrieve profile. Request returned: %@", [results objectForKey:@"status"]);
+                [self dismissWithError];
+                return;
+            }
+        }
+        
+        TDLog(@"Logged in successfully. Establishing profile...");
+        // Deserialize JSON results and parse them into News objects.
+        [delegate createProfile:results];
         [self dismissWithSuccess];
         [self removeLoginScreen];
     }
@@ -275,7 +285,7 @@
 }
 
 - (void)request:(TexasDrumsRequest *)request failedWithError:(NSError *)error {
-    TDLog(@"Request error: %@", error);
+    TDLog(@"Login request error: %@", error);
     
     [self dismissWithError];
 }

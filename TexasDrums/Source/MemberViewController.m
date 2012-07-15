@@ -12,6 +12,7 @@
 #import "AddressBookViewController.h"
 #import "AddMemberViewController.h"
 #import "PaymentViewController.h"
+#import "GigsViewController.h"
 #import "DownloadMusicViewController.h"
 #import "TexasDrumsGroupedTableViewCell.h"
 #import "TexasDrumsGetMemberLogout.h"
@@ -76,7 +77,7 @@
 #warning - move this in init.
         //accepted username. show member stuff
         if(membersOptions == nil){
-            membersOptions = [[NSArray alloc] initWithObjects:@"View Music", @"View Address Book", @"View Profile", nil];
+            membersOptions = [[NSArray alloc] initWithObjects:@"View Music", @"View Address Book", @"View Profile", @"View Gigs", nil];
             adminOptions = [[NSArray alloc] initWithObjects:@"Modify Dues", @"Add A Member", nil];
         }
         
@@ -198,8 +199,6 @@
 - (void)logout {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    [defaults setObject:@"" forKey:@"login_username"];
-    [defaults setObject:@"" forKey:@"login_password"];
     [defaults setBool:NO forKey:@"login_valid"];
     [defaults setBool:NO forKey:@"member"];
     
@@ -348,6 +347,10 @@
         if(indexPath.row == 2){
             ProfileViewController *PVC = [[[ProfileViewController alloc] initWithNibName:@"ProfileView" bundle:[NSBundle mainBundle]] autorelease];
             [self.navigationController pushViewController:PVC animated:YES];
+        }
+        if(indexPath.row == 3){
+            GigsViewController *GVC = [[[GigsViewController alloc] initWithNibName:@"GigsViewController" bundle:[NSBundle mainBundle]] autorelease];
+            [self.navigationController pushViewController:GVC animated:YES];
         }
     }
     else{

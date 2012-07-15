@@ -1,5 +1,5 @@
 //
-//  ViewGigsViewController.h
+//  GigsViewController.h
 //  TexasDrums
 //
 //  Created by Corey Roberts on 7/14/12.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TexasDrumsAPIConnection.h"
 
-@interface ViewGigsViewController : UIViewController {
+@interface GigsViewController : UIViewController {
     IBOutlet UITableView *gigsTable;
     NSMutableArray *gigs;
 }
