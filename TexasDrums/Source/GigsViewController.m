@@ -44,11 +44,19 @@
     
     [self setTitle:@"Gigs"];
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
     // Set properties.
     self.gigsTable.backgroundColor = [UIColor clearColor];
     self.gigsTable.alpha = 0.0f;
     
-    // Begin fetching news from the server.
+    // If user is a section leader/admin/instructor, create an add button.
+    if([defaults boolForKey:@"SL"] || [defaults boolForKey:@"admin"] || [defaults boolForKey:@"instructor"]) {
+        UIBarButtonItem *plusButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewGig)] autorelease];
+        self.navigationItem.rightBarButtonItem = plusButton;
+    }
+    
+    // Begin fetching gigs from the server.
     [self connect];
 }
 
@@ -139,6 +147,10 @@
     }
     
     [self displayTable];
+}
+
+- (void)addNewGig {
+    
 }
 
 #pragma mark - Table view data source
