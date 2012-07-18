@@ -21,11 +21,6 @@
 #import "Common.h"
 #import "CJSONDeserializer.h"
 
-#define CELL_CONTENT_WIDTH (320.0f)
-#define CELL_CONTENT_MARGIN (10.0f)
-#define _HEADER_HEIGHT_ (40)
-#define FONT_SIZE (16.0f)
-
 @implementation VideoViewController
 
 @synthesize videoArray, videoTable, yearArray;
@@ -243,7 +238,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section 
 {
     // Create a custom header.
-    UIView *containerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, _HEADER_HEIGHT_)] autorelease];
+    UIView *containerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, STANDARD_HEADER_HEIGHT)] autorelease];
     UILabel *headerTitle = [[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, 20)] autorelease];
     
     // Set header title properties.

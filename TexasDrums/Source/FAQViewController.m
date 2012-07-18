@@ -15,12 +15,6 @@
 
 @implementation FAQViewController
 
-#define QUESTION_FONT_SIZE (14.0f)
-#define ANSWER_FONT_SIZE (12.0f)
-#define CELL_CONTENT_WIDTH (320.0f)
-#define CELL_CONTENT_MARGIN (10.0f)
-#define _HEADER_HEIGHT_ (40)
-
 @synthesize FAQTable, faq, categories;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -239,11 +233,11 @@
     //this asserts that the cell will show all of the information.
     if(indexPath.row % 2 == 0){
         text = [[faq objectAtIndex:((indexPath.row / 2) + incrementor)] question];
-        size = [text sizeWithFont:[UIFont fontWithName:@"Georgia-Bold" size:QUESTION_FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+        size = [text sizeWithFont:[UIFont fontWithName:@"Georgia-Bold" size:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
     }
     else{
         text = [[faq objectAtIndex:((indexPath.row / 2) + incrementor)] answer];
-        size = [text sizeWithFont:[UIFont fontWithName:@"Georgia" size:ANSWER_FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+        size = [text sizeWithFont:[UIFont fontWithName:@"Georgia" size:SMALL_FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
     }
     
     CGFloat height = size.height;
@@ -254,7 +248,7 @@
 {
     // Create a custom header.
     int counter = 0;
-    UIView *containerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, _HEADER_HEIGHT_)] autorelease];
+    UIView *containerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, STANDARD_HEADER_HEIGHT)] autorelease];
     
     UILabel *headerTitle = [[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, 25)] autorelease];
     

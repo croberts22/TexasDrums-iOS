@@ -10,9 +10,11 @@
 #import "Profile.h"
 
 #define HEADER_HEIGHT 50
+#define STANDARD_HEADER_HEIGHT 40
 
 #define SMALL_FONT_SIZE 12.0f
 #define FONT_SIZE 14.0f
+#define SMALL_FONT_SIZE 12.0f
 #define CELL_CONTENT_WIDTH 320.0f
 #define CELL_CONTENT_MARGIN 10.0f
 

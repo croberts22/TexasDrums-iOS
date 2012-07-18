@@ -16,11 +16,6 @@
 
 @implementation StaffViewController
 
-#define CELL_CONTENT_WIDTH (320.0f)
-#define CELL_CONTENT_MARGIN (10.0f)
-#define _HEADER_HEIGHT_ (40)
-#define FONT_SIZE (16.0f)
-#define BIO_FONT_SIZE (12.0f)
 //this will need to be changed. add 11-12 extension in the API for current_year.
 #define DOMAIN_PATH (@"http://www.texasdrums.com/")
 

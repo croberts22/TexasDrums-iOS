@@ -15,11 +15,6 @@
 
 #import "UIFont+TexasDrums.h"
 
-#define CELL_CONTENT_WIDTH (320.0f)
-#define CELL_CONTENT_MARGIN (10.0f)
-#define _HEADER_HEIGHT_ (40)
-#define FONT_SIZE (16.0f)
-
 @implementation AudioViewController
 
 @synthesize audioArray, audioTable, audioPlayer, currentCell, pauseButton, playButton, yearArray;

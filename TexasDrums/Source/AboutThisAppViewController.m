@@ -63,9 +63,6 @@
     NSString *website = @"http://www.texasdrums.com";
     
     self.aboutInfo.text = [NSString stringWithFormat:@"Texas Drums for iPhone made by %@. \nSplash screen designed by %@. \n\n\nFor more info, check out %@", programmers, splash_design, website];
-    
-    //aboutInfo.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-    //aboutInfo.layer.shadowOffset = CGSizeMake(0, -2.0);
 }
 
 - (void)viewDidUnload
