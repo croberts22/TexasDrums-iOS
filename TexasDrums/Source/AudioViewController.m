@@ -14,6 +14,7 @@
 #import "TexasDrumsTableViewCell.h"
 
 #import "UIFont+TexasDrums.h"
+#import "UIColor+TexasDrums.h"
 
 @implementation AudioViewController
 
@@ -207,6 +208,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self.audioTable deselectRowAtIndexPath:indexPath animated:YES];
+    
     // If user taps the same cell, just stop the player and restart.
     if(self.currentCell == [tableView cellForRowAtIndexPath:indexPath]){
         if([audioPlayer isPlaying]){
@@ -217,6 +220,9 @@
         [audioPlayer play];
         return;
     }
+#warning - need to fix; reused cells will display icons on different cells.
+    self.currentCell.accessoryView = nil;
+    self.currentCell.textLabel.textColor = [UIColor TexasDrumsGrayColor];
     
     self.navigationItem.rightBarButtonItem = self.pauseButton;
     self.navigationItem.rightBarButtonItem.enabled = YES;
@@ -238,11 +244,19 @@
     audioPlayer.numberOfLoops = 0;
     [audioPlayer prepareToPlay];
     [audioPlayer play];
+    
+    // Add an accessory at the end to let the user know this tune is playing.
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    self.currentCell = cell;
+    cell.accessoryView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"note.png"]] autorelease];
+    cell.textLabel.textColor = [UIColor TexasDrumsOrangeColor];
+
 }
 
 #pragma mark - AVAudioPlayer Delegate Methods
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
+    
     self.navigationItem.rightBarButtonItem = self.playButton;
     [audioPlayer setCurrentTime:0.0f];
 

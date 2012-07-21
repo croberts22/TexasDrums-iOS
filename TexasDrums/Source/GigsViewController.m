@@ -7,6 +7,7 @@
 //
 
 #import "GigsViewController.h"
+#import "AddGigViewController.h"
 #import "TexasDrumsRequest.h"
 #import "SVProgressHUD.h"
 #import "GANTracker.h"
@@ -150,7 +151,8 @@
 }
 
 - (void)addNewGig {
-    
+    AddGigViewController *AGVC = [[[AddGigViewController alloc] initWithNibName:@"AddGigViewController" bundle:[NSBundle mainBundle]] autorelease];
+    [self.navigationController presentModalViewController:AGVC animated:YES];
 }
 
 #pragma mark - Table view data source

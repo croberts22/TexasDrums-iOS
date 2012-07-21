@@ -54,6 +54,18 @@
 		04E9AB7913B854DA00F207EA /* SingleMemberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E9AB7713B854DA00F207EA /* SingleMemberView.m */; };
 		04FD5E3913FACF8400482FCD /* AddMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5E3713FACF8400482FCD /* AddMemberViewController.m */; };
 		04FD5E3A13FACF8400482FCD /* AddMemberView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FD5E3813FACF8400482FCD /* AddMemberView.xib */; };
+		6303FF4015B7C294009FAEFE /* AddGigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6303FF3E15B7C294009FAEFE /* AddGigViewController.m */; };
+		6303FF4115B7C294009FAEFE /* AddGigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6303FF3E15B7C294009FAEFE /* AddGigViewController.m */; };
+		6303FF4215B7C294009FAEFE /* AddGigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6303FF3E15B7C294009FAEFE /* AddGigViewController.m */; };
+		6303FF4315B7C294009FAEFE /* AddGigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6303FF3F15B7C294009FAEFE /* AddGigViewController.xib */; };
+		6303FF4415B7C294009FAEFE /* AddGigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6303FF3F15B7C294009FAEFE /* AddGigViewController.xib */; };
+		6303FF4515B7C294009FAEFE /* AddGigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6303FF3F15B7C294009FAEFE /* AddGigViewController.xib */; };
+		6313B38315B67BBD00E23C25 /* note.png in Resources */ = {isa = PBXBuildFile; fileRef = 6313B38115B67BBD00E23C25 /* note.png */; };
+		6313B38415B67BBD00E23C25 /* note.png in Resources */ = {isa = PBXBuildFile; fileRef = 6313B38115B67BBD00E23C25 /* note.png */; };
+		6313B38515B67BBD00E23C25 /* note.png in Resources */ = {isa = PBXBuildFile; fileRef = 6313B38115B67BBD00E23C25 /* note.png */; };
+		6313B38615B67BBD00E23C25 /* note@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6313B38215B67BBD00E23C25 /* note@2x.png */; };
+		6313B38715B67BBD00E23C25 /* note@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6313B38215B67BBD00E23C25 /* note@2x.png */; };
+		6313B38815B67BBD00E23C25 /* note@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6313B38215B67BBD00E23C25 /* note@2x.png */; };
 		632D90881586F3B5008B106A /* TexasDrumsGetProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 632D90871586F3B4008B106A /* TexasDrumsGetProfile.m */; };
 		632D909B1586F856008B106A /* TexasDrumsGetRosters.m in Sources */ = {isa = PBXBuildFile; fileRef = 632D909A1586F856008B106A /* TexasDrumsGetRosters.m */; };
 		635296C2158985D800E62787 /* UIFont+TexasDrums.m in Sources */ = {isa = PBXBuildFile; fileRef = 635296C1158985D800E62787 /* UIFont+TexasDrums.m */; };
@@ -502,6 +514,11 @@
 		04FD5E3613FACF8400482FCD /* AddMemberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMemberViewController.h; sourceTree = "<group>"; };
 		04FD5E3713FACF8400482FCD /* AddMemberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AddMemberViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		04FD5E3813FACF8400482FCD /* AddMemberView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddMemberView.xib; sourceTree = "<group>"; };
+		6303FF3D15B7C294009FAEFE /* AddGigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddGigViewController.h; sourceTree = "<group>"; };
+		6303FF3E15B7C294009FAEFE /* AddGigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddGigViewController.m; sourceTree = "<group>"; };
+		6303FF3F15B7C294009FAEFE /* AddGigViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddGigViewController.xib; sourceTree = "<group>"; };
+		6313B38115B67BBD00E23C25 /* note.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = note.png; path = Media/Media/note.png; sourceTree = "<group>"; };
+		6313B38215B67BBD00E23C25 /* note@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "note@2x.png"; path = "Media/Media/note@2x.png"; sourceTree = "<group>"; };
 		632D90861586F3B4008B106A /* TexasDrumsGetProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexasDrumsGetProfile.h; sourceTree = "<group>"; };
 		632D90871586F3B4008B106A /* TexasDrumsGetProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsGetProfile.m; sourceTree = "<group>"; };
 		632D90991586F855008B106A /* TexasDrumsGetRosters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexasDrumsGetRosters.h; sourceTree = "<group>"; };
@@ -1238,6 +1255,8 @@
 		6353B99315B66CB800D88A14 /* Media */ = {
 			isa = PBXGroup;
 			children = (
+				6313B38115B67BBD00E23C25 /* note.png */,
+				6313B38215B67BBD00E23C25 /* note@2x.png */,
 			);
 			name = Media;
 			sourceTree = "<group>";
@@ -1570,6 +1589,9 @@
 				63FC645A15B2729900919537 /* GigsViewController.h */,
 				63FC645B15B2729900919537 /* GigsViewController.m */,
 				63FC645C15B2729900919537 /* GigsViewController.xib */,
+				6303FF3D15B7C294009FAEFE /* AddGigViewController.h */,
+				6303FF3E15B7C294009FAEFE /* AddGigViewController.m */,
+				6303FF3F15B7C294009FAEFE /* AddGigViewController.xib */,
 			);
 			name = "Member Options";
 			sourceTree = "<group>";
@@ -2130,6 +2152,9 @@
 				6353B8FD15B51EAD00D88A14 /* star@2x.png in Resources */,
 				6353B99615B6758700D88A14 /* media.png in Resources */,
 				6353B99915B6758700D88A14 /* media@2x.png in Resources */,
+				6313B38315B67BBD00E23C25 /* note.png in Resources */,
+				6313B38615B67BBD00E23C25 /* note@2x.png in Resources */,
+				6303FF4315B7C294009FAEFE /* AddGigViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2143,6 +2168,9 @@
 				6353B8FE15B51EAD00D88A14 /* star@2x.png in Resources */,
 				6353B99715B6758700D88A14 /* media.png in Resources */,
 				6353B99A15B6758700D88A14 /* media@2x.png in Resources */,
+				6313B38415B67BBD00E23C25 /* note.png in Resources */,
+				6313B38715B67BBD00E23C25 /* note@2x.png in Resources */,
+				6303FF4415B7C294009FAEFE /* AddGigViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2156,6 +2184,9 @@
 				6353B8FF15B51EAD00D88A14 /* star@2x.png in Resources */,
 				6353B99815B6758700D88A14 /* media.png in Resources */,
 				6353B99B15B6758700D88A14 /* media@2x.png in Resources */,
+				6313B38515B67BBD00E23C25 /* note.png in Resources */,
+				6313B38815B67BBD00E23C25 /* note@2x.png in Resources */,
+				6303FF4515B7C294009FAEFE /* AddGigViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2278,6 +2309,7 @@
 				63FC646115B2749600919537 /* TexasDrumsGetGigs.m in Sources */,
 				63FC646415B2788100919537 /* Gig.m in Sources */,
 				63FC646715B27A4100919537 /* GigUser.m in Sources */,
+				6303FF4015B7C294009FAEFE /* AddGigViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2286,6 +2318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				045646F913ADBD3000681573 /* TexasDrumsTests.m in Sources */,
+				6303FF4115B7C294009FAEFE /* AddGigViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2376,6 +2409,7 @@
 				AED8325814F3670D00BC8928 /* main.m in Sources */,
 				AED8325F14F3670D00BC8928 /* ViewController.m in Sources */,
 				AED8326A14F3677400BC8928 /* Tests.m in Sources */,
+				6303FF4215B7C294009FAEFE /* AddGigViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2448,8 +2482,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PROVISIONING_PROFILE = "25845EDA-52FC-4C46-89FE-A800EE1D5643";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "25845EDA-52FC-4C46-89FE-A800EE1D5643";
+				PROVISIONING_PROFILE = "07684AAB-6776-4A04-81D6-C5F7A3AB69C3";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "07684AAB-6776-4A04-81D6-C5F7A3AB69C3";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2498,8 +2532,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "25845EDA-52FC-4C46-89FE-A800EE1D5643";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "25845EDA-52FC-4C46-89FE-A800EE1D5643";
+				PROVISIONING_PROFILE = "07684AAB-6776-4A04-81D6-C5F7A3AB69C3";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "07684AAB-6776-4A04-81D6-C5F7A3AB69C3";
 				TEST_HOST = "";
 				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/**";
 				WRAPPER_EXTENSION = app;

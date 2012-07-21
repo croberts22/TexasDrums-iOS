@@ -16,7 +16,7 @@
 - (NSURL *)requestURL {
     NSString *server = [[TexasDrumsRequest TexasDrumsServerURL] absoluteString];
     
-    NSString *request_URL = [NSString stringWithFormat:@"%@/gigs/list.php?apikey=%@&username=%@&password=%@", server, [TexasDrumsRequest TexasDrumsAPIKey], _username, _password]; 
+    NSString *request_URL = [NSString stringWithFormat:@"%@gigs/list.php?apikey=%@&username=%@&password=%@", server, [TexasDrumsRequest TexasDrumsAPIKey], _username, _password]; 
     
     TDLog(@"Request: %@", request_URL);
     
