@@ -7,13 +7,20 @@
 //
 
 #import "EditNameViewController.h"
+#import "TexasDrumsGetEditProfile.h"
 #import "GANTracker.h"
+#import "SVProgressHUD.h"
+#import "UIColor+TexasDrums.h"
+#import "UIFont+TexasDrums.h"
+#import "CJSONDeserializer.h"
 
 @implementation EditNameViewController
 
 #define _403 (@"403 ERROR: No input given")
 
 @synthesize firstname, lastname, submit, status;
+
+#pragma mark - Memory Management
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,6 +41,42 @@
 
 #pragma mark - View lifecycle
 
+- (void)viewWillAppear:(BOOL)animated {
+    // Google Analytics
+    [[GANTracker sharedTracker] trackPageview:@"Edit Name (EditNameView)" withError:nil];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [self setTitle:@"Edit Name"];
+    
+    // Set properties.
+    status.alpha = 0.0f;
+    firstname.delegate = self;
+    lastname.delegate = self;
+    firstname.text = _Profile.firstname;
+    lastname.text = _Profile.lastname;
+    firstname.font = [UIFont TexasDrumsFontOfSize:14];
+    lastname.font = [UIFont TexasDrumsFontOfSize:14];
+    firstname.textColor = [UIColor lightGrayColor];
+    lastname.textColor = [UIColor lightGrayColor];
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - UI Methods
+
 - (void)setTitle:(NSString *)title
 {
     [super setTitle:title];
@@ -41,7 +84,7 @@
     if (!titleView) {
         titleView = [[UILabel alloc] initWithFrame:CGRectZero];
         titleView.backgroundColor = [UIColor clearColor];
-        titleView.font = [UIFont fontWithName:@"Georgia-Bold" size:20];
+        titleView.font = [UIFont TexasDrumsBoldFontOfSize:20];
         titleView.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
         titleView.textColor = [UIColor whiteColor]; 
         
@@ -52,52 +95,16 @@
     [titleView sizeToFit];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [[GANTracker sharedTracker] trackPageview:@"Edit Name (EditNameView)" withError:nil];
+- (void)dismissWithSuccess {
+    [SVProgressHUD dismiss];
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self setTitle:@"Edit Name"];
-    status.alpha = 0.0f;
-    
-    firstname.delegate = self;
-    lastname.delegate = self;
-    
-    firstname.text = _Profile.firstname;
-    lastname.text = _Profile.lastname;
-
-    firstname.font = [UIFont fontWithName:@"Georgia" size:14];
-    lastname.font = [UIFont fontWithName:@"Georgia" size:14];
-    
-    firstname.textColor = [UIColor lightGrayColor];
-    lastname.textColor = [UIColor lightGrayColor];
+- (void)dismissWithError {
+    [SVProgressHUD showErrorWithStatus:@"Unable to save."];
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if(textField == firstname){
-        [lastname becomeFirstResponder];
-    }
-    else{ //lastname is responder; submit
-        [textField resignFirstResponder];
-        [self submitButtonPressed:nil];
-    }
-    
-    return YES;
+- (IBAction)submitButtonPressed:(id)sender {
+    [self connect];
 }
 
 - (void)removeKeyboard {
@@ -126,8 +133,12 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)submitButtonPressed:(id)sender {
+#pragma mark - Data Methods
+
+- (void)connect {
+    
     [self removeKeyboard];
+    
     if([firstname.text isEqualToString:@""] || [lastname.text isEqualToString:@""]){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!"
                                                         message:@"Please input your first and last name and then press submit."
@@ -148,24 +159,78 @@
         [alert release];
         return;
     }
-    //NSError *error = nil;
-    NSString *API_Call = [NSString stringWithFormat:@"%@apikey=%@&username=%@&password=%@&firstname=%@&lastname=%@", TEXAS_DRUMS_API_EDIT_PROFILE, TEXAS_DRUMS_API_KEY, _Profile.username, _Profile.password, firstname.text, lastname.text];
-    TDLog(@"%@", API_Call);
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:API_Call]];
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    NSString *get = [[[NSString alloc] initWithData:response encoding:NSASCIIStringEncoding] autorelease];
+
     
-    if([get isEqualToString:_200OK]){
+    [SVProgressHUD showWithStatus:@"Updating..."];
+    TexasDrumsGetEditProfile *get = [[TexasDrumsGetEditProfile alloc] initWithUsername:_Profile.username 
+                                                                           andPassword:_Profile.password 
+                                                                         withFirstName:firstname.text 
+                                                                           andLastName:lastname.text
+                                                                    andUpdatedPassword:nil 
+                                                                              andPhone:nil 
+                                                                           andBirthday:nil
+                                                                              andEmail:nil];
+    get.delegate = self;
+    [get startRequest];
+}
+
+
+#pragma mark - UITextField Delegate Methods
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if(textField == firstname){
+        [lastname becomeFirstResponder];
+    }
+    else { 
+        [textField resignFirstResponder];
+        [self submitButtonPressed:nil];
+    }
+    
+    return YES;
+}
+
+#pragma mark - TexasDrumsRequestDelegate Methods
+
+- (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
+    
+    NSError *error = nil;
+    NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
+    
+    if([results count] > 0){
+        // Check if the response is just a dictionary value of one.
+        // This implies that the key value pair follows the format:
+        // status -> 'message'
+        // We use respondsToSelector since the API returns a dictionary
+        // of length one for any status messages, but an array of 
+        // dictionary responses for valid data. 
+        // CJSONDeserializer interprets actual data as NSArrays.
+        if([results respondsToSelector:@selector(objectForKey:)] ){
+            if(![[results objectForKey:@"status"] isEqualToString:_200OK]) {
+                TDLog(@"Unable to update profile. Request returned: %@", [results objectForKey:@"status"]);
+                [self dismissWithSuccess];
+                return;
+            }
+        }
+        
+        TDLog(@"Profile updated.");
         _Profile.firstname = firstname.text;
         _Profile.lastname = lastname.text;
         
         [self performSelectorOnMainThread:@selector(displayText:) withObject:@"Your name has been updated." waitUntilDone:YES];
         [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(sendToProfileView) userInfo:nil repeats:NO];
+        [self dismissWithSuccess];
     }
-    else if([get isEqualToString:@""]){
-        [self performSelectorOnMainThread:@selector(displayText:) withObject:@"Could not update name." waitUntilDone:YES];
+    else {
+        TDLog(@"Could not update profile..");
+        [self dismissWithError];
     }
-    //more error management here
+}
+
+- (void)request:(TexasDrumsRequest *)request failedWithError:(NSError *)error {
+    TDLog(@"Request error: %@", error);
+    
+    // Show refresh button and error message.
+    [self dismissWithError];
 }
 
 @end

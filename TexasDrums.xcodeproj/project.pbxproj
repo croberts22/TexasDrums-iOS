@@ -66,6 +66,12 @@
 		6313B38615B67BBD00E23C25 /* note@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6313B38215B67BBD00E23C25 /* note@2x.png */; };
 		6313B38715B67BBD00E23C25 /* note@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6313B38215B67BBD00E23C25 /* note@2x.png */; };
 		6313B38815B67BBD00E23C25 /* note@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6313B38215B67BBD00E23C25 /* note@2x.png */; };
+		63292FB215BCFEF800CB383B /* DateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63292FB015BCFEF800CB383B /* DateViewController.m */; };
+		63292FB315BCFEF800CB383B /* DateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63292FB015BCFEF800CB383B /* DateViewController.m */; };
+		63292FB415BCFEF800CB383B /* DateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63292FB015BCFEF800CB383B /* DateViewController.m */; };
+		63292FB515BCFEF800CB383B /* DateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63292FB115BCFEF800CB383B /* DateViewController.xib */; };
+		63292FB615BCFEF800CB383B /* DateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63292FB115BCFEF800CB383B /* DateViewController.xib */; };
+		63292FB715BCFEF800CB383B /* DateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63292FB115BCFEF800CB383B /* DateViewController.xib */; };
 		632D90881586F3B5008B106A /* TexasDrumsGetProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 632D90871586F3B4008B106A /* TexasDrumsGetProfile.m */; };
 		632D909B1586F856008B106A /* TexasDrumsGetRosters.m in Sources */ = {isa = PBXBuildFile; fileRef = 632D909A1586F856008B106A /* TexasDrumsGetRosters.m */; };
 		635296C2158985D800E62787 /* UIFont+TexasDrums.m in Sources */ = {isa = PBXBuildFile; fileRef = 635296C1158985D800E62787 /* UIFont+TexasDrums.m */; };
@@ -289,6 +295,9 @@
 		63BE6CDE157D7AF400E4097B /* CrittercismGridViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63BE6C94157D7AF300E4097B /* CrittercismGridViewController.xib */; };
 		63BE6CDF157D7AF400E4097B /* CrittercismRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63BE6C95157D7AF300E4097B /* CrittercismRootViewController.xib */; };
 		63BE6CE0157D7AF400E4097B /* CrittercismViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63BE6C96157D7AF300E4097B /* CrittercismViewController.xib */; };
+		63E2EDA415C0FE81006C826E /* TexasDrumsGetEditProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E2EDA315C0FE81006C826E /* TexasDrumsGetEditProfile.m */; };
+		63E2EDA515C0FE81006C826E /* TexasDrumsGetEditProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E2EDA315C0FE81006C826E /* TexasDrumsGetEditProfile.m */; };
+		63E2EDA615C0FE81006C826E /* TexasDrumsGetEditProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E2EDA315C0FE81006C826E /* TexasDrumsGetEditProfile.m */; };
 		63FC645D15B2729900919537 /* GigsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC645B15B2729900919537 /* GigsViewController.m */; };
 		63FC645E15B2729900919537 /* GigsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63FC645C15B2729900919537 /* GigsViewController.xib */; };
 		63FC646115B2749600919537 /* TexasDrumsGetGigs.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC646015B2749600919537 /* TexasDrumsGetGigs.m */; };
@@ -519,6 +528,9 @@
 		6303FF3F15B7C294009FAEFE /* AddGigViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddGigViewController.xib; sourceTree = "<group>"; };
 		6313B38115B67BBD00E23C25 /* note.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = note.png; path = Media/Media/note.png; sourceTree = "<group>"; };
 		6313B38215B67BBD00E23C25 /* note@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "note@2x.png"; path = "Media/Media/note@2x.png"; sourceTree = "<group>"; };
+		63292FAF15BCFEF800CB383B /* DateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateViewController.h; sourceTree = "<group>"; };
+		63292FB015BCFEF800CB383B /* DateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateViewController.m; sourceTree = "<group>"; };
+		63292FB115BCFEF800CB383B /* DateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DateViewController.xib; sourceTree = "<group>"; };
 		632D90861586F3B4008B106A /* TexasDrumsGetProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexasDrumsGetProfile.h; sourceTree = "<group>"; };
 		632D90871586F3B4008B106A /* TexasDrumsGetProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsGetProfile.m; sourceTree = "<group>"; };
 		632D90991586F855008B106A /* TexasDrumsGetRosters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexasDrumsGetRosters.h; sourceTree = "<group>"; };
@@ -712,6 +724,8 @@
 		63BE6C94157D7AF300E4097B /* CrittercismGridViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CrittercismGridViewController.xib; sourceTree = "<group>"; };
 		63BE6C95157D7AF300E4097B /* CrittercismRootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CrittercismRootViewController.xib; sourceTree = "<group>"; };
 		63BE6C96157D7AF300E4097B /* CrittercismViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CrittercismViewController.xib; sourceTree = "<group>"; };
+		63E2EDA215C0FE81006C826E /* TexasDrumsGetEditProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexasDrumsGetEditProfile.h; sourceTree = "<group>"; };
+		63E2EDA315C0FE81006C826E /* TexasDrumsGetEditProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsGetEditProfile.m; sourceTree = "<group>"; };
 		63FC645A15B2729900919537 /* GigsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GigsViewController.h; sourceTree = "<group>"; };
 		63FC645B15B2729900919537 /* GigsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GigsViewController.m; sourceTree = "<group>"; };
 		63FC645C15B2729900919537 /* GigsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GigsViewController.xib; sourceTree = "<group>"; };
@@ -1252,6 +1266,22 @@
 			name = "Admin Options";
 			sourceTree = "<group>";
 		};
+		63292FAE15BCFEC100CB383B /* View Gigs */ = {
+			isa = PBXGroup;
+			children = (
+				63FC645A15B2729900919537 /* GigsViewController.h */,
+				63FC645B15B2729900919537 /* GigsViewController.m */,
+				63FC645C15B2729900919537 /* GigsViewController.xib */,
+				6303FF3D15B7C294009FAEFE /* AddGigViewController.h */,
+				6303FF3E15B7C294009FAEFE /* AddGigViewController.m */,
+				6303FF3F15B7C294009FAEFE /* AddGigViewController.xib */,
+				63292FAF15BCFEF800CB383B /* DateViewController.h */,
+				63292FB015BCFEF800CB383B /* DateViewController.m */,
+				63292FB115BCFEF800CB383B /* DateViewController.xib */,
+			);
+			name = "View Gigs";
+			sourceTree = "<group>";
+		};
 		6353B99315B66CB800D88A14 /* Media */ = {
 			isa = PBXGroup;
 			children = (
@@ -1284,6 +1314,8 @@
 				637FD12115B1034C0069AA53 /* TexasDrumsGetMemberLogout.m */,
 				63FC645F15B2749600919537 /* TexasDrumsGetGigs.h */,
 				63FC646015B2749600919537 /* TexasDrumsGetGigs.m */,
+				63E2EDA215C0FE81006C826E /* TexasDrumsGetEditProfile.h */,
+				63E2EDA315C0FE81006C826E /* TexasDrumsGetEditProfile.m */,
 			);
 			name = Requests;
 			sourceTree = "<group>";
@@ -1571,6 +1603,7 @@
 		AE10584615066417001D3792 /* Member Options */ = {
 			isa = PBXGroup;
 			children = (
+				63292FAE15BCFEC100CB383B /* View Gigs */,
 				AEF9CA4C151B70D800C8A028 /* DownloadMusicViewController.h */,
 				AEF9CA4D151B70D800C8A028 /* DownloadMusicViewController.m */,
 				AEF9CA4E151B70D800C8A028 /* DownloadMusicView.xib */,
@@ -1586,12 +1619,6 @@
 				AEF25866152F55060019D5BD /* MusicViewController.h */,
 				AEF25867152F55070019D5BD /* MusicViewController.m */,
 				AEF25868152F55070019D5BD /* MusicViewController.xib */,
-				63FC645A15B2729900919537 /* GigsViewController.h */,
-				63FC645B15B2729900919537 /* GigsViewController.m */,
-				63FC645C15B2729900919537 /* GigsViewController.xib */,
-				6303FF3D15B7C294009FAEFE /* AddGigViewController.h */,
-				6303FF3E15B7C294009FAEFE /* AddGigViewController.m */,
-				6303FF3F15B7C294009FAEFE /* AddGigViewController.xib */,
 			);
 			name = "Member Options";
 			sourceTree = "<group>";
@@ -2155,6 +2182,7 @@
 				6313B38315B67BBD00E23C25 /* note.png in Resources */,
 				6313B38615B67BBD00E23C25 /* note@2x.png in Resources */,
 				6303FF4315B7C294009FAEFE /* AddGigViewController.xib in Resources */,
+				63292FB515BCFEF800CB383B /* DateViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2171,6 +2199,7 @@
 				6313B38415B67BBD00E23C25 /* note.png in Resources */,
 				6313B38715B67BBD00E23C25 /* note@2x.png in Resources */,
 				6303FF4415B7C294009FAEFE /* AddGigViewController.xib in Resources */,
+				63292FB615BCFEF800CB383B /* DateViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2187,6 +2216,7 @@
 				6313B38515B67BBD00E23C25 /* note.png in Resources */,
 				6313B38815B67BBD00E23C25 /* note@2x.png in Resources */,
 				6303FF4515B7C294009FAEFE /* AddGigViewController.xib in Resources */,
+				63292FB715BCFEF800CB383B /* DateViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2310,6 +2340,8 @@
 				63FC646415B2788100919537 /* Gig.m in Sources */,
 				63FC646715B27A4100919537 /* GigUser.m in Sources */,
 				6303FF4015B7C294009FAEFE /* AddGigViewController.m in Sources */,
+				63292FB215BCFEF800CB383B /* DateViewController.m in Sources */,
+				63E2EDA415C0FE81006C826E /* TexasDrumsGetEditProfile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2319,6 +2351,8 @@
 			files = (
 				045646F913ADBD3000681573 /* TexasDrumsTests.m in Sources */,
 				6303FF4115B7C294009FAEFE /* AddGigViewController.m in Sources */,
+				63292FB315BCFEF800CB383B /* DateViewController.m in Sources */,
+				63E2EDA515C0FE81006C826E /* TexasDrumsGetEditProfile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2410,6 +2444,8 @@
 				AED8325F14F3670D00BC8928 /* ViewController.m in Sources */,
 				AED8326A14F3677400BC8928 /* Tests.m in Sources */,
 				6303FF4215B7C294009FAEFE /* AddGigViewController.m in Sources */,
+				63292FB415BCFEF800CB383B /* DateViewController.m in Sources */,
+				63E2EDA615C0FE81006C826E /* TexasDrumsGetEditProfile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -61,6 +61,9 @@
     self.date.text = current_date;
     [dateFormatter release];
     
+    UIBarButtonItem *cancelButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(removeModalView)] autorelease];
+    self.navigationBar.leftBarButtonItem = cancelButton;
+    
 }
 
 - (void)viewDidUnload
@@ -95,10 +98,18 @@
     [titleView sizeToFit];
 }
 
+- (IBAction)dateButtonPressed:(id)sender {
+    
+}
+
 - (IBAction)backgroundButtonPressed:(id)sender {
     [self.name resignFirstResponder];
     [self.location resignFirstResponder];
     [self.description resignFirstResponder];
+}
+
+- (void)removeModalView {
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - UITextField Methods

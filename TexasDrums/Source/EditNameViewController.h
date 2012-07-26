@@ -8,16 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "Common.h"
+#import "TexasDrumsAPIConnection.h"
 
-@interface EditNameViewController : UIViewController<UITextFieldDelegate> {
-    IBOutlet UITextField <UITextFieldDelegate> *firstname;
-    IBOutlet UITextField <UITextFieldDelegate> *lastname;
+@interface EditNameViewController : UIViewController<UITextFieldDelegate, TexasDrumsAPIConnection> {
+    IBOutlet UITextField *firstname;
+    IBOutlet UITextField *lastname;
     IBOutlet UIButton *submit;
     IBOutlet UILabel *status;
 }
 
-@property (nonatomic, retain) UITextField <UITextFieldDelegate> *firstname;
-@property (nonatomic, retain) UITextField <UITextFieldDelegate> *lastname;
+@property (nonatomic, retain) UITextField *firstname;
+@property (nonatomic, retain) UITextField *lastname;
 @property (nonatomic, retain) UIButton *submit;
 @property (nonatomic, retain) UILabel *status;
 
