@@ -7,9 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Common.h"
-#import "CJSONDeserializer.h"
-#import "Music.h"
+
 
 @interface DownloadMusicViewController : UIViewController<NSURLConnectionDelegate> {
     IBOutlet UITableView *musicTable;

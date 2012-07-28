@@ -7,16 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Common.h"
+#import "TexasDrumsAPIConnection.h"
 
-@interface EditPhoneViewController : UIViewController<UITextFieldDelegate> {
-    IBOutlet UITextField <UITextFieldDelegate> *phone;
+@interface EditPhoneViewController : UIViewController<UITextFieldDelegate, TexasDrumsAPIConnection> {
+    IBOutlet UITextField *phone;
     IBOutlet UIButton *submit;
     IBOutlet UIButton *background_button;
     IBOutlet UILabel *status;
 }
 
-@property (nonatomic, retain) UITextField <UITextFieldDelegate> *phone;
+@property (nonatomic, retain) UITextField *phone;
 @property (nonatomic, retain) UIButton *submit;
 @property (nonatomic, retain) UIButton *background_button;
 @property (nonatomic, retain) UILabel *status;

@@ -9,7 +9,6 @@
 #import "TexasDrumsAppDelegate.h"
 #import "MemberLoginViewController.h"
 #import "CJSONDeserializer.h"
-#import "GANTracker.h"
 #import "Crittercism.h"
 #import "TexasDrumsGetMemberLogin.h"
 

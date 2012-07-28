@@ -9,7 +9,6 @@
 #import "AddressBookViewController.h"
 #import "CJSONDeserializer.h"
 #import "AddressBookMemberViewController.h"
-#import "GANTracker.h"
 
 @implementation AddressBookViewController
 

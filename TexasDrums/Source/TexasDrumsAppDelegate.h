@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Common.h"
 
 @interface TexasDrumsAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
     UIImageView *splashView;

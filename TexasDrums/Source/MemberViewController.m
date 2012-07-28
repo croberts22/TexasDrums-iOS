@@ -17,15 +17,7 @@
 #import "TexasDrumsGroupedTableViewCell.h"
 #import "TexasDrumsGetMemberLogout.h"
 #import "TexasDrumsAppDelegate.h"
-#import "Common.h"
-
-// Utilities
-#import "GANTracker.h"
-#import "SVProgressHUD.h"
-
-// Categories
-#import "UIFont+TexasDrums.h"
-#import "UIColor+TexasDrums.h"
+#import "CJSONDeserializer.h"
 
 @implementation MemberViewController
 

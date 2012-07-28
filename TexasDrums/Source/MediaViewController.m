@@ -10,8 +10,6 @@
 #import "AudioViewController.h"
 #import "VideoViewController.h"
 #import "PictureViewController.h"
-#import "GANTracker.h"
-
 
 @implementation MediaViewController
 

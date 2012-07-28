@@ -12,11 +12,6 @@
 #import "SingleMemberView.h"
 #import "TexasDrumsGroupedTableViewCell.h"
 
-#import "GANTracker.h"
-
-#import "UIFont+TexasDrums.h"
-#import "UIColor+TexasDrums.h"
-
 @implementation SingleRosterViewController
 
 #define _HEADER_HEIGHT_ (50)

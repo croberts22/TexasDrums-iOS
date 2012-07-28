@@ -10,7 +10,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
-#import "StaffMember.h"
+
+
+@class StaffMember;
 
 @interface StaffMemberViewController : UIViewController<UIWebViewDelegate, MFMailComposeViewControllerDelegate> {
     StaffMember *member;

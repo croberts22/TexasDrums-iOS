@@ -7,9 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FAQ.h"
-#import "Common.h"
-#import "CJSONDeserializer.h"
 #import "TexasDrumsAPIConnection.h"
 
 @interface FAQViewController : UIViewController<TexasDrumsAPIConnection> {

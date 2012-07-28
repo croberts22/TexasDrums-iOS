@@ -7,7 +7,6 @@
 //
 
 #import "EditEmailViewController.h"
-#import "GANTracker.h"
 
 @implementation EditEmailViewController
 

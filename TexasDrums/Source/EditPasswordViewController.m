@@ -8,12 +8,7 @@
 
 #import "EditPasswordViewController.h"
 #import "TexasDrumsGetEditProfile.h"
-#import "GANTracker.h"
-#import "SVProgressHUD.h"
-#import "UIColor+TexasDrums.h"
-#import "UIFont+TexasDrums.h"
 #import "CJSONDeserializer.H"
-#import "Common.h"
 
 @implementation EditPasswordViewController
 

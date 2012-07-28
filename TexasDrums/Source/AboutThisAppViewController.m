@@ -7,7 +7,6 @@
 //
 
 #import "AboutThisAppViewController.h"
-#import "GANTracker.h"
 
 @implementation AboutThisAppViewController
 

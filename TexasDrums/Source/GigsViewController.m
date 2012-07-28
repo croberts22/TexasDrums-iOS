@@ -9,16 +9,9 @@
 #import "GigsViewController.h"
 #import "AddGigViewController.h"
 #import "TexasDrumsRequest.h"
-#import "SVProgressHUD.h"
-#import "GANTracker.h"
 #import "TexasDrumsGroupedTableViewCell.h"
 #import "CJSONDeserializer.h"
-
-#import "UIFont+TexasDrums.h"
-#import "UIColor+TexasDrums.h"
 #import "TexasDrumsGetGigs.h"
-#import "Common.h"
-
 #import "Gig.h"
 #import "GigUser.h"
 

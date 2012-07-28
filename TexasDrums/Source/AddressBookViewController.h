@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Common.h"
 
 @interface AddressBookViewController : UIViewController<NSURLConnectionDelegate> {
     IBOutlet UITableView *addressBookTable;

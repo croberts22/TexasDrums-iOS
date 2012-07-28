@@ -7,7 +7,6 @@
 //
 
 #import "PictureViewController.h"
-#import "GANTracker.h"
 
 @implementation PictureViewController
 

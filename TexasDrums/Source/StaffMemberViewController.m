@@ -7,9 +7,8 @@
 //
 
 #import "StaffMemberViewController.h"
-#import "UIImageView+WebCache.h"
-#import "GANTracker.h"
 #import "TexasDrumsWebViewController.h"
+#import "StaffMember.h"
 
 #define DOMAIN_PATH (@"http://www.texasdrums.com/")
 

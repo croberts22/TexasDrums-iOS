@@ -9,14 +9,8 @@
 #import "SingleMemberView.h"
 #import "TexasDrumsGroupedTableViewCell.h"
 #import "RosterMember.h"
-#import "GANTracker.h"
-#import "Common.h"
-
-#import "UIFont+TexasDrums.h"
-#import "UIColor+TexasDrums.h"
 
 @implementation SingleMemberView
-
 
 @synthesize member;
 @synthesize memberData, memberName, data, categories;

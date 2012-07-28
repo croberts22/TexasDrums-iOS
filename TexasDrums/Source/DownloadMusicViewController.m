@@ -10,7 +10,8 @@
 #import "MusicViewController.h"
 #import "TexasDrumsWebViewController.h"
 #import "TexasDrumsGroupedTableViewCell.h"
-#import "GANTracker.h"
+#import "CJSONDeserializer.h"
+#import "Music.h"
 
 #define _HEADER_HEIGHT_ (50)
 

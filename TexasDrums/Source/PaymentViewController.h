@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Common.h"
 
 @interface PaymentViewController : UIViewController {
     IBOutlet UITableView *paymentTable;

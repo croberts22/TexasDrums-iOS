@@ -7,11 +7,9 @@
 //
 
 #import "FAQViewController.h"
-#import "GANTracker.h"
 #import "TexasDrumsGetFAQ.h"
-#import "UIFont+TexasDrums.h"
-#import "UIColor+TexasDrums.h"
-#import "SVProgressHUD.h"
+#import "FAQ.h"
+#import "CJSONDeserializer.h"
 
 @implementation FAQViewController
 

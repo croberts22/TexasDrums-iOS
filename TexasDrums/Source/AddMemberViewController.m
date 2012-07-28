@@ -7,7 +7,6 @@
 //
 
 #import "AddMemberViewController.h"
-#import "GANTracker.h"
 
 @implementation AddMemberViewController
 

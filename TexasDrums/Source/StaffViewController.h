@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Common.h"
 #import "TexasDrumsAPIConnection.h"
 
 @interface StaffViewController : UIViewController<TexasDrumsAPIConnection> {

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TexasDrumsAPIConnection.h"
+
+@protocol TexasDrumsAPIConnection;
 
 @class TexasDrumsAppDelegate;
 

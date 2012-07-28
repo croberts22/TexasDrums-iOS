@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
 #import "TexasDrumsAPIConnection.h"
 
 @interface VideoViewController : UIViewController<TexasDrumsAPIConnection, UITableViewDelegate> {

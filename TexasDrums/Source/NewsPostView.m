@@ -10,10 +10,6 @@
 #import "News.h"
 #import "TexasDrumsWebViewController.h"
 
-#import "GANTracker.h"
-
-#import "UIColor+TexasDrums.h"
-
 
 @implementation NewsPostView
 

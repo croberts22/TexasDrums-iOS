@@ -8,11 +8,6 @@
 
 #import "AddGigViewController.h"
 
-#import "UIColor+TexasDrums.h"
-#import "UIFont+TexasDrums.h"
-#import "GANTracker.h"
-#import "SVProgressHUD.h"
-
 @interface AddGigViewController ()
 
 @end

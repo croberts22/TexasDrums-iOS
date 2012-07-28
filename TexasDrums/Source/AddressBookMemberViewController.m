@@ -7,7 +7,7 @@
 //
 
 #import "AddressBookMemberViewController.h"
-#import "GANTracker.h"
+#import "Profile.h"
 
 @interface AddressBookMemberViewController ()
 

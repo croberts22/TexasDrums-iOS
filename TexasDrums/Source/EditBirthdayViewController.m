@@ -7,8 +7,6 @@
 //
 
 #import "EditBirthdayViewController.h"
-#import "GANTracker.h"
-#import "Common.h"
 
 @implementation EditBirthdayViewController
 

@@ -7,20 +7,11 @@
 //
 
 #import "MemberLoginViewController.h"
-#import "Common.h"
 #import "Profile.h"
 #import "TexasDrumsGetMemberLogin.h"
 #import "TexasDrumsGetProfile.h"
 #import "TexasDrumsAppDelegate.h"
-
-// Utilities
 #import "CJSONDeserializer.h"
-#import "GANTracker.h"
-#import "SVProgressHUD.h"
-
-// Categories
-#import "UIFont+TexasDrums.h"
-#import "UIColor+TexasDrums.h"
 
 @implementation MemberLoginViewController
 

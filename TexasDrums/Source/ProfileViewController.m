@@ -13,13 +13,6 @@
 #import "EditBirthdayViewController.h"
 #import "EditEmailViewController.h"
 
-// Utilities
-#import "GANTracker.h"
-
-// Categories
-#import "UIFont+TexasDrums.h"
-#import "UIColor+TexasDrums.h"
-
 @implementation ProfileViewController
 
 @synthesize profileTable;

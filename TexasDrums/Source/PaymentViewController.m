@@ -9,7 +9,6 @@
 #import "PaymentViewController.h"
 #import "CJSONDeserializer.h"
 #import "Profile.h"
-#import "GANTracker.h"
 
 @implementation PaymentViewController
 

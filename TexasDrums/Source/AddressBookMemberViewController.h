@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
-#import "Profile.h"
-#import "Common.h"
+
+@class Profile;
 
 @interface AddressBookMemberViewController : UIViewController<MFMailComposeViewControllerDelegate, UIActionSheetDelegate> {
     IBOutlet UILabel *member_name;

@@ -7,11 +7,10 @@
 //
 
 #import "EditPhoneViewController.h"
-#import "GANTracker.h"
+#import "TexasDrumsGetEditProfile.h"
+#import "CJSONDeserializer.h"
 
 @implementation EditPhoneViewController
-
-#define _403 (@"403 ERROR: No input given")
 
 @synthesize phone, status, submit, background_button;
 
@@ -34,44 +33,28 @@
 
 #pragma mark - View lifecycle
 
-- (void)setTitle:(NSString *)title
-{
-    [super setTitle:title];
-    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
-    if (!titleView) {
-        titleView = [[UILabel alloc] initWithFrame:CGRectZero];
-        titleView.backgroundColor = [UIColor clearColor];
-        titleView.font = [UIFont fontWithName:@"Georgia-Bold" size:20];
-        titleView.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-        titleView.textColor = [UIColor whiteColor]; 
-        
-        self.navigationItem.titleView = titleView;
-        [titleView release];
-    }
-    titleView.text = title;
-    [titleView sizeToFit];
-}
-
 - (void)viewWillAppear:(BOOL)animated {
+    // Google Analytics
     [[GANTracker sharedTracker] trackPageview:@"Edit Phone (EditPhoneView)" withError:nil];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     [self setTitle:@"Edit Phone Number"];
-    status.alpha = 0.0f;
-    phone.delegate = self;
-    phone.text = _Profile.phonenumber;
-    phone.textColor = [UIColor lightGrayColor];
-    phone.font = [UIFont fontWithName:@"Georgia" size:14];
+    
+    // Set properties.
+    self.status.alpha = 0.0f;
+    self.phone.delegate = self;
+    self.phone.text = _Profile.phonenumber;
+    self.phone.textColor = [UIColor TexasDrumsGrayColor];
+    self.phone.font = [UIFont TexasDrumsFontOfSize:14];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -80,6 +63,113 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark - UI Methods
+
+- (void)setTitle:(NSString *)title
+{
+    [super setTitle:title];
+    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
+    if (!titleView) {
+        titleView = [[UILabel alloc] initWithFrame:CGRectZero];
+        titleView.backgroundColor = [UIColor clearColor];
+        titleView.font = [UIFont TexasDrumsBoldFontOfSize:20];
+        titleView.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+        titleView.textColor = [UIColor whiteColor];
+        
+        self.navigationItem.titleView = titleView;
+        [titleView release];
+    }
+    titleView.text = title;
+    [titleView sizeToFit];
+}
+
+- (void)dismissWithSuccess {
+    [SVProgressHUD dismiss];
+}
+
+- (void)dismissWithError {
+    [SVProgressHUD showErrorWithStatus:@"Unable to save."];
+}
+
+- (IBAction)submitButtonPressed:(id)sender {
+    [self connect];
+}
+
+- (void)removeKeyboard {
+    [self.phone resignFirstResponder];
+}
+
+- (IBAction)backgroundButtonPressed:(id)sender {
+    [self.phone resignFirstResponder];
+}
+
+- (void)displayText:(NSString *)text {
+    self.status.text = text;
+    [UIView animateWithDuration:.5f animations:^{
+        self.status.alpha = 1.0;
+    }];
+}
+
+- (void)removeError {
+    [UIView animateWithDuration:.5f animations:^{
+        self.status.alpha = 0.0;
+    }];
+}
+
+- (void)sendToProfileView {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+- (void)connect {
+    
+    [self removeKeyboard];
+    
+    BOOL passedConstraints = [self checkConstraints];
+    
+    if(passedConstraints) {
+        [SVProgressHUD showWithStatus:@"Updating..."];
+        TexasDrumsGetEditProfile *get = [[TexasDrumsGetEditProfile alloc] initWithUsername:_Profile.username
+                                                                               andPassword:_Profile.password
+                                                                             withFirstName:nil
+                                                                               andLastName:nil
+                                                                        andUpdatedPassword:nil
+                                                                                  andPhone:self.phone.text
+                                                                               andBirthday:nil
+                                                                                  andEmail:nil];
+        get.delegate = self;
+        [get startRequest];
+    }
+    
+
+}
+
+- (BOOL)checkConstraints {
+    if([self.phone.text isEqualToString:_Profile.phonenumber]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"Your phone number didn't change. Please type in a new phone number."
+                                                       delegate:self
+                                              cancelButtonTitle:@"Okay"
+                                              otherButtonTitles:nil, nil];
+        [alert show];
+        [alert release];
+        return NO;
+    }
+    else if([self.phone.text length] != 10){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"Your phone number is invalid. Please type in a new phone number."
+                                                       delegate:self
+                                              cancelButtonTitle:@"Okay"
+                                              otherButtonTitles:nil, nil];
+        [alert show];
+        [alert release];
+        return NO;
+    }
+    else return YES;
+}
+
+#pragma mark - UITextField Delegate Methods
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [phone resignFirstResponder];
     [self submitButtonPressed:nil];
@@ -87,103 +177,49 @@
     return YES;
 }
 
-- (IBAction)backgroundButtonPressed:(id)sender {
-    [phone resignFirstResponder];
-}
+#pragma mark - TexasDrumsRequestDelegate Methods
 
-/*
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string 
-{
-    TDLog(@"textField:|%@|", textField.text);
-    TDLog(@"string:|%@|", string);
+- (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
     
-    NSString *result;
+    NSError *error = nil;
+    NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
     
-    if (![string isEqualToString:@""] && 
-        (textField.text.length == 3 || textField.text.length == 6){
-        
+    if([results count] > 0){
+        // Check if the response is just a dictionary value of one.
+        // This implies that the key value pair follows the format:
+        // status -> 'message'
+        // We use respondsToSelector since the API returns a dictionary
+        // of length one for any status messages, but an array of
+        // dictionary responses for valid data.
+        // CJSONDeserializer interprets actual data as NSArrays.
+        if([results respondsToSelector:@selector(objectForKey:)] ){
+            if([[results objectForKey:@"status"] isEqualToString:_200OK]) {
+                TDLog(@"Profile updated.");
+                _Profile.phonenumber = self.phone.text;
+                
+                [self performSelectorOnMainThread:@selector(displayText:) withObject:@"Your phone number has been updated." waitUntilDone:YES];
+                [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(sendToProfileView) userInfo:nil repeats:NO];
+                [self dismissWithSuccess];
+            }
+            else {
+                TDLog(@"Unable to update profile. Request returned: %@", [results objectForKey:@"status"]);
+                [self dismissWithError];
+                return;
+            }
+        }
     }
-    //if the string is empty, then we know we are subtracting
-    if([string isEqualToString:@""]){
-        result = [self subtractNumberFromGroup:textField.text];
-    }
-    //add number to group
-    else{
-        result = [self addNumber:string toGroup:textField.text];
-    }
-    
-    textField.text = result;
-    
-    TDLog(@"new textField:|%@|", textField.text);
-    
-    return NO;
-}
- */
-
-- (void)displayText:(NSString *)text {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    self.status.text = text;
-    [UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:.50];
-    self.status.alpha = 1.0;
-	[UIView commitAnimations];
-    [pool release];
-}
-
-- (void)removeError {
-    [UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:.5];
-    self.status.alpha = 0.0;
-	[UIView commitAnimations];
-}
-
-- (IBAction)submitButtonPressed:(id)sender {
-    if([phone.text isEqualToString:_Profile.phonenumber]){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" 
-                                                        message:@"Your phone number didn't change. Please type in a new phone number."
-                                                       delegate:self 
-                                              cancelButtonTitle:@"Okay" 
-                                              otherButtonTitles:nil, nil];
-        [alert show];
-        [alert release];
-    }
-    else if([phone.text length] != 10){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" 
-                                                        message:@"Your phone number is invalid. Please type in a new phone number."
-                                                       delegate:self 
-                                              cancelButtonTitle:@"Okay" 
-                                              otherButtonTitles:nil, nil];
-        [alert show];
-        [alert release];
-    }
-    else if([phone.text length] == 10){
-        [self updatePhone];
+    else {
+        TDLog(@"Could not update profile.");
+        [self dismissWithError];
     }
 }
 
-- (void)sendToProfileView {
-    [self.navigationController popViewControllerAnimated:YES];
+- (void)request:(TexasDrumsRequest *)request failedWithError:(NSError *)error {
+    TDLog(@"Request error: %@", error);
+    
+    // Show refresh button and error message.
+    [self dismissWithError];
 }
 
-- (void)updatePhone {
-    NSString *API_Call = [NSString stringWithFormat:@"%@apikey=%@&username=%@&password=%@&phone=%@", TEXAS_DRUMS_API_EDIT_PROFILE, TEXAS_DRUMS_API_KEY, _Profile.username, _Profile.password, phone.text];
-    TDLog(@"%@", API_Call);
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:API_Call]];
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    NSString *get = [[[NSString alloc] initWithData:response encoding:NSASCIIStringEncoding] autorelease];
-    
-    if([get isEqualToString:_200OK]){
-        //set _Profile phone and set defaults in order to keep internal data in sync per startups
-        _Profile.phonenumber = phone.text;
-        
-        //inform user of successful update and pop screen
-        [self performSelectorOnMainThread:@selector(displayText:) withObject:@"Your phone number has been updated." waitUntilDone:YES];
-        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(sendToProfileView) userInfo:nil repeats:NO];
-    }
-    else if([get isEqualToString:@""]){
-        [self performSelectorOnMainThread:@selector(displayText:) withObject:@"Could not update phone number." waitUntilDone:YES];
-    }
-    
-}
 
 @end

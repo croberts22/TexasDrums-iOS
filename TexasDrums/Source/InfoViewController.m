@@ -11,8 +11,6 @@
 #import "FAQViewController.h"
 #import "StaffViewController.h"
 #import "AboutThisAppViewController.h"
-#import "Common.h"
-#import "GANTracker.h"
 
 @implementation InfoViewController
 

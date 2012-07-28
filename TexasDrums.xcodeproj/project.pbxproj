@@ -100,7 +100,6 @@
 		637CF8D1158C4B0B00838F9A /* UIFont+TexasDrums.m in Sources */ = {isa = PBXBuildFile; fileRef = 635296C1158985D800E62787 /* UIFont+TexasDrums.m */; };
 		637CF8D2158C4B0B00838F9A /* TexasDrumsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E9AB3B13B4E5B700F207EA /* TexasDrumsAppDelegate.m */; };
 		637CF8D3158C4B0B00838F9A /* TexasDrumsWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7564CA153CDC8100D04368 /* TexasDrumsWebViewController.m */; };
-		637CF8D4158C4B0B00838F9A /* NSURLConnectionWithTag.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3A23581562D1AB009B8F4B /* NSURLConnectionWithTag.m */; };
 		637CF8D5158C4B0B00838F9A /* UserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3A5E63156B464200A7DEF3 /* UserProfile.m */; };
 		637CF8D6158C4B2800838F9A /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3A234915619336009B8F4B /* SVProgressHUD.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		637CF8D7158C4B4B00838F9A /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DF12157BA80E004A11DA /* ASIAuthenticationDialog.m */; };
@@ -315,7 +314,6 @@
 		AE37F29C154B5353001EA3A8 /* AddressBookThumbnail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE37F29A154B5353001EA3A8 /* AddressBookThumbnail@2x.png */; };
 		AE3A234A15619336009B8F4B /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AE3A234715619336009B8F4B /* SVProgressHUD.bundle */; };
 		AE3A234B15619336009B8F4B /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3A234915619336009B8F4B /* SVProgressHUD.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		AE3A23591562D1AC009B8F4B /* NSURLConnectionWithTag.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3A23581562D1AB009B8F4B /* NSURLConnectionWithTag.m */; };
 		AE3A5E64156B464200A7DEF3 /* UserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3A5E63156B464200A7DEF3 /* UserProfile.m */; };
 		AE3F7EC8152682B000CAA448 /* Music.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3F7EC7152682B000CAA448 /* Music.m */; };
 		AE4B350B14C120EE00519280 /* StaffViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B350914C120EE00519280 /* StaffViewController.m */; };
@@ -731,6 +729,7 @@
 		63E2EDA315C0FE81006C826E /* TexasDrumsGetEditProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsGetEditProfile.m; sourceTree = "<group>"; };
 		63E4D6AA15C361EC003EC59E /* EditProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfile.h; sourceTree = "<group>"; };
 		63E4D6AB15C361EC003EC59E /* EditProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfile.m; sourceTree = "<group>"; };
+		63E4D6AF15C38283003EC59E /* TDCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDCategories.h; sourceTree = "<group>"; };
 		63FC645A15B2729900919537 /* GigsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GigsViewController.h; sourceTree = "<group>"; };
 		63FC645B15B2729900919537 /* GigsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GigsViewController.m; sourceTree = "<group>"; };
 		63FC645C15B2729900919537 /* GigsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GigsViewController.xib; sourceTree = "<group>"; };
@@ -753,8 +752,6 @@
 		AE3A234715619336009B8F4B /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		AE3A234815619336009B8F4B /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		AE3A234915619336009B8F4B /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
-		AE3A23571562D1AB009B8F4B /* NSURLConnectionWithTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSURLConnectionWithTag.h; sourceTree = "<group>"; };
-		AE3A23581562D1AB009B8F4B /* NSURLConnectionWithTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSURLConnectionWithTag.m; sourceTree = "<group>"; };
 		AE3A5E5F156B3F4900A7DEF3 /* TexasDrumsTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TexasDrumsTable.h; sourceTree = "<group>"; };
 		AE3A5E60156B405900A7DEF3 /* TexasDrumsAPIConnection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TexasDrumsAPIConnection.h; sourceTree = "<group>"; };
 		AE3A5E62156B464200A7DEF3 /* UserProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfile.h; sourceTree = "<group>"; };
@@ -1186,8 +1183,6 @@
 				AE7564C9153CDC8100D04368 /* TexasDrumsWebViewController.h */,
 				AE7564CA153CDC8100D04368 /* TexasDrumsWebViewController.m */,
 				AE7564CB153CDC8200D04368 /* TexasDrumsWebViewController.xib */,
-				AE3A23571562D1AB009B8F4B /* NSURLConnectionWithTag.h */,
-				AE3A23581562D1AB009B8F4B /* NSURLConnectionWithTag.m */,
 				AE3A5E5F156B3F4900A7DEF3 /* TexasDrumsTable.h */,
 				AE3A5E60156B405900A7DEF3 /* TexasDrumsAPIConnection.h */,
 				AE3A5E62156B464200A7DEF3 /* UserProfile.h */,
@@ -1560,6 +1555,7 @@
 		63F966E7158AAEA6002AD634 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				63E4D6AF15C38283003EC59E /* TDCategories.h */,
 				AE7564C6153CD56D00D04368 /* NSString+RegEx.h */,
 				AE7564C7153CD56D00D04368 /* NSString+RegEx.m */,
 				6398DFA2157C1A65004A11DA /* UIColor+TexasDrums.h */,
@@ -2307,7 +2303,6 @@
 				AEA939CB15420135000E66F4 /* StaffMemberViewController.m in Sources */,
 				AE37F2971548B9EA001EA3A8 /* AddressBookMemberViewController.m in Sources */,
 				AE3A234B15619336009B8F4B /* SVProgressHUD.m in Sources */,
-				AE3A23591562D1AC009B8F4B /* NSURLConnectionWithTag.m in Sources */,
 				AE3A5E64156B464200A7DEF3 /* UserProfile.m in Sources */,
 				6398DF0F157BA724004A11DA /* TexasDrumsRequest.m in Sources */,
 				6398DF69157BA80E004A11DA /* ASIAuthenticationDialog.m in Sources */,
@@ -2438,7 +2433,6 @@
 				637CF8D1158C4B0B00838F9A /* UIFont+TexasDrums.m in Sources */,
 				637CF8D2158C4B0B00838F9A /* TexasDrumsAppDelegate.m in Sources */,
 				637CF8D3158C4B0B00838F9A /* TexasDrumsWebViewController.m in Sources */,
-				637CF8D4158C4B0B00838F9A /* NSURLConnectionWithTag.m in Sources */,
 				637CF8D5158C4B0B00838F9A /* UserProfile.m in Sources */,
 				637CF8C8158C4AEA00838F9A /* TexasDrumsRequest.m in Sources */,
 				637CF8C9158C4AEA00838F9A /* TexasDrumsGetNews.m in Sources */,

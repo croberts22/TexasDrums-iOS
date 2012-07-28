@@ -7,8 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Roster.h"
-
 
 @interface RosterMember : NSObject {
     NSString *firstname;

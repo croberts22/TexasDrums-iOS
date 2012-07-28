@@ -8,12 +8,7 @@
 
 #import "EditNameViewController.h"
 #import "TexasDrumsGetEditProfile.h"
-#import "GANTracker.h"
-#import "SVProgressHUD.h"
-#import "UIColor+TexasDrums.h"
-#import "UIFont+TexasDrums.h"
 #import "CJSONDeserializer.h"
-#import "Common.h"
 
 @implementation EditNameViewController
 
@@ -59,8 +54,8 @@
     self.lastname.text = _Profile.lastname;
     self.firstname.font = [UIFont TexasDrumsFontOfSize:14];
     self.lastname.font = [UIFont TexasDrumsFontOfSize:14];
-    self.firstname.textColor = [UIColor lightGrayColor];
-    self.lastname.textColor = [UIColor lightGrayColor];
+    self.firstname.textColor = [UIColor TexasDrumsGrayColor];
+    self.lastname.textColor = [UIColor TexasDrumsGrayColor];
 }
 
 - (void)viewDidUnload
@@ -107,8 +102,8 @@
 }
 
 - (void)removeKeyboard {
-    [firstname resignFirstResponder];
-    [lastname resignFirstResponder];
+    [self.firstname resignFirstResponder];
+    [self.lastname resignFirstResponder];
 }
 
 - (void)displayText:(NSString *)text {
@@ -131,7 +126,7 @@
 #pragma mark - Data Methods
 
 - (void)connect {
-    
+
     [self removeKeyboard];
     
     BOOL passedConstraints = [self checkNameConstraints];

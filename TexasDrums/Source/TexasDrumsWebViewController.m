@@ -7,7 +7,6 @@
 //
 
 #import "TexasDrumsWebViewController.h"
-#import "GANTracker.h"
 
 @interface TexasDrumsWebViewController ()
 

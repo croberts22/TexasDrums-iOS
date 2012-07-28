@@ -7,7 +7,6 @@
 //
 
 #import "MusicViewController.h"
-#import "GANTracker.h"
 
 @interface MusicViewController ()
 

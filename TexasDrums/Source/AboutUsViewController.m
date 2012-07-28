@@ -8,7 +8,6 @@
 
 #import "AboutUsViewController.h"
 #import "CJSONDeserializer.h"
-#import "GANTracker.h"
 
 @implementation AboutUsViewController
 

@@ -7,20 +7,12 @@
 //
 
 #import "NewsViewController.h"
-#import "Common.h"
 #import "News.h"
 #import "NewsPostView.h"
 #import "TexasDrumsTableViewCell.h"
 #import "TexasDrumsGetNews.h"
-
 #import "CJSONDeserializer.h"
 #import "RegexKitLite.h"
-#import "GANTracker.h"
-#import "SVProgressHUD.h"
-
-#import "NSString+RegEx.h"
-#import "UIFont+TexasDrums.h"
-#import "UIColor+TexasDrums.h"
 
 @implementation NewsViewController
 

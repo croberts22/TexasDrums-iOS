@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Common.h"
 
 @interface EditEmailViewController : UIViewController<UITextFieldDelegate> {
     IBOutlet UITextField <UITextFieldDelegate> *email;
