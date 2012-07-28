@@ -84,14 +84,8 @@
     [super setTitle:title];
     UILabel *titleView = (UILabel *)self.navbar.titleView;
     if (!titleView) {
-        titleView = [[UILabel alloc] initWithFrame:CGRectZero];
-        titleView.backgroundColor = [UIColor clearColor];
-        titleView.font = [UIFont TexasDrumsBoldFontOfSize:20];
-        titleView.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-        titleView.textColor = [UIColor whiteColor]; 
-        
+        titleView = [UILabel TexasDrumsNavigationBar];
         self.navbar.titleView = titleView;
-        [titleView release];
     }
     titleView.text = title;
     [titleView sizeToFit];
