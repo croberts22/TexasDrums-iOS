@@ -36,7 +36,7 @@
     }
 
     if(_updatedPassword != nil) {
-        request_URL = [NSString stringWithFormat:@"%@&new_password=%@", request_URL, _password];
+        request_URL = [NSString stringWithFormat:@"%@&new_password=%@", request_URL, _updatedPassword];
     }
     
     if(_phone != nil) {

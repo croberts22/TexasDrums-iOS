@@ -7,13 +7,16 @@
 //
 
 #import "EditBirthdayViewController.h"
+#import "TexasDrumsGetEditProfile.h"
+#import "CJSONDeserializer.h"
 
 @implementation EditBirthdayViewController
 
 @synthesize picker, birthdayLabel, submitButton, received_data, updatedBirthday, status;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+#pragma mark - Memory Management
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -21,8 +24,7 @@
     return self;
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
@@ -31,35 +33,21 @@
 
 #pragma mark - View lifecycle
 
-- (void)setTitle:(NSString *)title
-{
-    [super setTitle:title];
-    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
-    if (!titleView) {
-        titleView = [[UILabel alloc] initWithFrame:CGRectZero];
-        titleView.backgroundColor = [UIColor clearColor];
-        titleView.font = [UIFont fontWithName:@"Georgia-Bold" size:20];
-        titleView.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-        titleView.textColor = [UIColor whiteColor]; 
-        
-        self.navigationItem.titleView = titleView;
-        [titleView release];
-    }
-    titleView.text = title;
-    [titleView sizeToFit];
-}
-
 - (void)viewWillAppear:(BOOL)animated {
+    // Google Analytics
     [[GANTracker sharedTracker] trackPageview:@"Edit Birthday (EditBirthdayView)" withError:nil];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
+    
     [super viewDidLoad];
-    [self parseDatabaseString];
+    
     [self setTitle:@"Edit Birthday"];
-    [picker addTarget:self action:@selector(updateLabel:) forControlEvents:UIControlEventValueChanged];
-    self.status.alpha = 0.0f;
+    
+    // When the picker changes value, update the label.
+    [self.picker addTarget:self action:@selector(updateLabel:) forControlEvents:UIControlEventValueChanged];
+    
+    // Prepare min and max range for the date picker.
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
     [dateFormatter setDateFormat:@"MMddyyyy"];
 
@@ -70,67 +58,120 @@
     NSDate *maxDate = [calendar dateByAddingComponents:comps toDate:current_date options:0];
     [comps setYear:-70];
     NSDate *minDate = [calendar dateByAddingComponents:comps toDate:current_date options:0];
-    
-    [picker setMaximumDate:maxDate];
-    [picker setDate:current_date];
-    [picker setMinimumDate:minDate];
+
+    // Set properties.
+    self.status.alpha = 0.0f;
+    self.picker.maximumDate = maxDate;
+    self.picker.date = current_date;
+    self.picker.minimumDate = minDate;
     
     self.birthdayLabel.text = [self parseDatabaseString];
 }
 
-- (void)startConnection {
-    
-    NSString *API_Call = [NSString stringWithFormat:@"%@apikey=%@&username=%@&password=%@&birthday=%@", TEXAS_DRUMS_API_EDIT_PROFILE, TEXAS_DRUMS_API_KEY, _Profile.username, _Profile.password, updatedBirthday];
-    TDLog(@"%@", API_Call);
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:API_Call] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
-    
-    NSURLConnection *urlconnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
-    if(urlconnection) {
-        received_data = [[NSMutableData data] retain];
-    }
+- (void)viewDidUnload {
+    [super viewDidUnload];
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - UI Methods
+
+- (void)setTitle:(NSString *)title {
+    [super setTitle:title];
+    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
+    if (!titleView) {
+        titleView = [[UILabel alloc] initWithFrame:CGRectZero];
+        titleView.backgroundColor = [UIColor clearColor];
+        titleView.font = [UIFont TexasDrumsBoldFontOfSize:20];
+        titleView.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+        titleView.textColor = [UIColor whiteColor];
+        
+        self.navigationItem.titleView = titleView;
+        [titleView release];
+    }
+    titleView.text = title;
+    [titleView sizeToFit];
+}
+
+- (void)dismissWithSuccess {
+    [SVProgressHUD dismiss];
+}
+
+- (void)dismissWithError {
+    [SVProgressHUD showErrorWithStatus:@"Unable to save."];
 }
 
 - (IBAction)submitButtonPressed:(id)sender {
+    [self connect];
+}
+
+- (void)displayText:(NSString *)text {
+    self.status.text = text;
+    [UIView animateWithDuration:.5f animations:^{
+        self.status.alpha = 1.0;
+    }];
+}
+
+- (void)removeError {
+    [UIView animateWithDuration:.5f animations:^{
+        self.status.alpha = 0.0;
+    }];
+}
+
+- (void)sendToProfileView {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)updateLabel:(id)sender {
     NSCalendar *calendar = [NSCalendar currentCalendar];
+    
     int year = [[calendar components:NSYearCalendarUnit fromDate:picker.date] year];
     int month = [[calendar components:NSMonthCalendarUnit fromDate:picker.date] month];
     int day = [[calendar components:NSDayCalendarUnit fromDate:picker.date] day];
     TDLog(@"%d %d %d", month, day, year);
     
-    NSString *month_str = [NSString stringWithFormat:@"%d", month];
-    NSString *day_str = [NSString stringWithFormat:@"%d", day];
+    self.birthdayLabel.text = [NSString stringWithFormat:@"%@ %d, %d", [self convertIntToMonth:month], day, year];
+}
+
+#pragma mark - Data Methods
+
+- (void)connect {
     
-    if(month < 10){
-        month_str = [NSString stringWithFormat:@"0%d", month];
-    }
-    if(day < 10){
-        day_str = [NSString stringWithFormat:@"0%d", day];
-    }
+    self.updatedBirthday = [self prepareDateString];
     
-    NSString *date = [NSString stringWithFormat:@"%@%@%d", month_str, day_str, year];
-    if([date isEqualToString:_Profile.birthday]){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" 
-                                                        message:@"Your birthday didn't change. Please choose your correct birthday or press the 'Back' button to cancel."
-                                                       delegate:self 
-                                              cancelButtonTitle:@"Okay" 
+    BOOL passedConstraints = [self checkConstraints];
+    
+    if(passedConstraints) {
+        [SVProgressHUD showWithStatus:@"Updating..."];
+        TexasDrumsGetEditProfile *get = [[TexasDrumsGetEditProfile alloc] initWithUsername:_Profile.username
+                                                                               andPassword:_Profile.password
+                                                                             withFirstName:nil
+                                                                               andLastName:nil
+                                                                        andUpdatedPassword:nil
+                                                                                  andPhone:nil
+                                                                               andBirthday:self.updatedBirthday
+                                                                                  andEmail:nil];
+        get.delegate = self;
+        [get startRequest];
+    }
+}
+
+- (BOOL)checkConstraints {
+    if([self.updatedBirthday isEqualToString:_Profile.birthday]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"Your birthday didn't change. Please choose your correct birthday or tap the 'Back' button to cancel."
+                                                       delegate:self
+                                              cancelButtonTitle:@"Okay"
                                               otherButtonTitles:nil, nil];
         [alert show];
         [alert release];
         
-        return;
+        return NO;
     }
-
-    self.updatedBirthday = date;
-    TDLog(@"%@", date);
-    [self startConnection];
-    
+    else return YES;
 }
 
 - (NSString *)parseDatabaseString {
@@ -187,100 +228,68 @@
     }
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (void)updateLabel:(id)sender {
+- (NSString *)prepareDateString {
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    
     int year = [[calendar components:NSYearCalendarUnit fromDate:picker.date] year];
     int month = [[calendar components:NSMonthCalendarUnit fromDate:picker.date] month];
     int day = [[calendar components:NSDayCalendarUnit fromDate:picker.date] day];
     TDLog(@"%d %d %d", month, day, year);
     
-    self.birthdayLabel.text = [NSString stringWithFormat:@"%@ %d, %d", [self convertIntToMonth:month], day, year];
-}   
-
-- (void)displayText:(NSString *)text {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    self.status.text = text;
-    [UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:.50];
-    self.status.alpha = 1.0;
-	[UIView commitAnimations];
-    [pool release];
+    NSString *month_str = [NSString stringWithFormat:@"%d", month];
+    NSString *day_str = [NSString stringWithFormat:@"%d", day];
+    
+    if(month < 10){
+        month_str = [NSString stringWithFormat:@"0%d", month];
+    }
+    if(day < 10){
+        day_str = [NSString stringWithFormat:@"0%d", day];
+    }
+    
+   return [NSString stringWithFormat:@"%@%@%d", month_str, day_str, year];
 }
 
-- (void)removeError {
-    [UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:.5];
-    self.status.alpha = 0.0;
-	[UIView commitAnimations];
+#pragma mark - TexasDrumsRequestDelegate Methods
+
+- (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
+    
+    NSError *error = nil;
+    NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
+    
+    if([results count] > 0){
+        // Check if the response is just a dictionary value of one.
+        // This implies that the key value pair follows the format:
+        // status -> 'message'
+        // We use respondsToSelector since the API returns a dictionary
+        // of length one for any status messages, but an array of
+        // dictionary responses for valid data.
+        // CJSONDeserializer interprets actual data as NSArrays.
+        if([results respondsToSelector:@selector(objectForKey:)] ){
+            if([[results objectForKey:@"status"] isEqualToString:_200OK]) {
+                TDLog(@"Profile updated.");
+                _Profile.birthday = self.updatedBirthday;
+                
+                [self performSelectorOnMainThread:@selector(displayText:) withObject:@"Your birthday has been updated." waitUntilDone:YES];
+                [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(sendToProfileView) userInfo:nil repeats:NO];
+                [self dismissWithSuccess];
+            }
+            else {
+                TDLog(@"Unable to update profile. Request returned: %@", [results objectForKey:@"status"]);
+                [self dismissWithError];
+                return;
+            }
+        }
+    }
+    else {
+        TDLog(@"Could not update profile.");
+        [self dismissWithError];
+    }
 }
 
-- (void)sendToProfileView {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-#pragma mark - NSURLConnection delegate methods
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    // This method is called when the server has determined that it
-    // has enough information to create the NSURLResponse.
+- (void)request:(TexasDrumsRequest *)request failedWithError:(NSError *)error {
+    TDLog(@"Request error: %@", error);
     
-    // It can be called multiple times, for example in the case of a
-    // redirect, so each time we reset the data.
-    [received_data setLength:0];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    // Append the new data to received_data.
-    [received_data appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection
-  didFailWithError:(NSError *)error
-{
-    // release the connection, and the data object
-    [connection release];
-    [received_data release];
-    
-    // inform the user
-    TDLog(@"Connection failed! Error - %@ %@",
-          [error localizedDescription],
-          [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" 
-                                                    message:[error localizedDescription] 
-                                                   delegate:self 
-                                          cancelButtonTitle:@":( Okay" 
-                                          otherButtonTitles:nil, nil];
-    [alert show];
-    [alert release];
-    
-    [self performSelectorOnMainThread:@selector(showRefreshButton) withObject:nil waitUntilDone:NO];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    
-    //set _Profile birthday and set defaults in order to keep internal data in sync per startups
-    _Profile.birthday = updatedBirthday;
-    
-    //inform user of successful update and pop screen
-    [self performSelectorOnMainThread:@selector(displayText:) withObject:@"Your birthday has been updated." waitUntilDone:YES];
-    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(sendToProfileView) userInfo:nil repeats:NO];
-    
-    TDLog(@"Succeeded! Received %d bytes of data", [received_data length]);
-    
-    // release the connection, and the data object
-    [connection release];
-    [received_data release];
+    // Show refresh button and error message.
+    [self dismissWithError];
 }
 
 @end

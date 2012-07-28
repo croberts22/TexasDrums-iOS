@@ -7,25 +7,28 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TexasDrumsAPIConnection.h"
 
-@interface EditEmailViewController : UIViewController<UITextFieldDelegate> {
-    IBOutlet UITextField <UITextFieldDelegate> *email;
+@protocol TexasDrumsAPIConnection;
+
+@interface EditEmailViewController : UIViewController<UITextFieldDelegate, TexasDrumsAPIConnection> {
+    IBOutlet UITextField *email;
     IBOutlet UIButton *submit;
     IBOutlet UIButton *backgroundButton;
     IBOutlet UILabel *status;
 }
 
-@property (nonatomic, retain) UITextField <UITextFieldDelegate> *email;
+@property (nonatomic, retain) UITextField *email;
 @property (nonatomic, retain) UIButton *submit;
 @property (nonatomic, retain) UIButton *backgroundButton;
 @property (nonatomic, retain) UILabel *status;
 
-
 - (IBAction)submitButtonPressed:(id)sender;
 - (IBAction)backgroundButtonPressed:(id)sender;
-- (void)displayText:(NSString *)text;
 - (void)removeKeyboard;
+- (void)displayText:(NSString *)text;
 - (void)removeError;
 - (void)sendToProfileView;
+- (BOOL)checkConstraints;
 
 @end

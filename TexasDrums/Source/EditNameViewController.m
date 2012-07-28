@@ -16,8 +16,7 @@
 
 #pragma mark - Memory Management
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -25,8 +24,7 @@
     return self;
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
@@ -40,8 +38,7 @@
     [[GANTracker sharedTracker] trackPageview:@"Edit Name (EditNameView)" withError:nil];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setTitle:@"Edit Name"];
@@ -58,21 +55,18 @@
     self.lastname.textColor = [UIColor TexasDrumsGrayColor];
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - UI Methods
 
-- (void)setTitle:(NSString *)title
-{
+- (void)setTitle:(NSString *)title {
     [super setTitle:title];
     UILabel *titleView = (UILabel *)self.navigationItem.titleView;
     if (!titleView) {
@@ -129,7 +123,7 @@
 
     [self removeKeyboard];
     
-    BOOL passedConstraints = [self checkNameConstraints];
+    BOOL passedConstraints = [self checkConstraints];
     
     if(passedConstraints) {
         [SVProgressHUD showWithStatus:@"Updating..."];
@@ -146,7 +140,7 @@
     }
 }
 
-- (BOOL)checkNameConstraints {
+- (BOOL)checkConstraints {
     if(firstname.text.length == 0 || lastname.text.length == 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!"
                                                         message:@"Please input your first and last name and try again."
@@ -169,7 +163,6 @@
     }
     else return YES;
 }
-
 
 #pragma mark - UITextField Delegate Methods
 

@@ -7,15 +7,16 @@
 //
 
 #import "EditEmailViewController.h"
+#import "TexasDrumsGetEditProfile.h"
+#import "CJSONDeserializer.h"
 
 @implementation EditEmailViewController
 
-#define _403 (@"403 ERROR: No input given")
-
 @synthesize email, submit, status, backgroundButton;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+#pragma mark - Memory Management
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -23,8 +24,7 @@
     return self;
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
@@ -33,16 +33,45 @@
 
 #pragma mark - View lifecycle
 
-- (void)setTitle:(NSString *)title
-{
+- (void)viewWillAppear:(BOOL)animated {
+    //Google Analytics
+    [[GANTracker sharedTracker] trackPageview:@"Edit Email (EditEmailView)" withError:nil];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self setTitle:@"Edit Email"];
+    
+    // Set properties.
+    self.status.alpha = 0.0f;
+    
+    self.email.delegate = self;
+    self.email.text = _Profile.email;
+    self.email.textColor = [UIColor TexasDrumsGrayColor];
+    self.email.font = [UIFont TexasDrumsFontOfSize:14];
+}
+
+- (void)viewDidUnload {
+    [super viewDidUnload];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - UI Methods
+
+- (void)setTitle:(NSString *)title {
     [super setTitle:title];
     UILabel *titleView = (UILabel *)self.navigationItem.titleView;
     if (!titleView) {
         titleView = [[UILabel alloc] initWithFrame:CGRectZero];
         titleView.backgroundColor = [UIColor clearColor];
-        titleView.font = [UIFont fontWithName:@"Georgia-Bold" size:20];
+        titleView.font = [UIFont TexasDrumsBoldFontOfSize:20];
         titleView.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-        titleView.textColor = [UIColor whiteColor]; 
+        titleView.textColor = [UIColor whiteColor];
         
         self.navigationItem.titleView = titleView;
         [titleView release];
@@ -51,109 +80,143 @@
     [titleView sizeToFit];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [[GANTracker sharedTracker] trackPageview:@"Edit Email (EditEmailView)" withError:nil];
+- (void)dismissWithSuccess {
+    [SVProgressHUD dismiss];
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self setTitle:@"Edit Email"];
-    status.alpha = 0.0f;
-    
-    email.delegate = self;
-    email.text = _Profile.email;
-    email.font = [UIFont fontWithName:@"Georgia" size:14];
-    email.textColor = [UIColor lightGrayColor];
+- (void)dismissWithError {
+    [SVProgressHUD showErrorWithStatus:@"Unable to save."];
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [email resignFirstResponder];
-    [self submitButtonPressed:nil];
-    return YES;
-}
-
-- (void)removeKeyboard {
-    [email resignFirstResponder];
-}
-
-- (void)displayText:(NSString *)text {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    self.status.text = text;
-    [UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:.50];
-    self.status.alpha = 1.0;
-	[UIView commitAnimations];
-    [pool release];
-}
-
-- (void)removeError {
-    [UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:.5];
-    self.status.alpha = 0.0;
-	[UIView commitAnimations];
-}
-
-- (void)sendToProfileView {
-    [self.navigationController popViewControllerAnimated:YES];
+- (IBAction)submitButtonPressed:(id)sender {
+    [self connect];
 }
 
 - (IBAction)backgroundButtonPressed:(id)sender {
     [self removeKeyboard];
 }
 
-- (IBAction)submitButtonPressed:(id)sender {
+- (void)removeKeyboard {
+    [self.email resignFirstResponder];
+}
+
+- (void)displayText:(NSString *)text {
+    self.status.text = text;
+    [UIView animateWithDuration:.5f animations:^{
+        self.status.alpha = 1.0;
+    }];
+}
+
+- (void)removeError {
+    [UIView animateWithDuration:.5f animations:^{
+        self.status.alpha = 0.0;
+    }];
+}
+
+- (void)sendToProfileView {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - Data Methods
+
+- (void)connect {
+    
     [self removeKeyboard];
-    if([email.text isEqualToString:@""]){
+    
+    BOOL passedConstraints = [self checkConstraints];
+    
+    if(passedConstraints) {
+        [SVProgressHUD showWithStatus:@"Updating..."];
+        TexasDrumsGetEditProfile *get = [[TexasDrumsGetEditProfile alloc] initWithUsername:_Profile.username
+                                                                               andPassword:_Profile.password
+                                                                             withFirstName:nil
+                                                                               andLastName:nil
+                                                                        andUpdatedPassword:nil
+                                                                                  andPhone:nil
+                                                                               andBirthday:nil
+                                                                                  andEmail:self.email.text];
+        get.delegate = self;
+        [get startRequest];
+
+    }
+
+}
+
+- (BOOL)checkConstraints {
+    if(self.email.text.length == 0){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!"
                                                         message:@"Please input your email and then press submit."
-                                                       delegate:self 
-                                              cancelButtonTitle:@"Okay" 
+                                                       delegate:self
+                                              cancelButtonTitle:@"Okay"
                                               otherButtonTitles:nil, nil];
         [alert show];
         [alert release];
-        return;
+        return NO;
     }
-    else if([email.text isEqualToString:_Profile.email]){
+    else if([self.email.text isEqualToString:_Profile.email]){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!"
                                                         message:@"You didn't change anything! Please edit your email and press submit when you are done."
-                                                       delegate:self 
-                                              cancelButtonTitle:@"Okay" 
+                                                       delegate:self
+                                              cancelButtonTitle:@"Okay"
                                               otherButtonTitles:nil, nil];
         [alert show];
         [alert release];
-        return;
+        return NO;
     }
-    //NSError *error = nil;
-    NSString *API_Call = [NSString stringWithFormat:@"%@apikey=%@&username=%@&password=%@&email=%@", TEXAS_DRUMS_API_EDIT_PROFILE, TEXAS_DRUMS_API_KEY, _Profile.username, _Profile.password, email.text];
-    TDLog(@"%@", API_Call);
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:API_Call]];
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    NSString *get = [[[NSString alloc] initWithData:response encoding:NSASCIIStringEncoding] autorelease];
+    else return YES;
+}
+
+#pragma mark - UITextField Delegate Methods
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [email resignFirstResponder];
+    [self connect];
     
-    if([get isEqualToString:_200OK]){
-        _Profile.email = email.text;
-        
-        [self performSelectorOnMainThread:@selector(displayText:) withObject:@"Your email has been updated." waitUntilDone:YES];
-        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(sendToProfileView) userInfo:nil repeats:NO];
+    return YES;
+}
+
+#pragma mark - TexasDrumsRequestDelegate Methods
+
+- (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
+    
+    NSError *error = nil;
+    NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
+    
+    if([results count] > 0){
+        // Check if the response is just a dictionary value of one.
+        // This implies that the key value pair follows the format:
+        // status -> 'message'
+        // We use respondsToSelector since the API returns a dictionary
+        // of length one for any status messages, but an array of
+        // dictionary responses for valid data.
+        // CJSONDeserializer interprets actual data as NSArrays.
+        if([results respondsToSelector:@selector(objectForKey:)] ){
+            if([[results objectForKey:@"status"] isEqualToString:_200OK]) {
+                TDLog(@"Profile updated.");
+                _Profile.email = self.email.text;
+                
+                [self performSelectorOnMainThread:@selector(displayText:) withObject:@"Your email has been updated." waitUntilDone:YES];
+                [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(sendToProfileView) userInfo:nil repeats:NO];
+                [self dismissWithSuccess];
+            }
+            else {
+                TDLog(@"Unable to update profile. Request returned: %@", [results objectForKey:@"status"]);
+                [self dismissWithError];
+                return;
+            }
+        }
     }
-    else if([get isEqualToString:@""]){
-        [self performSelectorOnMainThread:@selector(displayText:) withObject:@"Could not update email." waitUntilDone:YES];
+    else {
+        TDLog(@"Could not update profile.");
+        [self dismissWithError];
     }
-    //more error management here
+}
+
+- (void)request:(TexasDrumsRequest *)request failedWithError:(NSError *)error {
+    TDLog(@"Request error: %@", error);
+    
+    // Show refresh button and error message.
+    [self dismissWithError];
 }
 
 @end

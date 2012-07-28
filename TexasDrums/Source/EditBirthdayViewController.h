@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TexasDrumsAPIConnection.h"
 
-@interface EditBirthdayViewController : UIViewController<NSURLConnectionDelegate> {
+@protocol TexasDrumsAPIConnection;
+
+@interface EditBirthdayViewController : UIViewController<TexasDrumsAPIConnection> {
     IBOutlet UIDatePicker *picker;
     IBOutlet UILabel *birthdayLabel;
     IBOutlet UILabel *status;
@@ -25,5 +28,13 @@
 @property (nonatomic, retain) NSMutableData *received_data;
 
 - (IBAction)submitButtonPressed:(id)sender;
+- (void)displayText:(NSString *)text;
+- (void)removeError;
+- (void)sendToProfileView;
+- (void)updateLabel:(id)sender;
+- (BOOL)checkConstraints;
+- (NSString *)parseDatabaseString;
+- (NSString *)convertIntToMonth:(int)month;
+- (NSString *)prepareDateString;
 
 @end

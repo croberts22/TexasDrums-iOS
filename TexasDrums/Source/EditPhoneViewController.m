@@ -14,8 +14,9 @@
 
 @synthesize phone, status, submit, background_button;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+#pragma mark - Memory Management
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -23,8 +24,7 @@
     return self;
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
@@ -38,8 +38,7 @@
     [[GANTracker sharedTracker] trackPageview:@"Edit Phone (EditPhoneView)" withError:nil];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setTitle:@"Edit Phone Number"];
@@ -52,21 +51,18 @@
     self.phone.font = [UIFont TexasDrumsFontOfSize:14];
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - UI Methods
 
-- (void)setTitle:(NSString *)title
-{
+- (void)setTitle:(NSString *)title {
     [super setTitle:title];
     UILabel *titleView = (UILabel *)self.navigationItem.titleView;
     if (!titleView) {
@@ -95,11 +91,11 @@
     [self connect];
 }
 
-- (void)removeKeyboard {
-    [self.phone resignFirstResponder];
+- (IBAction)backgroundButtonPressed:(id)sender {
+    [self removeKeyboard];
 }
 
-- (IBAction)backgroundButtonPressed:(id)sender {
+- (void)removeKeyboard {
     [self.phone resignFirstResponder];
 }
 
@@ -120,6 +116,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark - Data Methods
 
 - (void)connect {
     
@@ -172,7 +169,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [phone resignFirstResponder];
-    [self submitButtonPressed:nil];
+    [self connect];
     
     return YES;
 }

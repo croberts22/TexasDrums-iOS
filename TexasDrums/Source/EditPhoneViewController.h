@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "TexasDrumsAPIConnection.h"
 
+@protocol TexasDrumsAPIConnection;
+
 @interface EditPhoneViewController : UIViewController<UITextFieldDelegate, TexasDrumsAPIConnection> {
     IBOutlet UITextField *phone;
     IBOutlet UIButton *submit;
@@ -21,11 +23,12 @@
 @property (nonatomic, retain) UIButton *background_button;
 @property (nonatomic, retain) UILabel *status;
 
+- (IBAction)submitButtonPressed:(id)sender;
 - (IBAction)backgroundButtonPressed:(id)sender;
+- (void)removeKeyboard;
 - (void)displayText:(NSString *)text;
 - (void)removeError;
-- (IBAction)submitButtonPressed:(id)sender;
 - (void)sendToProfileView;
-- (void)updatePhone;
+- (BOOL)checkConstraints;
 
 @end

@@ -14,8 +14,7 @@
 
 @synthesize original_password, a_new_password, a_new_password_again, length_constraint, alpha_constraint, numerical_constraint, background_button, status;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -23,8 +22,7 @@
     return self;
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
@@ -38,8 +36,7 @@
     [[GANTracker sharedTracker] trackPageview:@"Edit Password (EditPasswordView)" withError:nil];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setTitle:@"Edit Password"];
@@ -64,21 +61,18 @@
     self.status.alpha = 0.0f;
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - UI Methods
 
-- (void)setTitle:(NSString *)title
-{
+- (void)setTitle:(NSString *)title {
     [super setTitle:title];
     UILabel *titleView = (UILabel *)self.navigationItem.titleView;
     if (!titleView) {
@@ -144,7 +138,7 @@
 - (void)connect {
     [self removeKeyboard];
 
-    BOOL passedConstraints = [self checkPasswordConstraints];
+    BOOL passedConstraints = [self checkConstraints];
     
     if(passedConstraints) {
         [SVProgressHUD showWithStatus:@"Updating..."];
@@ -161,8 +155,7 @@
     }
 }
 
-
-- (BOOL)checkPasswordConstraints {
+- (BOOL)checkConstraints {
     
     UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
                                                      message:@""
@@ -174,7 +167,6 @@
     if(original_password.text.length == 0 || a_new_password.text.length == 0 || a_new_password_again.text.length == 0){
         alert.message = @"Please fill out all fields.";
         [alert show];
-        [alert release];
         return NO;
     }
     
@@ -188,7 +180,6 @@
             if([original_password.text isEqualToString:a_new_password.text]){
                 alert.message = @"Your original password and your new password are the same. Please enter a different password.";
                 [alert show];
-                [alert release];
                 return NO;
             }
             
@@ -217,7 +208,6 @@
                         // Numerical constraint was not met.
                         alert.message = @"Your new password must contain at least one numerical character. Please try again.";
                         [alert show];
-                        [alert release];
                         self.numerical_constraint.textColor = [UIColor redColor];
                         return NO;
                     }
@@ -226,7 +216,6 @@
                     // Alphabetical constraint was not met.
                     alert.message = @"Your new password must contain at least one alphabetic character. Please try again.";
                     [alert show];
-                    [alert release];
                     self.alpha_constraint.textColor = [UIColor redColor];
                     return NO;
                 }
@@ -235,7 +224,6 @@
                 // Character length constraint was not met.
                 alert.message = @"Your new password must be between 8-16 characters. Please try again.";
                 [alert show];
-                [alert release];
                 self.length_constraint.textColor = [UIColor redColor];
                 return NO;
             }
@@ -244,7 +232,6 @@
             // New password fields do not match.
             alert.message = @"Your new password entries are not the same.  Please try again.";
             [alert show];
-            [alert release];
             return NO;
         }
     }
@@ -252,7 +239,6 @@
         // Original password field does not match what we have stored currently.
         alert.message = @"Your old password does not match your current password. Please try again.";
         [alert show];
-        [alert release];
         return NO;
     }
 }

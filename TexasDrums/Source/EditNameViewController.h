@@ -21,12 +21,11 @@
 @property (nonatomic, retain) UIButton *submit;
 @property (nonatomic, retain) UILabel *status;
 
-
 - (IBAction)submitButtonPressed:(id)sender;
 - (void)removeKeyboard;
 - (void)displayText:(NSString *)text;
 - (void)removeError;
 - (void)sendToProfileView;
-
+- (BOOL)checkConstraints;
 
 @end

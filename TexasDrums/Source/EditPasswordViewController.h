@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TexasDrumsAPIConnection.h"
 
-@interface EditPasswordViewController : UIViewController<TexasDrumsAPIConnection, UITextFieldDelegate> {
+@interface EditPasswordViewController : UIViewController<UITextFieldDelegate, TexasDrumsAPIConnection> {
     IBOutlet UITextField *original_password;
     IBOutlet UITextField *a_new_password;
     IBOutlet UITextField *a_new_password_again;
@@ -35,5 +35,6 @@
 - (void)displayText:(NSString *)text;
 - (void)removeError;
 - (void)sendToProfileView;
+- (BOOL)checkConstraints;
 
 @end
