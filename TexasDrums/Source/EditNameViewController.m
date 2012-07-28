@@ -13,10 +13,9 @@
 #import "UIColor+TexasDrums.h"
 #import "UIFont+TexasDrums.h"
 #import "CJSONDeserializer.h"
+#import "Common.h"
 
 @implementation EditNameViewController
-
-#define _403 (@"403 ERROR: No input given")
 
 @synthesize firstname, lastname, submit, status;
 
@@ -53,15 +52,15 @@
     [self setTitle:@"Edit Name"];
     
     // Set properties.
-    status.alpha = 0.0f;
-    firstname.delegate = self;
-    lastname.delegate = self;
-    firstname.text = _Profile.firstname;
-    lastname.text = _Profile.lastname;
-    firstname.font = [UIFont TexasDrumsFontOfSize:14];
-    lastname.font = [UIFont TexasDrumsFontOfSize:14];
-    firstname.textColor = [UIColor lightGrayColor];
-    lastname.textColor = [UIColor lightGrayColor];
+    self.status.alpha = 0.0f;
+    self.firstname.delegate = self;
+    self.lastname.delegate = self;
+    self.firstname.text = _Profile.firstname;
+    self.lastname.text = _Profile.lastname;
+    self.firstname.font = [UIFont TexasDrumsFontOfSize:14];
+    self.lastname.font = [UIFont TexasDrumsFontOfSize:14];
+    self.firstname.textColor = [UIColor lightGrayColor];
+    self.lastname.textColor = [UIColor lightGrayColor];
 }
 
 - (void)viewDidUnload
@@ -113,20 +112,16 @@
 }
 
 - (void)displayText:(NSString *)text {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     self.status.text = text;
-    [UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:.50];
-    self.status.alpha = 1.0;
-	[UIView commitAnimations];
-    [pool release];
+    [UIView animateWithDuration:.5f animations:^{
+        self.status.alpha = 1.0;
+    }];
 }
 
 - (void)removeError {
-    [UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:.5];
-    self.status.alpha = 0.0;
-	[UIView commitAnimations];
+    [UIView animateWithDuration:.5f animations:^{
+        self.status.alpha = 0.0;
+    }];
 }
 
 - (void)sendToProfileView {
@@ -139,39 +134,45 @@
     
     [self removeKeyboard];
     
-    if([firstname.text isEqualToString:@""] || [lastname.text isEqualToString:@""]){
+    BOOL passedConstraints = [self checkNameConstraints];
+    
+    if(passedConstraints) {
+        [SVProgressHUD showWithStatus:@"Updating..."];
+        TexasDrumsGetEditProfile *get = [[TexasDrumsGetEditProfile alloc] initWithUsername:_Profile.username
+                                                                               andPassword:_Profile.password
+                                                                             withFirstName:firstname.text
+                                                                               andLastName:lastname.text
+                                                                        andUpdatedPassword:nil
+                                                                                  andPhone:nil
+                                                                               andBirthday:nil
+                                                                                  andEmail:nil];
+        get.delegate = self;
+        [get startRequest];
+    }
+}
+
+- (BOOL)checkNameConstraints {
+    if(firstname.text.length == 0 || lastname.text.length == 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!"
-                                                        message:@"Please input your first and last name and then press submit."
-                                                       delegate:self 
-                                              cancelButtonTitle:@"Okay" 
+                                                        message:@"Please input your first and last name and try again."
+                                                       delegate:self
+                                              cancelButtonTitle:@"Okay"
                                               otherButtonTitles:nil, nil];
         [alert show];
         [alert release];
-        return;
+        return NO;
     }
-    else if([firstname.text isEqualToString:_Profile.firstname] && [lastname.text isEqualToString:_Profile.lastname]){
+    else if([firstname.text isEqualToString:_Profile.firstname] && [lastname.text isEqualToString:_Profile.lastname]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!"
                                                         message:@"You didn't change anything! Please edit your name and press submit when you are done."
-                                                       delegate:self 
-                                              cancelButtonTitle:@"Okay" 
+                                                       delegate:self
+                                              cancelButtonTitle:@"Okay"
                                               otherButtonTitles:nil, nil];
         [alert show];
         [alert release];
-        return;
+        return NO;
     }
-
-    
-    [SVProgressHUD showWithStatus:@"Updating..."];
-    TexasDrumsGetEditProfile *get = [[TexasDrumsGetEditProfile alloc] initWithUsername:_Profile.username 
-                                                                           andPassword:_Profile.password 
-                                                                         withFirstName:firstname.text 
-                                                                           andLastName:lastname.text
-                                                                    andUpdatedPassword:nil 
-                                                                              andPhone:nil 
-                                                                           andBirthday:nil
-                                                                              andEmail:nil];
-    get.delegate = self;
-    [get startRequest];
+    else return YES;
 }
 
 
@@ -205,23 +206,24 @@
         // dictionary responses for valid data. 
         // CJSONDeserializer interprets actual data as NSArrays.
         if([results respondsToSelector:@selector(objectForKey:)] ){
-            if(![[results objectForKey:@"status"] isEqualToString:_200OK]) {
-                TDLog(@"Unable to update profile. Request returned: %@", [results objectForKey:@"status"]);
+            if([[results objectForKey:@"status"] isEqualToString:_200OK]) {
+                TDLog(@"Profile updated.");
+                _Profile.firstname = firstname.text;
+                _Profile.lastname = lastname.text;
+                
+                [self performSelectorOnMainThread:@selector(displayText:) withObject:@"Your name has been updated." waitUntilDone:YES];
+                [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(sendToProfileView) userInfo:nil repeats:NO];
                 [self dismissWithSuccess];
+            }
+            else {
+                TDLog(@"Unable to update profile. Request returned: %@", [results objectForKey:@"status"]);
+                [self dismissWithError];
                 return;
             }
         }
-        
-        TDLog(@"Profile updated.");
-        _Profile.firstname = firstname.text;
-        _Profile.lastname = lastname.text;
-        
-        [self performSelectorOnMainThread:@selector(displayText:) withObject:@"Your name has been updated." waitUntilDone:YES];
-        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(sendToProfileView) userInfo:nil repeats:NO];
-        [self dismissWithSuccess];
     }
     else {
-        TDLog(@"Could not update profile..");
+        TDLog(@"Could not update profile.");
         [self dismissWithError];
     }
 }

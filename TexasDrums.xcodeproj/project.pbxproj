@@ -298,6 +298,9 @@
 		63E2EDA415C0FE81006C826E /* TexasDrumsGetEditProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E2EDA315C0FE81006C826E /* TexasDrumsGetEditProfile.m */; };
 		63E2EDA515C0FE81006C826E /* TexasDrumsGetEditProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E2EDA315C0FE81006C826E /* TexasDrumsGetEditProfile.m */; };
 		63E2EDA615C0FE81006C826E /* TexasDrumsGetEditProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E2EDA315C0FE81006C826E /* TexasDrumsGetEditProfile.m */; };
+		63E4D6AC15C361ED003EC59E /* EditProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D6AB15C361EC003EC59E /* EditProfile.m */; };
+		63E4D6AD15C361ED003EC59E /* EditProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D6AB15C361EC003EC59E /* EditProfile.m */; };
+		63E4D6AE15C361ED003EC59E /* EditProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D6AB15C361EC003EC59E /* EditProfile.m */; };
 		63FC645D15B2729900919537 /* GigsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC645B15B2729900919537 /* GigsViewController.m */; };
 		63FC645E15B2729900919537 /* GigsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63FC645C15B2729900919537 /* GigsViewController.xib */; };
 		63FC646115B2749600919537 /* TexasDrumsGetGigs.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC646015B2749600919537 /* TexasDrumsGetGigs.m */; };
@@ -726,6 +729,8 @@
 		63BE6C96157D7AF300E4097B /* CrittercismViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CrittercismViewController.xib; sourceTree = "<group>"; };
 		63E2EDA215C0FE81006C826E /* TexasDrumsGetEditProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexasDrumsGetEditProfile.h; sourceTree = "<group>"; };
 		63E2EDA315C0FE81006C826E /* TexasDrumsGetEditProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsGetEditProfile.m; sourceTree = "<group>"; };
+		63E4D6AA15C361EC003EC59E /* EditProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfile.h; sourceTree = "<group>"; };
+		63E4D6AB15C361EC003EC59E /* EditProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfile.m; sourceTree = "<group>"; };
 		63FC645A15B2729900919537 /* GigsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GigsViewController.h; sourceTree = "<group>"; };
 		63FC645B15B2729900919537 /* GigsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GigsViewController.m; sourceTree = "<group>"; };
 		63FC645C15B2729900919537 /* GigsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GigsViewController.xib; sourceTree = "<group>"; };
@@ -991,6 +996,8 @@
 				044E644714473E2C000080B4 /* EditEmailViewController.h */,
 				044E644814473E2C000080B4 /* EditEmailViewController.m */,
 				044E644914473E2C000080B4 /* EditEmailView.xib */,
+				63E4D6AA15C361EC003EC59E /* EditProfile.h */,
+				63E4D6AB15C361EC003EC59E /* EditProfile.m */,
 			);
 			name = "Edit Profile";
 			sourceTree = "<group>";
@@ -2342,6 +2349,7 @@
 				6303FF4015B7C294009FAEFE /* AddGigViewController.m in Sources */,
 				63292FB215BCFEF800CB383B /* DateViewController.m in Sources */,
 				63E2EDA415C0FE81006C826E /* TexasDrumsGetEditProfile.m in Sources */,
+				63E4D6AC15C361ED003EC59E /* EditProfile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2353,6 +2361,7 @@
 				6303FF4115B7C294009FAEFE /* AddGigViewController.m in Sources */,
 				63292FB315BCFEF800CB383B /* DateViewController.m in Sources */,
 				63E2EDA515C0FE81006C826E /* TexasDrumsGetEditProfile.m in Sources */,
+				63E4D6AD15C361ED003EC59E /* EditProfile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2446,6 +2455,7 @@
 				6303FF4215B7C294009FAEFE /* AddGigViewController.m in Sources */,
 				63292FB415BCFEF800CB383B /* DateViewController.m in Sources */,
 				63E2EDA615C0FE81006C826E /* TexasDrumsGetEditProfile.m in Sources */,
+				63E4D6AE15C361ED003EC59E /* EditProfile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

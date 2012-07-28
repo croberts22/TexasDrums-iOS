@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Common.h"
+#import "TexasDrumsAPIConnection.h"
 
-@interface EditPasswordViewController : UIViewController<UITextFieldDelegate> {
-    IBOutlet UITextField <UITextFieldDelegate> *original_password;
-    IBOutlet UITextField <UITextFieldDelegate> *a_new_password;
-    IBOutlet UITextField <UITextFieldDelegate> *a_new_password_again;
+@interface EditPasswordViewController : UIViewController<TexasDrumsAPIConnection, UITextFieldDelegate> {
+    IBOutlet UITextField *original_password;
+    IBOutlet UITextField *a_new_password;
+    IBOutlet UITextField *a_new_password_again;
     IBOutlet UILabel *length_constraint;
     IBOutlet UILabel *alpha_constraint;
     IBOutlet UILabel *numerical_constraint;
@@ -20,22 +20,20 @@
     IBOutlet UIButton *background_button;
 }
 
-@property (nonatomic, retain) UITextField <UITextFieldDelegate> *original_password;
-@property (nonatomic, retain) UITextField <UITextFieldDelegate> *a_new_password;
-@property (nonatomic, retain) UITextField <UITextFieldDelegate> *a_new_password_again;
+@property (nonatomic, retain) UITextField *original_password;
+@property (nonatomic, retain) UITextField *a_new_password;
+@property (nonatomic, retain) UITextField *a_new_password_again;
 @property (nonatomic, retain) UILabel *length_constraint;
 @property (nonatomic, retain) UILabel *alpha_constraint;
 @property (nonatomic, retain) UILabel *numerical_constraint;
 @property (nonatomic, retain) UILabel *status;
 @property (nonatomic, retain) UIButton *background_button;
 
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField;
-- (void)removeKeyboard;
-- (IBAction)backgroundButtonPressed:(id)sender;
-- (void)displayText:(NSString *)text;
 - (IBAction)submitButtonPressed:(id)sender;
+- (IBAction)backgroundButtonPressed:(id)sender;
+- (void)removeKeyboard;
+- (void)displayText:(NSString *)text;
+- (void)removeError;
 - (void)sendToProfileView;
-- (void)updatePassword:(NSString *)password;
 
 @end

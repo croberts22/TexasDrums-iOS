@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Common.h"
 #import "TexasDrumsAPIConnection.h"
 
 @interface EditNameViewController : UIViewController<UITextFieldDelegate, TexasDrumsAPIConnection> {
@@ -22,10 +21,12 @@
 @property (nonatomic, retain) UIButton *submit;
 @property (nonatomic, retain) UILabel *status;
 
+
+- (IBAction)submitButtonPressed:(id)sender;
 - (void)removeKeyboard;
 - (void)displayText:(NSString *)text;
 - (void)removeError;
+- (void)sendToProfileView;
 
-- (IBAction)submitButtonPressed:(id)sender;
 
 @end

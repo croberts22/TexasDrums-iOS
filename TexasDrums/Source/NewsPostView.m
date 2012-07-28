@@ -103,8 +103,8 @@
 }
 
 - (NSString *)createPost {
-    NSString *header = [NSString stringWithString:@"<html><body link=#FF792A vlink=#CE792A alink=#FF792A><p style = 'font-family: Georgia; font-size: 14px; background-color: #000000; color: #999999'><br />"];
-    NSString *footer = [NSString stringWithString:@"</p><br /></body></html>"];
+    NSString *header = @"<html><body link=#FF792A vlink=#CE792A alink=#FF792A><p style = 'font-family: Georgia; font-size: 14px; background-color: #000000; color: #999999'><br />";
+    NSString *footer = @"</p><br /></body></html>";
     
     return [NSString stringWithFormat:@"%@%@%@", header, post.post, footer];
 }
