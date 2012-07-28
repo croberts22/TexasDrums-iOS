@@ -306,6 +306,12 @@
 		63E4D6B715C44D25003EC59E /* UILabel+TexasDrums.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D6B615C44D22003EC59E /* UILabel+TexasDrums.m */; };
 		63E4D6B815C44D25003EC59E /* UILabel+TexasDrums.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D6B615C44D22003EC59E /* UILabel+TexasDrums.m */; };
 		63E4D6B915C44D25003EC59E /* UILabel+TexasDrums.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D6B615C44D22003EC59E /* UILabel+TexasDrums.m */; };
+		63E4D6BC15C45194003EC59E /* TexasDrumsGetMusic.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D6BB15C45193003EC59E /* TexasDrumsGetMusic.m */; };
+		63E4D6BD15C45194003EC59E /* TexasDrumsGetMusic.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D6BB15C45193003EC59E /* TexasDrumsGetMusic.m */; };
+		63E4D6BE15C45194003EC59E /* TexasDrumsGetMusic.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D6BB15C45193003EC59E /* TexasDrumsGetMusic.m */; };
+		63E4D6C115C45844003EC59E /* TexasDrumsGetAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D6C015C45840003EC59E /* TexasDrumsGetAddressBook.m */; };
+		63E4D6C215C45844003EC59E /* TexasDrumsGetAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D6C015C45840003EC59E /* TexasDrumsGetAddressBook.m */; };
+		63E4D6C315C45844003EC59E /* TexasDrumsGetAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D6C015C45840003EC59E /* TexasDrumsGetAddressBook.m */; };
 		63FC645D15B2729900919537 /* GigsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC645B15B2729900919537 /* GigsViewController.m */; };
 		63FC645E15B2729900919537 /* GigsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63FC645C15B2729900919537 /* GigsViewController.xib */; };
 		63FC646115B2749600919537 /* TexasDrumsGetGigs.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC646015B2749600919537 /* TexasDrumsGetGigs.m */; };
@@ -740,6 +746,10 @@
 		63E4D6B115C390BF003EC59E /* UIView+TexasDrums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TexasDrums.m"; sourceTree = "<group>"; };
 		63E4D6B515C44D20003EC59E /* UILabel+TexasDrums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+TexasDrums.h"; sourceTree = "<group>"; };
 		63E4D6B615C44D22003EC59E /* UILabel+TexasDrums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+TexasDrums.m"; sourceTree = "<group>"; };
+		63E4D6BA15C45193003EC59E /* TexasDrumsGetMusic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexasDrumsGetMusic.h; sourceTree = "<group>"; };
+		63E4D6BB15C45193003EC59E /* TexasDrumsGetMusic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsGetMusic.m; sourceTree = "<group>"; };
+		63E4D6BF15C4583D003EC59E /* TexasDrumsGetAddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexasDrumsGetAddressBook.h; sourceTree = "<group>"; };
+		63E4D6C015C45840003EC59E /* TexasDrumsGetAddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsGetAddressBook.m; sourceTree = "<group>"; };
 		63FC645A15B2729900919537 /* GigsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GigsViewController.h; sourceTree = "<group>"; };
 		63FC645B15B2729900919537 /* GigsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GigsViewController.m; sourceTree = "<group>"; };
 		63FC645C15B2729900919537 /* GigsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GigsViewController.xib; sourceTree = "<group>"; };
@@ -1328,6 +1338,10 @@
 				63FC646015B2749600919537 /* TexasDrumsGetGigs.m */,
 				63E2EDA215C0FE81006C826E /* TexasDrumsGetEditProfile.h */,
 				63E2EDA315C0FE81006C826E /* TexasDrumsGetEditProfile.m */,
+				63E4D6BA15C45193003EC59E /* TexasDrumsGetMusic.h */,
+				63E4D6BB15C45193003EC59E /* TexasDrumsGetMusic.m */,
+				63E4D6BF15C4583D003EC59E /* TexasDrumsGetAddressBook.h */,
+				63E4D6C015C45840003EC59E /* TexasDrumsGetAddressBook.m */,
 			);
 			name = Requests;
 			sourceTree = "<group>";
@@ -2361,6 +2375,8 @@
 				63E4D6AC15C361ED003EC59E /* EditProfile.m in Sources */,
 				63E4D6B215C390C1003EC59E /* UIView+TexasDrums.m in Sources */,
 				63E4D6B715C44D25003EC59E /* UILabel+TexasDrums.m in Sources */,
+				63E4D6BC15C45194003EC59E /* TexasDrumsGetMusic.m in Sources */,
+				63E4D6C115C45844003EC59E /* TexasDrumsGetAddressBook.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2375,6 +2391,8 @@
 				63E4D6AD15C361ED003EC59E /* EditProfile.m in Sources */,
 				63E4D6B315C390C1003EC59E /* UIView+TexasDrums.m in Sources */,
 				63E4D6B815C44D25003EC59E /* UILabel+TexasDrums.m in Sources */,
+				63E4D6BD15C45194003EC59E /* TexasDrumsGetMusic.m in Sources */,
+				63E4D6C215C45844003EC59E /* TexasDrumsGetAddressBook.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2470,6 +2488,8 @@
 				63E4D6AE15C361ED003EC59E /* EditProfile.m in Sources */,
 				63E4D6B415C390C1003EC59E /* UIView+TexasDrums.m in Sources */,
 				63E4D6B915C44D25003EC59E /* UILabel+TexasDrums.m in Sources */,
+				63E4D6BE15C45194003EC59E /* TexasDrumsGetMusic.m in Sources */,
+				63E4D6C315C45844003EC59E /* TexasDrumsGetAddressBook.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

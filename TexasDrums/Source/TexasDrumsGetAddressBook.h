@@ -1,14 +1,14 @@
 //
-//  TexasDrumsGetGigs.h
+//  TexasDrumsGetAddressBook.h
 //  TexasDrums
 //
-//  Created by Corey Roberts on 7/14/12.
+//  Created by Corey Roberts on 7/28/12.
 //  Copyright (c) 2012 Corey Roberts. All rights reserved.
 //
 
 #import "TexasDrumsRequest.h"
 
-@interface TexasDrumsGetGigs : TexasDrumsRequest {
+@interface TexasDrumsGetAddressBook : TexasDrumsRequest {
     NSString *_username;
     NSString *_password;
 }

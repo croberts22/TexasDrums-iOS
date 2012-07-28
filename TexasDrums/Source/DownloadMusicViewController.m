@@ -12,8 +12,7 @@
 #import "TexasDrumsGroupedTableViewCell.h"
 #import "CJSONDeserializer.h"
 #import "Music.h"
-
-#define _HEADER_HEIGHT_ (50)
+#import "TexasDrumsGetMusic.h"
 
 @interface DownloadMusicViewController ()
 
@@ -21,10 +20,11 @@
 
 @implementation DownloadMusicViewController
 
-@synthesize musicTable, musicArray, indicator, received_data, status;
+@synthesize musicTable, musicArray;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+#pragma mark - Memory Management
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -32,8 +32,48 @@
     return self;
 }
 
-- (void)setTitle:(NSString *)title
-{
+#pragma mark - View lifecycle
+
+- (void)viewWillAppear:(BOOL)animated {
+    // Google Analytics
+    [[GANTracker sharedTracker] trackPageview:@"Download Music (DownloadMusicView)" withError:nil];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self setTitle:@"Music"];
+    
+    // Allocate things as necessary.
+    if(self.musicArray == nil){
+        self.musicArray = [[[NSMutableArray alloc] init] autorelease];
+    }
+    
+    // Set properties.
+    self.musicTable.backgroundColor = [UIColor clearColor];
+    self.musicTable.alpha = 0.0f;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    
+    if([musicArray count] == 0) {
+        [self connect];
+    }
+}
+
+- (void)viewDidUnload {
+    [super viewDidUnload];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - UI Methods
+
+- (void)setTitle:(NSString *)title {
     [super setTitle:title];
     UILabel *titleView = (UILabel *)self.navigationItem.titleView;
     if (!titleView) {
@@ -44,62 +84,59 @@
     [titleView sizeToFit];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [[GANTracker sharedTracker] trackPageview:@"Download Music (DownloadMusicView)" withError:nil];
+- (void)refreshPressed {
+    // Fetch music from the server.
+    [self connect];
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self setTitle:@"Music"];
-    if(musicArray == nil){
-        self.musicArray = [[[NSMutableArray alloc] init] autorelease];
-    }
-    self.musicTable.backgroundColor = [UIColor clearColor];
-    
-    self.musicTable.alpha = 0.0f;
-    self.status.alpha = 1.0f;
-    self.indicator.alpha = 1.0f;
-    [self fetchMusic];
+- (void)hideRefreshButton {
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+    [SVProgressHUD showWithStatus:@"Loading..." maskType:SVProgressHUDMaskTypeClear];
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+- (void)dismissWithSuccess {
+    self.navigationItem.rightBarButtonItem.enabled = YES;
+    [SVProgressHUD dismiss];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+- (void)dismissWithError {
+    self.navigationItem.rightBarButtonItem.enabled = YES;
+    [SVProgressHUD showErrorWithStatus:@"Could not fetch music."];
 }
 
-- (void)fetchMusic {
-    [self startConnection];
+- (void)displayTable {
+    [self.musicTable reloadData];
+    [UIView animateWithDuration:0.5f animations:^{
+        if([musicArray count] > 0){
+            self.musicTable.alpha = 1.0f;
+        }
+        else {
+            self.musicTable.alpha = 0.0f;
+        }
+    }];
 }
 
-- (void)startConnection {
-    NSString *API_Call = [NSString stringWithFormat:@"%@apikey=%@&username=%@&password=%@", TEXAS_DRUMS_API_MUSIC, TEXAS_DRUMS_API_KEY, _Profile.username, _Profile.password];
-    TDLog(@"%@", API_Call);
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:API_Call] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
-    
-    NSURLConnection *urlconnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
-    if(urlconnection) {
-        received_data = [[NSMutableData data] retain];
-    }
+#pragma mark - Data Methods
+
+- (void)connect {
+    [self hideRefreshButton];
+    [SVProgressHUD showWithStatus:@"Loading..."];
+    TexasDrumsGetMusic *get = [[TexasDrumsGetMusic alloc] initWithUsername:_Profile.username andPassword:_Profile.password];
+    get.delegate = self;
+    [get startRequest];
 }
 
 - (void)parseMusicData:(NSDictionary *)results {
     for(NSDictionary *item in results) {
         if(DEBUG_MODE) TDLog(@"%@", item);
         Music *music = [self createNewMusic:item];
-        [musicArray addObject:music];
+        [self.musicArray addObject:music];
     }
     
-    [self performSelectorOnMainThread:@selector(displayTable) withObject:nil waitUntilDone:YES];
+    [self displayTable];
 }
 
+#warning - move this as a class method?
 - (Music *)createNewMusic:(NSDictionary *)item {
     Music *music = [[[Music alloc] init] autorelease];
     music.filename = [item objectForKey:@"name"];
@@ -113,43 +150,35 @@
     return music;
 }
 
-- (void)displayTable {
-    float delay = 1.0f;
-    [musicTable reloadData];
-    [UIView beginAnimations:@"displayNewsTable" context:NULL];
-    [UIView setAnimationDelay:delay];
-    self.musicTable.alpha = 1.0f;
-    self.status.alpha = 0.0f;
-    self.indicator.alpha = 0.0f;
-    [UIView commitAnimations];
-}
+#pragma mark - Table View Data Source Methods
 
-
-#pragma mark - Table View Delegate
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [musicArray count];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.musicArray count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return DEFAULT_ROW_HEIGHT;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *header = [UIView TexasDrumsGroupedTableHeaderViewWithTitle:@"Select music:" andAlignment:UITextAlignmentCenter];
+    
+    return header;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     
     TexasDrumsGroupedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if(cell == nil){
         cell = [[[TexasDrumsGroupedTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+
+            cell.textLabel.font = [UIFont TexasDrumsBoldFontOfSize:16];
     }
-    
-    // Overriding TexasDrumsGroupedTableViewCell properties.
-    cell.textLabel.text = [[musicArray objectAtIndex:indexPath.row] filename];
-    cell.textLabel.font = [UIFont fontWithName:@"Georgia-Bold" size:16];
     
     UIImage *background;
     UIImage *selected_background;
@@ -178,89 +207,66 @@
     ((UIImageView *)cell.backgroundView).image = background;
     ((UIImageView *)cell.selectedBackgroundView).image = selected_background;
     
+    Music *music = [self.musicArray objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = music.filename;
+    
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 44.0f;
-}
-
-- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-	return _HEADER_HEIGHT_;
-}
-
-- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *header = [UIView TexasDrumsGroupedTableHeaderViewWithTitle:@"Select music:" andAlignment:UITextAlignmentCenter];
-    
-    return header;
-}
+#pragma mark - Table View Delegate Methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+#warning - Consider moving this out and doing an animation in viewWillAppear when popping.
     [self.musicTable deselectRowAtIndexPath:indexPath animated:YES];
-    TexasDrumsWebViewController *TDWVC = [[TexasDrumsWebViewController alloc] init];
-    NSString *url = [[musicArray objectAtIndex:indexPath.row] location];
+    TexasDrumsWebViewController *TDWVC = [[[TexasDrumsWebViewController alloc] init] autorelease];
+    
+    Music *music = [self.musicArray objectAtIndex:indexPath.row];
+    NSString *url = music.location;
+    
     TDWVC.url = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    TDWVC.the_title = [[musicArray objectAtIndex:indexPath.row] filename];
+    TDWVC.the_title = music.filename;
+    
     [self.navigationController pushViewController:TDWVC animated:YES];
-    [TDWVC release];
 }
 
-#pragma mark - NSURLConnection delegate methods
+#pragma mark - TexasDrumsRequest Delegate Methods
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    [received_data setLength:0];
+- (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
+    TDLog(@"Music request succeeded.");
     
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    // Append the new data to received_data.
-    [received_data appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection
-  didFailWithError:(NSError *)error
-{
-    // release the connection, and the data object
-    [connection release];
-    [received_data release];
-    
-    // inform the user
-    TDLog(@"Connection failed! Error - %@ %@",
-          [error localizedDescription],
-          [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" 
-                                                    message:[error localizedDescription] 
-                                                   delegate:self 
-                                          cancelButtonTitle:@":( Okay" 
-                                          otherButtonTitles:nil, nil];
-    [alert show];
-    [alert release];
-    
-    [indicator stopAnimating];
-    self.status.text = @"Nothing was found. Please try again later.";
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
     NSError *error = nil;
-    NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:received_data error:&error];
+    NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
     
-    [self parseMusicData:results];
+    if([results count] > 0){
+        // Check if the response is just a dictionary value of one.
+        // This implies that the key value pair follows the format:
+        // status -> 'message'
+        // We use respondsToSelector since the API returns a dictionary
+        // of length one for any status messages, but an array of
+        // dictionary responses for valid data.
+        // CJSONDeserializer interprets actual data as NSArrays.
+        if([results respondsToSelector:@selector(objectForKey:)] ){
+            if([[results objectForKey:@"status"] isEqualToString:_403_UNKNOWN_ERROR]) {
+                TDLog(@"No music found. Request returned: %@", [results objectForKey:@"status"]);
+                [self dismissWithSuccess];
+                return;
+            }
+        }
+        
+        TDLog(@"New music found. Parsing..");
+        // Deserialize JSON results and parse them into Music objects.
+        [self parseMusicData:results];
+    }
     
-    TDLog(@"Succeeded! Received %d bytes of data", [received_data length]);
+    [self dismissWithSuccess];
+}
+
+- (void)request:(TexasDrumsRequest *)request failedWithError:(NSError *)error {
+    TDLog(@"Music request error: %@", error);
     
-    // release the connection, and the data object
-    [connection release];
-    [received_data release];
-    
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    // Show error message.
+    [self dismissWithError];
 }
 
 

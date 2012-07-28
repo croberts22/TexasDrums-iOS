@@ -363,7 +363,7 @@
         // dictionary responses for valid data. 
         // CJSONDeserializer interprets actual data as NSArrays.
         if([results respondsToSelector:@selector(objectForKey:)] ){
-            if([[results objectForKey:@"status"] isEqualToString:_200OK]) {
+            if([[results objectForKey:@"status"] isEqualToString:_200_OK]) {
                 TDLog(@"Logged out successfully. Request returned: %@", [results objectForKey:@"status"]);
                 [self logout];
                 [self dismissWithSuccess];

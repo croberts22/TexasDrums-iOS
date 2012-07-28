@@ -9,15 +9,15 @@
 #import "AddressBookViewController.h"
 #import "CJSONDeserializer.h"
 #import "AddressBookMemberViewController.h"
+#import "TexasDrumsGetAddressBook.h"
 
 @implementation AddressBookViewController
 
-#define _HEADER_HEIGHT_ (25)
+@synthesize addressBookTable, sorter, addressBook, full_name, sections, membership;
 
-@synthesize addressBookTable, sorter, addressBook, indicator, full_name, sections, membership, received_data, status;
+#pragma mark - Memory Management
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -25,8 +25,7 @@
     return self;
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
@@ -42,39 +41,22 @@
 
 #pragma mark - View lifecycle
 
-- (void)setTitle:(NSString *)title
-{
-    [super setTitle:title];
-    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
-    if (!titleView) {
-        titleView = [UILabel TexasDrumsNavigationBar];
-        self.navigationItem.titleView = titleView;
-    }
-    titleView.text = title;
-    [titleView sizeToFit];
-}
-
 - (void)viewWillAppear:(BOOL)animated {
+    // Google Analytics
     [[GANTracker sharedTracker] trackPageview:@"Address Book (AddressBookView)" withError:nil];
+    
     NSIndexPath *indexPath = [self.addressBookTable indexPathForSelectedRow];
     if(indexPath) {
         [self.addressBookTable deselectRowAtIndexPath:indexPath animated:YES];
     }
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self setTitle:@"Address Book"];
     
-    self.sorter.alpha = 0.0f;
-    self.sorter.enabled = NO;
-    self.addressBookTable.alpha = 0.0f;
-    self.indicator.alpha = 1.0f;
-    self.status.alpha = 1.0f;
-    self.status.text = @"Loading...";
-    self.addressBookTable.separatorColor = [UIColor darkGrayColor];
-    
+    // Allocate things as necessary.
     if(addressBook == nil){
         addressBook = [[NSMutableArray alloc] init];
     }
@@ -88,37 +70,81 @@
         membership = [[NSMutableDictionary alloc] init];
     }
     
-    [indicator startAnimating];
+    // Set properties.
+    self.sorter.alpha = 0.0f;
+    self.sorter.enabled = NO;
+    self.addressBookTable.alpha = 0.0f;
+    self.addressBookTable.separatorColor = [UIColor darkGrayColor];
     
-    [self fetchAddressBook];
+    [self connect];
+}
+
+- (void)viewDidUnload {
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - UI Methods
+
+- (void)setTitle:(NSString *)title {
+    [super setTitle:title];
+    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
+    if (!titleView) {
+        titleView = [UILabel TexasDrumsNavigationBar];
+        self.navigationItem.titleView = titleView;
+    }
+    titleView.text = title;
+    [titleView sizeToFit];
+}
+
+- (void)refreshPressed {
+    // Fetch music from the server.
+    [self connect];
+}
+
+- (void)hideRefreshButton {
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+    [SVProgressHUD showWithStatus:@"Loading..." maskType:SVProgressHUDMaskTypeClear];
+}
+
+- (void)dismissWithSuccess {
+    self.navigationItem.rightBarButtonItem.enabled = YES;
+    [SVProgressHUD dismiss];
+}
+
+- (void)dismissWithError {
+    self.navigationItem.rightBarButtonItem.enabled = YES;
+    [SVProgressHUD showErrorWithStatus:@"Could not fetch data."];
 }
 
 - (void)displayTable {
-    float delay = 1.0f;
     self.sorter.enabled = YES;
     [self.addressBookTable reloadData];
-    [UIView beginAnimations:@"displayAddressBook" context:NULL];
-    [UIView setAnimationDelay:delay];
-    self.addressBookTable.alpha = 1.0f;
-    self.sorter.alpha = 1.0f;
-    self.indicator.alpha = 0.0f;
-    self.status.alpha = 0.0f;
-    [UIView commitAnimations];
-    [self.indicator performSelector:@selector(stopAnimating) withObject:nil afterDelay:delay+.25];
+    [UIView animateWithDuration:0.5f animations:^{
+        self.addressBookTable.alpha = 1.0f;
+        self.sorter.alpha = 1.0f;
+    }];
 }
 
-- (void)fetchAddressBook {
-    [self startConnection];
+- (IBAction)sorterChanged:(id)sender {
+    [self.addressBookTable scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+    [self.addressBookTable reloadData];
 }
 
-- (void)startConnection {
-    NSString *API_Call = [NSString stringWithFormat:@"%@apikey=%@&username=%@&password=%@", TEXAS_DRUMS_API_ACCOUNTS, TEXAS_DRUMS_API_KEY, _Profile.username, _Profile.password];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:API_Call] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
-    
-    NSURLConnection *urlconnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
-    if(urlconnection) {
-        received_data = [[NSMutableData data] retain];
-    }
+#pragma mark - Data Methods
+
+- (void)connect {
+    [self hideRefreshButton];
+    [SVProgressHUD showWithStatus:@"Loading..."];
+    TexasDrumsGetAddressBook *get = [[TexasDrumsGetAddressBook alloc] initWithUsername:_Profile.username andPassword:_Profile.password];
+    get.delegate = self;
+    [get startRequest];
 }
 
 - (void)parseAddressBookData:(NSDictionary *)results {    
@@ -128,12 +154,14 @@
             [addressBook addObject:profile];
         }
     }
+    
     [self sortMembersByName];
-    //Any changes to UI must be done on main thread.
-    [self performSelectorOnMainThread:@selector(displayTable) withObject:nil waitUntilDone:YES];
+    
+    [self displayTable];
     
 }
 
+#warning - move this as a class method?
 - (Profile *)createNewProfile:(NSDictionary *)item {
     Profile *member_profile = [[[Profile alloc] init] autorelease];
     
@@ -207,7 +235,6 @@
         }
     }
     
-    
     for (Profile *this_profile in addressBook){
         [[full_name objectForKey:this_profile.alphabet_first] addObject:this_profile];
         [[sections objectForKey:this_profile.section] addObject:this_profile];
@@ -226,74 +253,29 @@
     }
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+    if(sorter.selectedSegmentIndex == 0){
+        return [[full_name allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    }
+    
+    return nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
+#pragma mark - Table View Data Source Methods
 
-#pragma mark - TableViewDelegate
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if(sorter.selectedSegmentIndex == 0){
         return [[full_name allKeys] count];
     }
     else if(sorter.selectedSegmentIndex == 1){
         return [[sections allKeys] count];
     }
-    else{
+    else {
         return [[membership allKeys] count];
     }
-    return 0;
 }
 
-/*
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if(sorter.selectedSegmentIndex == 0){
-        return [[[sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
-    }
-    else if(sorter.selectedSegmentIndex == 1){
-        switch(section){
-            case 0:
-                return @"Snares";
-                break;
-            case 1:
-                return @"Tenors";
-                break;
-            case 2:
-                return @"Basses";
-                break;
-            case 3:
-                return @"Cymbals";
-                break;
-            case 4:
-                return @"Instructors";
-                break;
-            default:
-                break;
-        }
-    }
-    else if(sorter.selectedSegmentIndex == 2){
-        if(section == 0){
-            return @"Current Members";
-        }
-        else return @"Alumni Members";
-    }
-    
-    return @"";
-}
- */
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if(sorter.selectedSegmentIndex == 0){ 
         return [[full_name valueForKey:[[[full_name allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section]] count];
     }
@@ -306,21 +288,41 @@
     else return 0;
 }
 
-- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-    if(sorter.selectedSegmentIndex == 0){
-        return [[full_name allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-    }
-    
-    return nil;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return DEFAULT_ROW_HEIGHT;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    NSString *sectionTitle;
+    
+    if(sorter.selectedSegmentIndex == 0){
+        sectionTitle = [[[full_name allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
+    }
+    else if(sorter.selectedSegmentIndex == 1){
+        sectionTitle = [[[sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
+    }
+    else if(sorter.selectedSegmentIndex == 2){
+        sectionTitle = [[[membership allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
+    }
+    
+    UIView *header = [UIView TexasDrumsAddressBookTableHeaderViewWithTitle:sectionTitle];
+    
+	return header;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if(cell == nil){
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        
+        cell.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"uitableviewselection-orange-44.png"]] autorelease];
+        
+        cell.textLabel.font = [UIFont TexasDrumsBoldFontOfSize:16];
+        cell.textLabel.textColor = [UIColor TexasDrumsGrayColor];
     }
     
     Profile *profile;
@@ -335,50 +337,12 @@
         profile = [[membership valueForKey:[[[membership allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
     }
 
-    // Configure the cell...
-    cell.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"uitableviewselection-orange-44.png"]] autorelease];
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", profile.firstname, profile.lastname];
-    cell.textLabel.font = [UIFont fontWithName:@"Georgia-Bold" size:16];
-    cell.textLabel.textColor = [UIColor lightGrayColor];
+    
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 44.0f;
-}
-
-- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section 
-{
-    //create a new view of size _HEADER_HEIGHT_, and place a label inside.
-    UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, _HEADER_HEIGHT_)];
-    
-    UILabel *headerTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, _HEADER_HEIGHT_)];
-    if(sorter.selectedSegmentIndex == 0){
-        headerTitle.text = [[[full_name allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
-    }
-    else if(sorter.selectedSegmentIndex == 1){
-        headerTitle.text = [[[sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];    
-    }
-    else if(sorter.selectedSegmentIndex == 2){
-       headerTitle.text = [[[membership allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
-    }
-    
-    headerTitle.textAlignment = UITextAlignmentLeft;
-    headerTitle.textColor = [UIColor orangeColor];
-    headerTitle.shadowOffset = CGSizeMake(0, 1);
-    headerTitle.font = [UIFont fontWithName:@"Georgia-Bold" size:18];
-    headerTitle.backgroundColor = [UIColor clearColor];
-    
-    UILabel *blackBackground = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 25)] autorelease];
-                            
-    blackBackground.backgroundColor = [UIColor blackColor];
-    
-    [containerView addSubview:blackBackground];
-    [containerView addSubview:headerTitle];
-    
-	return containerView;
-}
+#pragma mark - Table View Delegate Methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     AddressBookMemberViewController *ABMVC = [[AddressBookMemberViewController alloc] init];
@@ -387,72 +351,45 @@
     [ABMVC release];
 }
 
-- (IBAction)sorterChanged:(id)sender{
-    [self.addressBookTable scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
-    [self.addressBookTable reloadData];
-}
+#pragma mark - TexasDrumsRequest Delegate Methods
 
-#pragma mark - NSURLConnection delegate methods
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    // This method is called when the server has determined that it
-    // has enough information to create the NSURLResponse.
+- (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
+    TDLog(@"Address Book request succeeded.");
     
-    // It can be called multiple times, for example in the case of a
-    // redirect, so each time we reset the data.
-    [received_data setLength:0];
-    
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    // Append the new data to received_data.
-    [received_data appendData:data];
-}
-
-
-- (void)connection:(NSURLConnection *)connection
-  didFailWithError:(NSError *)error
-{
-    // release the connection, and the data object
-    [connection release];
-    [received_data release];
-    
-    // inform the user
-    TDLog(@"Connection failed! Error - %@ %@",
-          [error localizedDescription],
-          [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" 
-                                                    message:[error localizedDescription] 
-                                                   delegate:self 
-                                          cancelButtonTitle:@":( Okay" 
-                                          otherButtonTitles:nil, nil];
-    [alert show];
-    [alert release];
-    
-    [indicator stopAnimating];
-    self.status.text = @"Nothing was found. Please try again later.";
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
     NSError *error = nil;
-    NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:received_data error:&error];
+    NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
     
-    [self parseAddressBookData:results];
+    if([results count] > 0){
+        // Check if the response is just a dictionary value of one.
+        // This implies that the key value pair follows the format:
+        // status -> 'message'
+        // We use respondsToSelector since the API returns a dictionary
+        // of length one for any status messages, but an array of
+        // dictionary responses for valid data.
+        // CJSONDeserializer interprets actual data as NSArrays.
+        if([results respondsToSelector:@selector(objectForKey:)] ){
+            if([[results objectForKey:@"status"] isEqualToString:_403_UNKNOWN_ERROR]) {
+                TDLog(@"No address book entities found. Request returned: %@", [results objectForKey:@"status"]);
+                [self dismissWithSuccess];
+                return;
+            }
+        }
+        
+        TDLog(@"New address book entities found. Parsing..");
+        // Deserialize JSON results and parse them into Music objects.
+        [self parseAddressBookData:results];
+    }
     
-    TDLog(@"Succeeded! Received %d bytes of data.", [received_data length]);
-    
-    // release the connection, and the data object
-    [connection release];
-    [received_data release];
-    
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    [self dismissWithSuccess];
 }
+
+- (void)request:(TexasDrumsRequest *)request failedWithError:(NSError *)error {
+    TDLog(@"Address Book request error: %@", error);
+    
+    // Show error message.
+    [self dismissWithError];
+}
+
 
 
 @end

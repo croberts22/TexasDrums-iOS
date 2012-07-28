@@ -250,7 +250,7 @@
         // dictionary responses for valid data. 
         // CJSONDeserializer interprets actual data as NSArrays.
         if([results respondsToSelector:@selector(objectForKey:)] ){
-            if([[results objectForKey:@"status"] isEqualToString:_404UNAUTHORIZED]) {
+            if([[results objectForKey:@"status"] isEqualToString:_404_UNAUTHORIZED]) {
                 TDLog(@"Unable to retrieve profile. Request returned: %@", [results objectForKey:@"status"]);
                 [self dismissWithError];
                 return;

@@ -11,6 +11,7 @@
 
 #define HEADER_HEIGHT               50
 #define STANDARD_HEADER_HEIGHT      40
+#define DEFAULT_ROW_HEIGHT          44
 
 #define SMALL_FONT_SIZE             12.0f
 #define FONT_SIZE                   14.0f
@@ -19,8 +20,10 @@
 #define CELL_CONTENT_MARGIN         10.0f
 
 // Defined API Values
-#define _200OK                      @"200 OK"
-#define _404UNAUTHORIZED            @"404 UNAUTHORIZED"
+#define _200_OK                     @"200 OK"
+#define _403_UNKNOWN_ERROR          @"403 UNKNOWN ERROR"
+#define _404_UNAUTHORIZED           @"404 UNAUTHORIZED"
+#define _405_INVALID_API_KEY        @"405 INVALID API KEY"
 #define _NEWS_API_NO_NEW_ARTICLES   @"No new articles."
 #define _GIGS_API_NO_GIGS_AVAILABLE @"No gigs available."
 

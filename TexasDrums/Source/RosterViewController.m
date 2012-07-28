@@ -24,8 +24,7 @@
 
 #pragma mark - Memory Management
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
@@ -34,16 +33,15 @@
 
 #pragma mark - View lifecycle
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     // Google Analytics
     [[GANTracker sharedTracker] trackPageview:@"Roster (RosterView)" withError:nil];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     [self setTitle:@"Roster"];
@@ -67,8 +65,7 @@
     //[self connect];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
     if([rosters count] == 0){
@@ -76,33 +73,28 @@
     }
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 }
 
-- (void)viewDidDisappear:(BOOL)animated
-{
+- (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - UI Methods
 
-- (void)setTitle:(NSString *)title
-{
+- (void)setTitle:(NSString *)title {
     [super setTitle:title];
     UILabel *titleView = (UILabel *)self.navigationItem.titleView;
     if (!titleView) {
@@ -134,17 +126,15 @@
 }
 
 - (void)displayTable {
-    float duration = 0.5f;
     [self.rosterTable reloadData];
-    [UIView beginAnimations:@"displayRosterTable" context:NULL];
-    [UIView setAnimationDuration:duration];
-    if([rosters count] > 0){
-        self.rosterTable.alpha = 1.0f;
-    }
-    else {
-        self.rosterTable.alpha = 0.0f;
-    }
-    [UIView commitAnimations];
+    [UIView animateWithDuration:0.5f animations:^{
+        if([rosters count] > 0){
+            self.rosterTable.alpha = 1.0f;
+        }
+        else {
+            self.rosterTable.alpha = 0.0f;
+        }
+    }];
 }
 
 #pragma mark - Data Methods
@@ -242,7 +232,6 @@
     return member;
 }
 
-
 #warning - move to category?
 - (NSString *)convertHTML:(NSString *)quote {
     NSString *searchString = quote;
@@ -290,40 +279,35 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{   
-    return [rosters count] == 0 ? 0 : 1;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {   
+    return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [rosters count];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 	return HEADER_HEIGHT;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section 
-{
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
     UIView *header = [UIView TexasDrumsGroupedTableHeaderViewWithTitle:@"Select a year:" andAlignment:UITextAlignmentCenter];
 
 	return header;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     static NSString *CellIdentifier = @"Cell";
     
     TexasDrumsGroupedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[TexasDrumsGroupedTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        
+        cell.textLabel.textAlignment = UITextAlignmentCenter;
     }
-    
-    // Override TexasDrumsGroupedTableViewCell properties.
-    cell.textLabel.textAlignment = UITextAlignmentCenter;
     
     UIImage *background;
     UIImage *selected_background;
@@ -358,20 +342,19 @@
     return cell;
 }
 
-#pragma mark - Table view delegate
+#pragma mark - Table View Delegate Methods
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // *** Consider moving this out and doing an animation in viewWillAppear when popping.
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+#warning - Consider moving this out and doing an animation in viewWillAppear when popping.
     [self.rosterTable deselectRowAtIndexPath:indexPath animated:YES];
     
-    SingleRosterViewController *SRVC = [[SingleRosterViewController alloc] initWithNibName:@"SingleRosterView" bundle:[NSBundle mainBundle]];
+    SingleRosterViewController *SRVC = [[[SingleRosterViewController alloc] initWithNibName:@"SingleRosterView" bundle:[NSBundle mainBundle]] autorelease];
     
     SRVC.roster = [rosters objectAtIndex:indexPath.row];
     SRVC.year = [[rosters objectAtIndex:indexPath.row] the_year];
     
     [self.navigationController pushViewController:SRVC animated:YES];
-    [SRVC release];
 }
 
 #pragma mark - TexasDrumsRequestDelegate Methods
@@ -383,6 +366,24 @@
     NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
     
     if([results count] > 0){
+        // Check if the response is just a dictionary value of one.
+        // This implies that the key value pair follows the format:
+        // status -> 'message'
+        // We use respondsToSelector since the API returns a dictionary
+        // of length one for any status messages, but an array of
+        // dictionary responses for valid data.
+        // CJSONDeserializer interprets actual data as NSArrays.
+        if([results respondsToSelector:@selector(objectForKey:)] ){
+            if([[results objectForKey:@"status"] isEqualToString:_403_UNKNOWN_ERROR]) {
+                TDLog(@"No rosters found. Request returned: %@", [results objectForKey:@"status"]);
+                [self dismissWithSuccess];
+                return;
+            }
+        }
+        
+        TDLog(@"New rosters found. Parsing..");
+        // Deserialize JSON results and parse them into Music objects.
+
         [self parseRosterData:results];
     }
     

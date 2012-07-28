@@ -7,23 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TexasDrumsAPIConnection.h"
 
+@protocol TexasDrumsAPIConnection;
 
-@interface DownloadMusicViewController : UIViewController<NSURLConnectionDelegate> {
+@class Music;
+
+@interface DownloadMusicViewController : UIViewController<TexasDrumsAPIConnection, UITableViewDataSource, UITableViewDelegate> {
+    
     IBOutlet UITableView *musicTable;
-    IBOutlet UIActivityIndicatorView *indicator;
-    IBOutlet UILabel *status;
-    
     NSMutableArray *musicArray;
-    NSMutableData *received_data;
-    
 
 }
 
 @property (nonatomic, retain) UITableView *musicTable;
-@property (nonatomic, retain) UIActivityIndicatorView *indicator;
-@property (nonatomic, retain) UILabel *status;
 @property (nonatomic, retain) NSMutableArray *musicArray;
-@property (nonatomic, retain) NSMutableData *received_data;
+
+- (void)parseMusicData:(NSDictionary *)results;
+- (Music *)createNewMusic:(NSDictionary *)item;
 
 @end

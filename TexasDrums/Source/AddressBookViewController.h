@@ -7,33 +7,31 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TexasDrumsAPIConnection.h"
 
-@interface AddressBookViewController : UIViewController<NSURLConnectionDelegate> {
+@protocol TexasDrumsAPIConnection;
+
+@interface AddressBookViewController : UIViewController<TexasDrumsAPIConnection, UITableViewDataSource, UITableViewDelegate> {
     IBOutlet UITableView *addressBookTable;
     IBOutlet UISegmentedControl *sorter;
-    IBOutlet UIActivityIndicatorView *indicator;
-    IBOutlet UILabel *status;
     NSMutableArray *addressBook;
     NSMutableDictionary *full_name;
     NSMutableDictionary *sections;
     NSMutableDictionary *membership;
-    NSMutableData *received_data;
 }
-
-extern NSString *const TEXAS_DRUMS_API_ACCOUNTS;
 
 @property (nonatomic, retain) UITableView *addressBookTable;
 @property (nonatomic, retain) UISegmentedControl *sorter;
 @property (nonatomic, retain) NSMutableArray *addressBook;
-@property (nonatomic, retain) UIActivityIndicatorView *indicator;
-@property (nonatomic, retain) UILabel *status;
 @property (nonatomic, retain) NSMutableDictionary *full_name;
 @property (nonatomic, retain) NSMutableDictionary *sections;
 @property (nonatomic, retain) NSMutableDictionary *membership;
-@property (nonatomic, retain) NSMutableData *received_data;
 
+- (IBAction)sorterChanged:(id)sender;
+- (void)parseAddressBookData:(NSDictionary *)results;
+- (Profile *)createNewProfile:(NSDictionary *)item;
 - (void)sortMembersByName;
 - (void)grabCharacters;
-- (IBAction)sorterChanged:(id)sender;
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView;
 
 @end
