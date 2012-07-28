@@ -37,16 +37,5 @@
     GHAssertNotNil(news, nil);
 }
 
-- (void)testExtractHTMLFromPostDefaultHTML {
-    NSString *string = @"<html><a href='blahblah'>hello</a></html>";
-    NSString *expected_result = @"hello"; 
-    NSString *result = [self.NVC extractHTMLFromPost:string];
-    
-    GHAssertTrue([result isEqualToString:expected_result], @"testExtractHTMLFromPostDefaultHTML failed");
-}
-
-
-
-
 
 @end

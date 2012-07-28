@@ -14,8 +14,6 @@
 
 @implementation SingleRosterViewController
 
-#define _HEADER_HEIGHT_ (50)
-
 @synthesize roster, year, singleRosterTable;
 
 - (void)dealloc
@@ -121,7 +119,7 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-	return _HEADER_HEIGHT_;
+	return HEADER_HEIGHT;
 }
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section 

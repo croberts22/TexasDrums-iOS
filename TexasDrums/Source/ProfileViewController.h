@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class Profile;
+
 @interface ProfileViewController : UIViewController {
     IBOutlet UITableView *profileTable;
 }
