@@ -132,38 +132,28 @@
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section 
 {
-    
-    // Create a custom header.
-    UIView *containerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, _HEADER_HEIGHT_)] autorelease];
-    UILabel *headerTitle = [[[UILabel alloc] initWithFrame:CGRectMake(10, 20, 300, 30)] autorelease];
+    NSString *sectionTitle;
     
     switch(section){
         case 0:
-            headerTitle.text = @"Snares";
+            sectionTitle = @"Snares";
             break;
         case 1:
-            headerTitle.text = @"Tenors";
+            sectionTitle = @"Tenors";
             break;
         case 2:
-            headerTitle.text = @"Basses";
+            sectionTitle = @"Basses";
             break;
         case 3:
-            headerTitle.text = @"Cymbals";
+            sectionTitle = @"Cymbals";
             break;
         default:
             break;
     }
     
-    // Set header title properties.
-    headerTitle.backgroundColor = [UIColor clearColor];
-    headerTitle.textAlignment = UITextAlignmentLeft;
-    headerTitle.textColor = [UIColor TexasDrumsOrangeColor];
-    headerTitle.font = [UIFont TexasDrumsBoldFontOfSize:18];
-    headerTitle.shadowOffset = CGSizeMake(0, 1);
+    UIView *header = [UIView TexasDrumsGroupedTableHeaderViewWithTitle:sectionTitle andAlignment:UITextAlignmentLeft];
     
-    [containerView addSubview:headerTitle];
-    
-	return containerView;
+	return header;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

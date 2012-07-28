@@ -14,12 +14,11 @@
 
 @implementation InfoViewController
 
-#define _HEADER_HEIGHT_ (50)
-
 @synthesize aboutTable;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+#pragma mark - Memory Management
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -27,8 +26,7 @@
     return self;
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
@@ -36,20 +34,19 @@
 }
 
 - (void)dealloc {
-    [aboutTable release];
+    [self.aboutTable release];
     [super dealloc];
 }
 
 #pragma mark - View lifecycle
 
-- (void)setTitle:(NSString *)title
-{
+- (void)setTitle:(NSString *)title {
     [super setTitle:title];
     UILabel *titleView = (UILabel *)self.navigationItem.titleView;
     if (!titleView) {
         titleView = [[UILabel alloc] initWithFrame:CGRectZero];
         titleView.backgroundColor = [UIColor clearColor];
-        titleView.font = [UIFont fontWithName:@"Georgia-Bold" size:20];
+        titleView.font = [UIFont TexasDrumsBoldFontOfSize:20];
         titleView.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
         titleView.textColor = [UIColor whiteColor]; 
         
@@ -61,67 +58,52 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    // Google Analytics
     [[GANTracker sharedTracker] trackPageview:@"Info (InfoView)" withError:nil];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self setTitle:@"Info"];
+    
+    // Set properties.
     self.aboutTable.scrollEnabled = NO;
 }
 
-- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
-    [self dismissModalViewControllerAnimated:YES];
-}
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
+#pragma mark - UITableView Data Source Methods
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
 }
 
-- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-	return _HEADER_HEIGHT_;
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+	return HEADER_HEIGHT;
 }
 
-//This method overrides the titleForHeaderInSection method.
-- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section 
-{
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
-    //create a new view of size _HEADER_HEIGHT_, and place a label inside.
-    UIView *containerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, _HEADER_HEIGHT_)] autorelease];
-    UILabel *headerTitle = [[[UILabel alloc] initWithFrame:CGRectMake(10, 20, 300, 30)] autorelease];
-    headerTitle.textAlignment = UITextAlignmentLeft;
-    headerTitle.textColor = [UIColor orangeColor];
-    //headerTitle.shadowColor = [UIColor blackColor];
-    headerTitle.shadowOffset = CGSizeMake(0, 1);
-    headerTitle.font = [UIFont fontWithName:@"Georgia-Bold" size:18];
-    headerTitle.backgroundColor = [UIColor clearColor];
-    [containerView addSubview:headerTitle];
-    
+    NSString *sectionTitle;
     if(section == 0){
-        headerTitle.text = @"About Texas Drums";
+        sectionTitle = @"About Texas Drums";
     }
     else if(section == 1){
-        headerTitle.text = @"About This App ";
+        sectionTitle = @"About This App ";
     }
     
-	return containerView;
+    UIView *header = [UIView TexasDrumsGroupedTableHeaderViewWithTitle:sectionTitle andAlignment:UITextAlignmentLeft];
+    
+	return header;
 }
 
 - (UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
@@ -145,7 +127,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
     if(section == 0){
         return 3;
     }
@@ -299,5 +280,10 @@
     }
 
 }
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 
 @end

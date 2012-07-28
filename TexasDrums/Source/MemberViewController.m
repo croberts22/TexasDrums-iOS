@@ -244,26 +244,18 @@
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section 
 {
-    // Create a custom header.
-    UIView *containerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, HEADER_HEIGHT)] autorelease];
-    UILabel *headerTitle = [[[UILabel alloc] initWithFrame:CGRectMake(10, 20, 300, 30)] autorelease];
+    NSString *sectionTitle;
     
     if(section == 0){
-        headerTitle.text = @"Member Options";
+        sectionTitle = @"Member Options";
     }
     else if(section == 1){
-        headerTitle.text = @"Administrative Options";
+        sectionTitle = @"Administrative Options";
     }
     
-    headerTitle.textAlignment = UITextAlignmentLeft;
-    headerTitle.textColor = [UIColor TexasDrumsOrangeColor];
-    headerTitle.font = [UIFont TexasDrumsBoldFontOfSize:18];
-    headerTitle.backgroundColor = [UIColor clearColor];
-    headerTitle.shadowOffset = CGSizeMake(0, 1);
-
-    [containerView addSubview:headerTitle];
+    UIView *header = [UIView TexasDrumsGroupedTableHeaderViewWithTitle:sectionTitle andAlignment:UITextAlignmentLeft];
     
-	return containerView;
+	return header;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

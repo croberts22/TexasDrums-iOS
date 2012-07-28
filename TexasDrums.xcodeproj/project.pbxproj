@@ -300,6 +300,9 @@
 		63E4D6AC15C361ED003EC59E /* EditProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D6AB15C361EC003EC59E /* EditProfile.m */; };
 		63E4D6AD15C361ED003EC59E /* EditProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D6AB15C361EC003EC59E /* EditProfile.m */; };
 		63E4D6AE15C361ED003EC59E /* EditProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D6AB15C361EC003EC59E /* EditProfile.m */; };
+		63E4D6B215C390C1003EC59E /* UIView+TexasDrums.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D6B115C390BF003EC59E /* UIView+TexasDrums.m */; };
+		63E4D6B315C390C1003EC59E /* UIView+TexasDrums.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D6B115C390BF003EC59E /* UIView+TexasDrums.m */; };
+		63E4D6B415C390C1003EC59E /* UIView+TexasDrums.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D6B115C390BF003EC59E /* UIView+TexasDrums.m */; };
 		63FC645D15B2729900919537 /* GigsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC645B15B2729900919537 /* GigsViewController.m */; };
 		63FC645E15B2729900919537 /* GigsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63FC645C15B2729900919537 /* GigsViewController.xib */; };
 		63FC646115B2749600919537 /* TexasDrumsGetGigs.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC646015B2749600919537 /* TexasDrumsGetGigs.m */; };
@@ -730,6 +733,8 @@
 		63E4D6AA15C361EC003EC59E /* EditProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfile.h; sourceTree = "<group>"; };
 		63E4D6AB15C361EC003EC59E /* EditProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfile.m; sourceTree = "<group>"; };
 		63E4D6AF15C38283003EC59E /* TDCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDCategories.h; sourceTree = "<group>"; };
+		63E4D6B015C390BD003EC59E /* UIView+TexasDrums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TexasDrums.h"; sourceTree = "<group>"; };
+		63E4D6B115C390BF003EC59E /* UIView+TexasDrums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TexasDrums.m"; sourceTree = "<group>"; };
 		63FC645A15B2729900919537 /* GigsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GigsViewController.h; sourceTree = "<group>"; };
 		63FC645B15B2729900919537 /* GigsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GigsViewController.m; sourceTree = "<group>"; };
 		63FC645C15B2729900919537 /* GigsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GigsViewController.xib; sourceTree = "<group>"; };
@@ -1562,6 +1567,8 @@
 				6398DFA3157C1A65004A11DA /* UIColor+TexasDrums.m */,
 				635296C0158985D800E62787 /* UIFont+TexasDrums.h */,
 				635296C1158985D800E62787 /* UIFont+TexasDrums.m */,
+				63E4D6B015C390BD003EC59E /* UIView+TexasDrums.h */,
+				63E4D6B115C390BF003EC59E /* UIView+TexasDrums.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -2345,6 +2352,7 @@
 				63292FB215BCFEF800CB383B /* DateViewController.m in Sources */,
 				63E2EDA415C0FE81006C826E /* TexasDrumsGetEditProfile.m in Sources */,
 				63E4D6AC15C361ED003EC59E /* EditProfile.m in Sources */,
+				63E4D6B215C390C1003EC59E /* UIView+TexasDrums.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2357,6 +2365,7 @@
 				63292FB315BCFEF800CB383B /* DateViewController.m in Sources */,
 				63E2EDA515C0FE81006C826E /* TexasDrumsGetEditProfile.m in Sources */,
 				63E4D6AD15C361ED003EC59E /* EditProfile.m in Sources */,
+				63E4D6B315C390C1003EC59E /* UIView+TexasDrums.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2450,6 +2459,7 @@
 				63292FB415BCFEF800CB383B /* DateViewController.m in Sources */,
 				63E2EDA615C0FE81006C826E /* TexasDrumsGetEditProfile.m in Sources */,
 				63E4D6AE15C361ED003EC59E /* EditProfile.m in Sources */,
+				63E4D6B415C390C1003EC59E /* UIView+TexasDrums.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

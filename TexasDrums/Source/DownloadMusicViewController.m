@@ -197,22 +197,10 @@
 	return _HEADER_HEIGHT_;
 }
 
-- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section 
-{
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *header = [UIView TexasDrumsGroupedTableHeaderViewWithTitle:@"Select music:" andAlignment:UITextAlignmentCenter];
     
-    //create a new view of size _HEADER_HEIGHT_, and place a label inside.
-    UIView *containerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, _HEADER_HEIGHT_)] autorelease];
-    UILabel *headerTitle = [[[UILabel alloc] initWithFrame:CGRectMake(10, 20, 300, 30)] autorelease];
-    headerTitle.text = @"Select music:";
-    headerTitle.textAlignment = UITextAlignmentCenter;
-    headerTitle.textColor = [UIColor orangeColor];
-    //headerTitle.shadowColor = [UIColor darkGrayColor];
-    headerTitle.shadowOffset = CGSizeMake(0, 1);
-    headerTitle.font = [UIFont fontWithName:@"Georgia-Bold" size:18];
-    headerTitle.backgroundColor = [UIColor clearColor];
-    [containerView addSubview:headerTitle];
-    
-    return containerView;
+    return header;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

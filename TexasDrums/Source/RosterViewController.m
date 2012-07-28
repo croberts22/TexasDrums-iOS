@@ -298,7 +298,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {   
-    return 1;
+    return [rosters count] == 0 ? 0 : 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -313,25 +313,10 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section 
 {
-    // Create a custom header.
-    UIView *containerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, HEADER_HEIGHT)] autorelease];
-    UILabel *headerTitle = [[[UILabel alloc] initWithFrame:CGRectMake(10, 20, 300, 30)] autorelease];
+    
+    UIView *header = [UIView TexasDrumsGroupedTableHeaderViewWithTitle:@"Select a year:" andAlignment:UITextAlignmentCenter];
 
-    headerTitle.text = @"";
-    if([rosters count] > 0){
-        headerTitle.text = @"Select a year:";
-    }
-    
-    // Set header title properties.
-    headerTitle.textAlignment = UITextAlignmentCenter;
-    headerTitle.textColor = [UIColor TexasDrumsOrangeColor];
-    headerTitle.font = [UIFont TexasDrumsBoldFontOfSize:18];
-    headerTitle.backgroundColor = [UIColor clearColor];
-    headerTitle.shadowOffset = CGSizeMake(0, 1);
-    
-    [containerView addSubview:headerTitle];
-    
-	return containerView;
+	return header;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
