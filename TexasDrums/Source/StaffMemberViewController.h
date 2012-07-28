@@ -11,7 +11,6 @@
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 
-
 @class StaffMember;
 
 @interface StaffMemberViewController : UIViewController<UIWebViewDelegate, MFMailComposeViewControllerDelegate> {
@@ -20,7 +19,6 @@
     UIWebView *bio;
     UIScrollView *scroll;
     BOOL loadBio;
-    //IBOutlet UIActivityIndicatorView *indicator;
 }
 
 @property (nonatomic, retain) StaffMember *member;
@@ -28,6 +26,5 @@
 @property (nonatomic, retain) UIWebView *bio;
 @property (nonatomic, retain) UIScrollView *scroll;
 @property (nonatomic, assign) BOOL loadBio;
-//@property (nonatomic, retain) UIActivityIndicatorView *indicator;
 
 @end

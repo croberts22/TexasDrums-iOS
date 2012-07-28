@@ -10,18 +10,21 @@
 #import "TexasDrumsWebViewController.h"
 #import "StaffMember.h"
 
-#define DOMAIN_PATH (@"http://www.texasdrums.com/")
-
 @interface StaffMemberViewController ()
+
+- (void)initializePicture;
+- (void)initializeBio;
+- (void)initializeScroll;
 
 @end
 
 @implementation StaffMemberViewController
 
-@synthesize member, picture, bio, scroll, loadBio; //, indicator;
+@synthesize member, picture, bio, scroll, loadBio;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+#pragma mark - Memory Management
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -29,8 +32,45 @@
     return self;
 }
 
-- (void)setTitle:(NSString *)title
-{
+#pragma mark - View lifecycle
+
+- (void)viewWillAppear:(BOOL)animated {
+    // Google Analytics
+    [[GANTracker sharedTracker] trackPageview:[NSString stringWithFormat:@"Staff Member: %@ (StaffMemberView)", member.fullname] withError:nil];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self setTitle:member.fullname];
+    
+    // Set properties.
+    self.loadBio = FALSE;
+    self.picture.alpha = 0.0f;
+    self.bio.alpha = 0.0f;
+    
+    // Initialize and set properties for the picture, bio, and the scroller.
+    [self initializePicture];
+    [self initializeBio];
+    [self initializeScroll];
+    
+    // After initialization, add the UIScrollView to the main view.
+    [self.view addSubview:scroll];
+}
+
+- (void)viewDidUnload {
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - UI Methods
+
+- (void)setTitle:(NSString *)title {
     [super setTitle:title];
     UILabel *titleView = (UILabel *)self.navigationItem.titleView;
     if (!titleView) {
@@ -41,28 +81,7 @@
     [titleView sizeToFit];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [[GANTracker sharedTracker] trackPageview:[NSString stringWithFormat:@"Staff Member: %@ (StaffMemberView)", member.fullname] withError:nil];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self setTitle:member.fullname];
-    
-    self.loadBio = FALSE;
-    self.picture.alpha = 0.0f;
-    self.bio.alpha = 0.0f;
-    //self.indicator.alpha = 1.0f;
-    
-    // Initialize and set properties for the picture, bio, and the scroller.
-    [self initializePicture];
-    [self initializeBio];
-    [self initializeScroll];
-    
-    // After initialization, add the UIScrollView to the main view.
-    [self.view addSubview:scroll];
-}
+#pragma mark - Data Methods
 
 - (void)initializePicture {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", DOMAIN_PATH, member.image_url]];
@@ -79,13 +98,13 @@
 
 - (void)initializeBio {
     
-    // HTML
-    NSString *header = [NSString stringWithString:@"<html><body link=#FF792A vlink=#CE792A alink=#FF792A><p style = 'font-family: Georgia; font-size: 12px; color: #999999; text-align: center;'>"];
+    // Initialize HTML code.
+    NSString *header = @"<html><body link=#FF792A vlink=#CE792A alink=#FF792A><p style = 'font-family: Georgia; font-size: 12px; color: #999999; text-align: center;'>";
     NSString *footer = [NSString stringWithFormat:@"</p><p style = 'font-family: Georgia; font-size: 14px; color: #999999; text-align: center;'><strong>Email <a href='mailto:%@'>%@</a></strong><br /></p></body></html>", member.email, member.first];
     NSString *HTMLString = [NSString stringWithFormat:@"%@%@%@", header, member.bio, footer];
-   
+    
     // Set the frame to start at (0, height of picture).
-    bio = [[[UIWebView alloc] initWithFrame:CGRectMake(0, picture.frame.size.height, 320, 175)] autorelease];
+    bio = [[[UIWebView alloc] initWithFrame:CGRectMake(0, picture.frame.size.height, 320, 167)] autorelease];
     
     [self.bio loadHTMLString:HTMLString baseURL:nil];
     
@@ -99,32 +118,21 @@
 
 - (void)initializeScroll {
     // Set UIScrollView's frame to be the UIView (not including space for the UINavigationBar or UITabBar) = (320, 367).
-    scroll = [[[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 375)] autorelease];
+    scroll = [[[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 367)] autorelease];
     
     // Set UIScrollView properties.
     self.scroll.backgroundColor = [UIColor clearColor];
     self.scroll.scrollEnabled = YES;
     
     // Add the UIImageView and UIWebView to the UIScrollView's view.
-    [self.scroll addSubview:picture];    
+    [self.scroll addSubview:picture];
     [self.scroll addSubview:bio];
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - UIWebView Delegate Methods
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
+    
     // Use JavaScript to calculate the height of the 'document,' which is the WebView.
     CGFloat contentHeight = [[webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.scrollHeight"] floatValue];
     
@@ -133,26 +141,25 @@
     self.scroll.contentSize = CGSizeMake(320, picture.frame.size.height+webView.frame.size.height);
     
     self.loadBio = TRUE;
-    [UIView beginAnimations:@"webview" context:NULL];
-    [UIView setAnimationDelay:1.0f];
-    self.bio.alpha = 1.0f;
-    self.picture.alpha = 1.0f;
-    //self.indicator.alpha = 0.0f;
-    [UIView commitAnimations];
+    
+    [UIView animateWithDuration:0.5f animations:^{
+        self.bio.alpha = 1.0f;
+        self.picture.alpha = 1.0f;
+    }];
 }
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType 
-{
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     if(!loadBio){
         return YES;
     }
     else {
-        TDLog(@"%@", request);
+        // If the link is not a mail link, then push to the TexasDrumsWebViewController.
         if([[[request URL] absoluteString] rangeOfString:@"mailto:"].location == NSNotFound){
             TexasDrumsWebViewController *TDWBC = [[[TexasDrumsWebViewController alloc] init] autorelease];
             TDWBC.url = request;
             [self.navigationController pushViewController:TDWBC animated:YES];
         }
+        // Otherwise, present a mail modal view.
         else{
             if([MFMailComposeViewController canSendMail]){
                 MFMailComposeViewController *mailVC = [[MFMailComposeViewController alloc] init];
@@ -166,6 +173,8 @@
         return NO;
     }
 }
+
+#pragma mark - MFMailComposeViewController Delegate Methods
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
     [self dismissModalViewControllerAnimated:YES];

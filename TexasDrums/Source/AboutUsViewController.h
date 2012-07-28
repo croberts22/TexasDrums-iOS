@@ -12,26 +12,12 @@
 @interface AboutUsViewController : UIViewController<TexasDrumsAPIConnection> {
     IBOutlet UIImageView *image;
     IBOutlet UITextView *info;
-    IBOutlet UIActivityIndicatorView *large_indicator;
-    IBOutlet UIActivityIndicatorView *indicator;
-    IBOutlet UILabel *status;
-    NSMutableData *received_data;
 }
 
 @property (nonatomic, retain) UIImageView *image;
 @property (nonatomic, retain) UITextView *info;
-@property (nonatomic, retain) UIActivityIndicatorView *large_indicator;
-@property (nonatomic, retain) UIActivityIndicatorView *indicator;
-@property (nonatomic, retain) UILabel *status;
-@property (nonatomic, retain) NSMutableData *received_data;
 
-- (void)startIndicators;
-- (void)stopLargeIndicator;
-- (void)stopIndicator;
-- (void)fetchAbout;
-- (void)parseAboutData:(NSDictionary *)results;
-- (void)loadImage:(NSString *)link;
-- (void)displayImage:(UIImage *)image;
 - (void)displayText:(NSString *)text;
+- (void)parseAboutData:(NSDictionary *)results;
 
 @end

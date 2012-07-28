@@ -12,26 +12,23 @@
 #import "TexasDrumsTableViewCell.h"
 #import "TexasDrumsGetNews.h"
 #import "CJSONDeserializer.h"
-#import "RegexKitLite.h"
 
 @implementation NewsViewController
 
-@synthesize newsTable, posts, allposts, timestamp, reloadIndicator, refresh, loading, num_member_posts, received_data;
+@synthesize newsTable, posts, allposts, timestamp, reloadIndicator, refresh, num_member_posts, status;
 
-- (void)dealloc
-{
+#pragma mark - Memory Management
+
+- (void)dealloc {
     [posts release];
     [allposts release];
     [newsTable release];
     [reloadIndicator release];
     [refresh release];
-    [loading release];
-    [received_data release];
     [super dealloc];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
@@ -39,8 +36,7 @@
 
 #pragma mark - View lifecycle
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     // Google Analytics
@@ -51,14 +47,9 @@
     if(indexPath) {
         [self.newsTable deselectRowAtIndexPath:indexPath animated:YES];
     }
-    
-    // changing UINavBar graphics
-    //UIImage *bgImage = [UIImage imageNamed:@"UINavigationBar.png"];
-    //[self.navigationController.navigationBar setBackgroundImage:bgImage forBarMetrics:UIBarMetricsDefault];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 
     [self setTitle:@"News"];
@@ -78,12 +69,13 @@
     
     // Create refresh button.
     self.refresh = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(connect)] autorelease];
-    
+    self.status.alpha = 0.0f;
+    self.status.text = @"We were unable to load the news for you! Tap the refresh button or try again later.";
+    self.status.textColor = [UIColor TexasDrumsGrayColor];
     self.navigationItem.rightBarButtonItem = refresh;
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
     [self.newsTable reloadData];
@@ -93,31 +85,26 @@
     }
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidUnload];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 }
 
-- (void)viewDidDisappear:(BOOL)animated
-{
+- (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - UI Methods
 
-- (void)setTitle:(NSString *)title
-{
+- (void)setTitle:(NSString *)title {
     [super setTitle:title];
     UILabel *titleView = (UILabel *)self.navigationItem.titleView;
     if (!titleView) {
@@ -151,15 +138,26 @@
 - (void)dismissWithError {
     self.navigationItem.rightBarButtonItem.enabled = YES;
     [SVProgressHUD showErrorWithStatus:@"Could not fetch data."];
+    
+    if(self.posts.count == 0 && self.status.alpha < 1.0f) {
+        [UIView animateWithDuration:0.5f animations:^{
+            self.status.alpha = 1.0f;
+        }];
+    }
 }
 
 - (void)displayTable {
-    float duration = 0.5f;
     [self.newsTable reloadData];
-    [UIView beginAnimations:@"displayNewsTable" context:NULL];
-    [UIView setAnimationDuration:duration];
-    self.newsTable.alpha = 1.0f;
-    [UIView commitAnimations];
+    [UIView animateWithDuration:0.5f animations:^{
+        if(self.status.alpha != 0.0f) {
+            self.status.alpha = 0.0f;
+        }
+        self.newsTable.alpha = 1.0f;
+    } completion:^(BOOL finished){
+        if(finished) {
+            self.status.hidden = YES;
+        }
+    }];
 }
 
 #pragma mark - Data Methods

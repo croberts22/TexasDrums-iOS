@@ -11,19 +11,13 @@
 
 @interface StaffViewController : UIViewController<TexasDrumsAPIConnection> {
     IBOutlet UITableView *staffTable;
-    IBOutlet UIActivityIndicatorView *indicator;
-    IBOutlet UILabel *status;
     NSMutableArray *staff;
-    NSMutableData *received_data;
 }
 
 @property (nonatomic, retain) UITableView *staffTable;
 @property (nonatomic, retain) NSMutableArray *staff;
-@property (nonatomic, retain) UIActivityIndicatorView *indicator;
-@property (nonatomic, retain) UILabel *status;
-@property (nonatomic, retain) NSMutableData *received_data;
 
-- (void)fetchStaff;
+- (void)displayTable;
 - (void)parseStaffData:(NSDictionary *)results;
 
 @end

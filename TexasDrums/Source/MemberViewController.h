@@ -16,7 +16,7 @@ typedef enum {
     kLogout
 } ButtonType;
 
-@interface MemberViewController : UIViewController<TexasDrumsAPIConnection, NSURLConnectionDelegate> {
+@interface MemberViewController : UIViewController<TexasDrumsAPIConnection, UITableViewDataSource, UITableViewDelegate> {
     IBOutlet UITableView *memberTable;
     IBOutlet UIView *loginPrompt;
     NSArray *membersOptions;
@@ -34,7 +34,6 @@ typedef enum {
 - (void)setButton:(ButtonType)buttonType;
 - (void)showMemberLoginScreen;
 - (void)logoutButtonPressed;
-- (void)destroyProfile;
 - (void)logout;
 
 @end

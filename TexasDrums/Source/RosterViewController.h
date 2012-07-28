@@ -28,8 +28,6 @@
 - (void)displayTable;
 - (void)parseRosterData:(NSDictionary *)results;
 - (RosterMember *)createNewRosterMember:(NSDictionary *)item;
-- (NSString *)convertHTML:(NSString *)quote;
-- (NSString *)parsePhoneNumber:(NSString *)number;
 - (void)sortSections:(Roster *)roster;
 
 @end

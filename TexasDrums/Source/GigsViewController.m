@@ -175,7 +175,7 @@
     
     switch (indexPath.row) {
         case 0:
-            text = [NSString stringWithFormat:@"%d", gig.timestamp_string];
+            text = [NSString stringWithFormat:@"%@", gig.timestamp_string];
             break;
         case 1:
             text = gig.location;

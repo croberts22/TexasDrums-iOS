@@ -15,8 +15,9 @@
 
 @synthesize FAQTable, faq, categories;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+#pragma mark - Memory Management
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -24,8 +25,7 @@
     return self;
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
@@ -41,8 +41,7 @@
     [[GANTracker sharedTracker] trackPageview:@"FAQ (FAQView)" withError:nil];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setTitle:@"FAQ"];
@@ -57,29 +56,16 @@
     self.FAQTable.backgroundColor = [UIColor clearColor];
     self.FAQTable.separatorColor = [UIColor clearColor];
     self.FAQTable.alpha = 0.0f;
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
     
     [self connect];
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
+- (void)viewDidUnload {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -109,7 +95,7 @@
 
 - (void)hideRefreshButton {
     self.navigationItem.rightBarButtonItem.enabled = NO;
-    [SVProgressHUD showWithStatus:@"Loading..." maskType:SVProgressHUDMaskTypeClear];
+    [SVProgressHUD showWithStatus:@"Loading..."];
 }
 
 - (void)dismissWithSuccess {
@@ -123,12 +109,10 @@
 }
 
 - (void)displayTable {
-    float duration = 0.5f;
     [self.FAQTable reloadData];
-    [UIView beginAnimations:@"displayFAQTable" context:NULL];
-    [UIView setAnimationDelay:duration];
-    self.FAQTable.alpha = 1.0f;
-    [UIView commitAnimations];
+    [UIView animateWithDuration:0.5f animations:^{
+        self.FAQTable.alpha = 1.0f;
+    }];
 }
 
 #pragma mark - Data Methods
@@ -166,7 +150,7 @@
 - (void)countCategories {
     for(FAQ *this_faq in faq){
         // Remove quotes.
-        NSString *this_category = [[this_faq category] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+        NSString *this_category = [this_faq.category stringByReplacingOccurrencesOfString:@"\"" withString:@""];
         
         // If category doesn't exist in dictionary, add it.
         if([categories objectForKey:this_category] == nil){
@@ -179,8 +163,7 @@
     }
 }
 
-
-#pragma mark - UITableView Data Source
+#pragma mark - UITableView Data Source Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -238,36 +221,21 @@
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section 
 {
-    // Create a custom header.
+    NSString *sectionTitle;
     int counter = 0;
-    UIView *containerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, STANDARD_HEADER_HEIGHT)] autorelease];
-    
-    UILabel *headerTitle = [[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, 25)] autorelease];
     
     // Determine the section header based on the section.
     for(id key in categories){
-        headerTitle.text = key;
+        sectionTitle = key;
         if(counter == section){
             break;
         }
         counter++;
     }
     
-    // Set header title properties.
-    headerTitle.textAlignment = UITextAlignmentCenter;
-    headerTitle.textColor = [UIColor TexasDrumsOrangeColor];
-    headerTitle.font = [UIFont TexasDrumsBoldFontOfSize:18];
-    headerTitle.backgroundColor = [UIColor clearColor];
-    headerTitle.shadowOffset = CGSizeMake(0, 1);
+    UIView *header = [UIView TexasDrumsFAQTableHeaderViewWithTitle:sectionTitle];
     
-    UIImage *headerImage = [UIImage imageNamed:@"header.png"];
-    UIImageView *headerImageView = [[[UIImageView alloc] initWithImage:headerImage] autorelease];
-    headerImageView.frame = CGRectMake(0, 0, 320, 30);
-
-    [containerView addSubview:headerImageView];
-    [containerView addSubview:headerTitle];
-    
-	return containerView;
+	return header;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -282,18 +250,16 @@
     {
         // Set cell properties.
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor clearColor];
         label = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
         label.lineBreakMode = UILineBreakModeWordWrap;
-        label.numberOfLines = 0; // Infinite lines.
+        label.numberOfLines = 0; 
         label.backgroundColor = [UIColor clearColor];
         label.tag = 1;
         
         [[cell contentView] addSubview:label];
     }
-    
-    // Set properties.
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.backgroundColor = [UIColor clearColor];
     
     NSString *text;
     CGSize size;
@@ -345,13 +311,34 @@
     
     NSError *error = nil;
     NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
-    [self parseFAQData:results];
     
+    if([results count] > 0){
+        // Check if the response is just a dictionary value of one.
+        // This implies that the key value pair follows the format:
+        // status -> 'message'
+        // We use respondsToSelector since the API returns a dictionary
+        // of length one for any status messages, but an array of
+        // dictionary responses for valid data.
+        // CJSONDeserializer interprets actual data as NSArrays.
+        if([results respondsToSelector:@selector(objectForKey:)] ){
+            if([[results objectForKey:@"status"] isEqualToString:_403_UNKNOWN_ERROR]) {
+                TDLog(@"No FAQ data found. Request returned: %@", [results objectForKey:@"status"]);
+                [self dismissWithSuccess];
+                return;
+            }
+        }
+        
+        TDLog(@"New FAQ data found. Parsing..");
+        // Deserialize JSON results and parse them into FAQ objects.
+        
+        [self parseFAQData:results];
+    }
+
     [self dismissWithSuccess];
 }
 
 - (void)request:(TexasDrumsRequest *)request failedWithError:(NSError *)error {
-    TDLog(@"request error: %@", error);
+    TDLog(@"Request error: %@", error);
     
     // Show refresh button and error message.
     [self dismissWithError];

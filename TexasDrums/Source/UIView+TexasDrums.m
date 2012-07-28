@@ -47,6 +47,31 @@
     return header;
 }
 
++ (UIView *)TexasDrumsFAQTableHeaderViewWithTitle:(NSString *)title {
+    
+    UIView *header = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, STANDARD_HEADER_HEIGHT)] autorelease];
+    UIImage *headerImage = [UIImage imageNamed:@"header.png"];
+    UIImageView *headerImageView = [[[UIImageView alloc] initWithImage:headerImage] autorelease];
+    headerImageView.frame = CGRectMake(0, 0, 320, 30);
+
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, 25)] autorelease];
+    
+    header.backgroundColor = [UIColor blackColor];
+    
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor TexasDrumsOrangeColor];
+    label.font = [UIFont TexasDrumsBoldFontOfSize:18];
+    label.backgroundColor = [UIColor clearColor];
+    label.shadowOffset = CGSizeMake(0, 1);
+    
+    label.text = title;
+    
+    [header addSubview:headerImageView];
+    [header addSubview:label];
+    
+    return header;
+}
+
 + (UIView *)TexasDrumsVersionFooter {
     
     UIView *footer = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 10)] autorelease];
@@ -64,6 +89,5 @@
     
     return footer;
 }
-
 
 @end

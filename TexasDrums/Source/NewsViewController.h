@@ -15,25 +15,23 @@
 
 @interface NewsViewController : UIViewController<TexasDrumsTable, TexasDrumsAPIConnection> {
     IBOutlet UITableView *newsTable;
+    IBOutlet UILabel *status;
     NSMutableArray *posts;
     NSMutableArray *allposts;
     int timestamp;
     int num_member_posts;
     UIActivityIndicatorView *reloadIndicator;
     UIBarButtonItem *refresh;
-    UIBarButtonItem *loading;
-    NSMutableData *received_data;
 }
 
 @property (nonatomic, retain) UITableView *newsTable;
+@property (nonatomic, retain) UILabel *status;
 @property (nonatomic, retain) NSMutableArray *posts;
 @property (nonatomic, retain) NSMutableArray *allposts;
 @property (nonatomic, assign) int timestamp;
 @property (nonatomic, assign) int num_member_posts;
 @property (nonatomic, retain) UIActivityIndicatorView *reloadIndicator;
 @property (nonatomic, retain) UIBarButtonItem *refresh;
-@property (nonatomic, retain) UIBarButtonItem *loading;
-@property (nonatomic, retain) NSMutableData *received_data;
 
 - (void)refreshPressed;
 - (void)hideRefreshButton;

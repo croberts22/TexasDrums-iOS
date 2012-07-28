@@ -9,9 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "Profile.h"
 
+// UITableView Header Heights
 #define HEADER_HEIGHT               50
 #define STANDARD_HEADER_HEIGHT      40
+
+// UITableView Row Heights
 #define DEFAULT_ROW_HEIGHT          44
+#define STAFF_ROW_HEIGHT            90
 
 #define SMALL_FONT_SIZE             12.0f
 #define FONT_SIZE                   14.0f
@@ -26,6 +30,8 @@
 #define _405_INVALID_API_KEY        @"405 INVALID API KEY"
 #define _NEWS_API_NO_NEW_ARTICLES   @"No new articles."
 #define _GIGS_API_NO_GIGS_AVAILABLE @"No gigs available."
+
+#define DOMAIN_PATH                 @"http://www.texasdrums.com/"
 
 @interface Common : NSObject
 

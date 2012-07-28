@@ -12,6 +12,8 @@
 
 @synthesize aboutInfo;
 
+#pragma mark - Memory Management
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -31,8 +33,7 @@
 
 #pragma mark - View lifecycle
 
-- (void)setTitle:(NSString *)title
-{
+- (void)setTitle:(NSString *)title {
     [super setTitle:title];
     UILabel *titleView = (UILabel *)self.navigationItem.titleView;
     if (!titleView) {
@@ -44,29 +45,39 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    // Google Analytics
     [[GANTracker sharedTracker] trackPageview:@"About App (AboutThisAppView)" withError:nil];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    [self setTitle:@"About This App"];
-    NSString *programmers = @"Corey Roberts";
-    NSString *splash_design = @"Richard Fish";
-    NSString *website = @"http://www.texasdrums.com";
     
-    self.aboutInfo.text = [NSString stringWithFormat:@"Texas Drums for iPhone made by %@. \nSplash screen designed by %@. \n\n\nFor more info, check out %@", programmers, splash_design, website];
+    [self setTitle:@"About This App"];
+    
+    NSString *texasDrums = @"Texas Drums for iPhone made by Corey Roberts.";
+    NSString *splashScreen = @"Texas Drums logo designed by Richard Fish.";
+    NSString *moreInfo = @"For more info, check out http://www.texasdrums.com";
+    NSString *librariesUsed = @"Special thanks to the following:";
+    NSString *crittercism = @"- Crittercism and the Crittercism SDK";
+    NSString *asi = @"- ASI's ASIHTTPRequest library";
+    NSString *sdimage = @"- Oliver Poitrey's SDWebImage library";
+    NSString *google = @"- Google and the Google Analytics SDK";
+    NSString *touchJSON = @"- Jonathan Wight's Cocoa/TouchJSON library";
+    NSString *regexkit = @"- John Engelhart's RegexKit library";
+    NSString *family = @"- The entire Texas Drums, Longhorn Band, and University of Texas at Austin community for all of your support! :)";
+    
+    NSString *libraryString = [NSString stringWithFormat:@"%@\n\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n", librariesUsed, crittercism, asi, sdimage, google, touchJSON, regexkit, family];
+    
+    self.aboutInfo.text = @"Texas Drums for iPhone made by Corey Roberts. \nSplash screen designed by Richard Fish.\n\n";
+    
+    self.aboutInfo.text = [NSString stringWithFormat:@"%@\n%@\n\n%@\n\n%@", texasDrums, splashScreen, moreInfo, libraryString];
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }

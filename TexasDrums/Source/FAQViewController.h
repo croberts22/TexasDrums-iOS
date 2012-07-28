@@ -19,7 +19,6 @@
 @property (nonatomic, retain) NSMutableArray *faq;
 @property (nonatomic, retain) NSMutableDictionary *categories;
 
-- (void)fetchFAQ;
 - (void)parseFAQData:(NSDictionary *)results;
 - (void)countCategories;
 

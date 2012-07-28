@@ -11,16 +11,15 @@
 #import "CJSONDeserializer.h"
 #import "TexasDrumsTableViewCell.h"
 #import "StaffMemberViewController.h"
+#import "TexasDrumsGetStaff.h"
 
 @implementation StaffViewController
 
-//this will need to be changed. add 11-12 extension in the API for current_year.
-#define DOMAIN_PATH (@"http://www.texasdrums.com/")
+@synthesize staffTable, staff;
 
-@synthesize staffTable, staff, indicator, status, received_data;
+#pragma mark - Memory Management
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -28,8 +27,7 @@
     return self;
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
@@ -38,8 +36,47 @@
 
 #pragma mark - View lifecycle
 
-- (void)setTitle:(NSString *)title
-{
+- (void)viewWillAppear:(BOOL)animated {
+    // Google Analytics
+    [[GANTracker sharedTracker] trackPageview:@"Staff (StaffView)" withError:nil];
+    NSIndexPath *indexPath = [self.staffTable indexPathForSelectedRow];
+    if(indexPath) {
+        [self.staffTable deselectRowAtIndexPath:indexPath animated:YES];
+    }
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self setTitle:@"Staff"];
+    
+    // Allocate things as necessary.
+    if(staff == nil){
+        staff = [[NSMutableArray alloc] init];
+    }
+
+    // Set properties.
+    self.staffTable.backgroundColor = [UIColor clearColor];
+    self.staffTable.separatorColor = [UIColor grayColor];
+    self.staffTable.alpha = 0.0f;
+    
+    [self connect];
+}
+
+- (void)viewDidUnload {
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - UI Methods
+
+- (void)setTitle:(NSString *)title {
     [super setTitle:title];
     UILabel *titleView = (UILabel *)self.navigationItem.titleView;
     if (!titleView) {
@@ -50,65 +87,46 @@
     [titleView sizeToFit];
 }
 
+- (void)refreshPressed {
+    // Fetch roster from the server.
+    [self connect];
+}
+
+- (void)hideRefreshButton {
+    self.navigationItem.rightBarButtonItem = nil;
+}
+
+- (void)dismissWithSuccess {
+    self.navigationItem.rightBarButtonItem = nil;
+    [SVProgressHUD dismiss];
+}
+
+- (void)dismissWithError {
+    //self.navigationItem.rightBarButtonItem = refresh;
+    self.navigationItem.rightBarButtonItem.enabled = YES;
+    [SVProgressHUD showErrorWithStatus:@"Could not fetch data."];
+}
+
 - (void)displayTable {
-    float delay = 1.0f;
     [self.staffTable reloadData];
-    [UIView beginAnimations:@"displayStaffTable" context:NULL];
-    [UIView setAnimationDelay:delay];
-    self.staffTable.alpha = 1.0f;
-    self.indicator.alpha = 0.0f;
-    self.status.alpha = 0.0f;
-    [UIView commitAnimations];
-    [self.indicator performSelector:@selector(stopAnimating) withObject:nil afterDelay:delay+.25];
+    [UIView animateWithDuration:0.5f animations:^{
+        self.staffTable.alpha = 1.0f;
+    }];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [[GANTracker sharedTracker] trackPageview:@"Staff (StaffView)" withError:nil];
-    NSIndexPath *indexPath = [self.staffTable indexPathForSelectedRow];
-    if(indexPath) {
-        [self.staffTable deselectRowAtIndexPath:indexPath animated:YES];
-    }
-}
+#pragma mark - Data Methods
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self setTitle:@"Staff"];
-    
-    if(staff == nil){
-        staff = [[NSMutableArray alloc] init];
-    }
-    //set table properties
-    self.staffTable.backgroundColor = [UIColor clearColor];
-    self.staffTable.separatorColor = [UIColor grayColor];
-    self.staffTable.alpha = 0.0f;
-    
-    self.indicator.alpha = 1.0f;
-    self.status.alpha = 1.0f;
-    self.status.text = @"Loading...";
-    
-    [self fetchStaff];
-}
-
-
-- (void)fetchStaff {
-    [self startConnection];
-}
-
-- (void)startConnection {
-    NSString *API_Call = [NSString stringWithFormat:@"%@apikey=%@", TEXAS_DRUMS_API_STAFF, TEXAS_DRUMS_API_KEY];
-    TDLog(@"%@", API_Call);
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:API_Call] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
-    
-    NSURLConnection *urlconnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
-    if(urlconnection) {
-        received_data = [[NSMutableData data] retain];
-    }
+- (void)connect {
+    [self hideRefreshButton];
+    [SVProgressHUD showWithStatus:@"Loading..."];
+    TexasDrumsGetStaff *get = [[TexasDrumsGetStaff alloc] init];
+    get.delegate = self;
+    [get startRequest];
 }
 
 - (void)parseStaffData:(NSDictionary *)results {
     for(NSDictionary *item in results){
-        StaffMember *member = [[StaffMember alloc] init];
+        StaffMember *member = [[[StaffMember alloc] init] autorelease];
         member.first = [item objectForKey:@"firstname"];
         member.last = [item objectForKey:@"lastname"];
         member.fullname = [NSString stringWithFormat:@"%@ %@", member.first, member.last];
@@ -120,45 +138,27 @@
         member.sortfield = [[item objectForKey:@"sortfield"] intValue];
         
         [staff addObject:member];
-        
-        [member release];
     }
     
     [self displayTable]; 
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
+#pragma mark - UITableView Data Source Methods
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [staff count];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 90.0f;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return STAFF_ROW_HEIGHT;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     static NSString *CellIdentifier = @"Cell";
     
     TexasDrumsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -166,94 +166,73 @@
     if (cell == nil)
     {
         cell = [[[TexasDrumsTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        
+        cell.textLabel.font = [UIFont TexasDrumsBoldFontOfSize:18];
+        cell.textLabel.adjustsFontSizeToFitWidth = YES;
     }
+
+        StaffMember *staffMember = [staff objectAtIndex:indexPath.row];
     
-    cell.textLabel.font = [UIFont fontWithName:@"Georgia-Bold" size:18.0f];
-    
-    // Asynchronously fetch the Staff image; in the mean time, use a thumbnail        
-    // until the image is fetched.
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", DOMAIN_PATH, [[staff objectAtIndex:indexPath.row] image_url]]];
+    // Asynchronously fetch the Staff image; in the mean time, use a thumbnail until the image is fetched.
+    // NOTE: The API contains a global variable that determines which year to fetch.  The API was implemented this
+    // way so we could dynamically alter the Staff page without having to push out a new update (fixed in v1.1).
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", DOMAIN_PATH, staffMember.image_url]];
     
     [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"Thumbnail.png"]];
-    cell.textLabel.text = [[staff objectAtIndex:indexPath.row] fullname];
-    cell.textLabel.adjustsFontSizeToFitWidth = YES;
-    cell.detailTextLabel.text = [[staff objectAtIndex:indexPath.row] instrument];
+    
+    cell.textLabel.text = staffMember.fullname;
+    cell.detailTextLabel.text = staffMember.instrument;
     
     return cell;
 }
 
+#pragma mark - UITableView Delegate Methods
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    StaffMemberViewController *SMVC = [[StaffMemberViewController alloc] init];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    StaffMemberViewController *SMVC = [[[StaffMemberViewController alloc] initWithNibName:@"StaffMemberViewController" bundle:[NSBundle mainBundle]] autorelease];
     SMVC.member = [staff objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:SMVC animated:YES];
-    [SMVC release];
 }
 
-#pragma mark - NSURLConnection delegate methods
+#pragma mark - TexasDrumsRequestDelegate Methods
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    // This method is called when the server has determined that it
-    // has enough information to create the NSURLResponse.
+- (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
+    TDLog(@"Obtained staff members successfully.");
     
-    // It can be called multiple times, for example in the case of a
-    // redirect, so each time we reset the data.
-    [received_data setLength:0];
-    
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    // Append the new data to received_data.
-    [received_data appendData:data];
-}
-
-
-- (void)connection:(NSURLConnection *)connection
-  didFailWithError:(NSError *)error
-{
-    // release the connection, and the data object
-    [connection release];
-    [received_data release];
-    
-    // inform the user
-    TDLog(@"Connection failed! Error - %@ %@",
-          [error localizedDescription],
-          [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" 
-                                                    message:[error localizedDescription] 
-                                                   delegate:self 
-                                          cancelButtonTitle:@":( Okay" 
-                                          otherButtonTitles:nil, nil];
-    [alert show];
-    [alert release];
-    
-    self.status.text = @"Nothing was found. Please try again later.";
-    [self.indicator stopAnimating];
-    
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
     NSError *error = nil;
-    NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:received_data error:&error];
+    NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
     
-    [self parseStaffData:results];
+    if([results count] > 0){
+        // Check if the response is just a dictionary value of one.
+        // This implies that the key value pair follows the format:
+        // status -> 'message'
+        // We use respondsToSelector since the API returns a dictionary
+        // of length one for any status messages, but an array of
+        // dictionary responses for valid data.
+        // CJSONDeserializer interprets actual data as NSArrays.
+        if([results respondsToSelector:@selector(objectForKey:)] ){
+            if([[results objectForKey:@"status"] isEqualToString:_403_UNKNOWN_ERROR]) {
+                TDLog(@"No staff data found. Request returned: %@", [results objectForKey:@"status"]);
+                [self dismissWithSuccess];
+                return;
+            }
+        }
+        
+        TDLog(@"New staff data found. Parsing..");
+        // Deserialize JSON results and parse them into StaffMember objects.
+        
+        [self parseStaffData:results];
+    }
     
-    TDLog(@"Succeeded! Received %d bytes of data.", [received_data length]);
-    
-    // release the connection, and the data object
-    [connection release];
-    [received_data release];
-    
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    [self dismissWithSuccess];
 }
 
+- (void)request:(TexasDrumsRequest *)request failedWithError:(NSError *)error {
+    TDLog(@"Request error: %@", error);
+    
+    // Show refresh button and error message.
+    [self dismissWithError];
+}
 
 
 @end

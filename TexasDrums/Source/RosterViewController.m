@@ -15,8 +15,6 @@
 
 // Utilities
 #import "CJSONDeserializer.h"
-#import "RegexKitLite.h"
-
 
 @implementation RosterViewController
 
@@ -348,7 +346,7 @@
         }
         
         TDLog(@"New rosters found. Parsing..");
-        // Deserialize JSON results and parse them into Music objects.
+        // Deserialize JSON results and parse them into Roster objects.
 
         [self parseRosterData:results];
     }
