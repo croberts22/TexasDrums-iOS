@@ -12,5 +12,6 @@
 
 + (UIView *)TexasDrumsGroupedTableHeaderViewWithTitle:(NSString *)title andAlignment:(UITextAlignment)alignment;
 + (UIView *)TexasDrumsAddressBookTableHeaderViewWithTitle:(NSString *)title;
++ (UIView *)TexasDrumsVersionFooter;
 
 @end

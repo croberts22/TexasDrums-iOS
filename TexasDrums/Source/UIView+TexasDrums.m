@@ -47,5 +47,23 @@
     return header;
 }
 
++ (UIView *)TexasDrumsVersionFooter {
+    
+    UIView *footer = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 10)] autorelease];
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 30)] autorelease];
+    
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor darkGrayColor];
+    label.font = [UIFont TexasDrumsBoldFontOfSize:14];
+    label.backgroundColor = [UIColor clearColor];
+    label.shadowOffset = CGSizeMake(0, 1);
+    
+    label.text =[NSString stringWithFormat:@"You're using version %@!", [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleVersionKey]];
+    
+    [footer addSubview:label];
+    
+    return footer;
+}
+
 
 @end

@@ -164,6 +164,10 @@
     return DEFAULT_ROW_HEIGHT;
 }
 
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+	return HEADER_HEIGHT;
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *header = [UIView TexasDrumsGroupedTableHeaderViewWithTitle:@"Select music:" andAlignment:UITextAlignmentCenter];
     

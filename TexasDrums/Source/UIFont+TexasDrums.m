@@ -18,4 +18,8 @@
     return [UIFont fontWithName:@"Georgia-Bold" size:size];
 }
 
++ (UIFont *)TexasDrumsItalicFontOfSize:(int)size {
+    return [UIFont fontWithName:@"Georgia-Italic" size:size];
+}
+
 @end

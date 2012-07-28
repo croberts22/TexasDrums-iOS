@@ -40,17 +40,6 @@
 
 #pragma mark - View lifecycle
 
-- (void)setTitle:(NSString *)title {
-    [super setTitle:title];
-    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
-    if (!titleView) {
-        titleView = [UILabel TexasDrumsNavigationBar];
-        self.navigationItem.titleView = titleView;
-    }
-    titleView.text = title;
-    [titleView sizeToFit];
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     // Google Analytics
     [[GANTracker sharedTracker] trackPageview:@"Info (InfoView)" withError:nil];
@@ -65,7 +54,6 @@
     self.aboutTable.scrollEnabled = NO;
 }
 
-
 - (void)viewDidUnload {
     [super viewDidUnload];
 }
@@ -75,48 +63,23 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark - UI Methods
+
+- (void)setTitle:(NSString *)title {
+    [super setTitle:title];
+    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
+    if (!titleView) {
+        titleView = [UILabel TexasDrumsNavigationBar];
+        self.navigationItem.titleView = titleView;
+    }
+    titleView.text = title;
+    [titleView sizeToFit];
+}
+
 #pragma mark - UITableView Data Source Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
-}
-
-- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-	return HEADER_HEIGHT;
-}
-
-- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
-    NSString *sectionTitle;
-    if(section == 0){
-        sectionTitle = @"About Texas Drums";
-    }
-    else if(section == 1){
-        sectionTitle = @"About This App ";
-    }
-    
-    UIView *header = [UIView TexasDrumsGroupedTableHeaderViewWithTitle:sectionTitle andAlignment:UITextAlignmentLeft];
-    
-	return header;
-}
-
-- (UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    if(section == 1){
-        UIView *containerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 10)] autorelease];
-        UILabel *headerTitle = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 30)] autorelease];
-        headerTitle.textAlignment = UITextAlignmentCenter;
-        headerTitle.textColor = [UIColor darkGrayColor];
-        //headerTitle.shadowColor = [UIColor blackColor];
-        headerTitle.shadowOffset = CGSizeMake(0, 1);
-        headerTitle.font = [UIFont fontWithName:@"Georgia-Bold" size:14];
-        headerTitle.backgroundColor = [UIColor clearColor];
-        headerTitle.text =[NSString stringWithFormat:@"You're using version %@!", [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleVersionKey]];
-        [containerView addSubview:headerTitle];
-        
-        return containerView;
-    }
-    else return nil;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -129,111 +92,95 @@
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+	return HEADER_HEIGHT;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    NSString *sectionTitle;
+    
+    if(section == 0){
+        sectionTitle = @"About Texas Drums";
+    }
+    else if(section == 1){
+        sectionTitle = @"About This App";
+    }
+    
+    UIView *header = [UIView TexasDrumsGroupedTableHeaderViewWithTitle:sectionTitle andAlignment:UITextAlignmentLeft];
+    
+	return header;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    
+    if(section == 1){
+        return [UIView TexasDrumsVersionFooter];
+    }
+    else return nil;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
-    
-    //configure cell text
-    if(indexPath.section == 0){
-        switch(indexPath.row){
-            case 0:
-                cell.textLabel.text = @"About Us";
-                break;
-            case 1:
-                cell.textLabel.text = @"FAQ";
-                break;
-            case 2:
-                cell.textLabel.text = @"Section Leaders And Staff";
-                break;
-            default:
-                break;
-        }
-    }
-    else{
-        switch(indexPath.row){
-            case 0:
-                cell.textLabel.text = @"About This App";
-                break;
-            case 1:
-                cell.textLabel.text = @"Contact The Developers";
-                break;
-            default:
-                break;
-        }
+        
+        cell.textLabel.textColor = [UIColor TexasDrumsGrayColor];
+        cell.textLabel.font = [UIFont TexasDrumsBoldFontOfSize:16];
+        cell.textLabel.textAlignment = UITextAlignmentLeft;
+        cell.backgroundColor = [UIColor clearColor];
+        cell.backgroundView.clipsToBounds = YES;
+        
+        // Since a cell's background views are not compatible with UIImageView,
+        // set them both as UIImageView.
+        cell.backgroundView = [[[UIImageView alloc] init] autorelease];
+        cell.selectedBackgroundView = [[[UIImageView alloc] init] autorelease];
     }
 
-    //configure cell font, color, and background    
-    cell.textLabel.textColor = [UIColor lightGrayColor];
-    cell.textLabel.font = [UIFont fontWithName:@"Georgia-Bold" size:16];    
-    cell.textLabel.textAlignment = UITextAlignmentLeft;
-    cell.backgroundColor = [UIColor clearColor];
-    cell.backgroundView.clipsToBounds = YES;
+    UIImage *background;
+    UIImage *selected_background;
     
-    
-    // MAN THIS IS SO SLOPPY.
     if(indexPath.section == 0){
-        //configure cell background images
         if(indexPath.row == 0){
-            cell.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"top_table_cell.png"]] autorelease];
-            ((UIImageView *)cell.backgroundView).image = [UIImage imageNamed:@"top_table_cell.png"];
+            cell.textLabel.text = @"About Us";
+            background = [UIImage imageNamed:@"top_table_cell.png"];
+            selected_background = [UIImage imageNamed:@"top_table_cell.png"];
         }
         if(indexPath.row == 1){
-            cell.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"table_cell.png"]] autorelease];
-            ((UIImageView *)cell.backgroundView).image = [UIImage imageNamed:@"table_cell.png"];
+            cell.textLabel.text = @"FAQ";
+            background = [UIImage imageNamed:@"table_cell.png"];
+            selected_background = [UIImage imageNamed:@"table_cell.png"];
         }
         if(indexPath.row == 2){
-            cell.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bottom_table_cell.png"]] autorelease];
-            ((UIImageView *)cell.backgroundView).image = [UIImage imageNamed:@"bottom_table_cell.png"];
-        }
-        
-        //configure cell selection background images here
-        if(indexPath.row == 0){
-            cell.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"top_table_cell.png"]] autorelease];
-            ((UIImageView *)cell.selectedBackgroundView).image = [UIImage imageNamed:@"top_table_cell.png"];
-        }
-        if(indexPath.row == 1){
-            cell.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"table_cell.png"]] autorelease];
-            ((UIImageView *)cell.selectedBackgroundView).image = [UIImage imageNamed:@"table_cell.png"];
-        }
-        if(indexPath.row == 2){
-            cell.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bottom_table_cell.png"]] autorelease];
-            ((UIImageView *)cell.selectedBackgroundView).image = [UIImage imageNamed:@"bottom_table_cell.png"];
+            cell.textLabel.text = @"Section Leaders and Staff";
+            background = [UIImage imageNamed:@"bottom_table_cell.png"];
+            selected_background = [UIImage imageNamed:@"bottom_table_cell.png"];
         }
     }
     else{
-        //configure cell background images
         if(indexPath.row == 0){
-            cell.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"top_table_cell.png"]] autorelease];
-            ((UIImageView *)cell.backgroundView).image = [UIImage imageNamed:@"top_table_cell.png"];
+            cell.textLabel.text = @"About This App";
+            background = [UIImage imageNamed:@"top_table_cell.png"];
+            selected_background = [UIImage imageNamed:@"top_table_cell.png"];
         }
         if(indexPath.row == 1){
-            cell.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bottom_table_cell.png"]] autorelease];
-            ((UIImageView *)cell.backgroundView).image = [UIImage imageNamed:@"bottom_table_cell.png"];
-        }
-        
-        //configure cell selection background images here
-        if(indexPath.row == 0){
-            cell.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"top_table_cell.png"]] autorelease];
-            ((UIImageView *)cell.selectedBackgroundView).image = [UIImage imageNamed:@"top_table_cell.png"];
-        }
-        if(indexPath.row == 1){
-            cell.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bottom_table_cell.png"]] autorelease];
-            ((UIImageView *)cell.selectedBackgroundView).image = [UIImage imageNamed:@"bottom_table_cell.png"];
+            cell.textLabel.text = @"Contact The Developers";
+            background = [UIImage imageNamed:@"bottom_table_cell.png"];
+            selected_background = [UIImage imageNamed:@"bottom_table_cell.png"];
         }
     }
     
-    
-    
+    // Set the images.
+    ((UIImageView *)cell.backgroundView).image = background;
+    ((UIImageView *)cell.selectedBackgroundView).image = selected_background;    
     
     return cell;
 }
 
-#pragma mark - Table view delegate
+#pragma mark - UITableView Delegate Methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -274,6 +221,8 @@
     }
 
 }
+
+#pragma mark - MFMailComposeViewController Delegate Methods
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
     [self dismissModalViewControllerAnimated:YES];

@@ -312,6 +312,9 @@
 		63E4D6C115C45844003EC59E /* TexasDrumsGetAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D6C015C45840003EC59E /* TexasDrumsGetAddressBook.m */; };
 		63E4D6C215C45844003EC59E /* TexasDrumsGetAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D6C015C45840003EC59E /* TexasDrumsGetAddressBook.m */; };
 		63E4D6C315C45844003EC59E /* TexasDrumsGetAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D6C015C45840003EC59E /* TexasDrumsGetAddressBook.m */; };
+		63E4D6C615C45F92003EC59E /* NSString+TexasDrums.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D6C515C45F90003EC59E /* NSString+TexasDrums.m */; };
+		63E4D6C715C45F92003EC59E /* NSString+TexasDrums.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D6C515C45F90003EC59E /* NSString+TexasDrums.m */; };
+		63E4D6C815C45F92003EC59E /* NSString+TexasDrums.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D6C515C45F90003EC59E /* NSString+TexasDrums.m */; };
 		63FC645D15B2729900919537 /* GigsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC645B15B2729900919537 /* GigsViewController.m */; };
 		63FC645E15B2729900919537 /* GigsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63FC645C15B2729900919537 /* GigsViewController.xib */; };
 		63FC646115B2749600919537 /* TexasDrumsGetGigs.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC646015B2749600919537 /* TexasDrumsGetGigs.m */; };
@@ -750,6 +753,8 @@
 		63E4D6BB15C45193003EC59E /* TexasDrumsGetMusic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsGetMusic.m; sourceTree = "<group>"; };
 		63E4D6BF15C4583D003EC59E /* TexasDrumsGetAddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexasDrumsGetAddressBook.h; sourceTree = "<group>"; };
 		63E4D6C015C45840003EC59E /* TexasDrumsGetAddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsGetAddressBook.m; sourceTree = "<group>"; };
+		63E4D6C415C45F8E003EC59E /* NSString+TexasDrums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TexasDrums.h"; sourceTree = "<group>"; };
+		63E4D6C515C45F90003EC59E /* NSString+TexasDrums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TexasDrums.m"; sourceTree = "<group>"; };
 		63FC645A15B2729900919537 /* GigsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GigsViewController.h; sourceTree = "<group>"; };
 		63FC645B15B2729900919537 /* GigsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GigsViewController.m; sourceTree = "<group>"; };
 		63FC645C15B2729900919537 /* GigsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GigsViewController.xib; sourceTree = "<group>"; };
@@ -1590,6 +1595,8 @@
 				63E4D6B115C390BF003EC59E /* UIView+TexasDrums.m */,
 				63E4D6B515C44D20003EC59E /* UILabel+TexasDrums.h */,
 				63E4D6B615C44D22003EC59E /* UILabel+TexasDrums.m */,
+				63E4D6C415C45F8E003EC59E /* NSString+TexasDrums.h */,
+				63E4D6C515C45F90003EC59E /* NSString+TexasDrums.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -2377,6 +2384,7 @@
 				63E4D6B715C44D25003EC59E /* UILabel+TexasDrums.m in Sources */,
 				63E4D6BC15C45194003EC59E /* TexasDrumsGetMusic.m in Sources */,
 				63E4D6C115C45844003EC59E /* TexasDrumsGetAddressBook.m in Sources */,
+				63E4D6C615C45F92003EC59E /* NSString+TexasDrums.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2393,6 +2401,7 @@
 				63E4D6B815C44D25003EC59E /* UILabel+TexasDrums.m in Sources */,
 				63E4D6BD15C45194003EC59E /* TexasDrumsGetMusic.m in Sources */,
 				63E4D6C215C45844003EC59E /* TexasDrumsGetAddressBook.m in Sources */,
+				63E4D6C715C45F92003EC59E /* NSString+TexasDrums.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2490,6 +2499,7 @@
 				63E4D6B915C44D25003EC59E /* UILabel+TexasDrums.m in Sources */,
 				63E4D6BE15C45194003EC59E /* TexasDrumsGetMusic.m in Sources */,
 				63E4D6C315C45844003EC59E /* TexasDrumsGetAddressBook.m in Sources */,
+				63E4D6C815C45F92003EC59E /* NSString+TexasDrums.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

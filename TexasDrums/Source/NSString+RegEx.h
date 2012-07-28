@@ -13,5 +13,6 @@
 
 + (NSString *)stripExcessEscapes:(NSString *)string;
 + (NSString *)extractHTML:(NSString *)string;
++ (NSString *)convertHTML:(NSString *)string;
 
 @end

@@ -186,7 +186,7 @@
                 cell.detailTextLabel.text = @"tap to change";
                 cell.textLabel.text = @"Password";
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;                
-                cell.detailTextLabel.font = [UIFont fontWithName:@"Georgia-Italic" size:12];
+                cell.detailTextLabel.font = [UIFont TexasDrumsItalicFontOfSize:12];
                 cell.detailTextLabel.textColor = [UIColor whiteColor];
                 break;
             case 3:
@@ -213,10 +213,7 @@
     else if(indexPath.section == 1){
         switch(indexPath.row){
             case 0:
-                cell.detailTextLabel.text = [NSString stringWithFormat:@"%@-%@-%@", 
-                                             [_Profile.phonenumber substringWithRange:NSMakeRange(0, 3)],
-                                             [_Profile.phonenumber substringWithRange:NSMakeRange(3, 3)],
-                                             [_Profile.phonenumber substringWithRange:NSMakeRange(6, 4)]];
+                cell.detailTextLabel.text = [NSString parsePhoneNumber:_Profile.phonenumber];
                 cell.textLabel.text = @"Phone";
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 background = [UIImage imageNamed:@"top_table_cell.png"];
@@ -228,10 +225,7 @@
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 break;
             case 2:
-                cell.detailTextLabel.text = [NSString stringWithFormat:@"%@-%@-%@", 
-                                             [_Profile.birthday substringWithRange:NSMakeRange(0, 2)],
-                                             [_Profile.birthday substringWithRange:NSMakeRange(2, 2)],
-                                             [_Profile.birthday substringWithRange:NSMakeRange(4, 4)]];
+                cell.detailTextLabel.text = [NSString parseBirthday:_Profile.birthday];
                 cell.textLabel.text = @"Birthday";
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 background = [UIImage imageNamed:@"bottom_table_cell.png"];

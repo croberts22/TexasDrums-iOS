@@ -218,10 +218,10 @@
     member.amajor = [item objectForKey:@"major"];
     member.hometown = [item objectForKey:@"hometown"];
     member.quote = [item objectForKey:@"quote"];
-    member.quote = [self convertHTML:member.quote];
+    member.quote = [NSString convertHTML:member.quote];
     member.position = [[item objectForKey:@"position"] intValue];
     member.phone = [item objectForKey:@"phone"];
-    member.phone = [self parsePhoneNumber:member.phone];
+    member.phone = [NSString parsePhoneNumber:member.phone];
     member.email = [item objectForKey:@"email"];
     member.valid = [[item objectForKey:@"valid"] intValue];
     
@@ -230,40 +230,6 @@
     }
     
     return member;
-}
-
-#warning - move to category?
-- (NSString *)convertHTML:(NSString *)quote {
-    NSString *searchString = quote;
-    NSString *regexString = @"<br>|<br />";
-    NSString *replaceWithString = @"\r\n";
-    NSString *replacedString = NULL;
-    
-    replacedString = [searchString stringByReplacingOccurrencesOfRegex:regexString withString:replaceWithString];
-    
-    return replacedString;
-}
-
-- (NSString *)parsePhoneNumber:(NSString *)number {
-    NSString *areacode;
-    NSString *first;
-    NSString *last;
-    
-    // A number is only valid if it is 10 or 7 digits long.
-    // Anything else returns 'n/a'.
-    
-    if([number length] == 10){
-        areacode = [number substringWithRange:NSMakeRange(0, 3)];
-        first = [number substringWithRange:NSMakeRange(3, 3)];
-        last = [number substringWithRange:NSMakeRange(6, 4)];
-        return [NSString stringWithFormat:@"%@-%@-%@", areacode, first, last];
-    }
-    else if([number length] == 7){
-        first = [number substringWithRange:NSMakeRange(0, 3)];
-        last = [number substringWithRange:NSMakeRange(3, 4)];
-        return [NSString stringWithFormat:@"%@-%@", first, last];
-    }
-    else return @"n/a";
 }
 
 - (void)sortSections:(Roster *)roster {

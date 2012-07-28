@@ -33,4 +33,15 @@
     return replacedString;
 }
 
++ (NSString *)convertHTML:(NSString *)string {
+    NSString *searchString = string;
+    NSString *regexString = @"<br>|<br />";
+    NSString *replaceWithString = @"\r\n";
+    NSString *replacedString = NULL;
+    
+    replacedString = [searchString stringByReplacingOccurrencesOfRegex:regexString withString:replaceWithString];
+    
+    return replacedString;
+}
+
 @end

@@ -80,9 +80,6 @@
     self.refresh = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(connect)] autorelease];
     
     self.navigationItem.rightBarButtonItem = refresh;
-  
-    // Begin fetching news from the server.
-    [self connect];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -90,13 +87,15 @@
     [super viewDidAppear:animated];
     
     [self.newsTable reloadData];
+    
+    if(self.posts.count == 0) {
+        [self connect];
+    }
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (void)viewWillDisappear:(BOOL)animated

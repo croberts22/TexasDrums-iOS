@@ -12,5 +12,6 @@
 
 + (UIFont *)TexasDrumsFontOfSize:(int)size;
 + (UIFont *)TexasDrumsBoldFontOfSize:(int)size;
++ (UIFont *)TexasDrumsItalicFontOfSize:(int)size;
 
 @end

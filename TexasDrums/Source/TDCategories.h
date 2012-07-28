@@ -13,6 +13,7 @@
 #import "UIFont+TexasDrums.h"
 #import "UIView+TexasDrums.h"
 #import "UILabel+TexasDrums.h"
+#import "NSString+TexasDrums.h"
 
 #import "NSString+RegEx.h"
 
