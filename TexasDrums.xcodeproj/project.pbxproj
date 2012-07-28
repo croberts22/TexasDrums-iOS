@@ -412,6 +412,8 @@
 		63E4D72D15C48B35003EC59E /* rounded_table_cell_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = AEB9BB0A14BAA42B00C8A3A4 /* rounded_table_cell_bottom.png */; };
 		63E4D72E15C48B35003EC59E /* rounded_table_cell_top@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AEAAA1B314BB3868001332D3 /* rounded_table_cell_top@2x.png */; };
 		63E4D72F15C48B35003EC59E /* rounded_table_cell_top.png in Resources */ = {isa = PBXBuildFile; fileRef = AEB9BB0B14BAA42B00C8A3A4 /* rounded_table_cell_top.png */; };
+		63E4D74B15C48E83003EC59E /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = AED9E4CA14F21E17005064FA /* Logo.png */; };
+		63E4D74C15C48E85003EC59E /* Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AED9E4C814F21DF5005064FA /* Logo@2x.png */; };
 		63FC645D15B2729900919537 /* GigsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC645B15B2729900919537 /* GigsViewController.m */; };
 		63FC645E15B2729900919537 /* GigsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63FC645C15B2729900919537 /* GigsViewController.xib */; };
 		63FC646115B2749600919537 /* TexasDrumsGetGigs.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC646015B2749600919537 /* TexasDrumsGetGigs.m */; };
@@ -2433,6 +2435,8 @@
 				6313B38815B67BBD00E23C25 /* note@2x.png in Resources */,
 				6303FF4515B7C294009FAEFE /* AddGigViewController.xib in Resources */,
 				63292FB715BCFEF800CB383B /* DateViewController.xib in Resources */,
+				63E4D74B15C48E83003EC59E /* Logo.png in Resources */,
+				63E4D74C15C48E85003EC59E /* Logo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
