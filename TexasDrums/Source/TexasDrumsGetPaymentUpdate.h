@@ -8,6 +8,13 @@
 
 #import "TexasDrumsRequest.h"
 
-@interface TexasDrumsGetPaymentUpdate : TexasDrumsRequest
+@interface TexasDrumsGetPaymentUpdate : TexasDrumsRequest {
+    NSString *_username;
+    NSString *_password;
+    NSString *_user;
+    NSNumber *_paid;
+}
+
+- (id)initWithUsername:(NSString *)username andPassword:(NSString *)password andUser:(NSString *)user andPaid:(NSNumber *)paid;
 
 @end

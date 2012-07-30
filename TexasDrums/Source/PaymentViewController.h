@@ -7,23 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TexasDrumsAPIConnection.h"
 
-@interface PaymentViewController : UIViewController {
+@interface PaymentViewController : UIViewController<TexasDrumsAPIConnection, UITableViewDataSource, UITableViewDelegate> {
     IBOutlet UITableView *paymentTable;
-    IBOutlet UIActivityIndicatorView *indicator;
     NSMutableArray *memberList;
 }
 
 @property (nonatomic, retain) UITableView *paymentTable;
-@property (nonatomic, retain) UIActivityIndicatorView *indicator;
 @property (nonatomic, retain) NSMutableArray *memberList;
-
-
-extern NSString *const TEXAS_DRUMS_API_ACCOUNTS;
-extern NSString *const TEXAS_DRUMS_API_UPDATE_PAYMENT;
-
-- (void)fetchMembers;
-- (void)sortMembersByName;
-- (void)updateUser:(NSString *)user withPayment:(int)paid;
 
 @end

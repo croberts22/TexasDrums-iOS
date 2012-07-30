@@ -48,4 +48,6 @@
 @property (nonatomic, retain) NSString *alphabet_first;
 @property (nonatomic, retain) NSString *alphabet_last;
 
++ (Profile *)createNewProfile:(NSDictionary *)dictionary;
+
 @end

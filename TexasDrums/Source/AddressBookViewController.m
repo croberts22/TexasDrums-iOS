@@ -9,7 +9,7 @@
 #import "AddressBookViewController.h"
 #import "CJSONDeserializer.h"
 #import "AddressBookMemberViewController.h"
-#import "TexasDrumsGetAddressBook.h"
+#import "TexasDrumsGetAccounts.h"
 
 @implementation AddressBookViewController
 
@@ -142,46 +142,21 @@
 - (void)connect {
     [self hideRefreshButton];
     [SVProgressHUD showWithStatus:@"Loading..."];
-    TexasDrumsGetAddressBook *get = [[TexasDrumsGetAddressBook alloc] initWithUsername:_Profile.username andPassword:_Profile.password];
+    TexasDrumsGetAccounts *get = [[TexasDrumsGetAccounts alloc] initWithUsername:_Profile.username andPassword:_Profile.password];
     get.delegate = self;
     [get startRequest];
 }
 
 - (void)parseAddressBookData:(NSDictionary *)results {    
     for(NSDictionary *item in results){
-        Profile *profile = [self createNewProfile:item];
+        Profile *profile = [Profile createNewProfile:item];
         if(profile.valid){
             [addressBook addObject:profile];
         }
     }
     
     [self sortMembersByName];
-    
     [self displayTable];
-    
-}
-
-#warning - move this as a class method?
-- (Profile *)createNewProfile:(NSDictionary *)item {
-    Profile *member_profile = [[[Profile alloc] init] autorelease];
-    
-    member_profile.firstname = [item objectForKey:@"firstname"];
-    member_profile.lastname = [item objectForKey:@"lastname"];
-    member_profile.username = [item objectForKey:@"username"];
-    member_profile.section = [item objectForKey:@"section"];
-    member_profile.years = [item objectForKey:@"years"];
-    member_profile.status = [item objectForKey:@"status"];
-    
-    member_profile.birthday = [item objectForKey:@"birthday"];
-    member_profile.email = [item objectForKey:@"email"];
-    member_profile.phonenumber = [item objectForKey:@"phonenumber"];
-    member_profile.sl = [[item objectForKey:@"sl"] intValue];
-    member_profile.valid = [[item objectForKey:@"valid"] boolValue];
-    
-    member_profile.alphabet_first = [NSString stringWithFormat:@"%c", [member_profile.firstname characterAtIndex:0]];
-    member_profile.alphabet_last = [NSString stringWithFormat:@"%c", [member_profile.lastname characterAtIndex:0]];
-    
-    return member_profile;
 }
 
 - (void)sortMembersByName {
