@@ -23,7 +23,7 @@
 @property (nonatomic, retain) RosterMember *member;
 @property (nonatomic, retain) UILabel *memberName;
 @property (nonatomic, retain) UITableView *memberData;
-@property (nonatomic, retain) NSArray *data;
-@property (nonatomic, retain) NSArray *categories;
+@property (nonatomic, copy) NSArray *data;
+@property (nonatomic, copy) NSArray *categories;
 
 @end

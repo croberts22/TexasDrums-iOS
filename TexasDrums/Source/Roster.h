@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class RosterMember;
 
 @interface Roster : NSObject {
     NSString *the_year;
@@ -18,7 +19,7 @@
     NSMutableArray *instructor;
 }
 
-@property (nonatomic, retain) NSString *the_year;
+@property (nonatomic, copy) NSString *the_year;
 @property (nonatomic, retain) NSMutableArray *snares;
 @property (nonatomic, retain) NSMutableArray *tenors;
 @property (nonatomic, retain) NSMutableArray *basses;
@@ -26,5 +27,7 @@
 @property (nonatomic, retain) NSMutableArray *instructor;
 
 - (id)initWithYear:(NSString *)year;
+- (void)addMember:(RosterMember *)member;
+- (void)sortSections;
 
 @end

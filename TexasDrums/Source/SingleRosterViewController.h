@@ -16,7 +16,7 @@
     IBOutlet UITableView *singleRosterTable;
 }
 
-@property (nonatomic, retain) NSString *year;
+@property (nonatomic, copy) NSString *year;
 @property (nonatomic, retain) Roster *roster;
 @property (nonatomic, retain) UITableView *singleRosterTable;
 

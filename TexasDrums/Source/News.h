@@ -21,14 +21,17 @@
     int timestamp;
 }
 
-@property (nonatomic, retain) NSString *titleOfPost;
-@property (nonatomic, retain) NSString *post;
-@property (nonatomic, retain) NSString *subtitle;
-@property (nonatomic, retain) NSString *author;
-@property (nonatomic, retain) NSString *postDate;
-@property (nonatomic, retain) NSString *time;
+@property (nonatomic, copy) NSString *titleOfPost;
+@property (nonatomic, copy) NSString *post;
+@property (nonatomic, copy) NSString *subtitle;
+@property (nonatomic, copy) NSString *author;
+@property (nonatomic, copy) NSString *postDate;
+@property (nonatomic, copy) NSString *time;
 @property (nonatomic, assign) BOOL memberPost;
 @property (nonatomic, assign) BOOL sticky;
 @property (nonatomic, assign) int timestamp;
+
+- (id)init;
++ (News *)createNewPost:(NSDictionary *)item;
 
 @end

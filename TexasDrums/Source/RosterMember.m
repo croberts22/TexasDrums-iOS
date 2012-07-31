@@ -15,4 +15,52 @@
 @synthesize instrument, classification, year, amajor;
 @synthesize hometown, quote, position, phone, email, valid;
 
+- (id)init {
+    if((self = [super init])) {
+        self.firstname = @"";
+        self.nickname = @"";
+        self.lastname = @"";
+        self.fullname = @"";
+        self.instrument = @"";
+        self.classification = @"";
+        self.year = @"";
+        self.amajor = @"";
+        self.hometown = @"";
+        self.quote = @"";
+        self.position = -1;
+        self.phone = @"";
+        self.email = @"";
+        self.valid = 0;
+    }
+    
+    return self;
+}
+
++ (RosterMember *)createNewRosterMember:(NSDictionary *)item {
+    RosterMember *member = [[[RosterMember alloc] init] autorelease];
+    
+    member.firstname = [item objectForKey:@"firstname"];
+    member.nickname = [item objectForKey:@"nickname"];
+    member.lastname = [item objectForKey:@"lastname"];
+    member.fullname = [NSString stringWithFormat:@"%@ %@", member.firstname, member.lastname];
+    member.instrument = [item objectForKey:@"instrument"];
+    member.classification = [item objectForKey:@"classification"];
+    member.year = [item objectForKey:@"year"];
+    member.amajor = [item objectForKey:@"major"];
+    member.hometown = [item objectForKey:@"hometown"];
+    member.quote = [item objectForKey:@"quote"];
+    member.quote = [NSString convertHTML:member.quote];
+    member.position = [[item objectForKey:@"position"] intValue];
+    member.phone = [item objectForKey:@"phone"];
+    member.phone = [NSString parsePhoneNumber:member.phone];
+    member.email = [item objectForKey:@"email"];
+    member.valid = [[item objectForKey:@"valid"] intValue];
+    
+    if([member.email length] == 0){
+        member.email = @"n/a";
+    }
+    
+    return member;
+}
+
 @end

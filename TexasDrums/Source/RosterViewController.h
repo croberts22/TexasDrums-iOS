@@ -27,7 +27,5 @@
 - (void)hideRefreshButton;
 - (void)displayTable;
 - (void)parseRosterData:(NSDictionary *)results;
-- (RosterMember *)createNewRosterMember:(NSDictionary *)item;
-- (void)sortSections:(Roster *)roster;
 
 @end

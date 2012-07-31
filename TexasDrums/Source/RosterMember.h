@@ -25,19 +25,22 @@
     int valid;
 }
 
-@property (nonatomic, retain) NSString *firstname;
-@property (nonatomic, retain) NSString *nickname;
-@property (nonatomic, retain) NSString *lastname;
-@property (nonatomic, retain) NSString *fullname;
-@property (nonatomic, retain) NSString *instrument;
-@property (nonatomic, retain) NSString *classification;
-@property (nonatomic, retain) NSString *year;
-@property (nonatomic, retain) NSString *amajor;
-@property (nonatomic, retain) NSString *hometown;
-@property (nonatomic, retain) NSString *quote;
-@property (nonatomic, retain) NSString *phone;
-@property (nonatomic, retain) NSString *email;
-@property (nonatomic) int position;
-@property (nonatomic) int valid;
+@property (nonatomic, copy) NSString *firstname;
+@property (nonatomic, copy) NSString *nickname;
+@property (nonatomic, copy) NSString *lastname;
+@property (nonatomic, copy) NSString *fullname;
+@property (nonatomic, copy) NSString *instrument;
+@property (nonatomic, copy) NSString *classification;
+@property (nonatomic, copy) NSString *year;
+@property (nonatomic, copy) NSString *amajor;
+@property (nonatomic, copy) NSString *hometown;
+@property (nonatomic, copy) NSString *quote;
+@property (nonatomic, copy) NSString *phone;
+@property (nonatomic, copy) NSString *email;
+@property (nonatomic, assign) int position;
+@property (nonatomic, assign) int valid;
+
+- (id)init;
++ (RosterMember *)createNewRosterMember:(NSDictionary *)item;
 
 @end

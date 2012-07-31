@@ -12,7 +12,7 @@
 
 @interface NewsPostView : UIViewController<UIWebViewDelegate> {
     News *post;
-    IBOutlet UIWebView <UIWebViewDelegate> *webView;
+    IBOutlet UIWebView *webView;
     IBOutlet UILabel *titleOfPost;
     IBOutlet UILabel *dateAndAuthor;
     NSString *content;
@@ -22,10 +22,10 @@
 
 
 @property (nonatomic, retain) News *post;
-@property (nonatomic, retain) UIWebView <UIWebViewDelegate> *webView;
+@property (nonatomic, retain) UIWebView *webView;
 @property (nonatomic, retain) UILabel *titleOfPost;
 @property (nonatomic, retain) UILabel *dateAndAuthor;
-@property (nonatomic, retain) NSString *content;
+@property (nonatomic, copy) NSString *content;
 @property (nonatomic, assign) BOOL isMemberPost;
 @property (nonatomic, assign) BOOL loadPost;
 

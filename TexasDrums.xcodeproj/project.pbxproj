@@ -417,6 +417,12 @@
 		63E4D75A15C634F7003EC59E /* TexasDrumsGetPaymentUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D75915C634F7003EC59E /* TexasDrumsGetPaymentUpdate.m */; };
 		63E4D75B15C634F7003EC59E /* TexasDrumsGetPaymentUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D75915C634F7003EC59E /* TexasDrumsGetPaymentUpdate.m */; };
 		63E4D75C15C634F7003EC59E /* TexasDrumsGetPaymentUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D75915C634F7003EC59E /* TexasDrumsGetPaymentUpdate.m */; };
+		63E4D76015C63FA7003EC59E /* AuditionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D75E15C63FA7003EC59E /* AuditionViewController.m */; };
+		63E4D76115C63FA7003EC59E /* AuditionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D75E15C63FA7003EC59E /* AuditionViewController.m */; };
+		63E4D76215C63FA7003EC59E /* AuditionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E4D75E15C63FA7003EC59E /* AuditionViewController.m */; };
+		63E4D76315C63FA7003EC59E /* AuditionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63E4D75F15C63FA7003EC59E /* AuditionViewController.xib */; };
+		63E4D76415C63FA7003EC59E /* AuditionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63E4D75F15C63FA7003EC59E /* AuditionViewController.xib */; };
+		63E4D76515C63FA7003EC59E /* AuditionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63E4D75F15C63FA7003EC59E /* AuditionViewController.xib */; };
 		63FC645D15B2729900919537 /* GigsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC645B15B2729900919537 /* GigsViewController.m */; };
 		63FC645E15B2729900919537 /* GigsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63FC645C15B2729900919537 /* GigsViewController.xib */; };
 		63FC646115B2749600919537 /* TexasDrumsGetGigs.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC646015B2749600919537 /* TexasDrumsGetGigs.m */; };
@@ -863,6 +869,9 @@
 		63E4D6CF15C472EC003EC59E /* TexasDrumsGetStaff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsGetStaff.m; sourceTree = "<group>"; };
 		63E4D75815C634F7003EC59E /* TexasDrumsGetPaymentUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexasDrumsGetPaymentUpdate.h; sourceTree = "<group>"; };
 		63E4D75915C634F7003EC59E /* TexasDrumsGetPaymentUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsGetPaymentUpdate.m; sourceTree = "<group>"; };
+		63E4D75D15C63FA6003EC59E /* AuditionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuditionViewController.h; sourceTree = "<group>"; };
+		63E4D75E15C63FA7003EC59E /* AuditionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuditionViewController.m; sourceTree = "<group>"; };
+		63E4D75F15C63FA7003EC59E /* AuditionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AuditionViewController.xib; sourceTree = "<group>"; };
 		63FC645A15B2729900919537 /* GigsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GigsViewController.h; sourceTree = "<group>"; };
 		63FC645B15B2729900919537 /* GigsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GigsViewController.m; sourceTree = "<group>"; };
 		63FC645C15B2729900919537 /* GigsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GigsViewController.xib; sourceTree = "<group>"; };
@@ -1346,6 +1355,9 @@
 				AE4B350E14C120F900519280 /* AboutThisAppViewController.h */,
 				AE4B350F14C120F900519280 /* AboutThisAppViewController.m */,
 				AE4B351014C120F900519280 /* AboutThisAppView.xib */,
+				63E4D75D15C63FA6003EC59E /* AuditionViewController.h */,
+				63E4D75E15C63FA7003EC59E /* AuditionViewController.m */,
+				63E4D75F15C63FA7003EC59E /* AuditionViewController.xib */,
 			);
 			name = Info;
 			sourceTree = "<group>";
@@ -2335,6 +2347,7 @@
 				6313B38615B67BBD00E23C25 /* note@2x.png in Resources */,
 				6303FF4315B7C294009FAEFE /* AddGigViewController.xib in Resources */,
 				63292FB515BCFEF800CB383B /* DateViewController.xib in Resources */,
+				63E4D76315C63FA7003EC59E /* AuditionViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2352,6 +2365,7 @@
 				6313B38715B67BBD00E23C25 /* note@2x.png in Resources */,
 				6303FF4415B7C294009FAEFE /* AddGigViewController.xib in Resources */,
 				63292FB615BCFEF800CB383B /* DateViewController.xib in Resources */,
+				63E4D76415C63FA7003EC59E /* AuditionViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2444,6 +2458,7 @@
 				63292FB715BCFEF800CB383B /* DateViewController.xib in Resources */,
 				63E4D74B15C48E83003EC59E /* Logo.png in Resources */,
 				63E4D74C15C48E85003EC59E /* Logo@2x.png in Resources */,
+				63E4D76515C63FA7003EC59E /* AuditionViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2577,6 +2592,7 @@
 				63E4D6CB15C46A8F003EC59E /* TexasDrumsGetAbout.m in Sources */,
 				63E4D6D015C472EF003EC59E /* TexasDrumsGetStaff.m in Sources */,
 				63E4D75A15C634F7003EC59E /* TexasDrumsGetPaymentUpdate.m in Sources */,
+				63E4D76015C63FA7003EC59E /* AuditionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2600,6 +2616,7 @@
 				63E4D6E515C48ABC003EC59E /* UIColor+TexasDrums.m in Sources */,
 				63E4D6E615C48ABC003EC59E /* UIFont+TexasDrums.m in Sources */,
 				63E4D75B15C634F7003EC59E /* TexasDrumsGetPaymentUpdate.m in Sources */,
+				63E4D76115C63FA7003EC59E /* AuditionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2716,6 +2733,7 @@
 				63E4D6CD15C46A8F003EC59E /* TexasDrumsGetAbout.m in Sources */,
 				63E4D6D215C472EF003EC59E /* TexasDrumsGetStaff.m in Sources */,
 				63E4D75C15C634F7003EC59E /* TexasDrumsGetPaymentUpdate.m in Sources */,
+				63E4D76215C63FA7003EC59E /* AuditionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

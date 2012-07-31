@@ -168,7 +168,7 @@
             current_year = [member objectForKey:@"year"];
             
             // Sort and add the roster to the full roster list.
-            [self sortSections:roster];
+            [roster sortSections];
             [rosters addObject:roster];
             [roster release];
             
@@ -182,63 +182,13 @@
         }
         
         // Create a roster member and add it to the respective group.
-        RosterMember *roster_member = [self createNewRosterMember:member];
-        
-        if([roster_member.instrument isEqualToString:@"Snare"]){
-            [roster.snares addObject:roster_member];
-        }
-        else if([roster_member.instrument isEqualToString:@"Tenors"]){
-            [roster.tenors addObject:roster_member];
-        }
-        else if([roster_member.instrument isEqualToString:@"Bass"]){
-            [roster.basses addObject:roster_member];
-        }
-        else if([roster_member.instrument isEqualToString:@"Cymbals"]){
-            [roster.cymbals addObject:roster_member];
-        }
+        RosterMember *roster_member = [RosterMember createNewRosterMember:member];
+        [roster addMember:roster_member];
     }
     
     // Display the table after all data is acquired.
     [self displayTable];
     if(DEBUG_MODE) TDLog(@"Roster table configured. Reloading...");
-}
-
-- (RosterMember *)createNewRosterMember:(NSDictionary *)item {
-    RosterMember *member = [[[RosterMember alloc] init] autorelease];
-    
-    member.firstname = [item objectForKey:@"firstname"];
-    member.nickname = [item objectForKey:@"nickname"];
-    member.lastname = [item objectForKey:@"lastname"];
-    member.fullname = [NSString stringWithFormat:@"%@ %@", member.firstname, member.lastname];
-    member.instrument = [item objectForKey:@"instrument"];
-    member.classification = [item objectForKey:@"classification"];
-    member.year = [item objectForKey:@"year"];
-    member.amajor = [item objectForKey:@"major"];
-    member.hometown = [item objectForKey:@"hometown"];
-    member.quote = [item objectForKey:@"quote"];
-    member.quote = [NSString convertHTML:member.quote];
-    member.position = [[item objectForKey:@"position"] intValue];
-    member.phone = [item objectForKey:@"phone"];
-    member.phone = [NSString parsePhoneNumber:member.phone];
-    member.email = [item objectForKey:@"email"];
-    member.valid = [[item objectForKey:@"valid"] intValue];
-    
-    if([member.email length] == 0){
-        member.email = @"n/a";   
-    }
-    
-    return member;
-}
-
-- (void)sortSections:(Roster *)roster {
-    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"position" ascending:NO];
-    [roster.snares sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];  
-    [descriptor release];
-    descriptor = [[NSSortDescriptor alloc] initWithKey:@"position" ascending:YES];
-    [roster.basses sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
-    [roster.tenors sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
-    [roster.cymbals sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
-    [descriptor release];
 }
 
 #pragma mark - Table view data source
