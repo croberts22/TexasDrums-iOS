@@ -157,6 +157,29 @@
     GHAssertEquals(self.rosterMember.valid, 1, nil);
 }
 
+- (void)testCreateRosterMember2 {
+    NSArray *objects = [NSArray arrayWithObjects:@"FirstName", @"NickName", @"LastName", @"Snare", @"Classification", @"Year", @"Major", @"Hometown", @"Quote", @"5", @"Phone", @"Email", @"1", nil];
+    NSArray *keys    = [NSArray arrayWithObjects:@"firstname", @"nickname", @"lastname", @"instrument", @"classification", @"year", @"major", @"hometown", @"quote", @"position", @"phone", @"email", @"valid", nil];
+    NSDictionary *dictionary = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
+    self.rosterMember = [RosterMember createNewRosterMember:dictionary];
+    
+
+    GHAssertEqualStrings(self.rosterMember.firstname, @"FirstName", nil);
+    GHAssertEqualStrings(self.rosterMember.lastname, @"LastName", nil);
+    GHAssertEqualStrings(self.rosterMember.nickname, @"NickName", nil);
+    GHAssertEqualStrings(self.rosterMember.fullname, @"FirstName LastName", nil);
+    GHAssertEqualStrings(self.rosterMember.instrument, @"Snare", nil);
+    GHAssertEqualStrings(self.rosterMember.classification, @"Classification", nil);
+    GHAssertEqualStrings(self.rosterMember.year, @"Year", nil);
+    GHAssertEqualStrings(self.rosterMember.amajor, @"Major", nil);
+    GHAssertEqualStrings(self.rosterMember.hometown, @"Hometown", nil);
+    GHAssertEqualStrings(self.rosterMember.quote, @"Quote", nil);
+    GHAssertEqualStrings(self.rosterMember.phone, @"n/a", nil);
+    GHAssertEqualStrings(self.rosterMember.email, @"Email", nil);
+    GHAssertEquals(self.rosterMember.position, 5, nil);
+    GHAssertEquals(self.rosterMember.valid, 1, nil);
+}
+
 - (void)testAddMember1 {
     NSString *year = @"2012";
     Roster *roster = [[[Roster alloc] initWithYear:year] autorelease];
