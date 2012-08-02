@@ -8,6 +8,7 @@
 #import "GANTracker.h"
 #import "SVProgressHUD.h"
 #import "Common.h"
+#import "UserProfile.h"
 
 #ifndef __IPHONE_3_0
 #warning "This project uses features only available in iPhone SDK 3.0 and later."

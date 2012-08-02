@@ -16,7 +16,10 @@
 
 @implementation VideoViewController
 
-@synthesize videoArray, videoTable, yearArray;
+static NSMutableArray *videos = nil;
+static NSMutableArray *years = nil;
+
+@synthesize videoTable;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -48,19 +51,20 @@
     
     [self setTitle:@"Videos"];
     
-    // Allocate things as necessary.
-    if(videoArray == nil){
-        self.videoArray = [[[NSMutableArray alloc] init] autorelease];
-    }
-    if(yearArray == nil){
-        self.yearArray = [[[NSMutableArray alloc] init] autorelease];
-    }
-    
     // Set properties.
-    self.videoTable.alpha = 0.0f;
     self.videoTable.backgroundColor = [UIColor clearColor];
     
-    [self connect];
+    // Allocate things as necessary.
+    // If the static arrays are already allocated, there's no need
+    // to fetch a request from the server.
+    if(videos == nil && years == nil){
+        self.videoTable.alpha = 0.0f;
+        
+        videos = [[NSMutableArray alloc] init];
+        years = [[NSMutableArray alloc] init];
+
+        [self connect];
+    }
 }
 
 - (void)viewDidUnload {
@@ -112,7 +116,7 @@
     [self.videoTable reloadData];
     [UIView beginAnimations:@"displayVideoTable" context:NULL];
     [UIView setAnimationDuration:duration];
-    if([videoArray count] > 0){
+    if([videos count] > 0){
         self.videoTable.alpha = 1.0f;
     }
     else {
@@ -137,7 +141,7 @@
     NSString *current_year = @"";
     int i = 0;
     NSMutableArray *first_year = [[[NSMutableArray alloc] init] autorelease];
-    [videoArray addObject:first_year];
+    [videos addObject:first_year];
     
     for(NSDictionary *item in results) {
         //TDLog(@"%@", item);
@@ -148,12 +152,12 @@
         // If the current_year is empty, initialize it.
         if([current_year isEqualToString:@""]){
             current_year = video.videoYear;
-            [yearArray addObject:current_year];
+            [years addObject:current_year];
         }
         
         // If the year is equal to the current_year, add it to the array.
         if([current_year isEqualToString:video.videoYear]){
-            [[videoArray objectAtIndex:i] addObject:video];
+            [[videos objectAtIndex:i] addObject:video];
         }
         // Otherwise, instantiate a new array and move the pointer.
         else {
@@ -161,9 +165,9 @@
             i++;
             
             NSMutableArray *this_year = [[[NSMutableArray alloc] init] autorelease];
-            [videoArray addObject:this_year];
-            [yearArray addObject:current_year];
-            [[videoArray objectAtIndex:i] addObject:video];
+            [videos addObject:this_year];
+            [years addObject:current_year];
+            [[videos objectAtIndex:i] addObject:video];
         }
     }
     
@@ -174,11 +178,11 @@
 #pragma mark - UITableView Data Source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [yearArray count];
+    return [years count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[videoArray objectAtIndex:section] count];
+    return [[videos objectAtIndex:section] count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -191,7 +195,7 @@
     UILabel *headerTitle = [[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, 20)] autorelease];
     
     // Set header title properties.
-    headerTitle.text = [yearArray objectAtIndex:section];
+    headerTitle.text = [years objectAtIndex:section];
     headerTitle.textAlignment = UITextAlignmentCenter;
     headerTitle.textColor = [UIColor TexasDrumsOrangeColor];
     headerTitle.font = [UIFont TexasDrumsBoldFontOfSize:18];
@@ -228,7 +232,7 @@
     cell.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"uitableviewselection-orange-60.png"]] autorelease];
     
     // Find the correct video to display according to section and row.
-    Video *this_video = [[videoArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    Video *this_video = [[videos objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     
     cell.textLabel.text = this_video.videoTitle;
     cell.detailTextLabel.text = this_video.description;
@@ -242,7 +246,7 @@
 #pragma mark - UITableView Delegate Methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    Video *this_video = [[videoArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    Video *this_video = [[videos objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     TexasDrumsWebViewController *TDWVC = [[TexasDrumsWebViewController alloc] init];
     
     TDWVC.url = [NSURLRequest requestWithURL:[NSURL URLWithString:this_video.link]];

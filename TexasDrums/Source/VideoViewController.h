@@ -11,12 +11,8 @@
 
 @interface VideoViewController : UIViewController<TexasDrumsAPIConnection, UITableViewDelegate> {
     IBOutlet UITableView *videoTable;
-    NSMutableArray *videoArray;
-    NSMutableArray *yearArray;
 }
 
 @property (nonatomic, retain) UITableView *videoTable;
-@property (nonatomic, retain) NSMutableArray *videoArray;
-@property (nonatomic, retain) NSMutableArray *yearArray;
 
 @end

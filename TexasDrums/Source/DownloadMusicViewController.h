@@ -24,6 +24,5 @@
 @property (nonatomic, retain) NSMutableArray *musicArray;
 
 - (void)parseMusicData:(NSDictionary *)results;
-- (Music *)createNewMusic:(NSDictionary *)item;
 
 @end
