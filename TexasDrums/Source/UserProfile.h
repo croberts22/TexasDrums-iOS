@@ -25,6 +25,7 @@
     BOOL valid;
     NSString *lastlogin;
     BOOL paid;
+    BOOL loggedIn;
 }
 
 @property (nonatomic, copy) NSString *firstname;
@@ -43,5 +44,10 @@
 @property (nonatomic, assign) BOOL valid;
 @property (nonatomic, copy) NSString *lastlogin;
 @property (nonatomic, assign) BOOL paid;
+@property (nonatomic, assign) BOOL loggedIn;
+
++ (UserProfile *)sharedInstance;
+- (void)destroyProfile;
+- (void)createProfile:(NSDictionary *)dictionary;
 
 @end

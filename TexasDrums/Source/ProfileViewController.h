@@ -14,8 +14,6 @@
     IBOutlet UITableView *profileTable;
 }
 
-extern Profile *_Profile;
-
 @property (nonatomic, retain) UITableView *profileTable;
 
 @end

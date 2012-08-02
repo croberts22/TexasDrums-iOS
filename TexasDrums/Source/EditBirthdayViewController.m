@@ -52,7 +52,7 @@
     [dateFormatter setDateFormat:@"MMddyyyy"];
 
     NSCalendar *calendar = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
-    NSDate *current_date = [dateFormatter dateFromString:_Profile.birthday];
+    NSDate *current_date = [dateFormatter dateFromString:[UserProfile sharedInstance].birthday];
     NSDateComponents *comps = [[[NSDateComponents alloc] init] autorelease];
     [comps setYear:30];
     NSDate *maxDate = [calendar dateByAddingComponents:comps toDate:current_date options:0];
@@ -140,8 +140,8 @@
     
     if(passedConstraints) {
         [SVProgressHUD showWithStatus:@"Updating..."];
-        TexasDrumsGetEditProfile *get = [[TexasDrumsGetEditProfile alloc] initWithUsername:_Profile.username
-                                                                               andPassword:_Profile.password
+        TexasDrumsGetEditProfile *get = [[TexasDrumsGetEditProfile alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                                               andPassword:[UserProfile sharedInstance].hash
                                                                              withFirstName:nil
                                                                                andLastName:nil
                                                                         andUpdatedPassword:nil
@@ -154,7 +154,7 @@
 }
 
 - (BOOL)checkConstraints {
-    if([self.updatedBirthday isEqualToString:_Profile.birthday]){
+    if([self.updatedBirthday isEqualToString:[UserProfile sharedInstance].birthday]){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                         message:@"Your birthday didn't change. Please choose your correct birthday or tap the 'Back' button to cancel."
                                                        delegate:self
@@ -169,9 +169,11 @@
 }
 
 - (NSString *)parseDatabaseString {
-    NSString *month = [_Profile.birthday substringWithRange:NSMakeRange(0, 2)];
-    NSString *day   = [_Profile.birthday substringWithRange:NSMakeRange(2, 2)];
-    NSString *year  = [_Profile.birthday substringWithRange:NSMakeRange(4, 4)];
+    NSString *birthday = [UserProfile sharedInstance].birthday;
+    
+    NSString *month = [birthday substringWithRange:NSMakeRange(0, 2)];
+    NSString *day   = [birthday substringWithRange:NSMakeRange(2, 2)];
+    NSString *year  = [birthday substringWithRange:NSMakeRange(4, 4)];
     
     NSString *result = [NSString stringWithFormat:@"%@ %@, %@", [self convertIntToMonth:[month intValue]], day, year];
     
@@ -260,7 +262,7 @@
         if([results respondsToSelector:@selector(objectForKey:)] ){
             if([[results objectForKey:@"status"] isEqualToString:_200_OK]) {
                 TDLog(@"Profile updated.");
-                _Profile.birthday = self.updatedBirthday;
+                [UserProfile sharedInstance].birthday = self.updatedBirthday;
                 
                 [self performSelectorOnMainThread:@selector(displayText:) withObject:@"Your birthday has been updated." waitUntilDone:YES];
                 [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(sendToProfileView) userInfo:nil repeats:NO];

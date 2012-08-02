@@ -47,8 +47,8 @@
     self.status.alpha = 0.0f;
     self.firstname.delegate = self;
     self.lastname.delegate = self;
-    self.firstname.text = _Profile.firstname;
-    self.lastname.text = _Profile.lastname;
+    self.firstname.text = [UserProfile sharedInstance].firstname;
+    self.lastname.text = [UserProfile sharedInstance].lastname;
     self.firstname.font = [UIFont TexasDrumsFontOfSize:14];
     self.lastname.font = [UIFont TexasDrumsFontOfSize:14];
     self.firstname.textColor = [UIColor TexasDrumsGrayColor];
@@ -121,8 +121,8 @@
     
     if(passedConstraints) {
         [SVProgressHUD showWithStatus:@"Updating..."];
-        TexasDrumsGetEditProfile *get = [[TexasDrumsGetEditProfile alloc] initWithUsername:_Profile.username
-                                                                               andPassword:_Profile.password
+        TexasDrumsGetEditProfile *get = [[TexasDrumsGetEditProfile alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                                               andPassword:[UserProfile sharedInstance].hash
                                                                              withFirstName:firstname.text
                                                                                andLastName:lastname.text
                                                                         andUpdatedPassword:nil
@@ -145,7 +145,7 @@
         [alert release];
         return NO;
     }
-    else if([firstname.text isEqualToString:_Profile.firstname] && [lastname.text isEqualToString:_Profile.lastname]) {
+    else if([firstname.text isEqualToString:[UserProfile sharedInstance].firstname] && [lastname.text isEqualToString:[UserProfile sharedInstance].lastname]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!"
                                                         message:@"You didn't change anything! Please edit your name and press submit when you are done."
                                                        delegate:self
@@ -190,8 +190,8 @@
         if([results respondsToSelector:@selector(objectForKey:)] ){
             if([[results objectForKey:@"status"] isEqualToString:_200_OK]) {
                 TDLog(@"Profile updated.");
-                _Profile.firstname = firstname.text;
-                _Profile.lastname = lastname.text;
+                [UserProfile sharedInstance].firstname = firstname.text;
+                [UserProfile sharedInstance].lastname = lastname.text;
                 
                 [self performSelectorOnMainThread:@selector(displayText:) withObject:@"Your name has been updated." waitUntilDone:YES];
                 [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(sendToProfileView) userInfo:nil repeats:NO];

@@ -13,8 +13,6 @@
     UIImageView *splashView;
 }
 
-extern Profile *_Profile;
-
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 @property (nonatomic, retain) UIImageView *splashView;

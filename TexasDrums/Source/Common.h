@@ -35,8 +35,6 @@
 
 @interface Common : NSObject
 
-extern Profile *_Profile;
-
 extern BOOL const DEBUG_MODE;
 
 @end

@@ -38,6 +38,5 @@
 - (void)enableUI;
 - (IBAction)cancelButtonPressed:(id)sender;
 - (IBAction)loginButtonPressed:(id)sender;
-- (void)parseProfile:(NSDictionary *)results;
 
 @end

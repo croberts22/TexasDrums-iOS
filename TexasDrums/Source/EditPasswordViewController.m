@@ -136,8 +136,8 @@
     
     if(passedConstraints) {
         [SVProgressHUD showWithStatus:@"Updating..."];
-        TexasDrumsGetEditProfile *get = [[TexasDrumsGetEditProfile alloc] initWithUsername:_Profile.username
-                                                                               andPassword:_Profile.password
+        TexasDrumsGetEditProfile *get = [[TexasDrumsGetEditProfile alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                                               andPassword:[UserProfile sharedInstance].hash
                                                                              withFirstName:nil
                                                                                andLastName:nil
                                                                         andUpdatedPassword:self.a_new_password.text
@@ -165,7 +165,7 @@
     }
     
     // Check if the original password matches with what we have stored.
-    if([_Profile.password isEqualToString:original_password.text]){
+    if([[UserProfile sharedInstance].hash isEqualToString:original_password.text]){
         
         // If they match, check if the two new password fields match.
         if([a_new_password.text isEqualToString:a_new_password_again.text]){
@@ -272,7 +272,7 @@
         if([results respondsToSelector:@selector(objectForKey:)] ){
             if([[results objectForKey:@"status"] isEqualToString:_200_OK]) {
                 TDLog(@"Profile updated.");
-                _Profile.password = a_new_password.text;
+                [UserProfile sharedInstance].hash = a_new_password.text;
                 
                 [self performSelectorOnMainThread:@selector(displayText:) withObject:@"Your password has been updated." waitUntilDone:YES];
                 [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(sendToProfileView) userInfo:nil repeats:NO];

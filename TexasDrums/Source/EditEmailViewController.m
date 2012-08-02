@@ -47,7 +47,7 @@
     self.status.alpha = 0.0f;
     
     self.email.delegate = self;
-    self.email.text = _Profile.email;
+    self.email.text = [UserProfile sharedInstance].email;
     self.email.textColor = [UIColor TexasDrumsGrayColor];
     self.email.font = [UIFont TexasDrumsFontOfSize:14];
 }
@@ -121,8 +121,8 @@
     
     if(passedConstraints) {
         [SVProgressHUD showWithStatus:@"Updating..."];
-        TexasDrumsGetEditProfile *get = [[TexasDrumsGetEditProfile alloc] initWithUsername:_Profile.username
-                                                                               andPassword:_Profile.password
+        TexasDrumsGetEditProfile *get = [[TexasDrumsGetEditProfile alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                                               andPassword:[UserProfile sharedInstance].hash
                                                                              withFirstName:nil
                                                                                andLastName:nil
                                                                         andUpdatedPassword:nil
@@ -147,7 +147,7 @@
         [alert release];
         return NO;
     }
-    else if([self.email.text isEqualToString:_Profile.email]){
+    else if([self.email.text isEqualToString:[UserProfile sharedInstance].email]){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!"
                                                         message:@"You didn't change anything! Please edit your email and press submit when you are done."
                                                        delegate:self
@@ -187,7 +187,7 @@
         if([results respondsToSelector:@selector(objectForKey:)] ){
             if([[results objectForKey:@"status"] isEqualToString:_200_OK]) {
                 TDLog(@"Profile updated.");
-                _Profile.email = self.email.text;
+                [UserProfile sharedInstance].email = self.email.text;
                 
                 [self performSelectorOnMainThread:@selector(displayText:) withObject:@"Your email has been updated." waitUntilDone:YES];
                 [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(sendToProfileView) userInfo:nil repeats:NO];

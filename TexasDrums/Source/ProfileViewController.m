@@ -171,14 +171,14 @@
     if(indexPath.section == 0){
         switch(indexPath.row){
             case 0:
-                cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@", _Profile.firstname, _Profile.lastname];
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@", [UserProfile sharedInstance].firstname, [UserProfile sharedInstance].lastname];
                 cell.textLabel.text = @"Name";
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 background = [UIImage imageNamed:@"top_table_cell.png"];
                 selected_background = [UIImage imageNamed:@"top_table_cell.png"];
                 break;
             case 1:
-                cell.detailTextLabel.text = _Profile.username;
+                cell.detailTextLabel.text = [UserProfile sharedInstance].username;
                 cell.textLabel.text = @"Username";
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 break;
@@ -190,17 +190,17 @@
                 cell.detailTextLabel.textColor = [UIColor whiteColor];
                 break;
             case 3:
-                cell.detailTextLabel.text = _Profile.section;
+                cell.detailTextLabel.text = [UserProfile sharedInstance].section;
                 cell.textLabel.text = @"Section";
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 break;
             case 4:
-                cell.detailTextLabel.text = _Profile.years;
+                cell.detailTextLabel.text = [UserProfile sharedInstance].years;
                 cell.textLabel.text = @"Years";
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 break;
             case 5:
-                cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ Member", _Profile.status];
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ Member", [UserProfile sharedInstance].status];
                 cell.textLabel.text = @"Status";
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 background = [UIImage imageNamed:@"bottom_table_cell.png"];
@@ -213,19 +213,19 @@
     else if(indexPath.section == 1){
         switch(indexPath.row){
             case 0:
-                cell.detailTextLabel.text = [NSString parsePhoneNumber:_Profile.phonenumber];
+                cell.detailTextLabel.text = [NSString parsePhoneNumber:[UserProfile sharedInstance].phonenumber];
                 cell.textLabel.text = @"Phone";
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 background = [UIImage imageNamed:@"top_table_cell.png"];
                 selected_background = [UIImage imageNamed:@"top_table_cell.png"];
                 break; 
             case 1:
-                cell.detailTextLabel.text = _Profile.email;
+                cell.detailTextLabel.text = [UserProfile sharedInstance].email;
                 cell.textLabel.text = @"Email";
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 break;
             case 2:
-                cell.detailTextLabel.text = [NSString parseBirthday:_Profile.birthday];
+                cell.detailTextLabel.text = [NSString parseBirthday:[UserProfile sharedInstance].birthday];
                 cell.textLabel.text = @"Birthday";
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 background = [UIImage imageNamed:@"bottom_table_cell.png"];
@@ -240,7 +240,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.textLabel.font = [UIFont TexasDrumsBoldFontOfSize:16];
         
-        if(_Profile.paid){
+        if([UserProfile sharedInstance].paid){
             cell.textLabel.text = @"You have paid. Thank you!";
         }
         else{

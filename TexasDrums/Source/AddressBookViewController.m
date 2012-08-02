@@ -13,7 +13,10 @@
 
 @implementation AddressBookViewController
 
-@synthesize addressBookTable, sorter, addressBook, full_name, sections, membership;
+static NSMutableArray *addressBook = nil;
+static NSMutableDictionary *full_name = nil;
+
+@synthesize addressBookTable;
 
 #pragma mark - Memory Management
 
@@ -34,8 +37,6 @@
 
 - (void)dealloc {
     [addressBookTable release];
-    [sorter release];
-    [sections release];
     [super dealloc];
 }
 
@@ -56,27 +57,20 @@
     
     [self setTitle:@"Address Book"];
     
-    // Allocate things as necessary.
-    if(addressBook == nil){
-        addressBook = [[NSMutableArray alloc] init];
-    }
-    if(full_name == nil){
-        full_name = [[NSMutableDictionary alloc] init];
-    }
-    if(sections == nil){
-        sections = [[NSMutableDictionary alloc] init];
-    }
-    if(membership == nil){
-        membership = [[NSMutableDictionary alloc] init];
-    }
-    
     // Set properties.
-    self.sorter.alpha = 0.0f;
-    self.sorter.enabled = NO;
-    self.addressBookTable.alpha = 0.0f;
     self.addressBookTable.separatorColor = [UIColor darkGrayColor];
     
-    [self connect];
+    // Allocate things as necessary.
+    // These will only be allocated once, since they are static.
+    // There's no need to fetch for this data multiple times.
+    if(addressBook == nil && full_name == nil){
+        addressBook = [[NSMutableArray alloc] init];
+        full_name = [[NSMutableDictionary alloc] init];
+    
+        self.addressBookTable.alpha = 0.0f;
+        
+        [self connect];
+    }
 }
 
 - (void)viewDidUnload {
@@ -124,17 +118,10 @@
 }
 
 - (void)displayTable {
-    self.sorter.enabled = YES;
     [self.addressBookTable reloadData];
     [UIView animateWithDuration:0.5f animations:^{
         self.addressBookTable.alpha = 1.0f;
-        self.sorter.alpha = 1.0f;
     }];
-}
-
-- (IBAction)sorterChanged:(id)sender {
-    [self.addressBookTable scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
-    [self.addressBookTable reloadData];
 }
 
 #pragma mark - Data Methods
@@ -142,7 +129,7 @@
 - (void)connect {
     [self hideRefreshButton];
     [SVProgressHUD showWithStatus:@"Loading..."];
-    TexasDrumsGetAccounts *get = [[TexasDrumsGetAccounts alloc] initWithUsername:_Profile.username andPassword:_Profile.password];
+    TexasDrumsGetAccounts *get = [[TexasDrumsGetAccounts alloc] initWithUsername:[UserProfile sharedInstance].username andPassword:[UserProfile sharedInstance].hash];
     get.delegate = self;
     [get startRequest];
 }
@@ -174,93 +161,39 @@
     for (Profile *this_profile in addressBook){
         NSString *c = this_profile.alphabet_first;
         found = FALSE;
-        for (NSString *str in [self.full_name allKeys]){
+        for (NSString *str in [full_name allKeys]){
             if ([str isEqualToString:c]){
                 found = TRUE;
             }
         }
         if (!found){
-            [self.full_name setValue:[[NSMutableArray alloc] init] forKey:c];
-        }
-    }
-
-    for (Profile *this_profile in addressBook){
-        NSString *c = this_profile.section;
-        found = FALSE;
-        for (NSString *str in [self.sections allKeys]){
-            if ([str isEqualToString:c]){
-                found = TRUE;
-            }
-        }
-        if (!found){
-            [self.sections setValue:[[NSMutableArray alloc] init] forKey:c];
-        }
-    }
-    
-    for (Profile *this_profile in addressBook){
-        NSString *c = this_profile.status;
-        found = FALSE;
-        for (NSString *str in [self.membership allKeys]){
-            if ([str isEqualToString:c]){
-                found = TRUE;
-            }
-        }
-        if (!found){
-            [self.membership setValue:[[NSMutableArray alloc] init] forKey:c];
+            [full_name setValue:[[NSMutableArray alloc] init] forKey:c];
         }
     }
     
     for (Profile *this_profile in addressBook){
         [[full_name objectForKey:this_profile.alphabet_first] addObject:this_profile];
-        [[sections objectForKey:this_profile.section] addObject:this_profile];
-        [[membership objectForKey:this_profile.status] addObject:this_profile];
     }
     
-    for (NSString *key in [self.sections allKeys]){
+    for (NSString *key in [full_name allKeys]){
         //Name Table
-        [[self.full_name objectForKey:key] sortUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"firstname" ascending:YES]]];
-        
-        //Section Table
-        [[self.sections objectForKey:key] sortUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"section" ascending:YES]]];
-        
-        //Status/Membership Table
-        [[self.membership objectForKey:key] sortUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"status" ascending:YES]]];
+        [[full_name objectForKey:key] sortUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"firstname" ascending:YES]]];
     }
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-    if(sorter.selectedSegmentIndex == 0){
-        return [[full_name allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-    }
-    
-    return nil;
+    return [[full_name allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
 }
 
 #pragma mark - Table View Data Source Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if(sorter.selectedSegmentIndex == 0){
-        return [[full_name allKeys] count];
-    }
-    else if(sorter.selectedSegmentIndex == 1){
-        return [[sections allKeys] count];
-    }
-    else {
-        return [[membership allKeys] count];
-    }
+    return [[full_name allKeys] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if(sorter.selectedSegmentIndex == 0){ 
-        return [[full_name valueForKey:[[[full_name allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section]] count];
-    }
-    else if(sorter.selectedSegmentIndex == 1){
-        return [[sections valueForKey:[[[sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section]] count];
-    }
-    else if(sorter.selectedSegmentIndex == 2){
-        return [[membership valueForKey:[[[membership allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section]] count];
-    }
-    else return 0;
+
+    return [[full_name valueForKey:[[[full_name allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section]] count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -271,15 +204,7 @@
     
     NSString *sectionTitle;
     
-    if(sorter.selectedSegmentIndex == 0){
-        sectionTitle = [[[full_name allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
-    }
-    else if(sorter.selectedSegmentIndex == 1){
-        sectionTitle = [[[sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
-    }
-    else if(sorter.selectedSegmentIndex == 2){
-        sectionTitle = [[[membership allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
-    }
+    sectionTitle = [[[full_name allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
     
     UIView *header = [UIView TexasDrumsAddressBookTableHeaderViewWithTitle:sectionTitle];
     
@@ -302,15 +227,7 @@
     
     Profile *profile;
 
-    if(sorter.selectedSegmentIndex == 0){
-        profile = [[full_name valueForKey:[[[full_name allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
-    }
-    else if(sorter.selectedSegmentIndex == 1){
-        profile = [[sections valueForKey:[[[sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
-    }
-    else{
-        profile = [[membership valueForKey:[[[membership allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
-    }
+    profile = [[full_name valueForKey:[[[full_name allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
 
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", profile.firstname, profile.lastname];
     

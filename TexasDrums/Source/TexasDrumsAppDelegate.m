@@ -147,82 +147,17 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    if(_Profile == nil){
-        //TDLog(@"results: %@", results);
-        _Profile = [[Profile alloc] init];
-        
-        _Profile.firstname = [results objectForKey:@"firstname"];
-        [defaults setObject:_Profile.firstname forKey:@"firstname"];
-        
-        _Profile.lastname = [results objectForKey:@"lastname"];
-        [defaults setObject:_Profile.lastname forKey:@"lastname"];
-        
-        _Profile.email = [results objectForKey:@"email"];
-        [defaults setObject:_Profile.email forKey:@"email"];
-        
-        _Profile.birthday = [results objectForKey:@"birthday"];
-        [defaults setObject:_Profile.birthday forKey:@"birthday"];
-        
-        _Profile.lastlogin = [results objectForKey:@"lastlogin"];
-        [defaults setObject:_Profile.lastlogin forKey:@"lastlogin"];
-        
-        _Profile.paid = [[results objectForKey:@"paid"] boolValue];
-        [defaults setBool:_Profile.paid forKey:@"paid"];
-        
-        // This shouldn't be saved, and will not be able to be saved in the new
-        // implementation of the database.
-#warning - backend issue; needs to retrieve the hash.
-        _Profile.password = [results objectForKey:@"password"];
-        [defaults setObject:_Profile.password forKey:@"password"];
-        
-        _Profile.phonenumber = [results objectForKey:@"phonenumber"];
-        [defaults setObject:_Profile.phonenumber forKey:@"phonenumber"];
-        
-        _Profile.section = [results objectForKey:@"section"];
-        [defaults setObject:_Profile.section forKey:@"section"];
-        
-        _Profile.sl = [[results objectForKey:@"sl"] boolValue];
-        _Profile.instructor = [[results objectForKey:@"instructor"] boolValue];
-        _Profile.admin = [[results objectForKey:@"admin"] boolValue];
-        
-        _Profile.status = [results objectForKey:@"status"];
-        [defaults setObject:_Profile.status forKey:@"status"];
-        
-        _Profile.username = [results objectForKey:@"username"];
-        [defaults setObject:_Profile.username forKey:@"username"];
-        
-        _Profile.valid = [[results objectForKey:@"valid"] boolValue];
-        [defaults setBool:_Profile.valid forKey:@"valid"];
-        
-        _Profile.years = [results objectForKey:@"years"];
-        [defaults setObject:_Profile.years forKey:@"years"];
-    }
-    
-    if(_Profile.sl){
-        [defaults setBool:YES forKey:@"SL"];
-    }
-    else [defaults setBool:NO forKey:@"SL"]; 
-    
-    if(_Profile.instructor){
-        [defaults setBool:YES forKey:@"instructor"];
-    }
-    else [defaults setBool:NO forKey:@"instructor"];
-    
-    if(_Profile.admin){
-        [defaults setBool:YES forKey:@"admin"];
-    }
-    else [defaults setBool:NO forKey:@"admin"];
+    [[UserProfile sharedInstance] createProfile:results];
     
     [defaults setBool:YES forKey:@"member"];
     [defaults setBool:YES forKey:@"login_valid"];
     
-    TDLog(@"Profile for user '%@' has been fetched and saved.", _Profile.username);
+    TDLog(@"Profile for user '%@' has been fetched and saved.", [UserProfile sharedInstance].username);
 }
 
 - (void)destroyProfile {
     TDLog(@"Destroying profile.");
-    [_Profile release];
-    _Profile = nil;
+    [[UserProfile sharedInstance] destroyProfile];
 }
 
 - (void)request:(TexasDrumsRequest *)request receivedData:(id)data {

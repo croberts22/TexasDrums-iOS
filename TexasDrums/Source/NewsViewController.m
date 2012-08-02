@@ -220,7 +220,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // If user logged in, show all posts. Otherwise, just regular posts.
-    if(_Profile != nil){
+    if([UserProfile sharedInstance].loggedIn) {
         return [allposts count];
     }
     else{
@@ -249,9 +249,7 @@
     cell.imageView.image = nil;
     
     // If logged in, set defaults and allow member posts to be displayed.
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    if(_Profile != nil && [defaults boolForKey:@"login_valid"]){
+    if([UserProfile sharedInstance].loggedIn){
         cell.textLabel.text = [[allposts objectAtIndex:indexPath.row] titleOfPost];
         cell.detailTextLabel.text = [[allposts objectAtIndex:indexPath.row] subtitle];
 
@@ -285,7 +283,7 @@
     
     NewsPostView *NPV = [[NewsPostView alloc] initWithNibName:@"NewsPostView" bundle:[NSBundle mainBundle]];
     
-    if(_Profile == nil){
+    if([UserProfile sharedInstance].loggedIn) {
         NPV.content = [[posts objectAtIndex:indexPath.row] post]; 
         NPV.post = [posts objectAtIndex:indexPath.row];
     }

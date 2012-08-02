@@ -28,7 +28,6 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.delegate = (TexasDrumsAppDelegate *)[[UIApplication sharedApplication] delegate];
     }
     return self;
 }
@@ -60,7 +59,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     // If user is not logged in, show login prompt.
-    if(![defaults boolForKey:@"login_valid"]){
+    if(![UserProfile sharedInstance].loggedIn){
         self.loginPrompt.hidden = NO;
         self.memberTable.hidden = YES;
         
@@ -89,6 +88,7 @@
     [self setTitle:@"Members"];
     
     // Set properties.
+    self.delegate = (TexasDrumsAppDelegate *)[[UIApplication sharedApplication] delegate];
     self.memberTable.backgroundColor = [UIColor clearColor];
     self.loginPrompt.backgroundColor = [UIColor clearColor];
 }
@@ -171,18 +171,13 @@
 
 - (void)connect {
     [SVProgressHUD showWithStatus:@"Logging out..."];
-    TexasDrumsGetMemberLogout *get = [[TexasDrumsGetMemberLogout alloc] initWithUsername:_Profile.username andPassword:_Profile.password];
+    TexasDrumsGetMemberLogout *get = [[TexasDrumsGetMemberLogout alloc] initWithUsername:[UserProfile sharedInstance].username andPassword:[UserProfile sharedInstance].hash];
     get.delegate = self;
     [get startRequest];
 }
 
 - (void)logout {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    [defaults setBool:NO forKey:@"login_valid"];
-    [defaults setBool:NO forKey:@"member"];
-    
-    [delegate destroyProfile];
+    [self.delegate destroyProfile];
     
     // Smoothly transition back into the login prompt.
     self.loginPrompt.alpha = 0.0f;
@@ -199,7 +194,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if(_Profile.admin){
+    if([UserProfile sharedInstance].admin){
         return 2;
     }
 
@@ -207,7 +202,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if(_Profile.admin){
+    if([UserProfile sharedInstance].admin){
         if(section == 0){
             return [membersOptions count];
         }

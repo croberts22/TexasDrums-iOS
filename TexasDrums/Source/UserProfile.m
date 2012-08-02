@@ -44,6 +44,7 @@ static UserProfile *sharedInstance = nil;
         self.valid = NO;
         self.lastlogin = @"";
         self.paid = NO;
+        self.loggedIn = NO;
     }
     
     return self;
@@ -75,6 +76,46 @@ static UserProfile *sharedInstance = nil;
 
 - (id)autorelease {
     return self;
+}
+
+- (void)createProfile:(NSDictionary *)dictionary {
+    self.firstname = [dictionary objectForKey:@"firstname"];
+    self.lastname = [dictionary objectForKey:@"lastname"];
+    self.username = [dictionary objectForKey:@"username"];
+    self.hash = [dictionary objectForKey:@"password"];
+    self.section = [dictionary objectForKey:@"section"];
+    self.years = [dictionary objectForKey:@"years"];
+    self.status = [dictionary objectForKey:@"status"];
+    self.sl = [[dictionary objectForKey:@"SL"] boolValue];
+    self.instructor = [[dictionary objectForKey:@"instructor"] boolValue];
+    self.admin = [[dictionary objectForKey:@"admin"] boolValue];
+    self.phonenumber = [dictionary objectForKey:@"phonenumber"];
+    self.email = [dictionary objectForKey:@"email"];
+    self.birthday = [dictionary objectForKey:@"birthday"];
+    self.valid = [[dictionary objectForKey:@"valid"] boolValue];
+    self.lastlogin = [dictionary objectForKey:@"lastlogin"];
+    self.paid = [[dictionary objectForKey:@"paid"] boolValue];
+    self.loggedIn = YES;
+}
+
+- (void)destroyProfile {
+    self.firstname = @"";
+    self.lastname = @"";
+    self.username = @"";
+    self.hash = @"";
+    self.section = @"";
+    self.years = @"";
+    self.status = @"";
+    self.sl = NO;
+    self.instructor = NO;
+    self.admin = NO;
+    self.phonenumber = @"";
+    self.email = @"";
+    self.birthday = @"";
+    self.valid = NO;
+    self.lastlogin = @"";
+    self.paid = NO;
+    self.loggedIn = NO;
 }
 
 

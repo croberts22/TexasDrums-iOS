@@ -11,9 +11,6 @@
 
 @implementation Common
 
-// User Profile
-Profile *_Profile;
-
 // Debug Mode; this will include NSLog statements in the console.
 BOOL const DEBUG_MODE = NO;
 

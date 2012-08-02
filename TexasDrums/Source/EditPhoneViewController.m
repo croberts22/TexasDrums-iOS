@@ -46,7 +46,7 @@
     // Set properties.
     self.status.alpha = 0.0f;
     self.phone.delegate = self;
-    self.phone.text = _Profile.phonenumber;
+    self.phone.text = [UserProfile sharedInstance].phonenumber;
     self.phone.textColor = [UIColor TexasDrumsGrayColor];
     self.phone.font = [UIFont TexasDrumsFontOfSize:14];
 }
@@ -120,8 +120,8 @@
     
     if(passedConstraints) {
         [SVProgressHUD showWithStatus:@"Updating..."];
-        TexasDrumsGetEditProfile *get = [[TexasDrumsGetEditProfile alloc] initWithUsername:_Profile.username
-                                                                               andPassword:_Profile.password
+        TexasDrumsGetEditProfile *get = [[TexasDrumsGetEditProfile alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                                               andPassword:[UserProfile sharedInstance].hash
                                                                              withFirstName:nil
                                                                                andLastName:nil
                                                                         andUpdatedPassword:nil
@@ -136,7 +136,7 @@
 }
 
 - (BOOL)checkConstraints {
-    if([self.phone.text isEqualToString:_Profile.phonenumber]){
+    if([self.phone.text isEqualToString:[UserProfile sharedInstance].phonenumber]){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                         message:@"Your phone number didn't change. Please type in a new phone number."
                                                        delegate:self
@@ -186,7 +186,7 @@
         if([results respondsToSelector:@selector(objectForKey:)] ){
             if([[results objectForKey:@"status"] isEqualToString:_200_OK]) {
                 TDLog(@"Profile updated.");
-                _Profile.phonenumber = self.phone.text;
+                [UserProfile sharedInstance].phonenumber = self.phone.text;
                 
                 [self performSelectorOnMainThread:@selector(displayText:) withObject:@"Your phone number has been updated." waitUntilDone:YES];
                 [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(sendToProfileView) userInfo:nil repeats:NO];

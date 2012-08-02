@@ -111,7 +111,7 @@
 - (void)connect {
     [self hideRefreshButton];
     [SVProgressHUD showWithStatus:@"Loading..."];
-    TexasDrumsGetAccounts *get = [[TexasDrumsGetAccounts alloc] initWithUsername:_Profile.username andPassword:_Profile.password];
+    TexasDrumsGetAccounts *get = [[TexasDrumsGetAccounts alloc] initWithUsername:[UserProfile sharedInstance].username andPassword:[UserProfile sharedInstance].hash];
     get.delegate = self;
     [get startRequest];
 }
@@ -135,7 +135,7 @@
 }
 
 - (void)updateUser:(NSString *)user withPayment:(NSNumber *)paid {
-    TexasDrumsGetPaymentUpdate *get = [[TexasDrumsGetPaymentUpdate alloc] initWithUsername:_Profile.username andPassword:_Profile.password andUser:user andPaid:paid];
+    TexasDrumsGetPaymentUpdate *get = [[TexasDrumsGetPaymentUpdate alloc] initWithUsername:[UserProfile sharedInstance].username andPassword:[UserProfile sharedInstance].hash andUser:user andPaid:paid];
     get.delegate = self;
     [get startRequest];
 }
@@ -190,8 +190,8 @@
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         cell.textLabel.textColor = [UIColor darkGrayColor];
         
-        if([user isEqualToString:_Profile.username]){
-            _Profile.paid = TRUE;
+        if([user isEqualToString:[UserProfile sharedInstance].username]){
+            [UserProfile sharedInstance].paid = TRUE;
         }
         
         [self updateUser:user withPayment:[NSNumber numberWithInt:1]];
@@ -200,8 +200,8 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.textLabel.textColor = [UIColor TexasDrumsGrayColor];
         
-        if([user isEqualToString:_Profile.username]){
-            _Profile.paid = FALSE;
+        if([user isEqualToString:[UserProfile sharedInstance].username]){
+            [UserProfile sharedInstance].paid = FALSE;
         }
         
         [self updateUser:user withPayment:[NSNumber numberWithInt:0]];

@@ -99,7 +99,7 @@
 
 - (void)connect {
     [SVProgressHUD showWithStatus:@"Loading..."];
-    TexasDrumsGetGigs *get = [[TexasDrumsGetGigs alloc] initWithUsername:_Profile.username andPassword:_Profile.password];
+    TexasDrumsGetGigs *get = [[TexasDrumsGetGigs alloc] initWithUsername:[UserProfile sharedInstance].username andPassword:[UserProfile sharedInstance].hash];
     get.delegate = self;
     [get startRequest];
 }
