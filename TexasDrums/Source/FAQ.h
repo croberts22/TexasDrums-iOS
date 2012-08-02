@@ -16,9 +16,12 @@
 }
 
 
-@property (nonatomic, retain) NSString *category;
-@property (nonatomic, retain) NSString *question;
-@property (nonatomic, retain) NSString *answer;
-@property (nonatomic) BOOL valid;
+@property (nonatomic, copy) NSString *category;
+@property (nonatomic, copy) NSString *question;
+@property (nonatomic, copy) NSString *answer;
+@property (nonatomic, assign) BOOL valid;
+
+- (id)init;
++ (FAQ *)createNewFAQ:(NSDictionary *)item;
 
 @end

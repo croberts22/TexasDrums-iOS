@@ -178,7 +178,7 @@
     for(NSDictionary *item in results){
         if(DEBUG_MODE) TDLog(@"%@", item);
         
-        News *post = [self createNewPost:item];
+        News *post = [News createNewPost:item];
         
         // If we make it in this loop, then we know this post
         // to be the most recent timestamp.
@@ -200,23 +200,6 @@
     [self displayTable];
 }
 
-- (News *)createNewPost:(NSDictionary *)item {
-    News *post = [[[News alloc] init] autorelease];
-    
-    post.post = [item objectForKey:@"content"];
-    post.postDate = [item objectForKey:@"date"];
-    post.author = [item objectForKey:@"firstname"];
-    post.time = [item objectForKey:@"time"];
-    post.timestamp = [[item objectForKey:@"timestamp"] intValue];
-    post.titleOfPost = [item objectForKey:@"title"];
-    post.memberPost = [[item objectForKey:@"membernews"] boolValue];
-    post.sticky = [[item objectForKey:@"sticky"] boolValue];
-    post.subtitle = [NSString extractHTML:post.post];
-    post.subtitle = [NSString stripExcessEscapes:post.subtitle];
-    
-    return post;
-}
-
 - (void)sortTable {
     NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:NO];
     [allposts sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
@@ -231,13 +214,11 @@
 
 #pragma mark - UITableView Data Source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // If user logged in, show all posts. Otherwise, just regular posts.
     if(_Profile != nil){
         return [allposts count];
@@ -247,26 +228,24 @@
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 80;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     
     TexasDrumsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[TexasDrumsTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        
+        cell.textLabel.font = [UIFont TexasDrumsBoldFontOfSize:14];
+        
+        cell.detailTextLabel.numberOfLines = 3;
     }
-
+    
     cell.textLabel.textColor = [UIColor lightGrayColor];
     cell.detailTextLabel.textColor = [UIColor grayColor];
-    
-    cell.textLabel.font = [UIFont TexasDrumsBoldFontOfSize:14];
-    
-    cell.detailTextLabel.numberOfLines = 3;
     cell.imageView.image = nil;
     
     // If logged in, set defaults and allow member posts to be displayed.
@@ -300,11 +279,10 @@
     return cell;
 }
 
-
 #pragma mark - UITableView Delegate Methods 
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     NewsPostView *NPV = [[NewsPostView alloc] initWithNibName:@"NewsPostView" bundle:[NSBundle mainBundle]];
     
     if(_Profile == nil){

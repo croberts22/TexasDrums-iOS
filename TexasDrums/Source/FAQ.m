@@ -12,4 +12,26 @@
 
 @synthesize category, question, answer, valid;
 
+- (id)init {
+    if((self = [super init])) {
+        self.category = @"";
+        self.question = @"";
+        self.answer = @"";
+        self.valid = NO;
+    }
+    
+    return self;
+}
+
++ (FAQ *)createNewFAQ:(NSDictionary *)item {
+    FAQ *question = [[[FAQ alloc] init] autorelease];
+    
+    question.category = [item objectForKey:@"category"];
+    question.question = [item objectForKey:@"question"];
+    question.answer = [item objectForKey:@"answer"];
+    question.valid = [[item objectForKey:@"valid"] boolValue];
+    
+    return question;
+}
+
 @end

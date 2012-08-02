@@ -88,8 +88,6 @@
 
 @end
 
-
-
 @interface RosterTests : GHTestCase { }
 @property (retain) RosterMember *rosterMember;
 @end
@@ -244,7 +242,6 @@
     }
     
     // Create tenors.
-    
     for(int i = 1; i <= 10; i++) {
         NSString *position = [NSString stringWithFormat:@"%d", i];
         objects = [NSArray arrayWithObjects:@"FirstName", @"NickName", @"LastName", @"Tenors", @"Classification", @"Year", @"Major", @"Hometown", @"Quote", position , @"Phone", @"Email", @"1", nil];

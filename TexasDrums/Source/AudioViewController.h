@@ -11,23 +11,22 @@
 
 @interface AudioViewController : UIViewController<AVAudioPlayerDelegate> {
     IBOutlet UITableView *audioTable;
-    
-    UITableViewCell *currentCell;
+    int currentTrack;
     UIBarButtonItem *pauseButton;
     UIBarButtonItem *playButton;
-    
     AVAudioPlayer *audioPlayer;
-    
     NSMutableArray *audioArray;
-    NSMutableArray *yearArray;
 }
 
 @property (nonatomic, retain) UITableView *audioTable;
-@property (nonatomic, retain) UITableViewCell *currentCell;
+@property (nonatomic, assign) int currentTrack;
 @property (nonatomic, retain) UIBarButtonItem *pauseButton;
 @property (nonatomic, retain) UIBarButtonItem *playButton;
 @property (nonatomic, retain) AVAudioPlayer *audioPlayer;
 @property (nonatomic, retain) NSMutableArray *audioArray;
-@property (nonatomic, retain) NSMutableArray *yearArray;
+
+- (void)pausePlayer;
+- (void)resumePlayer;
+- (NSString *)grabFilenameWithIndex:(int)index;
 
 @end

@@ -18,8 +18,7 @@
 
 @synthesize videoArray, videoTable, yearArray;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -27,8 +26,7 @@
     return self;
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
@@ -45,8 +43,7 @@
     }
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setTitle:@"Videos"];
@@ -66,24 +63,20 @@
     [self connect];
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-
 #pragma mark - UI Methods
 
-- (void)setTitle:(NSString *)title
-{
+- (void)setTitle:(NSString *)title {
     [super setTitle:title];
     UILabel *titleView = (UILabel *)self.navigationItem.titleView;
     if (!titleView) {
@@ -150,7 +143,7 @@
         //TDLog(@"%@", item);
         
         // Create a new video object.
-        Video *video = [self createNewVideo:item];
+        Video *video = [Video createNewVideo:item];
         
         // If the current_year is empty, initialize it.
         if([current_year isEqualToString:@""]){
@@ -178,52 +171,21 @@
     
 }
 
-- (Video *)createNewVideo:(NSDictionary *)item {
-    
-    Video *video = [[Video alloc] init];
-    video.videoTitle = [item objectForKey:@"title"];
-    video.type = [item objectForKey:@"videotype"];
-    video.link = [item objectForKey:@"link"];
-    video.videoID = [item objectForKey:@"videoid"];
-    video.description = [item objectForKey:@"description"];
-    video.description = [NSString extractHTML:video.description];
-    video.description = [NSString stripExcessEscapes:video.description];
-    video.videoYear = [item objectForKey:@"year"];
-    video.videoDate = [item objectForKey:@"date"];
-    video.time = [item objectForKey:@"time"];
-    video.timestamp = [[item objectForKey:@"timestamp"] intValue];
-    video.valid = [[item objectForKey:@"valid"] boolValue];
-    video.thumbnail = [self createThumbnailURL:video.videoID];
-    
-    return [video autorelease];
-}
-                       
-- (NSURL *)createThumbnailURL:(NSString *)videoID {
-    NSString *string = [NSString stringWithFormat:@"http://img.youtube.com/vi/%@/hqdefault.jpg", videoID];
-    NSURL *url = [[NSURL alloc] initWithString:string];
-    
-    return [url autorelease];
-}
-
 #pragma mark - UITableView Data Source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [yearArray count];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [[videoArray objectAtIndex:section] count];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 80;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section 
-{
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section  {
     // Create a custom header.
     UIView *containerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, STANDARD_HEADER_HEIGHT)] autorelease];
     UILabel *headerTitle = [[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, 20)] autorelease];
@@ -247,8 +209,7 @@
 	return containerView;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -280,8 +241,7 @@
 
 #pragma mark - UITableView Delegate Methods
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Video *this_video = [[videoArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     TexasDrumsWebViewController *TDWVC = [[TexasDrumsWebViewController alloc] init];
     

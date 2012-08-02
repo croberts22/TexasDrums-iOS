@@ -18,12 +18,15 @@
     BOOL valid;
 }
 
-@property (nonatomic, retain) NSString *filename;
-@property (nonatomic, retain) NSString *location;
-@property (nonatomic, retain) NSString *instrument;
-@property (nonatomic) int year;
-@property (nonatomic, retain) NSString *filetype;
-@property (nonatomic, retain) NSString *status;
-@property (nonatomic) BOOL valid;
+@property (nonatomic, copy) NSString *filename;
+@property (nonatomic, copy) NSString *location;
+@property (nonatomic, copy) NSString *instrument;
+@property (nonatomic, assign) int year;
+@property (nonatomic, copy) NSString *filetype;
+@property (nonatomic, copy) NSString *status;
+@property (nonatomic, assign) BOOL valid;
+
+- (id)init;
++ (Music *)createNewMusic:(NSDictionary *)item;
 
 @end

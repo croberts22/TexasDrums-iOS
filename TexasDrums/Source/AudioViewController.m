@@ -7,16 +7,14 @@
 //
 
 #import "AudioViewController.h"
-#import "Audio.h"
 #import "CJSONDeserializer.h"
 #import "TexasDrumsTableViewCell.h"
 
 @implementation AudioViewController
 
-@synthesize audioArray, audioTable, audioPlayer, currentCell, pauseButton, playButton, yearArray;
+@synthesize audioTable, currentTrack, pauseButton, playButton, audioPlayer, audioArray;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -24,8 +22,7 @@
     return self;
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
@@ -39,9 +36,9 @@
     [[GANTracker sharedTracker] trackPageview:@"Audio (AudioView)" withError:nil];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self setTitle:@"Audio"];
 
     // Set variables.
@@ -55,15 +52,21 @@
     self.navigationItem.rightBarButtonItem = self.pauseButton;
     self.navigationItem.rightBarButtonItem.enabled = NO;
     
+    self.currentTrack = -1;
+    
     // Allocate things as necessary.
     if(audioArray == nil){
         self.audioArray = [[[NSMutableArray alloc] initWithObjects:@"Go Horns Go", @"Go, Go Horns", @"Texas Texas Yee Haw", @"Gourdhead", @"Tenor Intro", @"Defense", @"Push 'em Back", @"Hold 'em Horns, Hold 'em", @"D-D-D, Defense", @"Cheerleader", @"Buck Buck", @"Full Cadence Run", nil] autorelease];
     }
+    
+    if(audioPlayer == nil){
+        self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:nil error:nil];
+        self.audioPlayer.delegate = self;
+    }
 
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -78,16 +81,14 @@
     }
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - UI Methods
 
-- (void)setTitle:(NSString *)title
-{
+- (void)setTitle:(NSString *)title {
     [super setTitle:title];
     UILabel *titleView = (UILabel *)self.navigationItem.titleView;
     if (!titleView) {
@@ -159,34 +160,38 @@
     return nil;
 }
 
-
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [audioArray count];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 44;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     
     TexasDrumsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[TexasDrumsTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+
+        cell.textLabel.font = [UIFont TexasDrumsBoldFontOfSize:18];
     }
     
-    cell.textLabel.font = [UIFont TexasDrumsBoldFontOfSize:18];
+    if(currentTrack == indexPath.row) {
+        cell.accessoryView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"note.png"]] autorelease];
+        cell.textLabel.textColor = [UIColor TexasDrumsOrangeColor];
+    }
+    else {
+        cell.accessoryView = nil;
+        cell.textLabel.textColor = [UIColor TexasDrumsGrayColor];
+    }
     
     cell.textLabel.text = [audioArray objectAtIndex:indexPath.row];
     
@@ -195,12 +200,11 @@
 
 #pragma mark - UITableView Delegate Methods
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.audioTable deselectRowAtIndexPath:indexPath animated:YES];
     
     // If user taps the same cell, just stop the player and restart.
-    if(self.currentCell == [tableView cellForRowAtIndexPath:indexPath]){
+    if(self.currentTrack == indexPath.row){
         if([audioPlayer isPlaying]){
             [audioPlayer stop];
             [audioPlayer setCurrentTime:0.0f];
@@ -209,10 +213,14 @@
         [audioPlayer play];
         return;
     }
-#warning - need to fix; reused cells will display icons on different cells.
-    self.currentCell.accessoryView = nil;
-    self.currentCell.textLabel.textColor = [UIColor TexasDrumsGrayColor];
     
+    // Set the old cell properties.
+    NSIndexPath *oldIndexPath = [NSIndexPath indexPathForRow:self.currentTrack inSection:0];
+    UITableViewCell *cell = [self.audioTable cellForRowAtIndexPath:oldIndexPath];
+    cell.accessoryView = nil;
+    cell.textLabel.textColor = [UIColor TexasDrumsGrayColor];
+    
+    self.currentTrack = indexPath.row;
     self.navigationItem.rightBarButtonItem = self.pauseButton;
     self.navigationItem.rightBarButtonItem.enabled = YES;
     
@@ -234,12 +242,10 @@
     [audioPlayer prepareToPlay];
     [audioPlayer play];
     
-    // Add an accessory at the end to let the user know this tune is playing.
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    self.currentCell = cell;
-    cell.accessoryView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"note.png"]] autorelease];
+    // Set the new cell properties.
+    cell = [self.audioTable cellForRowAtIndexPath:indexPath];
+    cell.accessoryView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"note.png"]] autorelease];;
     cell.textLabel.textColor = [UIColor TexasDrumsOrangeColor];
-
 }
 
 #pragma mark - AVAudioPlayer Delegate Methods

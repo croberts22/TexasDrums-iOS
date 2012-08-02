@@ -13,6 +13,9 @@
     NSArray *mediaOptions;
 }
 
-@property (nonatomic, retain) NSArray *mediaOptions;
+@property (nonatomic, copy) NSArray *mediaOptions;
+
+- (IBAction)audioButtonPressed:(id)sender;
+- (IBAction)videoButtonPressed:(id)sender;
 
 @end

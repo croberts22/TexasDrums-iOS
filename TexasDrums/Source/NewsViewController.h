@@ -7,13 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
-#import "TexasDrumsTable.h"
 #import "TexasDrumsAPIConnection.h"
 
 @class News;
 
-@interface NewsViewController : UIViewController<TexasDrumsTable, TexasDrumsAPIConnection> {
+@interface NewsViewController : UIViewController<TexasDrumsAPIConnection, UITableViewDataSource, UITableViewDelegate> {
     IBOutlet UITableView *newsTable;
     IBOutlet UILabel *status;
     NSMutableArray *posts;
@@ -41,7 +39,6 @@
 
 - (void)connect;
 - (void)parseNewsData:(NSDictionary *)results;
-- (News *)createNewPost:(NSDictionary *)item;
 - (void)sortTable;
 
 @end

@@ -20,14 +20,17 @@
     int sortfield;
 }
 
-@property (nonatomic, retain) NSString *first;
-@property (nonatomic, retain) NSString *last;
-@property (nonatomic, retain) NSString *fullname;
-@property (nonatomic, retain) NSString *instrument;
-@property (nonatomic, retain) NSString *year;
-@property (nonatomic, retain) NSString *bio;
-@property (nonatomic, retain) NSString *image_url;
-@property (nonatomic, retain) NSString *email;
-@property (nonatomic) int sortfield;
+@property (nonatomic, copy) NSString *first;
+@property (nonatomic, copy) NSString *last;
+@property (nonatomic, copy) NSString *fullname;
+@property (nonatomic, copy) NSString *instrument;
+@property (nonatomic, copy) NSString *year;
+@property (nonatomic, copy) NSString *bio;
+@property (nonatomic, copy) NSString *image_url;
+@property (nonatomic, copy) NSString *email;
+@property (nonatomic, assign) int sortfield;
+
+- (id)init;
++ (StaffMember *)createNewStaffMember:(NSDictionary *)item;
 
 @end

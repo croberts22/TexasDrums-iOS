@@ -15,8 +15,9 @@
 
 @synthesize webView, titleOfPost, dateAndAuthor, content, post, isMemberPost, loadPost;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+#pragma mark - Memory management
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -24,8 +25,7 @@
     return self;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [post release];
     [content release];
     [titleOfPost release];
@@ -34,8 +34,7 @@
     [super dealloc];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
 }
@@ -43,11 +42,12 @@
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
+    // Google Analytics
     [[GANTracker sharedTracker] trackPageview:@"News Post (NewsPost)" withError:nil];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     // Set properties.
@@ -70,28 +70,25 @@
     [self.webView loadHTMLString:HTMLString baseURL:nil];
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark - User Methods
+#pragma mark - Data Methods
 
 - (void)createHeader {
     self.titleOfPost.text = post.titleOfPost;
     
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:post.timestamp];
     NSDateFormatter *format = [[[NSDateFormatter alloc] init] autorelease];
-    [format setDateStyle:NSDateFormatterMediumStyle];
-    [format setTimeStyle:NSDateFormatterShortStyle];
+    [format setDateFormat:@"MMMM d, yyyy 'at' h:m a"];
     
     NSString *dateString = [format stringFromDate:date];
     

@@ -29,7 +29,6 @@
 
 - (IBAction)sorterChanged:(id)sender;
 - (void)parseAddressBookData:(NSDictionary *)results;
-- (Profile *)createNewProfile:(NSDictionary *)item;
 - (void)sortMembersByName;
 - (void)grabCharacters;
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView;

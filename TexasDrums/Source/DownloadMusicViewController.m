@@ -129,25 +129,11 @@
 - (void)parseMusicData:(NSDictionary *)results {
     for(NSDictionary *item in results) {
         if(DEBUG_MODE) TDLog(@"%@", item);
-        Music *music = [self createNewMusic:item];
+        Music *music = [Music createNewMusic:item];
         [self.musicArray addObject:music];
     }
     
     [self displayTable];
-}
-
-#warning - move this as a class method?
-- (Music *)createNewMusic:(NSDictionary *)item {
-    Music *music = [[[Music alloc] init] autorelease];
-    music.filename = [item objectForKey:@"name"];
-    music.location = [[item objectForKey:@"location"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    music.instrument = [item objectForKey:@"instrument"];
-    music.year = [[item objectForKey:@"year"] intValue];
-    music.filetype = [item objectForKey:@"filetype"];
-    music.status = [item objectForKey:@"status"];
-    music.valid = [[item objectForKey:@"valid"] boolValue];
-    
-    return music;
 }
 
 #pragma mark - Table View Data Source Methods

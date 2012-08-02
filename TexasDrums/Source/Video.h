@@ -22,16 +22,20 @@
     BOOL valid;
 }
 
-@property (nonatomic, retain) NSString *videoTitle;
-@property (nonatomic, retain) NSString *type;
-@property (nonatomic, retain) NSString *link;
-@property (nonatomic, retain) NSString *videoID;
-@property (nonatomic, retain) NSString *description;
-@property (nonatomic, retain) NSString *videoYear;
-@property (nonatomic, retain) NSString *videoDate;
-@property (nonatomic, retain) NSString *time;
+@property (nonatomic, copy) NSString *videoTitle;
+@property (nonatomic, copy) NSString *type;
+@property (nonatomic, copy) NSString *link;
+@property (nonatomic, copy) NSString *videoID;
+@property (nonatomic, copy) NSString *description;
+@property (nonatomic, copy) NSString *videoYear;
+@property (nonatomic, copy) NSString *videoDate;
+@property (nonatomic, copy) NSString *time;
 @property (nonatomic, retain) NSURL *thumbnail;
 @property (nonatomic, assign) int timestamp;
 @property (nonatomic, assign) BOOL valid;
+
+- (id)init;
++ (Video *)createNewVideo:(NSDictionary *)item;
+- (NSURL *)createThumbnailURL;
 
 @end

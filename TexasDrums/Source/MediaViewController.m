@@ -15,14 +15,14 @@
 
 @synthesize mediaOptions;
 
-- (void)dealloc
-{
+#pragma mark - Memory management
+
+- (void)dealloc {
     [mediaOptions release];
     [super dealloc];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
@@ -31,8 +31,33 @@
 
 #pragma mark - View lifecycle
 
-- (void)setTitle:(NSString *)title
-{
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[GANTracker sharedTracker] trackPageview:@"Media (MediaView)" withError:nil];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self setTitle:@"Media"];
+    
+    // Allocate things as necessary.
+    mediaOptions = [[NSArray alloc] initWithObjects:@"Audio", @"Video", nil];
+}
+
+- (void)viewDidUnload {
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - UI Methods
+
+- (void)setTitle:(NSString *)title {
     [super setTitle:title];
     UILabel *titleView = (UILabel *)self.navigationItem.titleView;
     if (!titleView) {
@@ -42,51 +67,6 @@
     titleView.text = title;
     [titleView sizeToFit];
 }
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self setTitle:@"Media"];
-    
-    // Allocate things as necessary.
-    mediaOptions = [[NSArray alloc] initWithObjects:@"Audio", @"Video", nil];
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [[GANTracker sharedTracker] trackPageview:@"Media (MediaView)" withError:nil];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-#pragma mark - UIButton Methods
 
 - (IBAction)audioButtonPressed:(id)sender {
     AudioViewController *AVC = [[AudioViewController alloc] initWithNibName:@"AudioView" bundle:[NSBundle mainBundle]];

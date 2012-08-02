@@ -14,7 +14,7 @@
 @synthesize titleOfPost, post, author, time, timestamp, postDate, subtitle, memberPost, sticky;
 
 - (id)init {
-    if( (self = [super init]) ) {
+    if((self = [super init])) {
         self.titleOfPost = @"";
         self.post = @"";
         self.author = @"";

@@ -126,17 +126,7 @@
 
 - (void)parseStaffData:(NSDictionary *)results {
     for(NSDictionary *item in results){
-        StaffMember *member = [[[StaffMember alloc] init] autorelease];
-        member.first = [item objectForKey:@"firstname"];
-        member.last = [item objectForKey:@"lastname"];
-        member.fullname = [NSString stringWithFormat:@"%@ %@", member.first, member.last];
-        member.instrument = [item objectForKey:@"section"];
-        member.year = [item objectForKey:@"year"];
-        member.bio = [item objectForKey:@"bio"];
-        member.image_url = [item objectForKey:@"image"];
-        member.email = [item objectForKey:@"email"];
-        member.sortfield = [[item objectForKey:@"sortfield"] intValue];
-        
+        StaffMember *member = [StaffMember createNewStaffMember:item];
         [staff addObject:member];
     }
     

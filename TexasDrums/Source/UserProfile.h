@@ -27,21 +27,21 @@
     BOOL paid;
 }
 
-@property (nonatomic, retain) NSString *firstname;
-@property (nonatomic, retain) NSString *lastname;
-@property (nonatomic, retain) NSString *username;
-@property (nonatomic, retain) NSString *hash;
-@property (nonatomic, retain) NSString *section;
-@property (nonatomic, retain) NSString *years;
-@property (nonatomic, retain) NSString *status;
+@property (nonatomic, copy) NSString *firstname;
+@property (nonatomic, copy) NSString *lastname;
+@property (nonatomic, copy) NSString *username;
+@property (nonatomic, copy) NSString *hash;
+@property (nonatomic, copy) NSString *section;
+@property (nonatomic, copy) NSString *years;
+@property (nonatomic, copy) NSString *status;
 @property (nonatomic, assign) BOOL sl;
 @property (nonatomic, assign) BOOL instructor;
 @property (nonatomic, assign) BOOL admin;
-@property (nonatomic, retain) NSString *phonenumber;
-@property (nonatomic, retain) NSString *email;
-@property (nonatomic, retain) NSString *birthday;
+@property (nonatomic, copy) NSString *phonenumber;
+@property (nonatomic, copy) NSString *email;
+@property (nonatomic, copy) NSString *birthday;
 @property (nonatomic, assign) BOOL valid;
-@property (nonatomic, retain) NSString *lastlogin;
+@property (nonatomic, copy) NSString *lastlogin;
 @property (nonatomic, assign) BOOL paid;
 
 @end

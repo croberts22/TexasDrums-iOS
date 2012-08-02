@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface TexasDrumsAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
     UIImageView *splashView;
-    NSMutableData *received_data;
 }
 
 extern Profile *_Profile;
@@ -18,8 +18,9 @@ extern Profile *_Profile;
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 @property (nonatomic, retain) UIImageView *splashView;
-@property (nonatomic, retain) NSMutableData *received_data;
 
+- (void)registerAppDefaults;
+- (void)connect;
 - (void)createProfile:(NSDictionary *)results;
 - (void)destroyProfile;
 

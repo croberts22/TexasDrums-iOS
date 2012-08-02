@@ -128,23 +128,12 @@
     
     // Iterate through the results and create FAQ objects.
     for(NSDictionary *item in results){        
-        FAQ *question = [self createNewFAQ:item];
+        FAQ *question = [FAQ createNewFAQ:item];
         [faq addObject:question];
     }
     
     [self countCategories];
     [self displayTable];
-}
-
-- (FAQ *)createNewFAQ:(NSDictionary *)item {
-    FAQ *question = [[[FAQ alloc] init] autorelease];
-    
-    question.category = [item objectForKey:@"category"];
-    question.question = [item objectForKey:@"question"];
-    question.answer = [item objectForKey:@"answer"];
-    question.valid = [[item objectForKey:@"valid"] boolValue];
-    
-    return question;
 }
 
 - (void)countCategories {
@@ -165,13 +154,11 @@
 
 #pragma mark - UITableView Data Source Methods
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [categories count];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     //  Returns number of questions plus answers (questions * 2) per section.
     int counter = 0;
     for(id key in categories){
@@ -184,8 +171,7 @@
     return 0;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGSize size;
     NSString *text;
     CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
@@ -219,8 +205,7 @@
     return height + (CELL_CONTENT_MARGIN * 2);
 }
 
-- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section 
-{
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     NSString *sectionTitle;
     int counter = 0;
     
@@ -238,8 +223,7 @@
 	return header;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
  
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];

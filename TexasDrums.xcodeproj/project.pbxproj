@@ -134,7 +134,6 @@
 		637CF8F4158C4B7900838F9A /* SingleRosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC008213B998B200890150 /* SingleRosterViewController.m */; };
 		637CF8F5158C4B7900838F9A /* SingleMemberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E9AB7713B854DA00F207EA /* SingleMemberView.m */; };
 		637CF8F6158C4B7900838F9A /* Video.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB0AECD1538E486008CE123 /* Video.m */; };
-		637CF8F7158C4B7900838F9A /* Audio.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA5E5CC153785B40025A227 /* Audio.m */; };
 		637CF8F8158C4B7900838F9A /* MediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E9AB2D13B4E5B700F207EA /* MediaViewController.m */; };
 		637CF8F9158C4B7900838F9A /* AudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF3A973150A716900E25177 /* AudioViewController.m */; };
 		637CF8FA158C4B7900838F9A /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF3A979150A717200E25177 /* VideoViewController.m */; };
@@ -475,7 +474,6 @@
 		AEA5E5B9153640840025A227 /* ReadMe.txt in Resources */ = {isa = PBXBuildFile; fileRef = AEA5E5B5153640840025A227 /* ReadMe.txt */; };
 		AEA5E5BC153641E70025A227 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA5E5BB153641E70025A227 /* CFNetwork.framework */; };
 		AEA5E5BE153641EC0025A227 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA5E5BD153641EC0025A227 /* libsqlite3.0.dylib */; };
-		AEA5E5CD153785B50025A227 /* Audio.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA5E5CC153785B40025A227 /* Audio.m */; };
 		AEA5E5CF15378A7F0025A227 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA5E5CE15378A7F0025A227 /* AVFoundation.framework */; };
 		AEA939CB15420135000E66F4 /* StaffMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA939C915420134000E66F4 /* StaffMemberViewController.m */; };
 		AEA939CC15420135000E66F4 /* StaffMemberViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA939CA15420134000E66F4 /* StaffMemberViewController.xib */; };
@@ -894,7 +892,6 @@
 		AE3A234715619336009B8F4B /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		AE3A234815619336009B8F4B /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		AE3A234915619336009B8F4B /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
-		AE3A5E5F156B3F4900A7DEF3 /* TexasDrumsTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TexasDrumsTable.h; sourceTree = "<group>"; };
 		AE3A5E60156B405900A7DEF3 /* TexasDrumsAPIConnection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TexasDrumsAPIConnection.h; sourceTree = "<group>"; };
 		AE3A5E62156B464200A7DEF3 /* UserProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfile.h; sourceTree = "<group>"; };
 		AE3A5E63156B464200A7DEF3 /* UserProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfile.m; sourceTree = "<group>"; };
@@ -956,8 +953,6 @@
 		AEA5E5B5153640840025A227 /* ReadMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe.txt; sourceTree = "<group>"; };
 		AEA5E5BB153641E70025A227 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		AEA5E5BD153641EC0025A227 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
-		AEA5E5CB153785B40025A227 /* Audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Audio.h; sourceTree = "<group>"; };
-		AEA5E5CC153785B40025A227 /* Audio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Audio.m; sourceTree = "<group>"; };
 		AEA5E5CE15378A7F0025A227 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		AEA939C815420134000E66F4 /* StaffMemberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffMemberViewController.h; sourceTree = "<group>"; };
 		AEA939C915420134000E66F4 /* StaffMemberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffMemberViewController.m; sourceTree = "<group>"; };
@@ -1325,7 +1320,6 @@
 				AE7564C9153CDC8100D04368 /* TexasDrumsWebViewController.h */,
 				AE7564CA153CDC8100D04368 /* TexasDrumsWebViewController.m */,
 				AE7564CB153CDC8200D04368 /* TexasDrumsWebViewController.xib */,
-				AE3A5E5F156B3F4900A7DEF3 /* TexasDrumsTable.h */,
 				AE3A5E60156B405900A7DEF3 /* TexasDrumsAPIConnection.h */,
 				AE3A5E62156B464200A7DEF3 /* UserProfile.h */,
 				AE3A5E63156B464200A7DEF3 /* UserProfile.m */,
@@ -1869,8 +1863,6 @@
 			children = (
 				AEB0AECC1538E486008CE123 /* Video.h */,
 				AEB0AECD1538E486008CE123 /* Video.m */,
-				AEA5E5CB153785B40025A227 /* Audio.h */,
-				AEA5E5CC153785B40025A227 /* Audio.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -2533,7 +2525,6 @@
 				AEF20D2D15218CB000C6427D /* RegexKitLite.m in Sources */,
 				AE3F7EC8152682B000CAA448 /* Music.m in Sources */,
 				AEF25869152F55070019D5BD /* MusicViewController.m in Sources */,
-				AEA5E5CD153785B50025A227 /* Audio.m in Sources */,
 				AEB0AECE1538E487008CE123 /* Video.m in Sources */,
 				AE7564C5153CCE0800D04368 /* TexasDrumsTableViewCell.m in Sources */,
 				AE7564C8153CD56D00D04368 /* NSString+RegEx.m in Sources */,
@@ -2665,7 +2656,6 @@
 				637CF8F4158C4B7900838F9A /* SingleRosterViewController.m in Sources */,
 				637CF8F5158C4B7900838F9A /* SingleMemberView.m in Sources */,
 				637CF8F6158C4B7900838F9A /* Video.m in Sources */,
-				637CF8F7158C4B7900838F9A /* Audio.m in Sources */,
 				637CF8F8158C4B7900838F9A /* MediaViewController.m in Sources */,
 				637CF8F9158C4B7900838F9A /* AudioViewController.m in Sources */,
 				637CF8FA158C4B7900838F9A /* VideoViewController.m in Sources */,

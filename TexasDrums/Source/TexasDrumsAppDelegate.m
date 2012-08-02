@@ -15,24 +15,34 @@
 // Dispatch period in seconds
 static const NSInteger kGANDispatchPeriodSec = 10;
 
+@interface TexasDrumsAppDelegate ()
+- (void)forceLogout;
+@end
+
 @implementation TexasDrumsAppDelegate
 
 @synthesize window=_window;
 @synthesize tabBarController=_tabBarController;
-@synthesize splashView, received_data;
+@synthesize splashView;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{   
+{
+    
+    // Initialize Google Analytics.
     [[GANTracker sharedTracker] startTrackerWithAccountID:@"UA-30605087-1"
                                            dispatchPeriod:kGANDispatchPeriodSec
                                                  delegate:nil];
+    // Initialize Crittercism.
+    [Crittercism initWithAppID:@"4fca4280067e7c223100000d" andKey:@"qmqprnyvfwt1txkj96zhlofnksr0" andSecret:@"pat1ikup9agryyrlhh7mt2cv5k8gsnjx" andMainViewController:self.window.rootViewController];
+    
+    // Set AVAudio properties to play audio files on the silent thread of AVFoundation.
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [[AVAudioSession sharedInstance] setActive:YES error: nil];
 
     [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSArray *keys = [[[NSArray alloc] initWithObjects:@"login_valid", @"SL", @"instructor", @"admin", @"member", nil] autorelease];
-    NSArray *objects = [[[NSArray alloc] initWithObjects:@"NO", @"NO", @"NO", @"NO", @"NO", nil] autorelease];
-    NSDictionary *appDefaults = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
-    [defaults registerDefaults:appDefaults];
+    
+    [self registerAppDefaults];
+   
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     
@@ -40,19 +50,22 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 	splashView.image = [UIImage imageNamed:@"Default.png"]; //image is default.png
 	[_window addSubview:splashView]; //adds a subview so image can be seen; bring it forward
 	[_window bringSubviewToFront:splashView];
-	[UIView beginAnimations:nil context:nil]; //animations are stoic at at this point
-	[UIView setAnimationDuration:0.75]; //set duration of animation to 2 seconds
-	[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:_window cache:YES];
-	[UIView setAnimationDelegate:self]; 
-	[UIView setAnimationDidStopSelector:@selector(startupAnimationDone:finished:context:)];
-	splashView.alpha = 0.0;
-	[UIView commitAnimations];
+    
+    [UIView animateWithDuration:0.75f animations:^{
+        splashView.alpha = 0.0;
+    }];
     
     [self connect];
     
-    [Crittercism initWithAppID:@"4fca4280067e7c223100000d" andKey:@"qmqprnyvfwt1txkj96zhlofnksr0" andSecret:@"pat1ikup9agryyrlhh7mt2cv5k8gsnjx" andMainViewController:self.window.rootViewController];
-    
     return YES;
+}
+
+- (void)registerAppDefaults {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSArray *keys = [[[NSArray alloc] initWithObjects:@"login_valid", @"SL", @"instructor", @"admin", @"member", nil] autorelease];
+    NSArray *objects = [[[NSArray alloc] initWithObjects:@"NO", @"NO", @"NO", @"NO", @"NO", nil] autorelease];
+    NSDictionary *appDefaults = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
+    [defaults registerDefaults:appDefaults];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -102,6 +115,7 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     [super dealloc];
 }
 
+#pragma mark - Data Methods
 
 - (void)connect {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
