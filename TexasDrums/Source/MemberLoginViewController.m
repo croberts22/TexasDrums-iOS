@@ -9,7 +9,6 @@
 #import "MemberLoginViewController.h"
 #import "Profile.h"
 #import "TexasDrumsGetMemberLogin.h"
-#import "TexasDrumsGetProfile.h"
 #import "TexasDrumsAppDelegate.h"
 #import "CJSONDeserializer.h"
 

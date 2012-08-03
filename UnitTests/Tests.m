@@ -7,10 +7,23 @@
 //
 
 #import <GHUnitIOS/GHUNit.h>
+#import <SenTestingKit/SenTestingKit.h>
+#import "CJSONDeserializer.h"
 
 // Requests
 #import "TexasDrumsGetNews.h"
 #import "TexasDrumsGetRosters.h"
+#import "TexasDrumsGetFAQ.h"
+#import "TexasDrumsGetVideos.h"
+#import "TexasDrumsGetMemberLogin.h"
+#import "TexasDrumsGetMemberLogout.h"
+#import "TexasDrumsGetGigs.h"
+#import "TexasDrumsGetEditProfile.h"
+#import "TexasDrumsGetMusic.h"
+#import "TexasDrumsGetAccounts.h"
+#import "TexasDrumsGetAbout.h"
+#import "TexasDrumsGetStaff.h"
+#import "TexasDrumsGetPaymentUpdate.h"
 
 // News
 #import "News.h"
@@ -20,6 +33,10 @@
 #import "Roster.h"
 #import "RosterMember.h"
 #import "RosterViewController.h"
+
+// Media
+#import "Video.h"
+
 
 @interface NewsTests : GHTestCase { }
 @property (retain) News *news;
@@ -36,7 +53,6 @@
     self.news = nil;
 }
 
-// Begin Tests
 - (void)testNewsInitialization {
     GHAssertNotNil(news, nil);
     GHAssertEqualStrings(news.post, @"", nil);
@@ -265,6 +281,66 @@
 
 }
 
+- (void)testSortSections2 {
+    NSString *year = @"2012";
+    Roster *roster = [[[Roster alloc] initWithYear:year] autorelease];
+    
+    NSArray *objects;
+    NSArray *keys = [NSArray arrayWithObjects:@"firstname", @"nickname", @"lastname", @"instrument", @"classification", @"year", @"major", @"hometown", @"quote", @"position", @"phone", @"email", @"valid", nil];
+    NSDictionary *dictionary;
+    RosterMember *member;
+    
+    
+    // Create snares.
+    for(int i = 1; i <= 10; i=i+2) {
+        NSString *position = [NSString stringWithFormat:@"%d", i];
+        objects = [NSArray arrayWithObjects:@"FirstName", @"NickName", @"LastName", @"Snare", @"Classification", @"Year", @"Major", @"Hometown", @"Quote", position , @"Phone", @"Email", @"1", nil];
+        dictionary = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
+        member = [RosterMember createNewRosterMember:dictionary];
+        [roster addMember:member];
+    }
+    
+    for(int i = 0; i <= 10; i=i+2) {
+        NSString *position = [NSString stringWithFormat:@"%d", i];
+        objects = [NSArray arrayWithObjects:@"FirstName", @"NickName", @"LastName", @"Snare", @"Classification", @"Year", @"Major", @"Hometown", @"Quote", position , @"Phone", @"Email", @"1", nil];
+        dictionary = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
+        member = [RosterMember createNewRosterMember:dictionary];
+        [roster addMember:member];
+    }
+    
+    GHAssertTrue(roster.snares.count == 11, nil);
+    [roster sortSections];
+    
+    // Snares are sorted in an opposite manner.
+    for(int i = 0; i < 11; i++) {
+        RosterMember *member = [roster.snares objectAtIndex:i];
+        GHAssertTrue(10-i == member.position, nil);
+    }
+    
+    // Create tenors.
+    for(int i = 1; i <= 10; i++) {
+        NSString *position = [NSString stringWithFormat:@"%d", i];
+        objects = [NSArray arrayWithObjects:@"FirstName", @"NickName", @"LastName", @"Tenors", @"Classification", @"Year", @"Major", @"Hometown", @"Quote", position , @"Phone", @"Email", @"1", nil];
+        dictionary = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
+        member = [RosterMember createNewRosterMember:dictionary];
+        [roster addMember:member];
+    }
+    
+    GHAssertTrue(roster.tenors.count == 10, nil);
+    [roster sortSections];
+    
+    // Snares are sorted in an opposite manner.
+    // Tenors are not.
+    for(int i = 0; i < 10; i++) {
+        RosterMember *member = [roster.snares objectAtIndex:i];
+        GHAssertTrue(10-i == member.position, nil);
+        
+        member = [roster.tenors objectAtIndex:i];
+        GHAssertTrue(i+1 == member.position, nil);
+    }
+    
+}
+
 - (void)testCreateRoster1 {
     
     NSString *year = @"2012";
@@ -330,13 +406,167 @@
     GHAssertTrue(roster.basses.count == 1, nil);
     GHAssertTrue(roster.cymbals.count == 1, nil);
     GHAssertTrue(roster.instructor.count == 1, nil);
+    
+    for(int i = 0; i < 9; i++) {
+        [roster addMember:rosterMemberSnare];
+        [roster addMember:rosterMemberBass];
+        [roster addMember:rosterMemberTenors];
+        [roster addMember:rosterMemberCymbals];
+    }
+    
+    GHAssertTrue(roster.snares.count == 10, nil);
+    GHAssertTrue(roster.tenors.count == 10, nil);
+    GHAssertTrue(roster.basses.count == 10, nil);
+    GHAssertTrue(roster.cymbals.count == 10, nil);
+    GHAssertTrue(roster.instructor.count == 1, nil);
 }
 
 @end
 
-@interface APITests : GHTestCase { }
+@interface VideoTests : GHTestCase { }
+/*
+- (void)setUp { }
+
+- (void)tearDown { }
+
+- (void)testVideoInitialization { }
+ */
+
+@end
+
+@implementation VideoTests
+
+@end
+
+
+// API Tests
+@interface APITests : GHAsyncTestCase { }
+@property (nonatomic, retain) NSString *selectorName;
 @end
 
 @implementation APITests
+@synthesize selectorName;
 
+// News API Tests
+- (void)testGetNewsRequest {
+    self.selectorName = @"testGetNewsRequest";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    // Do asynchronous task here
+    TexasDrumsGetNews *get = [[TexasDrumsGetNews alloc] initWithTimestamp:0];
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0];
+}
+
+- (void)testGetNewsRequestMaxTimestamp {
+    self.selectorName = @"testGetNewsRequestMaxTimestamp";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetNews *get = [[TexasDrumsGetNews alloc] initWithTimestamp:NSIntegerMax];
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0];
+}
+
+// Roster API Tests
+- (void)testGetRostersRequest {
+    self.selectorName = @"testGetRostersRequest";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetRosters *get = [[TexasDrumsGetRosters alloc] init];
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0];
+}
+
+// FAQ API Tests
+- (void)testGetFAQRequest {
+    self.selectorName = @"testGetFAQRequest";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetFAQ *get = [[TexasDrumsGetFAQ alloc] init];
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0];
+}
+
+// Video API Tests
+- (void)testGetVideosRequest {
+    self.selectorName = @"testGetVideosRequest";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetVideos *get = [[TexasDrumsGetVideos alloc] init];
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0];
+}
+
+// Member Login API Tests
+- (void)testGetMemberLoginRequest {
+    self.selectorName = @"testGetMemberLoginRequest";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetMemberLogin *get = [[TexasDrumsGetMemberLogin alloc] initWithUsername:@"iostester" andPassword:@"!amacak3"];
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0];
+}
+
+- (void)testGetMemberLoginRequestInvalidCredentials {
+    self.selectorName = @"testGetMemberLoginRequestInvalidCredentials";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetMemberLogin *get = [[TexasDrumsGetMemberLogin alloc] initWithUsername:@"herpderp" andPassword:@"!"];
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusFailure timeout:5.0];
+}
+
+
+
+- (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
+    NSError *error = nil;
+    NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
+    
+    if([results count] > 0){
+        [self notify:kGHUnitWaitStatusSuccess forSelector:NSSelectorFromString(selectorName)];
+    }
+    else {
+        [self notify:kGHUnitWaitStatusFailure forSelector:NSSelectorFromString(selectorName)];
+    }
+}
+
+- (void)request:(TexasDrumsRequest *)request failedWithError:(NSError *)error {
+    [self notify:kGHUnitWaitStatusFailure forSelector:@selector(testGetNewsRequest)];
+}
+ 
 @end
