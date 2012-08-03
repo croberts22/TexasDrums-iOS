@@ -529,7 +529,7 @@
     // Prepare for asynchronous call
     [self prepare];
     
-    TexasDrumsGetMemberLogin *get = [[TexasDrumsGetMemberLogin alloc] initWithUsername:@"iostester" andPassword:@"!amacak3"];
+    TexasDrumsGetMemberLogin *get = [[TexasDrumsGetMemberLogin alloc] initWithUsername:@"tboyd" andPassword:@"tboyd"];
     get.delegate = self;
     [get startRequest];
     
@@ -551,6 +551,75 @@
     [self waitForStatus:kGHUnitWaitStatusFailure timeout:5.0];
 }
 
+// Member Logout API Tests
+- (void)testGetMemberLogoutRequest {
+    self.selectorName = @"testGetMemberLogoutRequest";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetMemberLogout *get = [[TexasDrumsGetMemberLogout alloc] initWithUsername:@"tboyd" andPassword:@"tboyd"];
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0];
+}
+
+- (void)testGetMemberLogoutRequestInvalidCredentials {
+    self.selectorName = @"testGetMemberLogoutRequestInvalidCredentials";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetMemberLogout *get = [[TexasDrumsGetMemberLogout alloc] initWithUsername:@"herp" andPassword:@"derp"];
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusFailure timeout:5.0];
+}
+
+// Gigs API Tests
+- (void)testGetGigsRequest {
+    self.selectorName = @"testGetGigsRequest";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetGigs *get = [[TexasDrumsGetGigs alloc] initWithUsername:@"tboyd" andPassword:@"tboyd"];
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0];
+}
+
+- (void)testGetGigsRequestInvalidCredentials {
+    self.selectorName = @"testGetGigsRequestInvalidCredentials";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetGigs *get = [[TexasDrumsGetGigs alloc] initWithUsername:@"herp" andPassword:@"derp"];
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusFailure timeout:5.0];
+}
+
+// Edit Profile API Tests
+
+// Music API Tests
+
+// Accounts API Tests
+
+// About API Tests
+
+// Staff API Tests
+
+// Update Payment API Tests
 
 
 - (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
@@ -558,7 +627,50 @@
     NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
     
     if([results count] > 0){
-        [self notify:kGHUnitWaitStatusSuccess forSelector:NSSelectorFromString(selectorName)];
+        // Special cases to consider if request returns a status response.
+        if([results respondsToSelector:@selector(objectForKey:)] ){
+            NSString *status = [results objectForKey:@"status"];
+            
+            if([request isMemberOfClass:[TexasDrumsGetNews class]]) {
+                if([status isEqualToString:_NEWS_API_NO_NEW_ARTICLES]) {
+                    [self notify:kGHUnitWaitStatusSuccess forSelector:NSSelectorFromString(selectorName)];
+                }
+                else {
+                    [self notify:kGHUnitWaitStatusFailure forSelector:NSSelectorFromString(selectorName)];
+                }
+            }
+            
+            if([request isMemberOfClass:[TexasDrumsGetMemberLogin class]]) {
+                if([status isEqualToString:_404_UNAUTHORIZED]) {
+                    [self notify:kGHUnitWaitStatusFailure forSelector:NSSelectorFromString(selectorName)];
+                }
+                else {
+                    [self notify:kGHUnitWaitStatusSuccess forSelector:NSSelectorFromString(selectorName)];
+                }
+            }
+            
+            if([request isMemberOfClass:[TexasDrumsGetMemberLogout class]]) {
+                if([status isEqualToString:_200_OK]) {
+                    [self notify:kGHUnitWaitStatusSuccess forSelector:NSSelectorFromString(selectorName)];
+                }
+                else {
+                    [self notify:kGHUnitWaitStatusFailure forSelector:NSSelectorFromString(selectorName)];
+                }
+            }
+            
+            if([request isMemberOfClass:[TexasDrumsGetGigs class]]) {
+                if([status isEqualToString:_404_UNAUTHORIZED]) {
+                    [self notify:kGHUnitWaitStatusFailure forSelector:NSSelectorFromString(selectorName)];
+                }
+            }
+            
+        }
+        else {
+            if(error == nil) {
+                // If we made it here, we got an acceptable JSON response that was successfully parsed.
+                [self notify:kGHUnitWaitStatusSuccess forSelector:NSSelectorFromString(selectorName)];
+            }
+        }
     }
     else {
         [self notify:kGHUnitWaitStatusFailure forSelector:NSSelectorFromString(selectorName)];
