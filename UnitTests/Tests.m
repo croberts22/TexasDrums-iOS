@@ -440,18 +440,31 @@
 
 @end
 
+/****************************************************************************************************
+ * API INTEGRATION TESTS                                                                            *
+ * ------------------------------------------------------------------------------------------------ *
+ * These tests take an API call, make a request to the server, and wait for a response.             *
+ * The max timeout for each request is 5 seconds, and expects some of the following responses:      *
+ * "200 OK"             -> Responses that are commands and modify the database.                     *
+ * "404 UNAUTHORIZED"   -> Responses that are unauthorized for users without permission.            *
+ * "403 UNKNOWN ERROR"  -> Responses that react to invalid queries.                                 *
+ * { JSON }             -> Responses that return an acceptable and parseable JSON string.           *
+ ****************************************************************************************************/
 
-// API Tests
 @interface APITests : GHAsyncTestCase { }
-@property (nonatomic, retain) NSString *selectorName;
+@property (nonatomic, copy) NSString *selectorName;
+@property (nonatomic, copy) NSString *badUsername;
+@property (nonatomic, copy) NSString *badPassword;
 @end
 
 @implementation APITests
-@synthesize selectorName;
+@synthesize selectorName, badUsername, badPassword;
 
 - (void)setUp {
     [UserProfile sharedInstance].username = @"iostester";
     [UserProfile sharedInstance].hash = @"!amacak3";
+    self.badUsername = @"badusername";
+    self.badPassword = @"badpassword";
 }
 
 - (void)tearDown {
@@ -460,7 +473,10 @@
     [UserProfile sharedInstance].hash = nil;
 }
 
-// News API Tests
+/****************************************************************************************************
+ * NEWS API TESTS                                                                                   *
+ ****************************************************************************************************/
+
 - (void)testGetNewsRequest {
     self.selectorName = @"testGetNewsRequest";
     
@@ -490,7 +506,10 @@
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0];
 }
 
-// Roster API Tests
+/****************************************************************************************************
+ * ROSTER API TESTS                                                                                 *
+ ****************************************************************************************************/
+
 - (void)testGetRostersRequest {
     self.selectorName = @"testGetRostersRequest";
     
@@ -505,7 +524,10 @@
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0];
 }
 
-// FAQ API Tests
+/****************************************************************************************************
+ * FAQ API TESTS                                                                                    *
+ ****************************************************************************************************/
+
 - (void)testGetFAQRequest {
     self.selectorName = @"testGetFAQRequest";
     
@@ -520,7 +542,10 @@
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0];
 }
 
-// Video API Tests
+/****************************************************************************************************
+ * VIDEO API TESTS                                                                                  *
+ ****************************************************************************************************/
+
 - (void)testGetVideosRequest {
     self.selectorName = @"testGetVideosRequest";
     
@@ -535,7 +560,10 @@
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0];
 }
 
-// Member Login API Tests
+/****************************************************************************************************
+ * MEMBER LOGIN API TESTS                                                                           *
+ ****************************************************************************************************/
+
 - (void)testGetMemberLoginRequest {
     self.selectorName = @"testGetMemberLoginRequest";
     
@@ -557,7 +585,8 @@
     // Prepare for asynchronous call
     [self prepare];
     
-    TexasDrumsGetMemberLogin *get = [[TexasDrumsGetMemberLogin alloc] initWithUsername:@"iostester" andPassword:@"!"];
+    TexasDrumsGetMemberLogin *get = [[TexasDrumsGetMemberLogin alloc] initWithUsername:self.badUsername
+                                                                           andPassword:self.badPassword];
     get.delegate = self;
     [get startRequest];
     
@@ -565,7 +594,10 @@
     [self waitForStatus:kGHUnitWaitStatusFailure timeout:5.0];
 }
 
-// Member Logout API Tests
+/****************************************************************************************************
+ * MEMBER LOGOUT API TESTS                                                                          *
+ ****************************************************************************************************/
+
 - (void)testGetMemberLogoutRequest {
     self.selectorName = @"testGetMemberLogoutRequest";
     
@@ -587,7 +619,8 @@
     // Prepare for asynchronous call
     [self prepare];
     
-    TexasDrumsGetMemberLogout *get = [[TexasDrumsGetMemberLogout alloc] initWithUsername:@"herp" andPassword:@"derp"];
+    TexasDrumsGetMemberLogout *get = [[TexasDrumsGetMemberLogout alloc] initWithUsername:self.badUsername
+                                                                             andPassword:self.badPassword];
     get.delegate = self;
     [get startRequest];
     
@@ -595,7 +628,10 @@
     [self waitForStatus:kGHUnitWaitStatusFailure timeout:5.0];
 }
 
-// Gigs API Tests
+/****************************************************************************************************
+ * GIGS API TESTS                                                                                   *
+ ****************************************************************************************************/
+
 - (void)testGetGigsRequest {
     self.selectorName = @"testGetGigsRequest";
     
@@ -617,7 +653,8 @@
     // Prepare for asynchronous call
     [self prepare];
     
-    TexasDrumsGetGigs *get = [[TexasDrumsGetGigs alloc] initWithUsername:@"herp" andPassword:@"derp"];
+    TexasDrumsGetGigs *get = [[TexasDrumsGetGigs alloc] initWithUsername:self.badUsername
+                                                             andPassword:self.badPassword];
     get.delegate = self;
     [get startRequest];
     
@@ -625,7 +662,10 @@
     [self waitForStatus:kGHUnitWaitStatusFailure timeout:5.0];
 }
 
-// Edit Profile API Tests
+/****************************************************************************************************
+ * EDIT PROFILE API TESTS                                                                           *
+ ****************************************************************************************************/
+
 - (void)testGetEditProfileEditFirstNameShouldFail {
     self.selectorName = @"testGetEditProfileEditFirstNameShouldFail";
     
@@ -868,16 +908,187 @@
     [self waitForStatus:kGHUnitWaitStatusFailure timeout:5.0];
 }
 
-// Music API Tests
+/****************************************************************************************************
+ * MUSIC API TESTS                                                                                  *
+ ****************************************************************************************************/
 
-// Accounts API Tests
+- (void)testGetMusicRequest {
+    self.selectorName = @"testGetMusicRequest";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetMusic *get = [[TexasDrumsGetMusic alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                             andPassword:[UserProfile sharedInstance].hash];
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0];
+}
 
-// About API Tests
+- (void)testGetMusicRequestInvalidCredentials {
+    self.selectorName = @"testGetMusicRequestInvalidCredentials";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetMusic *get = [[TexasDrumsGetMusic alloc] initWithUsername:self.badUsername
+                                                               andPassword:self.badPassword];
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusFailure timeout:5.0];
+}
 
-// Staff API Tests
+/****************************************************************************************************
+ * ACCOUNTS API TESTS                                                                               *
+ ****************************************************************************************************/
 
-// Update Payment API Tests
+- (void)testGetAccountsRequest {
+    self.selectorName = @"testGetAccountsRequest";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetAccounts *get = [[TexasDrumsGetAccounts alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                                     andPassword:[UserProfile sharedInstance].hash];
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0];
+}
 
+- (void)testGetAccountsRequestInvalidCredentials {
+    self.selectorName = @"testGetAccountsRequestInvalidCredentials";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetAccounts *get = [[TexasDrumsGetAccounts alloc] initWithUsername:self.badUsername
+                                                                     andPassword:self.badPassword];
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusFailure timeout:5.0];
+}
+
+/****************************************************************************************************
+ * ABOUT API TESTS                                                                                  *
+ ****************************************************************************************************/
+
+- (void)testGetAboutRequest {
+    self.selectorName = @"testGetAboutRequest";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetAbout *get = [[TexasDrumsGetAbout alloc] init];
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0];
+}
+
+/****************************************************************************************************
+ * STAFF API TESTS                                                                                  *
+ ****************************************************************************************************/
+
+- (void)testGetStaffRequest {
+    self.selectorName = @"testGetStaffRequest";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetStaff *get = [[TexasDrumsGetStaff alloc] init];
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0];
+}
+
+/****************************************************************************************************
+ * UPDATE PAYMENT API TESTS                                                                         *
+ ****************************************************************************************************/
+
+- (void)testGetPaymentRequestPaid {
+    self.selectorName = @"testGetPaymentRequestPaid";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetPaymentUpdate *get = [[TexasDrumsGetPaymentUpdate alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                                               andPassword:[UserProfile sharedInstance].hash
+                                                                                   andUser:[UserProfile sharedInstance].username
+                                                                                   andPaid:[NSNumber numberWithInt:1]];
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0];
+}
+
+- (void)testGetPaymentRequestNotPaid {
+    self.selectorName = @"testGetPaymentRequestNotPaid";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetPaymentUpdate *get = [[TexasDrumsGetPaymentUpdate alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                                               andPassword:[UserProfile sharedInstance].hash
+                                                                                   andUser:[UserProfile sharedInstance].username
+                                                                                   andPaid:[NSNumber numberWithInt:0]];
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0];
+}
+
+- (void)testGetPaymentRequestInvalidCredentials {
+    self.selectorName = @"testGetPaymentRequestInvalidCredentials";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetPaymentUpdate *get = [[TexasDrumsGetPaymentUpdate alloc] initWithUsername:self.badUsername
+                                                                               andPassword:self.badPassword
+                                                                                   andUser:[UserProfile sharedInstance].username
+                                                                                   andPaid:[NSNumber numberWithInt:1]];
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusFailure timeout:5.0];
+}
+
+- (void)testGetPaymentRequestInvalidUser {
+    self.selectorName = @"testGetPaymentRequestInvalidUser";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetPaymentUpdate *get = [[TexasDrumsGetPaymentUpdate alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                                               andPassword:[UserProfile sharedInstance].hash
+                                                                                   andUser:self.badUsername
+                                                                                   andPaid:[NSNumber numberWithInt:1]];
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusFailure timeout:5.0];
+}
+
+/****************************************************************************************************
+ * API RESPONDERS                                                                                   *
+ ****************************************************************************************************/
+
+#pragma mark - TexasDrumsRequest Delegate Methods
 
 - (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
     NSError *error = nil;
@@ -922,6 +1133,27 @@
             }
             
             if([request isMemberOfClass:[TexasDrumsGetEditProfile class]]) {
+                if([status isEqualToString:_200_OK]) {
+                    [self notify:kGHUnitWaitStatusSuccess forSelector:NSSelectorFromString(selectorName)];
+                }
+                else {
+                    [self notify:kGHUnitWaitStatusFailure forSelector:NSSelectorFromString(selectorName)];
+                }
+            }
+            
+            if([request isMemberOfClass:[TexasDrumsGetMusic class]]) {
+                if([status isEqualToString:_404_UNAUTHORIZED]) {
+                    [self notify:kGHUnitWaitStatusFailure forSelector:NSSelectorFromString(selectorName)];
+                }
+            }
+            
+            if([request isMemberOfClass:[TexasDrumsGetAccounts class]]) {
+                if([status isEqualToString:_404_UNAUTHORIZED]) {
+                    [self notify:kGHUnitWaitStatusFailure forSelector:NSSelectorFromString(selectorName)];
+                }
+            }
+            
+            if([request isMemberOfClass:[TexasDrumsGetPaymentUpdate class]]) {
                 if([status isEqualToString:_200_OK]) {
                     [self notify:kGHUnitWaitStatusSuccess forSelector:NSSelectorFromString(selectorName)];
                 }
