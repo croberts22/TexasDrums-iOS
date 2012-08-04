@@ -10,6 +10,8 @@
 #import <SenTestingKit/SenTestingKit.h>
 #import "CJSONDeserializer.h"
 
+#import "UserProfile.h"
+
 // Requests
 #import "TexasDrumsGetNews.h"
 #import "TexasDrumsGetRosters.h"
@@ -447,6 +449,17 @@
 @implementation APITests
 @synthesize selectorName;
 
+- (void)setUp {
+    [UserProfile sharedInstance].username = @"iostester";
+    [UserProfile sharedInstance].hash = @"!amacak3";
+}
+
+- (void)tearDown {
+    self.selectorName = nil;
+    [UserProfile sharedInstance].username = nil;
+    [UserProfile sharedInstance].hash = nil;
+}
+
 // News API Tests
 - (void)testGetNewsRequest {
     self.selectorName = @"testGetNewsRequest";
@@ -529,7 +542,8 @@
     // Prepare for asynchronous call
     [self prepare];
     
-    TexasDrumsGetMemberLogin *get = [[TexasDrumsGetMemberLogin alloc] initWithUsername:@"tboyd" andPassword:@"tboyd"];
+    TexasDrumsGetMemberLogin *get = [[TexasDrumsGetMemberLogin alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                                           andPassword:[UserProfile sharedInstance].hash];
     get.delegate = self;
     [get startRequest];
     
@@ -543,7 +557,7 @@
     // Prepare for asynchronous call
     [self prepare];
     
-    TexasDrumsGetMemberLogin *get = [[TexasDrumsGetMemberLogin alloc] initWithUsername:@"herpderp" andPassword:@"!"];
+    TexasDrumsGetMemberLogin *get = [[TexasDrumsGetMemberLogin alloc] initWithUsername:@"iostester" andPassword:@"!"];
     get.delegate = self;
     [get startRequest];
     
@@ -558,7 +572,8 @@
     // Prepare for asynchronous call
     [self prepare];
     
-    TexasDrumsGetMemberLogout *get = [[TexasDrumsGetMemberLogout alloc] initWithUsername:@"tboyd" andPassword:@"tboyd"];
+    TexasDrumsGetMemberLogout *get = [[TexasDrumsGetMemberLogout alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                                             andPassword:[UserProfile sharedInstance].hash];
     get.delegate = self;
     [get startRequest];
     
@@ -587,7 +602,8 @@
     // Prepare for asynchronous call
     [self prepare];
     
-    TexasDrumsGetGigs *get = [[TexasDrumsGetGigs alloc] initWithUsername:@"tboyd" andPassword:@"tboyd"];
+    TexasDrumsGetGigs *get = [[TexasDrumsGetGigs alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                             andPassword:[UserProfile sharedInstance].hash];
     get.delegate = self;
     [get startRequest];
     
@@ -610,6 +626,247 @@
 }
 
 // Edit Profile API Tests
+- (void)testGetEditProfileEditFirstNameShouldFail {
+    self.selectorName = @"testGetEditProfileEditFirstNameShouldFail";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetEditProfile *get = [[TexasDrumsGetEditProfile alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                                           andPassword:[UserProfile sharedInstance].hash
+                                                                         withFirstName:@"Hello"
+                                                                           andLastName:nil
+                                                                    andUpdatedPassword:nil
+                                                                              andPhone:nil
+                                                                           andBirthday:nil
+                                                                              andEmail:nil];
+    
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusFailure timeout:5.0];
+}
+
+- (void)testGetEditProfileEditLastNameShouldFail {
+    self.selectorName = @"testGetEditProfileEditLastNameShouldFail";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetEditProfile *get = [[TexasDrumsGetEditProfile alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                                           andPassword:[UserProfile sharedInstance].hash
+                                                                         withFirstName:nil
+                                                                           andLastName:@"World"
+                                                                    andUpdatedPassword:nil
+                                                                              andPhone:nil
+                                                                           andBirthday:nil
+                                                                              andEmail:nil];
+    
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusFailure timeout:5.0];
+}
+
+- (void)testGetEditProfileEditFullName {
+    self.selectorName = @"testGetEditProfileEditFullName";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetEditProfile *get = [[TexasDrumsGetEditProfile alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                                           andPassword:[UserProfile sharedInstance].hash
+                                                                         withFirstName:@"Hello"
+                                                                           andLastName:@"World"
+                                                                    andUpdatedPassword:nil
+                                                                              andPhone:nil
+                                                                           andBirthday:nil
+                                                                              andEmail:nil];
+    
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0];
+}
+
+- (void)testGetEditProfileEditPassword {
+    self.selectorName = @"testGetEditProfileEditPassword";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetEditProfile *get = [[TexasDrumsGetEditProfile alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                                           andPassword:[UserProfile sharedInstance].hash
+                                                                         withFirstName:nil
+                                                                           andLastName:nil
+                                                                    andUpdatedPassword:@"!amacak3"
+                                                                              andPhone:nil
+                                                                           andBirthday:nil
+                                                                              andEmail:nil];
+    
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0];
+}
+
+- (void)testGetEditProfileEditPhone {
+    self.selectorName = @"testGetEditProfileEditPhone";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetEditProfile *get = [[TexasDrumsGetEditProfile alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                                           andPassword:[UserProfile sharedInstance].hash
+                                                                         withFirstName:nil
+                                                                           andLastName:nil
+                                                                    andUpdatedPassword:nil
+                                                                              andPhone:@"1234567890"
+                                                                           andBirthday:nil
+                                                                              andEmail:nil];
+    
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0];
+}
+
+- (void)testGetEditProfileEditBirthday {
+    self.selectorName = @"testGetEditProfileEditBirthday";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetEditProfile *get = [[TexasDrumsGetEditProfile alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                                           andPassword:[UserProfile sharedInstance].hash
+                                                                         withFirstName:nil
+                                                                           andLastName:nil
+                                                                    andUpdatedPassword:nil
+                                                                              andPhone:nil
+                                                                           andBirthday:@"12345678"
+                                                                              andEmail:nil];
+    
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0];
+}
+
+- (void)testGetEditProfileEditEmail {
+    self.selectorName = @"testGetEditProfileEditEmail";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetEditProfile *get = [[TexasDrumsGetEditProfile alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                                           andPassword:[UserProfile sharedInstance].hash
+                                                                         withFirstName:nil
+                                                                           andLastName:nil
+                                                                    andUpdatedPassword:nil
+                                                                              andPhone:nil
+                                                                           andBirthday:nil
+                                                                              andEmail:@"hack@me.com"];
+    
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0];
+}
+
+- (void)testGetEditProfileEditMultiple1 {
+    self.selectorName = @"testGetEditProfileEditMultiple1";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetEditProfile *get = [[TexasDrumsGetEditProfile alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                                           andPassword:[UserProfile sharedInstance].hash
+                                                                         withFirstName:@"Hello"
+                                                                           andLastName:@"World"
+                                                                    andUpdatedPassword:nil
+                                                                              andPhone:nil
+                                                                           andBirthday:@"12345678"
+                                                                              andEmail:@"hack@me.com"];
+    
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0];
+}
+
+- (void)testGetEditProfileEditMultiple2 {
+    self.selectorName = @"testGetEditProfileEditMultiple2";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetEditProfile *get = [[TexasDrumsGetEditProfile alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                                           andPassword:[UserProfile sharedInstance].hash
+                                                                         withFirstName:@"Hello"
+                                                                           andLastName:@"World"
+                                                                    andUpdatedPassword:@"!amacak3"
+                                                                              andPhone:@"1234567890"
+                                                                           andBirthday:nil
+                                                                              andEmail:nil];
+    
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0];
+}
+
+- (void)testGetEditProfileEditAll {
+    self.selectorName = @"testGetEditProfileEditAll";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetEditProfile *get = [[TexasDrumsGetEditProfile alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                                           andPassword:[UserProfile sharedInstance].hash
+                                                                         withFirstName:@"Hello"
+                                                                           andLastName:@"World"
+                                                                    andUpdatedPassword:@"!amacak3"
+                                                                              andPhone:@"1234567890"
+                                                                           andBirthday:@"12345678"
+                                                                              andEmail:@"hack@me.com"];
+    
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0];
+}
+
+- (void)testGetEditProfileEditNoneShouldFail {
+    self.selectorName = @"testGetEditProfileEditNoneShouldFail";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetEditProfile *get = [[TexasDrumsGetEditProfile alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                                           andPassword:[UserProfile sharedInstance].hash
+                                                                         withFirstName:nil
+                                                                           andLastName:nil
+                                                                    andUpdatedPassword:nil
+                                                                              andPhone:nil
+                                                                           andBirthday:nil
+                                                                              andEmail:nil];
+    
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusFailure timeout:5.0];
+}
 
 // Music API Tests
 
@@ -660,6 +917,15 @@
             
             if([request isMemberOfClass:[TexasDrumsGetGigs class]]) {
                 if([status isEqualToString:_404_UNAUTHORIZED]) {
+                    [self notify:kGHUnitWaitStatusFailure forSelector:NSSelectorFromString(selectorName)];
+                }
+            }
+            
+            if([request isMemberOfClass:[TexasDrumsGetEditProfile class]]) {
+                if([status isEqualToString:_200_OK]) {
+                    [self notify:kGHUnitWaitStatusSuccess forSelector:NSSelectorFromString(selectorName)];
+                }
+                else {
                     [self notify:kGHUnitWaitStatusFailure forSelector:NSSelectorFromString(selectorName)];
                 }
             }
