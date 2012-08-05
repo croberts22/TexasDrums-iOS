@@ -29,7 +29,9 @@
 @synthesize peopleRequired = peopleRequired_;
 @synthesize location = location_;
 @synthesize description = description_;
+@synthesize whosIn = whosIn_;
 @synthesize currentSelection = currentSelection_;
+@synthesize currentPeople = currentPeople_;
 @synthesize dateViewController = dateViewController_;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -63,7 +65,7 @@
     self.peopleRequired.text = NSLocalizedString(@"tap to edit", nil);
     self.peopleRequired.textAlignment = UITextAlignmentLeft;
     self.currentSelection = [[[NSArray alloc] initWithObjects:@"3", @"2", @"2", @"3", nil] autorelease];
-    
+    self.currentPeople = [[[NSMutableArray alloc] init] autorelease];
     self.dateViewController = [[[DateViewController alloc] initWithNibName:@"DateViewController" bundle:[NSBundle mainBundle]] autorelease];
     self.dateViewController.view.frame = CGRectMake(0, self.view.frame.size.height, self.dateViewController.view.frame.size.width, self.dateViewController.view.frame.size.height);
     self.dateViewController.currentDate = [NSDate date];
@@ -114,19 +116,6 @@
                      completion:^(BOOL completed){}];
 }
 
-- (IBAction)peopleButtonPressed:(id)sender {
-    GigRequirementsViewController *GRVC = [[[GigRequirementsViewController alloc] initWithNibName:@"GigRequirementsViewController" bundle:[NSBundle mainBundle]] autorelease];
-    GRVC.delegate = self;
-    GRVC.peopleRequired = self.currentSelection;
-    
-    [self.navigationController pushViewController:GRVC animated:YES];
-}
-
-- (IBAction)chooseMemberSelected:(id)sender {
-    MemberListViewController *MLVC = [[[MemberListViewController alloc] initWithNibName:@"MemberListViewController" bundle:[NSBundle mainBundle]] autorelease];
-    [self.navigationController pushViewController:MLVC animated:YES];
-}
-
 - (void)removeDatePicker {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"MMMM d, yyyy' at 'h:mm a";
@@ -157,7 +146,22 @@
     [self.detailView setContentOffset:offset animated:YES];
 }
 
-#pragma mark - UITextField Methods
+- (IBAction)peopleButtonPressed:(id)sender {
+    GigRequirementsViewController *GRVC = [[[GigRequirementsViewController alloc] initWithNibName:@"GigRequirementsViewController" bundle:[NSBundle mainBundle]] autorelease];
+    GRVC.delegate = self;
+    GRVC.peopleRequired = self.currentSelection;
+    
+    [self.navigationController pushViewController:GRVC animated:YES];
+}
+
+- (IBAction)chooseMemberSelected:(id)sender {
+    MemberListViewController *MLVC = [[[MemberListViewController alloc] initWithNibName:@"MemberListViewController" bundle:[NSBundle mainBundle]] autorelease];
+    MLVC.delegate = self;
+    MLVC.currentSelection = currentPeople_;
+    [self.navigationController pushViewController:MLVC animated:YES];
+}
+
+#pragma mark - UITextField Delegate Methods
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     [self removeDatePicker];
@@ -206,5 +210,22 @@
     self.peopleRequired.text = [NSString stringWithFormat:@"%@ snares, %@ tenors, %@ basses, %@ cymbals", [selection objectAtIndex:0], [selection objectAtIndex:1], [selection objectAtIndex:2], [selection objectAtIndex:3]];
 }
 
+#pragma mark - MemberListViewController Delegate Methods
+
+- (void)memberListSelected:(NSArray *)selection {
+    self.currentSelection = [selection mutableCopy];
+    NSString *labelText = @"";
+    for(int i = 0; i < selection.count; i++) {
+        Profile *profile = [selection objectAtIndex:i];
+        if(i+1 == selection.count) {
+            labelText = [labelText stringByAppendingString:[NSString stringWithFormat:@"and %@", [profile fullName]]];
+        }
+        else {
+            labelText = [labelText stringByAppendingString:[NSString stringWithFormat:@"%@, ", [profile fullName]]];
+        }
+    }
+
+    self.whosIn.text = labelText;
+}
 
 @end

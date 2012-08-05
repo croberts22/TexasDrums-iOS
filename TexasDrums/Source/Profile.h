@@ -49,5 +49,6 @@
 @property (nonatomic, retain) NSString *alphabet_last;
 
 + (Profile *)createNewProfile:(NSDictionary *)dictionary;
+- (NSString *)fullName;
 
 @end

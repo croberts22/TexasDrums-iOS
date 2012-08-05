@@ -112,6 +112,12 @@
 		6347CABE15CE11A4004412BB /* GigRequirementsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6347CABA15CE11A4004412BB /* GigRequirementsViewController.xib */; };
 		6347CABF15CE11A4004412BB /* GigRequirementsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6347CABA15CE11A4004412BB /* GigRequirementsViewController.xib */; };
 		6347CAC015CE11A4004412BB /* GigRequirementsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6347CABA15CE11A4004412BB /* GigRequirementsViewController.xib */; };
+		6347CAC315CEE4B1004412BB /* checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CAC115CEE4B1004412BB /* checkmark.png */; };
+		6347CAC415CEE4B1004412BB /* checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CAC115CEE4B1004412BB /* checkmark.png */; };
+		6347CAC515CEE4B1004412BB /* checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CAC115CEE4B1004412BB /* checkmark.png */; };
+		6347CAC615CEE4B1004412BB /* checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CAC215CEE4B1004412BB /* checkmark@2x.png */; };
+		6347CAC715CEE4B1004412BB /* checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CAC215CEE4B1004412BB /* checkmark@2x.png */; };
+		6347CAC815CEE4B1004412BB /* checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CAC215CEE4B1004412BB /* checkmark@2x.png */; };
 		635296C2158985D800E62787 /* UIFont+TexasDrums.m in Sources */ = {isa = PBXBuildFile; fileRef = 635296C1158985D800E62787 /* UIFont+TexasDrums.m */; };
 		6353B8FA15B51EAD00D88A14 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 6353B8F815B51EAD00D88A14 /* star.png */; };
 		6353B8FB15B51EAD00D88A14 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 6353B8F815B51EAD00D88A14 /* star.png */; };
@@ -710,6 +716,8 @@
 		6347CAB815CE11A4004412BB /* GigRequirementsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GigRequirementsViewController.h; sourceTree = "<group>"; };
 		6347CAB915CE11A4004412BB /* GigRequirementsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GigRequirementsViewController.m; sourceTree = "<group>"; };
 		6347CABA15CE11A4004412BB /* GigRequirementsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GigRequirementsViewController.xib; sourceTree = "<group>"; };
+		6347CAC115CEE4B1004412BB /* checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checkmark.png; path = Media/UITableView/checkmark.png; sourceTree = "<group>"; };
+		6347CAC215CEE4B1004412BB /* checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkmark@2x.png"; path = "Media/UITableView/checkmark@2x.png"; sourceTree = "<group>"; };
 		635296C0158985D800E62787 /* UIFont+TexasDrums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+TexasDrums.h"; sourceTree = "<group>"; };
 		635296C1158985D800E62787 /* UIFont+TexasDrums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+TexasDrums.m"; sourceTree = "<group>"; };
 		6353B8F815B51EAD00D88A14 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = star.png; path = Media/UITableView/star.png; sourceTree = "<group>"; };
@@ -1412,6 +1420,8 @@
 		04D37ACA143E349A0009E988 /* UITableView */ = {
 			isa = PBXGroup;
 			children = (
+				6347CAC115CEE4B1004412BB /* checkmark.png */,
+				6347CAC215CEE4B1004412BB /* checkmark@2x.png */,
 				6353B8F815B51EAD00D88A14 /* star.png */,
 				6353B8F915B51EAD00D88A14 /* star@2x.png */,
 				AEB9BB0C14BAA42B00C8A3A4 /* rounded_table_cell.png */,
@@ -2449,6 +2459,8 @@
 				6347CA8D15CD7E3E004412BB /* whiteArrow@2x.png in Resources */,
 				6347CAB515CE10B2004412BB /* MemberListViewController.xib in Resources */,
 				6347CABE15CE11A4004412BB /* GigRequirementsViewController.xib in Resources */,
+				6347CAC315CEE4B1004412BB /* checkmark.png in Resources */,
+				6347CAC615CEE4B1004412BB /* checkmark@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2477,6 +2489,8 @@
 				6347CA8E15CD7E3E004412BB /* whiteArrow@2x.png in Resources */,
 				6347CAB615CE10B2004412BB /* MemberListViewController.xib in Resources */,
 				6347CABF15CE11A4004412BB /* GigRequirementsViewController.xib in Resources */,
+				6347CAC415CEE4B1004412BB /* checkmark.png in Resources */,
+				6347CAC715CEE4B1004412BB /* checkmark@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2580,6 +2594,8 @@
 				6347CA8F15CD7E3E004412BB /* whiteArrow@2x.png in Resources */,
 				6347CAB715CE10B2004412BB /* MemberListViewController.xib in Resources */,
 				6347CAC015CE11A4004412BB /* GigRequirementsViewController.xib in Resources */,
+				6347CAC515CEE4B1004412BB /* checkmark.png in Resources */,
+				6347CAC815CEE4B1004412BB /* checkmark@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

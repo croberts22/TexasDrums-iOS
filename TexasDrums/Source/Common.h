@@ -9,6 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "Profile.h"
 
+#define kMemberStatusCurrent        @"Current"
+#define kMemberStatusAlumni         @"Alumni"
+
+#define kSnare                      @"Snare"
+#define kTenors                     @"Tenors"
+#define kBass                       @"Bass"
+#define kCymbals                    @"Cymbals"
+#define kInstructor                 @"Instructor"
+
 // UITableView Header Heights
 #define HEADER_HEIGHT               50
 #define STANDARD_HEADER_HEIGHT      40

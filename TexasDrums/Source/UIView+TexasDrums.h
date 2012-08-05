@@ -14,5 +14,6 @@
 + (UIView *)TexasDrumsAddressBookTableHeaderViewWithTitle:(NSString *)title;
 + (UIView *)TexasDrumsFAQTableHeaderViewWithTitle:(NSString *)title;
 + (UIView *)TexasDrumsVersionFooter;
++ (UIView *)TexasDrumsCheckmarkAccessoryView;
 
 @end

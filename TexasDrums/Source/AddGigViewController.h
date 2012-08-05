@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "GigRequirementsViewController.h"
+#import "MemberListViewController.h"
 
 @class DateViewController;
 
-@interface AddGigViewController : UIViewController<UITextFieldDelegate, UITextViewDelegate, GigRequirementsViewControllerDelegate> {
+@interface AddGigViewController : UIViewController<UITextFieldDelegate, UITextViewDelegate, GigRequirementsViewControllerDelegate, MemberListViewControllerDelegate> {
     IBOutlet UIScrollView *detailView;
     IBOutlet UIButton *backgroundButton_;
     IBOutlet UITextField *name_;
@@ -21,7 +22,9 @@
     IBOutlet UIButton *peopleButton_;
     IBOutlet UITextField *location_;
     IBOutlet UITextView *description_;
+    IBOutlet UILabel *whosIn_;
     NSArray *currentSelection_;
+    NSMutableArray *currentPeople_;
     DateViewController *dateViewController_;
 }
 
@@ -34,8 +37,9 @@
 @property (nonatomic, retain) UIButton *peopleButton;
 @property (nonatomic, retain) UITextField *location;
 @property (nonatomic, retain) UITextView *description;
+@property (nonatomic, retain) UILabel *whosIn;
 @property (nonatomic, copy) NSArray *currentSelection;
-
+@property (nonatomic, retain) NSMutableArray *currentPeople;
 @property (nonatomic, retain) DateViewController *dateViewController;
 
 @end

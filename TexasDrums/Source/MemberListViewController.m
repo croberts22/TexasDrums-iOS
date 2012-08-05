@@ -16,7 +16,7 @@
 
 @implementation MemberListViewController
 
-@synthesize memberList, currentSelection;
+@synthesize memberList, currentSelection, delegate;
 
 static NSMutableArray *members = nil;
 
@@ -24,6 +24,7 @@ static NSMutableArray *members = nil;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.currentSelection = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -49,8 +50,15 @@ static NSMutableArray *members = nil;
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    // Sort selection before disappearing.
+    [self sortCurrentSelection];
+    
+    if([self.delegate respondsToSelector:@selector(memberListSelected:)]) {
+        [self.delegate memberListSelected:currentSelection];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -72,7 +80,7 @@ static NSMutableArray *members = nil;
 }
 
 - (void)refreshPressed {
-    // Fetch music from the server.
+    // Fetch list from the server.
     [self connect];
 }
 
@@ -128,6 +136,42 @@ static NSMutableArray *members = nil;
     [descriptor release];
 }
 
+- (void)sortCurrentSelection {
+    // Custom sorting; iterate through the list and find all snares, then tenors, etc.
+    
+    NSMutableArray *temporaryArray = [NSMutableArray array];
+    
+    // Get snares.
+    for(Profile *profile in currentSelection) {
+        if([profile.section isEqualToString:kSnare]) {
+            [temporaryArray addObject:profile];
+        }
+    }
+    
+    // Get tenors.
+    for(Profile *profile in currentSelection) {
+        if([profile.section isEqualToString:kTenors]) {
+            [temporaryArray addObject:profile];
+        }
+    }
+    
+    // Get basses.
+    for(Profile *profile in currentSelection) {
+        if([profile.section isEqualToString:kBass]) {
+            [temporaryArray addObject:profile];
+        }
+    }
+    
+    // Get cymbals.
+    for(Profile *profile in currentSelection) {
+        if([profile.section isEqualToString:kCymbals]) {
+            [temporaryArray addObject:profile];
+        }
+    }
+    
+    self.currentSelection = [temporaryArray mutableCopy];
+}
+
 #pragma mark - Table View Data Source Methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -156,6 +200,12 @@ static NSMutableArray *members = nil;
     
     profile = [members objectAtIndex:indexPath.row];
     
+    cell.accessoryView = nil;
+    
+    if([currentSelection containsObject:profile]) {
+        cell.accessoryView = [UIView TexasDrumsCheckmarkAccessoryView];
+    }
+    
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", profile.firstname, profile.lastname];
     
     return cell;
@@ -164,7 +214,20 @@ static NSMutableArray *members = nil;
 #pragma mark - Table View Delegate Methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    Profile *profile = [members objectAtIndex:indexPath.row];
+    UITableViewCell *cell = [self.memberList cellForRowAtIndexPath:indexPath];
+    
+    // If user was already selected, remove the user from the selection.
+    if([currentSelection containsObject:profile]) {
+        [self.currentSelection removeObject:profile];
+        cell.accessoryView = nil;
+    }
+    else {
+        [self.currentSelection addObject:profile];
+        cell.accessoryView = [UIView TexasDrumsCheckmarkAccessoryView];
+    }
+    
+    [self.memberList deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - TexasDrumsRequest Delegate Methods

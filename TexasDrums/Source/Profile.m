@@ -35,6 +35,10 @@
     return profile;
 }
 
+- (NSString *)fullName {
+    return [NSString stringWithFormat:@"%@ %@", self.firstname, self.lastname];
+}
+
 
 
 @end

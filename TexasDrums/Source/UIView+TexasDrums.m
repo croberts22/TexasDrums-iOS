@@ -90,4 +90,8 @@
     return footer;
 }
 
++ (UIView *)TexasDrumsCheckmarkAccessoryView {
+    return [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkmark.png"]] autorelease];
+}
+
 @end

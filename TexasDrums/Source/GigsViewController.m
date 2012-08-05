@@ -152,6 +152,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if([UserProfile sharedInstance].sl || [UserProfile sharedInstance].admin || [UserProfile sharedInstance].instructor) {
+        return 6;
+    }
+    
     return 5;
 }
 
@@ -190,6 +194,8 @@
         case 4:
             text = [gig createCurrentText];
             break;
+        case 5:
+            text = @"Edit gig";
         default:
             text = @""; // Should never get hit.
             break;
@@ -214,14 +220,12 @@
         // Override TexasDrumsGroupedTableViewCell properties. 
         cell.detailTextLabel.textColor = [UIColor TexasDrumsGrayColor];
         cell.textLabel.textColor = [UIColor TexasDrumsOrangeColor];
-        
-        cell.detailTextLabel.font = [UIFont TexasDrumsFontOfSize:14];
-        cell.textLabel.font = [UIFont TexasDrumsFontOfSize:12];
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-
+    cell.detailTextLabel.font = [UIFont TexasDrumsFontOfSize:14];
+    cell.textLabel.font = [UIFont TexasDrumsFontOfSize:12];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     /*
     UIImage *background;
@@ -277,6 +281,14 @@
             cell.textLabel.text = @"Need";
             cell.detailTextLabel.text = [gig createCurrentText];
             break;
+        case 5:
+            cell.detailTextLabel.font = [UIFont TexasDrumsBoldFontOfSize:16];
+            if([UserProfile sharedInstance].sl || [UserProfile sharedInstance].admin || [UserProfile sharedInstance].instructor) {
+                cell.detailTextLabel.text = @"Tap here to edit gig details.";
+            }
+            else {
+                cell.detailTextLabel.text = @"You are doing this gig.";                
+            }
         default:
             break;
     }
@@ -296,7 +308,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.gigsTable deselectRowAtIndexPath:indexPath animated:YES];
+    // Edit gig details.
+    if(indexPath.row == 5) {
+        
+    }
 }
 
 #pragma mark - TexasDrumsRequestDelegate Methods
