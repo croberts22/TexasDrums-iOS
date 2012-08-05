@@ -139,7 +139,8 @@
 
 - (void)addNewGig {
     AddGigViewController *AGVC = [[[AddGigViewController alloc] initWithNibName:@"AddGigViewController" bundle:[NSBundle mainBundle]] autorelease];
-    [self.navigationController presentModalViewController:AGVC animated:YES];
+    AGVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:AGVC animated:YES];
 }
 
 #pragma mark - Table view data source

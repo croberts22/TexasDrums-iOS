@@ -1,86 +1,60 @@
 //
-//  AddressBookViewController.m
+//  MemberListViewController.m
 //  TexasDrums
 //
-//  Created by Corey Roberts on 8/14/11.
-//  Copyright 2011 SpacePyro Productions. All rights reserved.
+//  Created by Corey Roberts on 8/4/12.
+//  Copyright (c) 2012 Corey Roberts. All rights reserved.
 //
 
-#import "AddressBookViewController.h"
-#import "CJSONDeserializer.h"
-#import "AddressBookMemberViewController.h"
+#import "MemberListViewController.h"
 #import "TexasDrumsGetAccounts.h"
+#import "CJSONDeserializer.h"
 
-@implementation AddressBookViewController
+@interface MemberListViewController ()
 
-static NSMutableArray *addressBook = nil;
-static NSMutableDictionary *full_name = nil;
+@end
 
-@synthesize addressBookTable;
+@implementation MemberListViewController
 
-#pragma mark - Memory Management
+@synthesize memberList, currentSelection;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+static NSMutableArray *members = nil;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
 
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-- (void)dealloc {
-    [addressBookTable release];
-    [super dealloc];
-}
-
-#pragma mark - View lifecycle
-
-- (void)viewWillAppear:(BOOL)animated {
-    // Google Analytics
-    [[GANTracker sharedTracker] trackPageview:@"Address Book (AddressBookView)" withError:nil];
-    
-    NSIndexPath *indexPath = [self.addressBookTable indexPathForSelectedRow];
-    if(indexPath) {
-        [self.addressBookTable deselectRowAtIndexPath:indexPath animated:YES];
-    }
-}
-
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
-    [self setTitle:@"Address Book"];
+    [self setTitle:@"Who's In?"];
     
-    // Set properties.
-    self.addressBookTable.separatorColor = [UIColor darkGrayColor];
+    self.memberList.separatorColor = [UIColor darkGrayColor];
     
     // Allocate things as necessary.
     // These will only be allocated once, since they are static.
     // There's no need to fetch for this data multiple times.
-    if(addressBook == nil && full_name == nil){
-        addressBook = [[NSMutableArray alloc] init];
-        full_name = [[NSMutableDictionary alloc] init];
-    
-        self.addressBookTable.alpha = 0.0f;
-        
+    if(members == nil) {
+        members = [[NSMutableArray alloc] init];
+        self.memberList.alpha = 0.0f;
         [self connect];
     }
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload
+{
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
@@ -118,9 +92,9 @@ static NSMutableDictionary *full_name = nil;
 }
 
 - (void)displayTable {
-    [self.addressBookTable reloadData];
+    [self.memberList reloadData];
     [UIView animateWithDuration:0.5f animations:^{
-        self.addressBookTable.alpha = 1.0f;
+        self.memberList.alpha = 1.0f;
     }];
 }
 
@@ -131,16 +105,16 @@ static NSMutableDictionary *full_name = nil;
     [SVProgressHUD showWithStatus:@"Loading..."];
     TexasDrumsGetAccounts *get = [[TexasDrumsGetAccounts alloc] initWithUsername:[UserProfile sharedInstance].username
                                                                      andPassword:[UserProfile sharedInstance].hash
-                                                           getCurrentMembersOnly:NO];
+                                                           getCurrentMembersOnly:YES];
     get.delegate = self;
     [get startRequest];
 }
 
-- (void)parseAddressBookData:(NSDictionary *)results {    
+- (void)parseMemberList:(NSDictionary *)results {
     for(NSDictionary *item in results){
         Profile *profile = [Profile createNewProfile:item];
         if(profile.valid){
-            [addressBook addObject:profile];
+            [members addObject:profile];
         }
     }
     
@@ -150,67 +124,18 @@ static NSMutableDictionary *full_name = nil;
 
 - (void)sortMembersByName {
     NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"firstname" ascending:YES];
-    [addressBook sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
+    [members sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
     [descriptor release];
-    
-    //now, grab all alpha characters
-    [self grabCharacters];
-}
-
-- (void)grabCharacters {
-    BOOL found;
-    
-    for (Profile *this_profile in addressBook){
-        NSString *c = this_profile.alphabet_first;
-        found = FALSE;
-        for (NSString *str in [full_name allKeys]){
-            if ([str isEqualToString:c]){
-                found = TRUE;
-            }
-        }
-        if (!found){
-            [full_name setValue:[[NSMutableArray alloc] init] forKey:c];
-        }
-    }
-    
-    for (Profile *this_profile in addressBook){
-        [[full_name objectForKey:this_profile.alphabet_first] addObject:this_profile];
-    }
-    
-    for (NSString *key in [full_name allKeys]){
-        //Name Table
-        [[full_name objectForKey:key] sortUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"firstname" ascending:YES]]];
-    }
-}
-
-- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-    return [[full_name allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
 }
 
 #pragma mark - Table View Data Source Methods
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[full_name allKeys] count];
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    return [[full_name valueForKey:[[[full_name allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section]] count];
+    return [members count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return DEFAULT_ROW_HEIGHT;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
-    NSString *sectionTitle;
-    
-    sectionTitle = [[[full_name allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
-    
-    UIView *header = [UIView TexasDrumsAddressBookTableHeaderViewWithTitle:sectionTitle];
-    
-	return header;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -228,9 +153,9 @@ static NSMutableDictionary *full_name = nil;
     }
     
     Profile *profile;
-
-    profile = [[full_name valueForKey:[[[full_name allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
-
+    
+    profile = [members objectAtIndex:indexPath.row];
+    
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", profile.firstname, profile.lastname];
     
     return cell;
@@ -239,16 +164,13 @@ static NSMutableDictionary *full_name = nil;
 #pragma mark - Table View Delegate Methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    AddressBookMemberViewController *ABMVC = [[AddressBookMemberViewController alloc] init];
-    ABMVC.profile = [[full_name valueForKey:[[[full_name allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
-    [self.navigationController pushViewController:ABMVC animated:YES];
-    [ABMVC release];
+
 }
 
 #pragma mark - TexasDrumsRequest Delegate Methods
 
 - (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
-    TDLog(@"Address Book request succeeded.");
+    TDLog(@"Member List request succeeded.");
     
     NSError *error = nil;
     NSDictionary *results = [[CJSONDeserializer deserializer] deserialize:data error:&error];
@@ -269,21 +191,20 @@ static NSMutableDictionary *full_name = nil;
             }
         }
         
-        TDLog(@"New address book entities found. Parsing..");
+        TDLog(@"New member entities found. Parsing..");
         // Deserialize JSON results and parse them into Music objects.
-        [self parseAddressBookData:results];
+        [self parseMemberList:results];
     }
     
     [self dismissWithSuccess];
 }
 
 - (void)request:(TexasDrumsRequest *)request failedWithError:(NSError *)error {
-    TDLog(@"Address Book request error: %@", error);
+    TDLog(@"Member List request error: %@", error);
     
     // Show error message.
     [self dismissWithError];
 }
-
 
 
 @end

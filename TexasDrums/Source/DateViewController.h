@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DateViewController : UIViewController
+@interface DateViewController : UIViewController {
+    NSDate *currentDate;
+    IBOutlet UIDatePicker *datePicker;
+}
+
+@property (nonatomic, retain) NSDate *currentDate;
+@property (nonatomic, retain) UIDatePicker *datePicker;
 
 @end

@@ -7,25 +7,35 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GigRequirementsViewController.h"
 
-@interface AddGigViewController : UIViewController<UITextFieldDelegate> {
-    IBOutlet UINavigationItem *navigationBar;
+@class DateViewController;
+
+@interface AddGigViewController : UIViewController<UITextFieldDelegate, UITextViewDelegate, GigRequirementsViewControllerDelegate> {
     IBOutlet UIScrollView *detailView;
     IBOutlet UIButton *backgroundButton_;
     IBOutlet UITextField *name_;
     IBOutlet UILabel *date_;
     IBOutlet UIButton *dateButton_;
+    IBOutlet UILabel *peopleRequired_;
+    IBOutlet UIButton *peopleButton_;
     IBOutlet UITextField *location_;
     IBOutlet UITextView *description_;
+    NSArray *currentSelection_;
+    DateViewController *dateViewController_;
 }
 
-@property (nonatomic, retain) UINavigationItem *navigationBar;
 @property (nonatomic, retain) UIScrollView *detailView;
 @property (nonatomic, retain) UIButton *backgroundButton;
 @property (nonatomic, retain) UITextField *name;
 @property (nonatomic, retain) UILabel *date;
 @property (nonatomic, retain) UIButton *dateButton;
+@property (nonatomic, retain) UILabel *peopleRequired;
+@property (nonatomic, retain) UIButton *peopleButton;
 @property (nonatomic, retain) UITextField *location;
 @property (nonatomic, retain) UITextView *description;
+@property (nonatomic, copy) NSArray *currentSelection;
+
+@property (nonatomic, retain) DateViewController *dateViewController;
 
 @end

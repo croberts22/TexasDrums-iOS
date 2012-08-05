@@ -73,6 +73,45 @@
 		63292FB615BCFEF800CB383B /* DateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63292FB115BCFEF800CB383B /* DateViewController.xib */; };
 		63292FB715BCFEF800CB383B /* DateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63292FB115BCFEF800CB383B /* DateViewController.xib */; };
 		632D909B1586F856008B106A /* TexasDrumsGetRosters.m in Sources */ = {isa = PBXBuildFile; fileRef = 632D909A1586F856008B106A /* TexasDrumsGetRosters.m */; };
+		6347CA7515CD7E3E004412BB /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6347CA6B15CD7E3E004412BB /* EGORefreshTableHeaderView.m */; };
+		6347CA7615CD7E3E004412BB /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6347CA6B15CD7E3E004412BB /* EGORefreshTableHeaderView.m */; };
+		6347CA7715CD7E3E004412BB /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6347CA6B15CD7E3E004412BB /* EGORefreshTableHeaderView.m */; };
+		6347CA7815CD7E3E004412BB /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CA6D15CD7E3E004412BB /* blackArrow.png */; };
+		6347CA7915CD7E3E004412BB /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CA6D15CD7E3E004412BB /* blackArrow.png */; };
+		6347CA7A15CD7E3E004412BB /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CA6D15CD7E3E004412BB /* blackArrow.png */; };
+		6347CA7B15CD7E3E004412BB /* blackArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CA6E15CD7E3E004412BB /* blackArrow@2x.png */; };
+		6347CA7C15CD7E3E004412BB /* blackArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CA6E15CD7E3E004412BB /* blackArrow@2x.png */; };
+		6347CA7D15CD7E3E004412BB /* blackArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CA6E15CD7E3E004412BB /* blackArrow@2x.png */; };
+		6347CA7E15CD7E3E004412BB /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CA6F15CD7E3E004412BB /* blueArrow.png */; };
+		6347CA7F15CD7E3E004412BB /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CA6F15CD7E3E004412BB /* blueArrow.png */; };
+		6347CA8015CD7E3E004412BB /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CA6F15CD7E3E004412BB /* blueArrow.png */; };
+		6347CA8115CD7E3E004412BB /* blueArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CA7015CD7E3E004412BB /* blueArrow@2x.png */; };
+		6347CA8215CD7E3E004412BB /* blueArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CA7015CD7E3E004412BB /* blueArrow@2x.png */; };
+		6347CA8315CD7E3E004412BB /* blueArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CA7015CD7E3E004412BB /* blueArrow@2x.png */; };
+		6347CA8415CD7E3E004412BB /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CA7115CD7E3E004412BB /* grayArrow.png */; };
+		6347CA8515CD7E3E004412BB /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CA7115CD7E3E004412BB /* grayArrow.png */; };
+		6347CA8615CD7E3E004412BB /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CA7115CD7E3E004412BB /* grayArrow.png */; };
+		6347CA8715CD7E3E004412BB /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CA7215CD7E3E004412BB /* grayArrow@2x.png */; };
+		6347CA8815CD7E3E004412BB /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CA7215CD7E3E004412BB /* grayArrow@2x.png */; };
+		6347CA8915CD7E3E004412BB /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CA7215CD7E3E004412BB /* grayArrow@2x.png */; };
+		6347CA8A15CD7E3E004412BB /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CA7315CD7E3E004412BB /* whiteArrow.png */; };
+		6347CA8B15CD7E3E004412BB /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CA7315CD7E3E004412BB /* whiteArrow.png */; };
+		6347CA8C15CD7E3E004412BB /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CA7315CD7E3E004412BB /* whiteArrow.png */; };
+		6347CA8D15CD7E3E004412BB /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CA7415CD7E3E004412BB /* whiteArrow@2x.png */; };
+		6347CA8E15CD7E3E004412BB /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CA7415CD7E3E004412BB /* whiteArrow@2x.png */; };
+		6347CA8F15CD7E3E004412BB /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CA7415CD7E3E004412BB /* whiteArrow@2x.png */; };
+		6347CAB215CE10B2004412BB /* MemberListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6347CAB015CE10B1004412BB /* MemberListViewController.m */; };
+		6347CAB315CE10B2004412BB /* MemberListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6347CAB015CE10B1004412BB /* MemberListViewController.m */; };
+		6347CAB415CE10B2004412BB /* MemberListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6347CAB015CE10B1004412BB /* MemberListViewController.m */; };
+		6347CAB515CE10B2004412BB /* MemberListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6347CAB115CE10B1004412BB /* MemberListViewController.xib */; };
+		6347CAB615CE10B2004412BB /* MemberListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6347CAB115CE10B1004412BB /* MemberListViewController.xib */; };
+		6347CAB715CE10B2004412BB /* MemberListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6347CAB115CE10B1004412BB /* MemberListViewController.xib */; };
+		6347CABB15CE11A4004412BB /* GigRequirementsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6347CAB915CE11A4004412BB /* GigRequirementsViewController.m */; };
+		6347CABC15CE11A4004412BB /* GigRequirementsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6347CAB915CE11A4004412BB /* GigRequirementsViewController.m */; };
+		6347CABD15CE11A4004412BB /* GigRequirementsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6347CAB915CE11A4004412BB /* GigRequirementsViewController.m */; };
+		6347CABE15CE11A4004412BB /* GigRequirementsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6347CABA15CE11A4004412BB /* GigRequirementsViewController.xib */; };
+		6347CABF15CE11A4004412BB /* GigRequirementsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6347CABA15CE11A4004412BB /* GigRequirementsViewController.xib */; };
+		6347CAC015CE11A4004412BB /* GigRequirementsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6347CABA15CE11A4004412BB /* GigRequirementsViewController.xib */; };
 		635296C2158985D800E62787 /* UIFont+TexasDrums.m in Sources */ = {isa = PBXBuildFile; fileRef = 635296C1158985D800E62787 /* UIFont+TexasDrums.m */; };
 		6353B8FA15B51EAD00D88A14 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 6353B8F815B51EAD00D88A14 /* star.png */; };
 		6353B8FB15B51EAD00D88A14 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 6353B8F815B51EAD00D88A14 /* star.png */; };
@@ -655,6 +694,22 @@
 		63292FB115BCFEF800CB383B /* DateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DateViewController.xib; sourceTree = "<group>"; };
 		632D90991586F855008B106A /* TexasDrumsGetRosters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexasDrumsGetRosters.h; sourceTree = "<group>"; };
 		632D909A1586F856008B106A /* TexasDrumsGetRosters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsGetRosters.m; sourceTree = "<group>"; };
+		6347CA6A15CD7E3E004412BB /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
+		6347CA6B15CD7E3E004412BB /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
+		6347CA6D15CD7E3E004412BB /* blackArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackArrow.png; sourceTree = "<group>"; };
+		6347CA6E15CD7E3E004412BB /* blackArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackArrow@2x.png"; sourceTree = "<group>"; };
+		6347CA6F15CD7E3E004412BB /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
+		6347CA7015CD7E3E004412BB /* blueArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueArrow@2x.png"; sourceTree = "<group>"; };
+		6347CA7115CD7E3E004412BB /* grayArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayArrow.png; sourceTree = "<group>"; };
+		6347CA7215CD7E3E004412BB /* grayArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grayArrow@2x.png"; sourceTree = "<group>"; };
+		6347CA7315CD7E3E004412BB /* whiteArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteArrow.png; sourceTree = "<group>"; };
+		6347CA7415CD7E3E004412BB /* whiteArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrow@2x.png"; sourceTree = "<group>"; };
+		6347CAAF15CE10B1004412BB /* MemberListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberListViewController.h; sourceTree = "<group>"; };
+		6347CAB015CE10B1004412BB /* MemberListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberListViewController.m; sourceTree = "<group>"; };
+		6347CAB115CE10B1004412BB /* MemberListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MemberListViewController.xib; sourceTree = "<group>"; };
+		6347CAB815CE11A4004412BB /* GigRequirementsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GigRequirementsViewController.h; sourceTree = "<group>"; };
+		6347CAB915CE11A4004412BB /* GigRequirementsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GigRequirementsViewController.m; sourceTree = "<group>"; };
+		6347CABA15CE11A4004412BB /* GigRequirementsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GigRequirementsViewController.xib; sourceTree = "<group>"; };
 		635296C0158985D800E62787 /* UIFont+TexasDrums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+TexasDrums.h"; sourceTree = "<group>"; };
 		635296C1158985D800E62787 /* UIFont+TexasDrums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+TexasDrums.m"; sourceTree = "<group>"; };
 		6353B8F815B51EAD00D88A14 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = star.png; path = Media/UITableView/star.png; sourceTree = "<group>"; };
@@ -1417,8 +1472,55 @@
 				63292FAF15BCFEF800CB383B /* DateViewController.h */,
 				63292FB015BCFEF800CB383B /* DateViewController.m */,
 				63292FB115BCFEF800CB383B /* DateViewController.xib */,
+				6347CAAF15CE10B1004412BB /* MemberListViewController.h */,
+				6347CAB015CE10B1004412BB /* MemberListViewController.m */,
+				6347CAB115CE10B1004412BB /* MemberListViewController.xib */,
+				6347CAB815CE11A4004412BB /* GigRequirementsViewController.h */,
+				6347CAB915CE11A4004412BB /* GigRequirementsViewController.m */,
+				6347CABA15CE11A4004412BB /* GigRequirementsViewController.xib */,
 			);
 			name = "View Gigs";
+			sourceTree = "<group>";
+		};
+		6347CA6715CD7E3E004412BB /* EGOTableViewPullRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				6347CA6815CD7E3E004412BB /* Classes */,
+				6347CA6C15CD7E3E004412BB /* Resources */,
+			);
+			path = EGOTableViewPullRefresh;
+			sourceTree = "<group>";
+		};
+		6347CA6815CD7E3E004412BB /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				6347CA6915CD7E3E004412BB /* View */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		6347CA6915CD7E3E004412BB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6347CA6A15CD7E3E004412BB /* EGORefreshTableHeaderView.h */,
+				6347CA6B15CD7E3E004412BB /* EGORefreshTableHeaderView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6347CA6C15CD7E3E004412BB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6347CA6D15CD7E3E004412BB /* blackArrow.png */,
+				6347CA6E15CD7E3E004412BB /* blackArrow@2x.png */,
+				6347CA6F15CD7E3E004412BB /* blueArrow.png */,
+				6347CA7015CD7E3E004412BB /* blueArrow@2x.png */,
+				6347CA7115CD7E3E004412BB /* grayArrow.png */,
+				6347CA7215CD7E3E004412BB /* grayArrow@2x.png */,
+				6347CA7315CD7E3E004412BB /* whiteArrow.png */,
+				6347CA7415CD7E3E004412BB /* whiteArrow@2x.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		6353B99315B66CB800D88A14 /* Media */ = {
@@ -1974,6 +2076,7 @@
 		AEF20D0315218CB000C6427D /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				6347CA6715CD7E3E004412BB /* EGOTableViewPullRefresh */,
 				63BE6C2C157D7AF300E4097B /* CrittercismSDK */,
 				6398DF90157BA81B004A11DA /* ASIHTTPRequest */,
 				AE3A234615619336009B8F4B /* SVProgressHUD */,
@@ -2336,6 +2439,16 @@
 				6303FF4315B7C294009FAEFE /* AddGigViewController.xib in Resources */,
 				63292FB515BCFEF800CB383B /* DateViewController.xib in Resources */,
 				63E4D76315C63FA7003EC59E /* AuditionViewController.xib in Resources */,
+				6347CA7815CD7E3E004412BB /* blackArrow.png in Resources */,
+				6347CA7B15CD7E3E004412BB /* blackArrow@2x.png in Resources */,
+				6347CA7E15CD7E3E004412BB /* blueArrow.png in Resources */,
+				6347CA8115CD7E3E004412BB /* blueArrow@2x.png in Resources */,
+				6347CA8415CD7E3E004412BB /* grayArrow.png in Resources */,
+				6347CA8715CD7E3E004412BB /* grayArrow@2x.png in Resources */,
+				6347CA8A15CD7E3E004412BB /* whiteArrow.png in Resources */,
+				6347CA8D15CD7E3E004412BB /* whiteArrow@2x.png in Resources */,
+				6347CAB515CE10B2004412BB /* MemberListViewController.xib in Resources */,
+				6347CABE15CE11A4004412BB /* GigRequirementsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2354,6 +2467,16 @@
 				6303FF4415B7C294009FAEFE /* AddGigViewController.xib in Resources */,
 				63292FB615BCFEF800CB383B /* DateViewController.xib in Resources */,
 				63E4D76415C63FA7003EC59E /* AuditionViewController.xib in Resources */,
+				6347CA7915CD7E3E004412BB /* blackArrow.png in Resources */,
+				6347CA7C15CD7E3E004412BB /* blackArrow@2x.png in Resources */,
+				6347CA7F15CD7E3E004412BB /* blueArrow.png in Resources */,
+				6347CA8215CD7E3E004412BB /* blueArrow@2x.png in Resources */,
+				6347CA8515CD7E3E004412BB /* grayArrow.png in Resources */,
+				6347CA8815CD7E3E004412BB /* grayArrow@2x.png in Resources */,
+				6347CA8B15CD7E3E004412BB /* whiteArrow.png in Resources */,
+				6347CA8E15CD7E3E004412BB /* whiteArrow@2x.png in Resources */,
+				6347CAB615CE10B2004412BB /* MemberListViewController.xib in Resources */,
+				6347CABF15CE11A4004412BB /* GigRequirementsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2447,6 +2570,16 @@
 				63E4D74B15C48E83003EC59E /* Logo.png in Resources */,
 				63E4D74C15C48E85003EC59E /* Logo@2x.png in Resources */,
 				63E4D76515C63FA7003EC59E /* AuditionViewController.xib in Resources */,
+				6347CA7A15CD7E3E004412BB /* blackArrow.png in Resources */,
+				6347CA7D15CD7E3E004412BB /* blackArrow@2x.png in Resources */,
+				6347CA8015CD7E3E004412BB /* blueArrow.png in Resources */,
+				6347CA8315CD7E3E004412BB /* blueArrow@2x.png in Resources */,
+				6347CA8615CD7E3E004412BB /* grayArrow.png in Resources */,
+				6347CA8915CD7E3E004412BB /* grayArrow@2x.png in Resources */,
+				6347CA8C15CD7E3E004412BB /* whiteArrow.png in Resources */,
+				6347CA8F15CD7E3E004412BB /* whiteArrow@2x.png in Resources */,
+				6347CAB715CE10B2004412BB /* MemberListViewController.xib in Resources */,
+				6347CAC015CE11A4004412BB /* GigRequirementsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2579,6 +2712,9 @@
 				63E4D6D015C472EF003EC59E /* TexasDrumsGetStaff.m in Sources */,
 				63E4D75A15C634F7003EC59E /* TexasDrumsGetPaymentUpdate.m in Sources */,
 				63E4D76015C63FA7003EC59E /* AuditionViewController.m in Sources */,
+				6347CA7515CD7E3E004412BB /* EGORefreshTableHeaderView.m in Sources */,
+				6347CAB215CE10B2004412BB /* MemberListViewController.m in Sources */,
+				6347CABB15CE11A4004412BB /* GigRequirementsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2605,6 +2741,9 @@
 				63E4D76115C63FA7003EC59E /* AuditionViewController.m in Sources */,
 				63F6800815CB72D500D3FFFB /* UserProfile.m in Sources */,
 				63F6800915CB72EC00D3FFFB /* GigsViewController.m in Sources */,
+				6347CA7615CD7E3E004412BB /* EGORefreshTableHeaderView.m in Sources */,
+				6347CAB315CE10B2004412BB /* MemberListViewController.m in Sources */,
+				6347CABC15CE11A4004412BB /* GigRequirementsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2720,6 +2859,9 @@
 				63E4D6D215C472EF003EC59E /* TexasDrumsGetStaff.m in Sources */,
 				63E4D75C15C634F7003EC59E /* TexasDrumsGetPaymentUpdate.m in Sources */,
 				63E4D76215C63FA7003EC59E /* AuditionViewController.m in Sources */,
+				6347CA7715CD7E3E004412BB /* EGORefreshTableHeaderView.m in Sources */,
+				6347CAB415CE10B2004412BB /* MemberListViewController.m in Sources */,
+				6347CABD15CE11A4004412BB /* GigRequirementsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

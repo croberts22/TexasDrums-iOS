@@ -11,8 +11,9 @@
 @interface TexasDrumsGetAccounts : TexasDrumsRequest {
     NSString *_username;
     NSString *_password;
+    BOOL _getCurrentMembers;
 }
 
-- (id)initWithUsername:(NSString *)username andPassword:(NSString *)password;
+- (id)initWithUsername:(NSString *)username andPassword:(NSString *)password getCurrentMembersOnly:(BOOL)getCurrentMembers;
 
 @end

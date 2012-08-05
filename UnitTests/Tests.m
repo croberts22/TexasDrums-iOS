@@ -953,7 +953,25 @@
     [self prepare];
     
     TexasDrumsGetAccounts *get = [[TexasDrumsGetAccounts alloc] initWithUsername:[UserProfile sharedInstance].username
-                                                                     andPassword:[UserProfile sharedInstance].hash];
+                                                                     andPassword:[UserProfile sharedInstance].hash
+                                                           getCurrentMembersOnly:NO];
+    get.delegate = self;
+    [get startRequest];
+    
+    // Wait for notify
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0];
+}
+
+
+- (void)testGetAccountsRequestCurrentMembersOnly {
+    self.selectorName = @"testGetAccountsRequestCurrentMembersOnly";
+    
+    // Prepare for asynchronous call
+    [self prepare];
+    
+    TexasDrumsGetAccounts *get = [[TexasDrumsGetAccounts alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                                     andPassword:[UserProfile sharedInstance].hash
+                                                           getCurrentMembersOnly:YES];
     get.delegate = self;
     [get startRequest];
     
@@ -968,7 +986,8 @@
     [self prepare];
     
     TexasDrumsGetAccounts *get = [[TexasDrumsGetAccounts alloc] initWithUsername:self.badUsername
-                                                                     andPassword:self.badPassword];
+                                                                     andPassword:self.badPassword
+                                                           getCurrentMembersOnly:NO];
     get.delegate = self;
     [get startRequest];
     
