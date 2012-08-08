@@ -13,9 +13,15 @@
 #import "TexasDrumsGetNews.h"
 #import "CJSONDeserializer.h"
 
+@interface NewsViewController()
+@property (nonatomic, assign) BOOL _reloading;
+@end
+
+
 @implementation NewsViewController
 
 @synthesize newsTable, posts, allposts, timestamp, reloadIndicator, refresh, num_member_posts, status;
+@synthesize _reloading;
 
 #pragma mark - Memory Management
 
@@ -25,6 +31,7 @@
     [newsTable release];
     [reloadIndicator release];
     [refresh release];
+    _refreshHeaderView = nil;
     [super dealloc];
 }
 
@@ -68,11 +75,22 @@
     }
     
     // Create refresh button.
-    self.refresh = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(connect)] autorelease];
+    self.refresh = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshPressed)] autorelease];
     self.status.alpha = 0.0f;
     self.status.text = @"We were unable to load the news for you! Tap the refresh button or try again later.";
     self.status.textColor = [UIColor TexasDrumsGrayColor];
-    self.navigationItem.rightBarButtonItem = refresh;
+    
+    // Create the 'Pull to Refresh' view.
+    if (_refreshHeaderView == nil) {
+		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.newsTable.bounds.size.height, self.view.frame.size.width, self.newsTable.bounds.size.height)];
+		view.delegate = self;
+		[self.newsTable addSubview:view];
+		_refreshHeaderView = view;
+		[view release];
+	}
+	
+	// Update the last update date.
+	[_refreshHeaderView refreshLastUpdatedDate];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -81,7 +99,8 @@
     [self.newsTable reloadData];
     
     if(self.posts.count == 0) {
-        [self connect];
+        [self hideRefreshButton];
+        [self egoRefreshTableHeaderDidTriggerRefresh:_refreshHeaderView];
     }
 }
 
@@ -122,24 +141,24 @@
     }
     
     // Begin fetching news from the server.
+    [self hideRefreshButton];
     [self connect];
 }
 
 - (void)hideRefreshButton {
-    self.navigationItem.rightBarButtonItem.enabled = NO;
+    self.navigationItem.rightBarButtonItem = nil;
     [SVProgressHUD showWithStatus:@"Loading..." maskType:SVProgressHUDMaskTypeClear];
 }
 
 - (void)dismissWithSuccess {
-    self.navigationItem.rightBarButtonItem.enabled = YES;
     [SVProgressHUD dismiss];
 }
 
 - (void)dismissWithError {
-    self.navigationItem.rightBarButtonItem.enabled = YES;
     [SVProgressHUD showErrorWithStatus:@"Could not fetch data."];
     
     if(self.posts.count == 0 && self.status.alpha < 1.0f) {
+        self.navigationItem.rightBarButtonItem = refresh;
         [UIView animateWithDuration:0.5f animations:^{
             self.status.alpha = 1.0f;
         }];
@@ -158,12 +177,13 @@
             self.status.hidden = YES;
         }
     }];
+    
+    [self doneLoadingTableViewData];
 }
 
 #pragma mark - Data Methods
 
 - (void)connect {
-    [self hideRefreshButton];
     TexasDrumsGetNews *get = [[TexasDrumsGetNews alloc] initWithTimestamp:timestamp];
     get.delegate = self;
     [get startRequest];    
@@ -300,6 +320,45 @@
     [NPV release];
 }
 
+#pragma mark -
+#pragma mark Data Source Loading / Reloading Methods
+
+- (void)reloadTableViewDataSource {
+	_reloading = YES;
+}
+
+- (void)doneLoadingTableViewData {
+	_reloading = NO;
+	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.newsTable];
+}
+
+#pragma mark -
+#pragma mark UIScrollViewDelegate Methods
+ 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+	[_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+}
+
+#pragma mark -
+#pragma mark EGORefreshTableHeaderDelegate Methods
+
+- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view {
+	[self reloadTableViewDataSource];
+    [self connect];
+}
+
+- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view {
+	return _reloading; // should return if data source model is reloading
+}
+
+- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view {
+	return [NSDate date];
+}
+
 #pragma mark - TexasDrumsRequest Delegate Methods
 
 - (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
@@ -319,7 +378,7 @@
         if([results respondsToSelector:@selector(objectForKey:)] ){
             if([[results objectForKey:@"status"] isEqualToString:_NEWS_API_NO_NEW_ARTICLES]) {
                 TDLog(@"No news found. Request returned: %@", [results objectForKey:@"status"]);
-                [self dismissWithSuccess];
+                [self doneLoadingTableViewData];
                 return;
             }
         }
@@ -337,6 +396,7 @@
     
     // Show error message.
     [self dismissWithError];
+    [self doneLoadingTableViewData];
 }
 
 @end

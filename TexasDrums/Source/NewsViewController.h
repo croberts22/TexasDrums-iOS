@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "TexasDrumsAPIConnection.h"
+#import "EGORefreshTableHeaderView.h"
 
 @class News;
 
-@interface NewsViewController : UIViewController<TexasDrumsAPIConnection, UITableViewDataSource, UITableViewDelegate> {
+@interface NewsViewController : UIViewController<TexasDrumsAPIConnection, EGORefreshTableHeaderDelegate, UITableViewDataSource, UITableViewDelegate> {
+    EGORefreshTableHeaderView *_refreshHeaderView;
     IBOutlet UITableView *newsTable;
     IBOutlet UILabel *status;
     NSMutableArray *posts;
@@ -40,5 +42,8 @@
 - (void)connect;
 - (void)parseNewsData:(NSDictionary *)results;
 - (void)sortTable;
+
+- (void)reloadTableViewDataSource;
+- (void)doneLoadingTableViewData;
 
 @end
