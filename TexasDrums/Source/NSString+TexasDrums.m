@@ -29,7 +29,7 @@
                                                     [birthday substringWithRange:NSMakeRange(2, 2)],
                                                     [birthday substringWithRange:NSMakeRange(4, 4)]];
     }
-    else return @"Not a valid birthday string. This string must be 8 characters long.";
+    else return @"n/a";
 }
 
 @end

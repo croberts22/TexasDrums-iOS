@@ -47,25 +47,21 @@
     // When the picker changes value, update the label.
     [self.picker addTarget:self action:@selector(updateLabel:) forControlEvents:UIControlEventValueChanged];
     
-    // Prepare min and max range for the date picker.
-    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    [dateFormatter setDateFormat:@"MMddyyyy"];
-
-    NSCalendar *calendar = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
-    NSDate *current_date = [dateFormatter dateFromString:[UserProfile sharedInstance].birthday];
-    NSDateComponents *comps = [[[NSDateComponents alloc] init] autorelease];
-    [comps setYear:30];
-    NSDate *maxDate = [calendar dateByAddingComponents:comps toDate:current_date options:0];
-    [comps setYear:-70];
-    NSDate *minDate = [calendar dateByAddingComponents:comps toDate:current_date options:0];
-
-    // Set properties.
-    self.status.alpha = 0.0f;
-    self.picker.maximumDate = maxDate;
-    self.picker.date = current_date;
-    self.picker.minimumDate = minDate;
-    
-    self.birthdayLabel.text = [self parseDatabaseString];
+    NSString *parseBirthday = [NSString parseBirthday:[UserProfile sharedInstance].birthday];
+    if([parseBirthday isEqualToString:@"n/a"]){
+        self.picker.date = [NSDate date];
+    }
+    else {
+        NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+        [dateFormatter setDateFormat:@"MMddyyyy"];
+        NSDate *current_date = [dateFormatter dateFromString:[UserProfile sharedInstance].birthday];
+        
+        // Set properties.
+        self.status.alpha = 0.0f;
+        self.picker.date = current_date;
+        
+        self.birthdayLabel.text = [self parseDatabaseString];
+    }
 }
 
 - (void)viewDidUnload {

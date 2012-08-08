@@ -788,7 +788,7 @@
                                                                            andLastName:nil
                                                                     andUpdatedPassword:nil
                                                                               andPhone:nil
-                                                                           andBirthday:@"12345678"
+                                                                           andBirthday:@"10202012"
                                                                               andEmail:nil];
     
     get.delegate = self;
@@ -832,7 +832,7 @@
                                                                            andLastName:@"World"
                                                                     andUpdatedPassword:nil
                                                                               andPhone:nil
-                                                                           andBirthday:@"12345678"
+                                                                           andBirthday:@"10202012"
                                                                               andEmail:@"hack@me.com"];
     
     get.delegate = self;
@@ -876,7 +876,7 @@
                                                                            andLastName:@"World"
                                                                     andUpdatedPassword:@"!amacak3"
                                                                               andPhone:@"1234567890"
-                                                                           andBirthday:@"12345678"
+                                                                           andBirthday:@"10202012"
                                                                               andEmail:@"hack@me.com"];
     
     get.delegate = self;

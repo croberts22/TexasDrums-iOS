@@ -108,9 +108,6 @@
 #pragma mark - UITableView Delegate Methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
     if(indexPath.row == 0){ 
         // User wanst to send an email.
         TDLog(@"Prompting user for sending %@ an email.", profile.firstname);
@@ -140,6 +137,9 @@
 #pragma mark - UIActionSheet Delegate Methods
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSIndexPath *indexPath = [self.member_contact indexPathForSelectedRow];
+    [self.member_contact deselectRowAtIndexPath:indexPath animated:YES];
+    
     switch(actionSheet.tag){
         case 1:
             // User is wanting to send an email.
@@ -149,6 +149,10 @@
                 if([MFMailComposeViewController canSendMail]){
                     MFMailComposeViewController *mailVC = [[MFMailComposeViewController alloc] init];
                     mailVC.mailComposeDelegate = self;
+                    mailVC.navigationBar.tintColor = [UIColor colorWithRed:215.0/255.0
+                                                                     green:127.0/255.0
+                                                                      blue:0.0/255.0
+                                                                     alpha:1.0];
                     [mailVC setToRecipients:[NSArray arrayWithObject:profile.email]];
                     [self presentModalViewController:mailVC animated:YES];
                     [mailVC release];

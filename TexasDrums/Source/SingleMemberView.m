@@ -133,7 +133,7 @@
         }
     }
     else{
-        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+        //cell.selectionStyle = UITableViewCellSelectionStyleBlue;
         cell.textLabel.text = [categories objectAtIndex:indexPath.row+4];
         cell.detailTextLabel.text = [data objectAtIndex:indexPath.row+4];
         if([cell.detailTextLabel.text isEqualToString:@"n/a"]){
