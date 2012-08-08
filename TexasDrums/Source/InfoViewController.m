@@ -211,6 +211,10 @@
         else if(indexPath.row == 1){
             if([MFMailComposeViewController canSendMail]){
                 MFMailComposeViewController *mailVC = [[MFMailComposeViewController alloc] init];
+                mailVC.navigationBar.tintColor = [UIColor colorWithRed:215.0/255.0
+                                                                 green:127.0/255.0
+                                                                  blue:0.0/255.0
+                                                                 alpha:1.0];
                 mailVC.mailComposeDelegate = self;
                 [mailVC setToRecipients:[NSArray arrayWithObject:@"support@texasdrums.com"]];
                 [mailVC setSubject:@"Texas Drums (iOS) Comments"];

@@ -111,7 +111,9 @@
 - (void)connect {
     [self hideRefreshButton];
     [SVProgressHUD showWithStatus:@"Loading..."];
-    TexasDrumsGetAccounts *get = [[TexasDrumsGetAccounts alloc] initWithUsername:[UserProfile sharedInstance].username andPassword:[UserProfile sharedInstance].hash];
+    TexasDrumsGetAccounts *get = [[TexasDrumsGetAccounts alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                                     andPassword:[UserProfile sharedInstance].hash
+                                                           getCurrentMembersOnly:YES];
     get.delegate = self;
     [get startRequest];
 }

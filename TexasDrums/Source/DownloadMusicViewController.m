@@ -52,15 +52,15 @@
     // Set properties.
     self.musicTable.backgroundColor = [UIColor clearColor];
     self.musicTable.alpha = 0.0f;
+    
+    if([musicArray count] == 0) {
+        [self connect];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
-    
-    if([musicArray count] == 0) {
-        [self connect];
-    }
 }
 
 - (void)viewDidUnload {

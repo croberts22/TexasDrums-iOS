@@ -149,6 +149,8 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     
     [[UserProfile sharedInstance] createProfile:results];
     
+    [Crittercism setUsername:[UserProfile sharedInstance].username];
+    
     [defaults setBool:YES forKey:@"member"];
     [defaults setBool:YES forKey:@"login_valid"];
     

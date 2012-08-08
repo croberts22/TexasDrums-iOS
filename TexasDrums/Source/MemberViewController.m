@@ -56,8 +56,6 @@
     self.loginPrompt.alpha = 1.0f;
     self.memberTable.alpha = 1.0f;
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
     // If user is not logged in, show login prompt.
     if(![UserProfile sharedInstance].loggedIn){
         self.loginPrompt.hidden = NO;
@@ -71,11 +69,11 @@
         
         [self setButton:kLogout];
         
-#warning - move this in init.
+#warning - move to init?
         //accepted username. show member stuff
         if(membersOptions == nil){
-            membersOptions = [[NSArray alloc] initWithObjects:@"View Music", @"View Address Book", @"View Profile", @"View Gigs", nil];
-            adminOptions = [[NSArray alloc] initWithObjects:@"Modify Dues", @"Add A Member", nil];
+            membersOptions = [[NSArray alloc] initWithObjects:@"View Music", @"View Address Book", @"View Profile", @"View Gigs (coming soon!)", nil];
+            adminOptions = [[NSArray alloc] initWithObjects:@"Modify Dues", @"Add A Member (beta)", nil];
         }
         
         [self.memberTable reloadData];
@@ -242,6 +240,7 @@
     
     // Override TexasDrumsGroupedTableViewCell properties.
     cell.textLabel.font = [UIFont TexasDrumsBoldFontOfSize:16];
+    cell.textLabel.textColor = [UIColor TexasDrumsGrayColor];
     
     NSArray *options;
     
@@ -255,6 +254,12 @@
         default:
             options = nil;
             break;
+    }
+    
+#warning - temporary for Gigs cell.
+    if(indexPath.row == 3 && indexPath.section == 0) {
+        cell.textLabel.textColor = [UIColor darkGrayColor];
+        cell.userInteractionEnabled = NO;
     }
     
     UIImage *background;
@@ -309,8 +314,10 @@
             [self.navigationController pushViewController:PVC animated:YES];
         }
         if(indexPath.row == 3){
+            /*
             GigsViewController *GVC = [[[GigsViewController alloc] initWithNibName:@"GigsViewController" bundle:[NSBundle mainBundle]] autorelease];
             [self.navigationController pushViewController:GVC animated:YES];
+             */
         }
     }
     else{
