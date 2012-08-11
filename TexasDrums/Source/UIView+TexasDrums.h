@@ -13,6 +13,7 @@
 + (UIView *)TexasDrumsGroupedTableHeaderViewWithTitle:(NSString *)title andAlignment:(UITextAlignment)alignment;
 + (UIView *)TexasDrumsAddressBookTableHeaderViewWithTitle:(NSString *)title;
 + (UIView *)TexasDrumsFAQTableHeaderViewWithTitle:(NSString *)title;
++ (UIView *)TexasDrumsVideoHeaderWithTitle:(NSString *)title;
 + (UIView *)TexasDrumsVersionFooter;
 + (UIView *)TexasDrumsCheckmarkAccessoryView;
 

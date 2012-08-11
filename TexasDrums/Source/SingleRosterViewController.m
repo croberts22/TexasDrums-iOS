@@ -100,16 +100,16 @@
 {
     switch(section){
         case 0:
-            return [[roster snares] count];
+            return [roster.snares count];
             break;
         case 1:
-            return [[roster tenors] count];
+            return [roster.tenors count];
             break;
         case 2:
-            return [[roster basses] count];
+            return [roster.basses count];
             break;
         case 3:
-            return [[roster cymbals] count];
+            return [roster.cymbals count];
             break;
         default:
             return 0;
@@ -128,16 +128,16 @@
     
     switch(section){
         case 0:
-            sectionTitle = @"Snares";
+            sectionTitle = kSnares;
             break;
         case 1:
-            sectionTitle = @"Tenors";
+            sectionTitle = kTenors;
             break;
         case 2:
-            sectionTitle = @"Basses";
+            sectionTitle = kBasses;
             break;
         case 3:
-            sectionTitle = @"Cymbals";
+            sectionTitle = kCymbals;
             break;
         default:
             break;
@@ -160,16 +160,16 @@
     
     switch(indexPath.section){
         case 0: 
-            instrument = [roster snares];
+            instrument = roster.snares;
             break;
         case 1: 
-            instrument = [roster tenors];
+            instrument = roster.tenors;
             break;
         case 2: 
-            instrument = [roster basses];
+            instrument = roster.basses;
             break;
         case 3: 
-            instrument = [roster cymbals];
+            instrument = roster.cymbals;
             break;
         default:
             break;

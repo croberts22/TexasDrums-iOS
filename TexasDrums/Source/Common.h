@@ -13,8 +13,10 @@
 #define kMemberStatusAlumni         @"Alumni"
 
 #define kSnare                      @"Snare"
+#define kSnares                     @"Snares"
 #define kTenors                     @"Tenors"
 #define kBass                       @"Bass"
+#define kBasses                     @"Basses"
 #define kCymbals                    @"Cymbals"
 #define kInstructor                 @"Instructor"
 

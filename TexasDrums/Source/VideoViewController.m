@@ -189,28 +189,12 @@ static NSMutableArray *years = nil;
     return 80;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section  {
-    // Create a custom header.
-    UIView *containerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, STANDARD_HEADER_HEIGHT)] autorelease];
-    UILabel *headerTitle = [[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, 20)] autorelease];
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
-    // Set header title properties.
-    headerTitle.text = [years objectAtIndex:section];
-    headerTitle.textAlignment = UITextAlignmentCenter;
-    headerTitle.textColor = [UIColor TexasDrumsOrangeColor];
-    headerTitle.font = [UIFont TexasDrumsBoldFontOfSize:18];
-    headerTitle.backgroundColor = [UIColor clearColor];
-    headerTitle.shadowOffset = CGSizeMake(0, 1);
+    NSString *sectionTitle = [years objectAtIndex:section];
+    UIView *header = [UIView TexasDrumsVideoHeaderWithTitle:sectionTitle];
     
-    // Set black gradient background behind header.
-    UIImage *headerImage = [UIImage imageNamed:@"header.png"];
-    UIImageView *headerImageView = [[[UIImageView alloc] initWithImage:headerImage] autorelease];
-    headerImageView.frame = CGRectMake(0, 0, self.view.frame.size.width, 30);
-    
-    [containerView addSubview:headerImageView];
-    [containerView addSubview:headerTitle];
-    
-	return containerView;
+	return header;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
