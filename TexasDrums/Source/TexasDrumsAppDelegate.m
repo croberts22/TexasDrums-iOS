@@ -37,7 +37,6 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     
     // Set AVAudio properties to play audio files on the silent thread of AVFoundation.
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
-    [[AVAudioSession sharedInstance] setActive:YES error: nil];
 
     [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
     
@@ -47,8 +46,8 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     [self.window makeKeyAndVisible];
     
     splashView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 320, 480)];
-	splashView.image = [UIImage imageNamed:@"Default.png"]; //image is default.png
-	[_window addSubview:splashView]; //adds a subview so image can be seen; bring it forward
+	splashView.image = [UIImage imageNamed:@"Default.png"]; 
+	[_window addSubview:splashView];
 	[_window bringSubviewToFront:splashView];
     
     [UIView animateWithDuration:0.75f animations:^{

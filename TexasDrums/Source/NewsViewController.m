@@ -304,12 +304,12 @@
     NewsPostView *NPV = [[NewsPostView alloc] initWithNibName:@"NewsPostView" bundle:[NSBundle mainBundle]];
     
     if([UserProfile sharedInstance].loggedIn) {
-        NPV.content = [[posts objectAtIndex:indexPath.row] post]; 
-        NPV.post = [posts objectAtIndex:indexPath.row];
+        NPV.content = [[allposts objectAtIndex:indexPath.row] post];
+        NPV.post = [allposts objectAtIndex:indexPath.row];
     }
     else {
-        NPV.content = [[allposts objectAtIndex:indexPath.row] post]; 
-        NPV.post = [allposts objectAtIndex:indexPath.row];
+        NPV.content = [[posts objectAtIndex:indexPath.row] post];
+        NPV.post = [posts objectAtIndex:indexPath.row];
         
         if([[allposts objectAtIndex:indexPath.row] memberPost]){
             NPV.isMemberPost = TRUE;
