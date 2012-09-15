@@ -14,23 +14,24 @@
 #import "CJSONDeserializer.h"
 
 @interface NewsViewController()
-@property (nonatomic, assign) BOOL _reloading;
-@end
 
+@property (nonatomic, assign) BOOL _reloading;
+
+@end
 
 @implementation NewsViewController
 
-@synthesize newsTable, posts, allposts, timestamp, reloadIndicator, refresh, num_member_posts, status;
+@synthesize newsTable, posts, allposts, timestamp, refresh, num_member_posts, status;
 @synthesize _reloading;
 
 #pragma mark - Memory Management
 
 - (void)dealloc {
-    [posts release];
-    [allposts release];
-    [newsTable release];
-    [reloadIndicator release];
-    [refresh release];
+    [newsTable release], newsTable = nil;
+    [posts release], posts = nil;
+    [allposts release], allposts = nil;
+    [refresh release], refresh = nil;
+    [status release], status = nil;
     _refreshHeaderView = nil;
     [super dealloc];
 }
@@ -75,7 +76,7 @@
     }
     
     // Create refresh button.
-    self.refresh = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshPressed)] autorelease];
+    self.refresh = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshPressed)];
     self.status.alpha = 0.0f;
     self.status.text = @"We were unable to load the news for you! Tap the refresh button or try again later.";
     self.status.textColor = [UIColor TexasDrumsGrayColor];

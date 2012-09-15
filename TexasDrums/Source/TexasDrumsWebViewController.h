@@ -34,7 +34,7 @@
 @property (nonatomic, retain) UIActivityIndicatorView *indicator;
 @property (nonatomic, retain) NSMutableArray *toolbarItems;
 @property (nonatomic, retain) NSURLRequest *url;
-@property (nonatomic, retain) NSString *the_title;
+@property (nonatomic, copy) NSString *the_title;
 
 - (IBAction)refreshButtonPressed:(id)sender;
 

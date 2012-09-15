@@ -54,7 +54,7 @@ static UserProfile *sharedInstance = nil;
     [super dealloc];
 }
 
-+ (id)allocWithZone:(NSZone*)zone {
++ (id)allocWithZone:(NSZone *)zone {
     return [[self sharedInstance] retain];
 }
 

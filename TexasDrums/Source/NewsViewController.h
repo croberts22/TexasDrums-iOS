@@ -20,7 +20,6 @@
     NSMutableArray *allposts;
     int timestamp;
     int num_member_posts;
-    UIActivityIndicatorView *reloadIndicator;
     UIBarButtonItem *refresh;
 }
 
@@ -30,7 +29,6 @@
 @property (nonatomic, retain) NSMutableArray *allposts;
 @property (nonatomic, assign) int timestamp;
 @property (nonatomic, assign) int num_member_posts;
-@property (nonatomic, retain) UIActivityIndicatorView *reloadIndicator;
 @property (nonatomic, retain) UIBarButtonItem *refresh;
 
 - (void)refreshPressed;

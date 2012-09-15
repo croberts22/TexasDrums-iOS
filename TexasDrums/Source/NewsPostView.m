@@ -20,17 +20,22 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.titleOfPost.text = @"";
+        self.dateAndAuthor.text = @"";
+        self.content = @"";
+        self.post = nil;
+        self.isMemberPost = NO;
+        self.loadPost = NO;
     }
     return self;
 }
 
 - (void)dealloc {
-    [post release];
-    [content release];
-    [titleOfPost release];
-    [dateAndAuthor release];
-    [webView release];
+    self.webView.delegate = nil;
+    [webView release], webView = nil;
+    [titleOfPost release], titleOfPost = nil;
+    [dateAndAuthor release], dateAndAuthor = nil;
+    [post release], post = nil;
     [super dealloc];
 }
 
