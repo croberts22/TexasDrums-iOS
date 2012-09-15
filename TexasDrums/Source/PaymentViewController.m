@@ -11,8 +11,19 @@
 #import "TexasDrumsGetAccounts.h"
 #import "TexasDrumsGetPaymentUpdate.h"
 
+@interface PaymentViewController() {
+    TexasDrumsGetAccounts *getAccounts;
+    TexasDrumsGetPaymentUpdate *getPayment;
+}
+
+@property (nonatomic, retain) TexasDrumsGetAccounts *getAccounts;
+@property (nonatomic, retain) TexasDrumsGetPaymentUpdate *getPayment;
+
+@end
+
 @implementation PaymentViewController
 
+@synthesize getAccounts, getPayment;
 @synthesize paymentTable, memberList;
 
 #pragma mark - Memory Management
@@ -24,6 +35,18 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (void)dealloc {
+    self.getAccounts.delegate = nil;
+    [self.getAccounts cancelRequest];
+    self.getPayment.delegate = nil;
+    [self.getPayment cancelRequest];
+    [getAccounts release], getAccounts = nil;
+    [getPayment release], getPayment = nil;
+    [paymentTable release], paymentTable = nil;
+    [memberList release], memberList = nil;
+    [super dealloc];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -31,6 +54,10 @@
     
     // Google Analytics
     [[GANTracker sharedTracker] trackPageview:@"Payment (PaymentView)" withError:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+
 }
 
 - (void)viewDidLoad {
@@ -111,11 +138,11 @@
 - (void)connect {
     [self hideRefreshButton];
     [SVProgressHUD showWithStatus:@"Loading..."];
-    TexasDrumsGetAccounts *get = [[TexasDrumsGetAccounts alloc] initWithUsername:[UserProfile sharedInstance].username
-                                                                     andPassword:[UserProfile sharedInstance].hash
-                                                           getCurrentMembersOnly:YES];
-    get.delegate = self;
-    [get startRequest];
+    self.getAccounts = [[TexasDrumsGetAccounts alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                           andPassword:[UserProfile sharedInstance].hash
+                                                 getCurrentMembersOnly:YES];
+    self.getAccounts.delegate = self;
+    [self.getAccounts startRequest];
 }
 
 - (void)parsePaymentData:(NSDictionary *)results {
@@ -137,9 +164,12 @@
 }
 
 - (void)updateUser:(NSString *)user withPayment:(NSNumber *)paid {
-    TexasDrumsGetPaymentUpdate *get = [[TexasDrumsGetPaymentUpdate alloc] initWithUsername:[UserProfile sharedInstance].username andPassword:[UserProfile sharedInstance].hash andUser:user andPaid:paid];
-    get.delegate = self;
-    [get startRequest];
+    self.getPayment = [[TexasDrumsGetPaymentUpdate alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                               andPassword:[UserProfile sharedInstance].hash
+                                                                   andUser:user
+                                                                   andPaid:paid];
+    self.getPayment.delegate = self;
+    [self.getPayment startRequest];
 }
 
 #pragma mark - Table view data source

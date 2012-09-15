@@ -27,6 +27,17 @@
     return self;
 }
 
+- (void)dealloc {
+    [member_name release], member_name = nil;
+    [member_header release], member_header = nil;
+    [member_status release], member_status = nil;
+    [profile release], profile = nil;
+    [member_contact release], member_contact = nil;
+    [super dealloc];
+}
+
+#pragma mark - View lifecycle
+
 - (void)viewWillAppear:(BOOL)animated {
     // Google Analytics
     [[GANTracker sharedTracker] trackPageview:@"Address Book (AddressBookMemberView)" withError:nil];

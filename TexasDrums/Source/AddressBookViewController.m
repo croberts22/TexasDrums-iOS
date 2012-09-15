@@ -11,11 +11,20 @@
 #import "AddressBookMemberViewController.h"
 #import "TexasDrumsGetAccounts.h"
 
+@interface AddressBookViewController() {
+    TexasDrumsGetAccounts *getAccounts;
+}
+
+@property (nonatomic, retain) TexasDrumsGetAccounts *getAccounts;
+
+@end
+
 @implementation AddressBookViewController
 
 static NSMutableArray *addressBook = nil;
 static NSMutableDictionary *full_name = nil;
 
+@synthesize getAccounts;
 @synthesize addressBookTable;
 
 #pragma mark - Memory Management
@@ -36,7 +45,9 @@ static NSMutableDictionary *full_name = nil;
 }
 
 - (void)dealloc {
-    [addressBookTable release];
+    self.getAccounts.delegate = nil;
+    [getAccounts release], getAccounts = nil;
+    [addressBookTable release], addressBookTable = nil;
     [super dealloc];
 }
 
@@ -50,6 +61,11 @@ static NSMutableDictionary *full_name = nil;
     if(indexPath) {
         [self.addressBookTable deselectRowAtIndexPath:indexPath animated:YES];
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [SVProgressHUD dismiss];
+    [self.getAccounts cancelRequest];
 }
 
 - (void)viewDidLoad {
@@ -129,11 +145,11 @@ static NSMutableDictionary *full_name = nil;
 - (void)connect {
     [self hideRefreshButton];
     [SVProgressHUD showWithStatus:@"Loading..."];
-    TexasDrumsGetAccounts *get = [[TexasDrumsGetAccounts alloc] initWithUsername:[UserProfile sharedInstance].username
-                                                                     andPassword:[UserProfile sharedInstance].hash
-                                                           getCurrentMembersOnly:NO];
-    get.delegate = self;
-    [get startRequest];
+    self.getAccounts = [[TexasDrumsGetAccounts alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                           andPassword:[UserProfile sharedInstance].hash
+                                                 getCurrentMembersOnly:NO];
+    self.getAccounts.delegate = self;
+    [self.getAccounts startRequest];
 }
 
 - (void)parseAddressBookData:(NSDictionary *)results {    

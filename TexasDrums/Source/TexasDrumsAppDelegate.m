@@ -33,7 +33,10 @@ static const NSInteger kGANDispatchPeriodSec = 10;
                                            dispatchPeriod:kGANDispatchPeriodSec
                                                  delegate:nil];
     // Initialize Crittercism.
-    [Crittercism initWithAppID:@"4fca4280067e7c223100000d" andKey:@"qmqprnyvfwt1txkj96zhlofnksr0" andSecret:@"pat1ikup9agryyrlhh7mt2cv5k8gsnjx" andMainViewController:self.window.rootViewController];
+    [Crittercism initWithAppID:@"4fca4280067e7c223100000d"
+                        andKey:@"qmqprnyvfwt1txkj96zhlofnksr0"
+                     andSecret:@"pat1ikup9agryyrlhh7mt2cv5k8gsnjx"
+         andMainViewController:self.window.rootViewController];
     
     // Set AVAudio properties to play audio files on the silent thread of AVFoundation.
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
@@ -45,7 +48,7 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     
-    splashView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 320, 480)];
+    splashView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 320, [UIScreen mainScreen].bounds.size.height)];
 	splashView.image = [UIImage imageNamed:@"Default.png"]; 
 	[_window addSubview:splashView];
 	[_window bringSubviewToFront:splashView];
@@ -150,6 +153,8 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     
     [Crittercism setUsername:[UserProfile sharedInstance].username];
     
+    [defaults setObject:[UserProfile sharedInstance].username forKey:@"username"];
+    [defaults setObject:[UserProfile sharedInstance].hash forKey:@"password"];
     [defaults setBool:YES forKey:@"member"];
     [defaults setBool:YES forKey:@"login_valid"];
     

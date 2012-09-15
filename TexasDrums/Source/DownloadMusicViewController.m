@@ -14,12 +14,17 @@
 #import "Music.h"
 #import "TexasDrumsGetMusic.h"
 
-@interface DownloadMusicViewController ()
+@interface DownloadMusicViewController() {
+    TexasDrumsGetMusic *getMusic;
+}
+
+@property (nonatomic, retain) TexasDrumsGetMusic *getMusic;
 
 @end
 
 @implementation DownloadMusicViewController
 
+@synthesize getMusic;
 @synthesize musicTable, musicArray;
 
 #pragma mark - Memory Management
@@ -32,11 +37,24 @@
     return self;
 }
 
+- (void)dealloc {
+    self.getMusic.delegate = nil;
+    [getMusic release], getMusic = nil;
+    [musicTable release], musicTable = nil;
+    [musicArray release], musicArray = nil;
+    [super dealloc];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
     // Google Analytics
     [[GANTracker sharedTracker] trackPageview:@"Download Music (DownloadMusicView)" withError:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [SVProgressHUD dismiss];
+    [self.getMusic cancelRequest];
 }
 
 - (void)viewDidLoad {
@@ -46,7 +64,7 @@
     
     // Allocate things as necessary.
     if(self.musicArray == nil){
-        self.musicArray = [[[NSMutableArray alloc] init] autorelease];
+        self.musicArray = [[NSMutableArray alloc] init];
     }
     
     // Set properties.
@@ -121,9 +139,10 @@
 - (void)connect {
     [self hideRefreshButton];
     [SVProgressHUD showWithStatus:@"Loading..."];
-    TexasDrumsGetMusic *get = [[TexasDrumsGetMusic alloc] initWithUsername:[UserProfile sharedInstance].username andPassword:[UserProfile sharedInstance].hash];
-    get.delegate = self;
-    [get startRequest];
+    self.getMusic = [[TexasDrumsGetMusic alloc] initWithUsername:[UserProfile sharedInstance].username
+                                                     andPassword:[UserProfile sharedInstance].hash];
+    self.getMusic.delegate = self;
+    [self.getMusic startRequest];
 }
 
 - (void)parseMusicData:(NSDictionary *)results {
