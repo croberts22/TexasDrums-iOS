@@ -18,7 +18,7 @@
 #pragma mark - Memory management
 
 - (void)dealloc {
-    [mediaOptions release];
+    [mediaOptions release], mediaOptions = nil;
     [super dealloc];
 }
 

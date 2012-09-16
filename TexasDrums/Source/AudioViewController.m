@@ -22,6 +22,8 @@
     return self;
 }
 
+#pragma mark - Memory Management
+
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
@@ -29,9 +31,20 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (void)dealloc {
+    [audioTable release], audioTable = nil;
+    [pauseButton release], pauseButton = nil;
+    [playButton release], playButton = nil;
+    [audioPlayer release], audioPlayer = nil;
+    [audioArray release], audioArray = nil;
+    [super dealloc];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     // Google Analytics.
     [[GANTracker sharedTracker] trackPageview:@"Audio (AudioView)" withError:nil];
 }
@@ -42,8 +55,8 @@
     [self setTitle:@"Audio"];
 
     // Set variables.
-    self.pauseButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPause target:self action:@selector(pausePlayer)] autorelease];
-    self.playButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(resumePlayer)] autorelease];
+    self.pauseButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPause target:self action:@selector(pausePlayer)];
+    self.playButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(resumePlayer)];
     
     // Set properties.
     self.audioTable.alpha = 1.0f;
@@ -56,7 +69,7 @@
     
     // Allocate things as necessary.
     if(audioArray == nil){
-        self.audioArray = [[[NSMutableArray alloc] initWithObjects:@"Go Horns Go", @"Go, Go Horns", @"Texas Texas Yee Haw", @"Gourdhead", @"Tenor Intro", @"Defense", @"Push 'em Back", @"Hold 'em Horns, Hold 'em", @"D-D-D, Defense", @"Cheerleader", @"Buck Buck", @"Full Cadence Run", nil] autorelease];
+        self.audioArray = [[NSMutableArray alloc] initWithObjects:@"Go Horns Go", @"Go, Go Horns", @"Texas Texas Yee Haw", @"Gourdhead", @"Tenor Intro", @"Defense", @"Push 'em Back", @"Hold 'em Horns, Hold 'em", @"D-D-D, Defense", @"Cheerleader", @"Buck Buck", @"Full Cadence Run", nil];
     }
     
     if(audioPlayer == nil){
@@ -73,11 +86,12 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
     if([audioPlayer isPlaying]){
         [audioPlayer stop];
-        [audioPlayer release];
+        self.audioPlayer.delegate = nil;
         self.audioPlayer = nil;
-        self.navigationItem.rightBarButtonItem = self.playButton;
     }
 }
 

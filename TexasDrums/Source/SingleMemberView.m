@@ -23,9 +23,14 @@
     return self;
 }
 
+#pragma mark - Memory Management
+
 - (void)dealloc {
-    [memberName release];
-    [memberData release];
+    [member release], member = nil;
+    [memberName release], memberName = nil;
+    [memberData release], memberData = nil;
+    data = nil;
+    categories = nil;
     [super dealloc];
 }
 

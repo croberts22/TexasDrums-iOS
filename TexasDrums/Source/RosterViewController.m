@@ -16,8 +16,17 @@
 // Utilities
 #import "CJSONDeserializer.h"
 
+@interface RosterViewController() {
+    TexasDrumsGetRosters *getRosters;
+}
+
+@property (nonatomic, retain) TexasDrumsGetRosters *getRosters;
+
+@end
+
 @implementation RosterViewController
 
+@synthesize getRosters;
 @synthesize rosters, rosterTable, refresh;
 
 #pragma mark - Memory Management
@@ -29,6 +38,15 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (void)dealloc {
+    self.getRosters.delegate = nil;
+    [getRosters release], getRosters = nil;
+    [rosters release], rosters = nil;
+    [rosterTable release], rosterTable = nil;
+    [refresh release], refresh = nil;
+    [super dealloc];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -36,10 +54,14 @@
     
     // Google Analytics
     [[GANTracker sharedTracker] trackPageview:@"Roster (RosterView)" withError:nil];
+    
+    NSIndexPath *indexPath = [self.rosterTable indexPathForSelectedRow];
+    if(indexPath) {
+        [self.rosterTable deselectRowAtIndexPath:indexPath animated:YES];
+    }
 }
 
 - (void)viewDidLoad {
-    
     [super viewDidLoad];
     
     [self setTitle:@"Roster"];
@@ -55,7 +77,7 @@
     }
     
     // Create refresh button.
-    self.refresh = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshPressed)] autorelease];
+    self.refresh = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshPressed)];
     
     self.navigationItem.rightBarButtonItem = refresh;
     
@@ -79,6 +101,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    
+    [SVProgressHUD dismiss];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -259,10 +283,6 @@
 #pragma mark - Table View Delegate Methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-#warning - Consider moving this out and doing an animation in viewWillAppear when popping.
-    [self.rosterTable deselectRowAtIndexPath:indexPath animated:YES];
-    
     SingleRosterViewController *SRVC = [[[SingleRosterViewController alloc] initWithNibName:@"SingleRosterView" bundle:[NSBundle mainBundle]] autorelease];
     
     SRVC.roster = [rosters objectAtIndex:indexPath.row];

@@ -13,20 +13,25 @@
 #import "TexasDrumsGetNews.h"
 #import "CJSONDeserializer.h"
 
-@interface NewsViewController()
+@interface NewsViewController() {
+    TexasDrumsGetNews *getNews;
+}
 
+@property (nonatomic, retain) TexasDrumsGetNews *getNews;
 @property (nonatomic, assign) BOOL _reloading;
 
 @end
 
 @implementation NewsViewController
 
+@synthesize getNews, _reloading;
 @synthesize newsTable, posts, allposts, timestamp, refresh, num_member_posts, status;
-@synthesize _reloading;
 
 #pragma mark - Memory Management
 
 - (void)dealloc {
+    self.getNews.delegate = nil;
+    [getNews release], getNews = nil;
     [newsTable release], newsTable = nil;
     [posts release], posts = nil;
     [allposts release], allposts = nil;
@@ -111,6 +116,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    
+    [SVProgressHUD dismiss];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {

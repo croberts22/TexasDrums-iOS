@@ -14,11 +14,20 @@
 
 #import "CJSONDeserializer.h"
 
+@interface VideoViewController() {
+    TexasDrumsGetVideos *getVideos;
+}
+
+@property (nonatomic, retain) TexasDrumsGetVideos *getVideos;
+
+@end
+
 @implementation VideoViewController
 
 static NSMutableArray *videos = nil;
 static NSMutableArray *years = nil;
 
+@synthesize getVideos;
 @synthesize videoTable;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -29,6 +38,8 @@ static NSMutableArray *years = nil;
     return self;
 }
 
+#pragma mark - Memory Management
+
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
@@ -36,14 +47,30 @@ static NSMutableArray *years = nil;
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (void)dealloc {
+    self.getVideos.delegate = nil;
+    [getVideos release], getVideos = nil;
+    [videoTable release], videoTable = nil;
+    [super dealloc];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     [[GANTracker sharedTracker] trackPageview:@"Videos (VideoView)" withError:nil];
     NSIndexPath *indexPath = [self.videoTable indexPathForSelectedRow];
     if(indexPath) {
         [self.videoTable deselectRowAtIndexPath:indexPath animated:YES];
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [SVProgressHUD dismiss];
+    [self.getVideos cancelRequest];
 }
 
 - (void)viewDidLoad {
@@ -69,8 +96,6 @@ static NSMutableArray *years = nil;
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -130,9 +155,9 @@ static NSMutableArray *years = nil;
 - (void)connect {
     [self hideRefreshButton];
     [SVProgressHUD showWithStatus:@"Loading..."];
-    TexasDrumsGetVideos *get = [[TexasDrumsGetVideos alloc] init];
-    get.delegate = self;
-    [get startRequest]; 
+    self.getVideos = [[TexasDrumsGetVideos alloc] init];
+    self.getVideos.delegate = self;
+    [self.getVideos startRequest];
 }
 
 - (void)parseVideoData:(NSDictionary *)results {
