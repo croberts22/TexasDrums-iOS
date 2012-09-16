@@ -49,7 +49,14 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     [self.window makeKeyAndVisible];
     
     splashView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 320, [UIScreen mainScreen].bounds.size.height)];
-	splashView.image = [UIImage imageNamed:@"Default.png"]; 
+    splashView.alpha = 1.0;
+    if(SCREEN_HEIGHT > 480) {
+        splashView.image = [UIImage imageNamed:@"Default-568h.png"];
+    }
+    else {
+        splashView.image = [UIImage imageNamed:@"Default.png"];
+    }
+	
 	[_window addSubview:splashView];
 	[_window bringSubviewToFront:splashView];
     

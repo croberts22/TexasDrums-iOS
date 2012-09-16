@@ -118,6 +118,7 @@
 		6347CAC615CEE4B1004412BB /* checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CAC215CEE4B1004412BB /* checkmark@2x.png */; };
 		6347CAC715CEE4B1004412BB /* checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CAC215CEE4B1004412BB /* checkmark@2x.png */; };
 		6347CAC815CEE4B1004412BB /* checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6347CAC215CEE4B1004412BB /* checkmark@2x.png */; };
+		635292141605AFCC00260734 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 635292131605AFCC00260734 /* Default-568h@2x.png */; };
 		635296C2158985D800E62787 /* UIFont+TexasDrums.m in Sources */ = {isa = PBXBuildFile; fileRef = 635296C1158985D800E62787 /* UIFont+TexasDrums.m */; };
 		6353B8FA15B51EAD00D88A14 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 6353B8F815B51EAD00D88A14 /* star.png */; };
 		6353B8FB15B51EAD00D88A14 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 6353B8F815B51EAD00D88A14 /* star.png */; };
@@ -736,6 +737,7 @@
 		6347CABA15CE11A4004412BB /* GigRequirementsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GigRequirementsViewController.xib; sourceTree = "<group>"; };
 		6347CAC115CEE4B1004412BB /* checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checkmark.png; path = Media/UITableView/checkmark.png; sourceTree = "<group>"; };
 		6347CAC215CEE4B1004412BB /* checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkmark@2x.png"; path = "Media/UITableView/checkmark@2x.png"; sourceTree = "<group>"; };
+		635292131605AFCC00260734 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		635296C0158985D800E62787 /* UIFont+TexasDrums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+TexasDrums.h"; sourceTree = "<group>"; };
 		635296C1158985D800E62787 /* UIFont+TexasDrums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+TexasDrums.m"; sourceTree = "<group>"; };
 		6353B8F815B51EAD00D88A14 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = star.png; path = Media/UITableView/star.png; sourceTree = "<group>"; };
@@ -1224,6 +1226,7 @@
 		045646B413ADBD2F00681573 = {
 			isa = PBXGroup;
 			children = (
+				635292131605AFCC00260734 /* Default-568h@2x.png */,
 				AED9E4CA14F21E17005064FA /* Logo.png */,
 				AED9E4C814F21DF5005064FA /* Logo@2x.png */,
 				AED9E4C614F21BC8005064FA /* Default@2x.png */,
@@ -2497,6 +2500,7 @@
 				635D6E2815D213660019B677 /* video@2x.png in Resources */,
 				635D6E2D15D21BD60019B677 /* orangeArrow.png in Resources */,
 				635D6E3015D21BD60019B677 /* orangeArrow@2x.png in Resources */,
+				635292141605AFCC00260734 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

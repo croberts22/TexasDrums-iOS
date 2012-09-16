@@ -20,6 +20,12 @@
 #define kCymbals                    @"Cymbals"
 #define kInstructor                 @"Instructor"
 
+// iPhone Screen Resolution
+#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+
+// VIEW_HEIGHT = (SCREEN_HEIGHT) - Status Bar Height (20) - Navigation Bar Height (44) - Tab Bar Height (50)
+#define VIEW_HEIGHT SCREEN_HEIGHT - 20 - 44 - 50
+
 // UITableView Header Heights
 #define HEADER_HEIGHT               50
 #define STANDARD_HEADER_HEIGHT      40

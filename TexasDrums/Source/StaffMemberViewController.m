@@ -118,7 +118,7 @@
 
 - (void)initializeScroll {
     // Set UIScrollView's frame to be the UIView (not including space for the UINavigationBar or UITabBar) = (320, 367).
-    scroll = [[[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 367)] autorelease];
+    scroll = [[[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, VIEW_HEIGHT)] autorelease];
     
     // Set UIScrollView properties.
     self.scroll.backgroundColor = [UIColor clearColor];
