@@ -81,7 +81,10 @@ static int max_retry_count = 3;
 }
 
 - (void)cancelRequest {
-    TDLog(@"Cancelling request: %@", self.request.url);
+    if(self.request.url) {
+        TDLog(@"Cancelling request: %@", self.request.url);
+    }
+    
     [self.request clearDelegatesAndCancel];
     self.request = nil;
 }

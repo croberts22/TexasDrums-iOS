@@ -57,7 +57,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-
+    [SVProgressHUD dismiss];
 }
 
 - (void)viewDidLoad {
@@ -199,11 +199,11 @@
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", member.firstname, member.lastname];
     if(member.paid){
         cell.textLabel.textColor = [UIColor darkGrayColor];
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        cell.accessoryView = [UIView TexasDrumsCheckmarkAccessoryView];
     }
     else{
         cell.textLabel.textColor = [UIColor TexasDrumsGrayColor];
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.accessoryView = nil;
     }
     
     return cell;
@@ -218,24 +218,26 @@
     
     NSString *user = profile.username;
     
-    if(cell.accessoryType == UITableViewCellAccessoryNone){
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    if(cell.accessoryView == nil){
+        cell.accessoryView = [UIView TexasDrumsCheckmarkAccessoryView];
         cell.textLabel.textColor = [UIColor darkGrayColor];
         
         if([user isEqualToString:[UserProfile sharedInstance].username]){
             [UserProfile sharedInstance].paid = TRUE;
         }
         
+        profile.paid = YES;
         [self updateUser:user withPayment:[NSNumber numberWithInt:1]];
     }
     else{
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.accessoryView = nil;
         cell.textLabel.textColor = [UIColor TexasDrumsGrayColor];
         
         if([user isEqualToString:[UserProfile sharedInstance].username]){
             [UserProfile sharedInstance].paid = FALSE;
         }
         
+        profile.paid = NO;
         [self updateUser:user withPayment:[NSNumber numberWithInt:0]];
     }
     
