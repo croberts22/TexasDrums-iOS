@@ -22,6 +22,8 @@
     return self;
 }
 
+#pragma mark - Memory Management
+
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
@@ -29,9 +31,23 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (void)dealloc {
+    [original_password release], original_password = nil;
+    [a_new_password release], a_new_password = nil;
+    [a_new_password_again release], a_new_password_again = nil;
+    [length_constraint release], length_constraint = nil;
+    [alpha_constraint release], alpha_constraint = nil;
+    [numerical_constraint release], numerical_constraint = nil;
+    [background_button release], background_button = nil;
+    [status release], status = nil;
+    [super dealloc];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     // Google Analytics
     [[GANTracker sharedTracker] trackPageview:@"Edit Password (EditPasswordView)" withError:nil];
 }

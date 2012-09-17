@@ -27,8 +27,6 @@
 @synthesize getMusic;
 @synthesize musicTable, musicArray;
 
-#pragma mark - Memory Management
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -36,6 +34,8 @@
     }
     return self;
 }
+
+#pragma mark - Memory Management
 
 - (void)dealloc {
     self.getMusic.delegate = nil;
@@ -48,11 +48,15 @@
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     // Google Analytics
     [[GANTracker sharedTracker] trackPageview:@"Download Music (DownloadMusicView)" withError:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
     [SVProgressHUD dismiss];
     [self.getMusic cancelRequest];
 }

@@ -54,6 +54,8 @@ static NSMutableDictionary *full_name = nil;
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     // Google Analytics
     [[GANTracker sharedTracker] trackPageview:@"Address Book (AddressBookView)" withError:nil];
     
@@ -64,6 +66,8 @@ static NSMutableDictionary *full_name = nil;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
     [SVProgressHUD dismiss];
     [self.getAccounts cancelRequest];
 }

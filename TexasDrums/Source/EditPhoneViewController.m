@@ -14,8 +14,6 @@
 
 @synthesize phone, status, submit, background_button;
 
-#pragma mark - Memory Management
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -24,6 +22,8 @@
     return self;
 }
 
+#pragma mark - Memory Management
+
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
@@ -31,9 +31,19 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (void)dealloc {
+    [phone release], phone = nil;
+    [status release], status = nil;
+    [submit release], submit = nil;
+    [background_button release], background_button = nil;
+    [super dealloc];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     // Google Analytics
     [[GANTracker sharedTracker] trackPageview:@"Edit Phone (EditPhoneView)" withError:nil];
 }

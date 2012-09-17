@@ -17,10 +17,7 @@
 
 @synthesize profileTable;
 
-#pragma mark - Memory Management
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -28,8 +25,9 @@
     return self;
 }
 
-- (void)didReceiveMemoryWarning
-{
+#pragma mark - Memory Management
+
+- (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
@@ -37,23 +35,30 @@
 }
 
 - (void)dealloc {
-    [profileTable release];
+    [profileTable release], profileTable = nil;
     [super dealloc];
 }
 
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     // Google Analytics
     [[GANTracker sharedTracker] trackPageview:@"Profile (ProfileView)" withError:nil];
     
+    NSIndexPath *indexPath = [self.profileTable indexPathForSelectedRow];
+    
     [self.profileTable reloadData];
+    
+    if(indexPath) {
+        [self.profileTable selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        [self.profileTable deselectRowAtIndexPath:indexPath animated:YES];
+    }
 }
 
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setTitle:@"Profile"];
@@ -63,21 +68,18 @@
     self.profileTable.separatorColor = [UIColor clearColor];
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - UI Methods
 
-- (void)setTitle:(NSString *)title
-{
+- (void)setTitle:(NSString *)title {
     [super setTitle:title];
     UILabel *titleView = (UILabel *)self.navigationItem.titleView;
     if (!titleView) {
@@ -90,8 +92,7 @@
 
 #pragma mark - UITableView Data Source Methods
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if([[UserProfile sharedInstance].status isEqualToString:kMemberStatusCurrent]) {
         return 3;
     }
@@ -99,8 +100,7 @@
     return 2;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if(section == 0) {
         return 6;
     }
@@ -112,13 +112,11 @@
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 44.0f;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *ProfileCell = @"Profile";
     static NSString *Status = @"Status";
     
@@ -146,7 +144,7 @@
             cell.selectedBackgroundView = [[[UIImageView alloc] init] autorelease];
         }
     }
-    else{
+    else {
         cell = [tableView dequeueReusableCellWithIdentifier:ProfileCell];
         if(cell == nil){
             cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:ProfileCell] autorelease];
@@ -239,7 +237,7 @@
                 break;
         }
     }
-    else{
+    else {
         cell.textLabel.textAlignment = UITextAlignmentCenter;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.textLabel.font = [UIFont TexasDrumsBoldFontOfSize:16];
@@ -264,9 +262,7 @@
 
 #pragma mark - UITableView Delegate Methods
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [self.profileTable deselectRowAtIndexPath:indexPath animated:YES];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
     if(indexPath.section == 0){
         if(indexPath.row == 0){

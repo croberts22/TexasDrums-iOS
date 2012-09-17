@@ -12,6 +12,31 @@
 
 @synthesize firstname, lastname, username, password, section, years, status, sl, instructor, admin, phonenumber, email, birthday, valid, lastlogin, paid, alphabet_last, alphabet_first, user_id;
 
+- (id)init {
+    if( (self = [super init])) {
+        self.firstname = @"";
+        self.lastname = @"";
+        self.username = @"";
+        self.password = @"";
+        self.section = @"";
+        self.years = @"";
+        self.status = @"";
+        self.sl = NO;
+        self.instructor = NO;
+        self.admin = NO;
+        self.phonenumber = @"";
+        self.email = @"";
+        self.birthday = @"";
+        self.valid = NO;
+        self.lastlogin = @"";
+        self.paid = NO;
+        self.alphabet_first = @"";
+        self.alphabet_last = @"";
+        self.user_id = -1;
+    }
+    return self;
+}
+
 + (Profile *)createNewProfile:(NSDictionary *)dictionary {
     Profile *profile = [[[Profile alloc] init] autorelease];
     

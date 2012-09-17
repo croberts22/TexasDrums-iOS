@@ -12,9 +12,7 @@
 
 @implementation EditBirthdayViewController
 
-@synthesize picker, birthdayLabel, submitButton, received_data, updatedBirthday, status;
-
-#pragma mark - Memory Management
+@synthesize picker, birthdayLabel, submitButton, updatedBirthday, status;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -24,11 +22,22 @@
     return self;
 }
 
+#pragma mark - Memory Management
+
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc that aren't in use.
+}
+
+- (void)dealloc {
+    [picker release], picker = nil;
+    [birthdayLabel release], birthdayLabel = nil;
+    [submitButton release], submitButton = nil;
+    [updatedBirthday release], updatedBirthday = nil;
+    [status release], status = nil;
+    [super dealloc];
 }
 
 #pragma mark - View lifecycle

@@ -14,8 +14,6 @@
 
 @synthesize firstname, lastname, submit, status;
 
-#pragma mark - Memory Management
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -24,6 +22,8 @@
     return self;
 }
 
+#pragma mark - Memory Management
+
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
@@ -31,9 +31,19 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (void)dealloc {
+    [firstname release], firstname = nil;
+    [lastname release], lastname = nil;
+    [submit release], submit = nil;
+    [status release], status = nil;
+    [super dealloc];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     // Google Analytics
     [[GANTracker sharedTracker] trackPageview:@"Edit Name (EditNameView)" withError:nil];
 }

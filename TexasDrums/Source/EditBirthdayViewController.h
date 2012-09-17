@@ -17,7 +17,6 @@
     IBOutlet UILabel *status;
     IBOutlet UIButton *submitButton;
     NSString *updatedBirthday;
-    NSMutableData *received_data;
 }
 
 @property (nonatomic, retain) UIDatePicker *picker;
@@ -25,7 +24,6 @@
 @property (nonatomic, retain) UILabel *status;
 @property (nonatomic, retain) UIButton *submitButton;
 @property (nonatomic, retain) NSString *updatedBirthday;
-@property (nonatomic, retain) NSMutableData *received_data;
 
 - (IBAction)submitButtonPressed:(id)sender;
 - (void)displayText:(NSString *)text;

@@ -21,9 +21,7 @@
 
 @implementation MemberViewController
 
-@synthesize membersOptions, memberTable, loginPrompt, adminOptions, delegate;
-
-#pragma mark - Memory Management
+@synthesize membersOptions, memberTable, loginPrompt, adminOptions;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -32,17 +30,21 @@
     return self;
 }
 
-- (void)dealloc {
-    [memberTable release];
-    [membersOptions release];
-    [super dealloc];
-}
+#pragma mark - Memory Management
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc that aren't in use.
+}
+
+- (void)dealloc {
+    [membersOptions release], membersOptions = nil;
+    [memberTable release], memberTable = nil;
+    [loginPrompt release], loginPrompt = nil;
+    [adminOptions release], adminOptions = nil;
+    [super dealloc];
 }
 
 #pragma mark - View lifecycle
@@ -86,7 +88,6 @@
     [self setTitle:@"Members"];
     
     // Set properties.
-    self.delegate = (TexasDrumsAppDelegate *)[[UIApplication sharedApplication] delegate];
     self.memberTable.backgroundColor = [UIColor clearColor];
     self.loginPrompt.backgroundColor = [UIColor clearColor];
 }
@@ -175,7 +176,8 @@
 }
 
 - (void)logout {
-    [self.delegate destroyProfile];
+    TexasDrumsAppDelegate *delegate = (TexasDrumsAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [delegate destroyProfile];
     
     // Smoothly transition back into the login prompt.
     self.loginPrompt.alpha = 0.0f;
