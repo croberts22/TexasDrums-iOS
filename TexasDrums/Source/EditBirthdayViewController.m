@@ -130,7 +130,6 @@
     int year = [[calendar components:NSYearCalendarUnit fromDate:picker.date] year];
     int month = [[calendar components:NSMonthCalendarUnit fromDate:picker.date] month];
     int day = [[calendar components:NSDayCalendarUnit fromDate:picker.date] day];
-    TDLog(@"%d %d %d", month, day, year);
     
     self.birthdayLabel.text = [NSString stringWithFormat:@"%@ %d, %d", [self convertIntToMonth:month], day, year];
 }

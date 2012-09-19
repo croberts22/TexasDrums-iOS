@@ -75,7 +75,7 @@
         //accepted username. show member stuff
         if(membersOptions == nil){
             membersOptions = [[NSArray alloc] initWithObjects:@"View Music", @"View Address Book", @"View Profile", @"View Gigs (coming soon!)", nil];
-            adminOptions = [[NSArray alloc] initWithObjects:@"Modify Dues", @"Add A Member (beta)", nil];
+            adminOptions = [[NSArray alloc] initWithObjects:@"Modify Dues", @"Add A Member (unusable)", nil];
         }
         
         [self.memberTable reloadData];
@@ -109,7 +109,6 @@
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
