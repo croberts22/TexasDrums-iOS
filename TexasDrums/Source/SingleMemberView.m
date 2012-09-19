@@ -75,7 +75,7 @@
     self.memberName.text = combined_name;
     
     // Allocate things as necessary.
-    data = [[NSArray alloc] initWithObjects:member.year, member.amajor, member.hometown, member.quote, member.email, member.phone, nil];
+    data = [[NSArray alloc] initWithObjects:member.classification, member.amajor, member.hometown, member.quote, member.email, member.phone, nil];
 }
 
 - (void)viewDidUnload {

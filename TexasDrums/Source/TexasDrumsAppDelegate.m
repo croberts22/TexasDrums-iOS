@@ -42,11 +42,14 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
 
     [self registerAppDefaults];
-    
-//    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
 
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
+    
+    
+    if ([self.tabBarController.tabBar respondsToSelector:@selector(setSelectedImageTintColor:)]) {
+        self.tabBarController.tabBar.selectedImageTintColor = [UIColor TexasDrumsOrangeColor];
+    }
     
     splashView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, [UIScreen mainScreen].bounds.size.height)];
     splashView.alpha = 1.0;

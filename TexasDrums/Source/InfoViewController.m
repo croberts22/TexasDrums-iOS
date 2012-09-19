@@ -43,6 +43,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     // Google Analytics
     [[GANTracker sharedTracker] trackPageview:@"Info (InfoView)" withError:nil];
+    
+    NSIndexPath *indexPath = [self.aboutTable indexPathForSelectedRow];
+    if(indexPath) {
+        [self.aboutTable deselectRowAtIndexPath:indexPath animated:YES];
+    }
 }
 
 - (void)viewDidLoad {
@@ -184,7 +189,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.aboutTable deselectRowAtIndexPath:indexPath animated:YES];
     if(indexPath.section == 0){
         if(indexPath.row == 0){
             AboutUsViewController *AUVC = [[AboutUsViewController alloc] initWithNibName:@"AboutUsView" bundle:[NSBundle mainBundle]];
