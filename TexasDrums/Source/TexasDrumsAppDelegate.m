@@ -38,6 +38,10 @@ static const NSInteger kGANDispatchPeriodSec = 10;
                      andSecret:@"pat1ikup9agryyrlhh7mt2cv5k8gsnjx"
          andMainViewController:self.window.rootViewController];
     
+    
+    // Get User Profile (if already logged in previously).
+    [self fetchUserProfile];
+    
     // Set AVAudio properties to play audio files on the silent thread of AVFoundation.
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
 
@@ -45,7 +49,6 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
-    
     
     if ([self.tabBarController.tabBar respondsToSelector:@selector(setSelectedImageTintColor:)]) {
         self.tabBarController.tabBar.selectedImageTintColor = [UIColor TexasDrumsOrangeColor];
@@ -66,8 +69,6 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     [UIView animateWithDuration:0.5f animations:^{
         splashView.alpha = 0.0;
     }];
-    
-    [self connect];
     
     return YES;
 }
@@ -129,7 +130,7 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 
 #pragma mark - Data Methods
 
-- (void)connect {
+- (void)fetchUserProfile {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     if(![defaults boolForKey:@"login_valid"]){

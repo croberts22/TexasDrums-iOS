@@ -18,7 +18,7 @@
 @property (nonatomic, retain) UIImageView *splashView;
 
 - (void)registerAppDefaults;
-- (void)connect;
+- (void)fetchUserProfile;
 - (void)createProfile:(NSDictionary *)results;
 - (void)destroyProfile;
 

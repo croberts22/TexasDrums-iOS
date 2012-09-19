@@ -52,6 +52,11 @@
     
     // Google Analytics
     [[GANTracker sharedTracker] trackPageview:@"Download Music (DownloadMusicView)" withError:nil];
+    
+    NSIndexPath *indexPath = [self.musicTable indexPathForSelectedRow];
+    if(indexPath) {
+        [self.musicTable deselectRowAtIndexPath:indexPath animated:YES];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -230,8 +235,6 @@
 #pragma mark - Table View Delegate Methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-#warning - Consider moving this out and doing an animation in viewWillAppear when popping.
-    [self.musicTable deselectRowAtIndexPath:indexPath animated:YES];
     TexasDrumsWebViewController *TDWVC = [[[TexasDrumsWebViewController alloc] init] autorelease];
     
     Music *music = [self.musicArray objectAtIndex:indexPath.row];
