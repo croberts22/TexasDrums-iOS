@@ -13,7 +13,7 @@
 @synthesize firstname, lastname, username, hash;
 @synthesize section, years, status;
 @synthesize sl, instructor, admin;
-@synthesize phonenumber, email, birthday, valid, lastlogin, paid;
+@synthesize phonenumber, email, birthday, valid, lastlogin, paid, loggedIn;
 
 static UserProfile *sharedInstance = nil;
 

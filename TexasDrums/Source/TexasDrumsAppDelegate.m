@@ -41,17 +41,17 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     // Set AVAudio properties to play audio files on the silent thread of AVFoundation.
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
 
-    [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
-    
     [self registerAppDefaults];
-   
+    
+//    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
+
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     
-    splashView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 320, [UIScreen mainScreen].bounds.size.height)];
+    splashView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, [UIScreen mainScreen].bounds.size.height)];
     splashView.alpha = 1.0;
     if(SCREEN_HEIGHT > 480) {
-        splashView.image = [UIImage imageNamed:@"Default-568h.png"];
+        splashView.image = [UIImage imageNamed:@"Default-568h@2x.png"];
     }
     else {
         splashView.image = [UIImage imageNamed:@"Default.png"];
@@ -60,7 +60,7 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 	[_window addSubview:splashView];
 	[_window bringSubviewToFront:splashView];
     
-    [UIView animateWithDuration:0.75f animations:^{
+    [UIView animateWithDuration:0.5f animations:^{
         splashView.alpha = 0.0;
     }];
     
