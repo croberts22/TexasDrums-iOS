@@ -33,10 +33,7 @@
 #pragma mark - Memory Management
 
 - (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 - (void)dealloc {
@@ -53,7 +50,7 @@
     [super viewWillAppear:animated];
     
     // Google Analytics
-    [[GANTracker sharedTracker] trackPageview:@"Members (MemberView)" withError:nil];
+    [[GANTracker sharedTracker] trackPageview:[[self class] description] withError:nil];
     
     self.loginPrompt.alpha = 1.0f;
     self.memberTable.alpha = 1.0f;

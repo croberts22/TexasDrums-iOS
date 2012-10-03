@@ -34,8 +34,10 @@
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     // Google Analytics
-    [[GANTracker sharedTracker] trackPageview:@"About Us (AboutUsView)" withError:nil];
+    [[GANTracker sharedTracker] trackPageview:[[self class] description] withError:nil];
 }
 
 - (void)viewDidLoad {

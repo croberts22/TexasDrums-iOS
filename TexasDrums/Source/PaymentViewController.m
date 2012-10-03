@@ -53,7 +53,7 @@
     [super viewWillAppear:animated];
     
     // Google Analytics
-    [[GANTracker sharedTracker] trackPageview:@"Payment (PaymentView)" withError:nil];
+    [[GANTracker sharedTracker] trackPageview:[[self class] description] withError:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

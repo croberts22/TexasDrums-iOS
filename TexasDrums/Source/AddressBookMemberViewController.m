@@ -42,7 +42,7 @@
     [super viewWillAppear:animated];
     
     // Google Analytics
-    [[GANTracker sharedTracker] trackPageview:@"Address Book (AddressBookMemberView)" withError:nil];
+    [[GANTracker sharedTracker] trackPageview:[[self class] description] withError:nil];
 }
 
 - (void)viewDidLoad {

@@ -43,8 +43,10 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     // Google Analytics
-    [[GANTracker sharedTracker] trackPageview:@"About App (AboutThisAppView)" withError:nil];
+    [[GANTracker sharedTracker] trackPageview:[[self class] description] withError:nil];
 }
 
 - (void)viewDidLoad {

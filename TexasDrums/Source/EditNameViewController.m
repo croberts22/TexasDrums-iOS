@@ -45,7 +45,7 @@
     [super viewWillAppear:animated];
     
     // Google Analytics
-    [[GANTracker sharedTracker] trackPageview:@"Edit Name (EditNameView)" withError:nil];
+    [[GANTracker sharedTracker] trackPageview:[[self class] description] withError:nil];
 }
 
 - (void)viewDidLoad {

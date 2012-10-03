@@ -41,10 +41,7 @@ static NSMutableArray *years = nil;
 #pragma mark - Memory Management
 
 - (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 - (void)dealloc {
@@ -59,7 +56,9 @@ static NSMutableArray *years = nil;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [[GANTracker sharedTracker] trackPageview:@"Videos (VideoView)" withError:nil];
+    // Google Analytics
+    [[GANTracker sharedTracker] trackPageview:[[self class] description] withError:nil];
+    
     NSIndexPath *indexPath = [self.videoTable indexPathForSelectedRow];
     if(indexPath) {
         [self.videoTable deselectRowAtIndexPath:indexPath animated:YES];
@@ -70,6 +69,8 @@ static NSMutableArray *years = nil;
     [super viewWillDisappear:animated];
     
     [SVProgressHUD dismiss];
+    
+    self.getVideos.delegate = nil;
     [self.getVideos cancelRequest];
 }
 
@@ -99,7 +100,6 @@ static NSMutableArray *years = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 

@@ -49,7 +49,7 @@
     [super viewWillAppear:animated];
     
     // Google Analytics
-    [[GANTracker sharedTracker] trackPageview:@"Edit Password (EditPasswordView)" withError:nil];
+    [[GANTracker sharedTracker] trackPageview:[[self class] description] withError:nil];
 }
 
 - (void)viewDidLoad {

@@ -57,7 +57,7 @@ static NSMutableDictionary *full_name = nil;
     [super viewWillAppear:animated];
     
     // Google Analytics
-    [[GANTracker sharedTracker] trackPageview:@"Address Book (AddressBookView)" withError:nil];
+    [[GANTracker sharedTracker] trackPageview:[[self class] description] withError:nil];
     
     NSIndexPath *indexPath = [self.addressBookTable indexPathForSelectedRow];
     if(indexPath) {

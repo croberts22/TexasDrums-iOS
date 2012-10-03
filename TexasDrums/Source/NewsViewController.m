@@ -51,7 +51,7 @@
     [super viewWillAppear:animated];
     
     // Google Analytics
-    [[GANTracker sharedTracker] trackPageview:@"News (NewsView)" withError:nil];
+    [[GANTracker sharedTracker] trackPageview:[[self class] description] withError:nil];
     
     // If we're coming back from reading a news post, deselect the cell.
     NSIndexPath *indexPath = [self.newsTable indexPathForSelectedRow];
@@ -95,17 +95,17 @@
 	
 	// Update the last update date.
 	[_refreshHeaderView refreshLastUpdatedDate];
+    
+    if(self.posts.count == 0) {
+        [self hideRefreshButton];
+        [self egoRefreshTableHeaderDidTriggerRefresh:_refreshHeaderView];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
     [self.newsTable reloadData];
-    
-    if(self.posts.count == 0) {
-        [self hideRefreshButton];
-        [self egoRefreshTableHeaderDidTriggerRefresh:_refreshHeaderView];
-    }
 }
 
 - (void)viewDidUnload {

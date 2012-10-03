@@ -41,8 +41,10 @@
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     // Google Analytics
-    [[GANTracker sharedTracker] trackPageview:@"Info (InfoView)" withError:nil];
+    [[GANTracker sharedTracker] trackPageview:[[self class] description] withError:nil];
     
     NSIndexPath *indexPath = [self.aboutTable indexPathForSelectedRow];
     if(indexPath) {

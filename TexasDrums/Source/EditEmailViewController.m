@@ -42,8 +42,10 @@
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
-    //Google Analytics
-    [[GANTracker sharedTracker] trackPageview:@"Edit Email (EditEmailView)" withError:nil];
+    [super viewWillAppear:animated];
+    
+    // Google Analytics
+    [[GANTracker sharedTracker] trackPageview:[[self class] description] withError:nil];
 }
 
 - (void)viewDidLoad {

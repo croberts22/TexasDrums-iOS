@@ -17,17 +17,14 @@
 @synthesize roster, year, singleRosterTable;
 
 - (void)dealloc {
-    [roster release];
-    [year release];
-    [singleRosterTable release];
+    [roster release], roster = nil;
+    [year release], year = nil;
+    [singleRosterTable release], singleRosterTable = nil;
     [super dealloc];
 }
 
 - (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 #pragma mark - View lifecycle
@@ -59,7 +56,7 @@
     [super viewWillAppear:animated];
     
     // Google Analytics
-    [[GANTracker sharedTracker] trackPageview:[NSString stringWithFormat:@"%@ Roster (SingleRosterView)", year] withError:nil];
+    [[GANTracker sharedTracker] trackPageview:[[self class] description] withError:nil];
     
     NSIndexPath *indexPath = [self.singleRosterTable indexPathForSelectedRow];
     if(indexPath) {

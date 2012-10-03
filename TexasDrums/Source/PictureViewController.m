@@ -42,7 +42,10 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [[GANTracker sharedTracker] trackPageview:@"Pictures (PictureView)" withError:nil];
+    [super viewWillAppear:animated];
+    
+    // Google Analytics
+    [[GANTracker sharedTracker] trackPageview:[[self class] description] withError:nil];
 }
 
 - (void)viewDidLoad

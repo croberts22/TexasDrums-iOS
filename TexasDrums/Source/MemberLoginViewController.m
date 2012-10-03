@@ -18,8 +18,7 @@
 
 #pragma mark - Memory Management
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         delegate = (TexasDrumsAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -27,28 +26,25 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [username release];
-    [password release];
-    [cancel release];
-    [login release];
+- (void)dealloc {
+    [username release], username = nil;
+    [password release], password = nil;
+    [cancel release], cancel = nil;
+    [login release], login = nil;
     [super dealloc];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     // Google Analytics
-    [[GANTracker sharedTracker] trackPageview:@"Member Login (MemberLoginView)" withError:nil];
+    [[GANTracker sharedTracker] trackPageview:[[self class] description] withError:nil];
 }
 
 - (void)viewDidLoad

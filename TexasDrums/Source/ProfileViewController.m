@@ -45,7 +45,7 @@
     [super viewWillAppear:animated];
     
     // Google Analytics
-    [[GANTracker sharedTracker] trackPageview:@"Profile (ProfileView)" withError:nil];
+    [[GANTracker sharedTracker] trackPageview:[[self class] description] withError:nil];
     
     NSIndexPath *indexPath = [self.profileTable indexPathForSelectedRow];
     

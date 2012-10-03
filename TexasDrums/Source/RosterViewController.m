@@ -53,7 +53,7 @@
     [super viewWillAppear:animated];
     
     // Google Analytics
-    [[GANTracker sharedTracker] trackPageview:@"Roster (RosterView)" withError:nil];
+    [[GANTracker sharedTracker] trackPageview:[[self class] description] withError:nil];
     
     NSIndexPath *indexPath = [self.rosterTable indexPathForSelectedRow];
     if(indexPath) {
@@ -82,15 +82,13 @@
     self.navigationItem.rightBarButtonItem = refresh;
     
     // Begin fetching roster from the server.
-    //[self connect];
+    if([rosters count] == 0){
+        [self connect];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    if([rosters count] == 0){
-        [self connect];
-    }
 }
 
 - (void)viewDidUnload {

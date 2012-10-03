@@ -37,8 +37,11 @@
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     // Google Analytics
-    [[GANTracker sharedTracker] trackPageview:@"Staff (StaffView)" withError:nil];
+    [[GANTracker sharedTracker] trackPageview:[[self class] description] withError:nil];
+    
     NSIndexPath *indexPath = [self.staffTable indexPathForSelectedRow];
     if(indexPath) {
         [self.staffTable deselectRowAtIndexPath:indexPath animated:YES];
