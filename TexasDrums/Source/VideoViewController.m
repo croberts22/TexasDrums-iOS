@@ -30,6 +30,8 @@ static NSMutableArray *years = nil;
 @synthesize getVideos;
 @synthesize videoTable;
 
+#pragma mark - Memory Management
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -37,8 +39,6 @@ static NSMutableArray *years = nil;
     }
     return self;
 }
-
-#pragma mark - Memory Management
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -137,17 +137,16 @@ static NSMutableArray *years = nil;
 }
 
 - (void)displayTable {
-    float duration = 0.5f;
     [self.videoTable reloadData];
-    [UIView beginAnimations:@"displayVideoTable" context:NULL];
-    [UIView setAnimationDuration:duration];
-    if([videos count] > 0){
-        self.videoTable.alpha = 1.0f;
-    }
-    else {
-        self.videoTable.alpha = 0.0f;
-    }
-    [UIView commitAnimations];
+    
+    [UIView animateWithDuration:0.5f animations:^(void) {
+        if([videos count] > 0){
+            self.videoTable.alpha = 1.0f;
+        }
+        else {
+            self.videoTable.alpha = 0.0f;
+        }
+    }];
 }
 
 #pragma mark - Data Methods
@@ -200,7 +199,7 @@ static NSMutableArray *years = nil;
     
 }
 
-#pragma mark - UITableView Data Source
+#pragma mark - UITableView Data Source Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [years count];

@@ -23,9 +23,4 @@
 @property (nonatomic, retain) UITableView *rosterTable;
 @property (nonatomic, retain) UIBarButtonItem *refresh;
 
-- (void)refreshPressed;
-- (void)hideRefreshButton;
-- (void)displayTable;
-- (void)parseRosterData:(NSDictionary *)results;
-
 @end

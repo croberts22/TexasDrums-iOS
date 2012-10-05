@@ -17,8 +17,9 @@
 
 static UserProfile *sharedInstance = nil;
 
-+ (UserProfile *)sharedInstance
-{
+#pragma mark - Singleton Methods
+
++ (UserProfile *)sharedInstance {
     if (sharedInstance == nil) {
         sharedInstance = [[super allocWithZone:nil] init];
     }
@@ -71,12 +72,14 @@ static UserProfile *sharedInstance = nil;
 }
 
 - (oneway void)release {
-    
+    // Do nothing.
 }
 
 - (id)autorelease {
     return self;
 }
+
+#pragma mark - Instance Methods
 
 - (void)createProfile:(NSDictionary *)dictionary {
     self.firstname = [dictionary objectForKey:@"firstname"];

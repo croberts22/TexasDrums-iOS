@@ -22,6 +22,11 @@
 
 @property (nonatomic, retain) TexasDrumsGetRosters *getRosters;
 
+- (void)refreshPressed;
+- (void)hideRefreshButton;
+- (void)displayTable;
+- (void)parseRosterData:(NSDictionary *)results;
+
 @end
 
 @implementation RosterViewController
@@ -32,10 +37,7 @@
 #pragma mark - Memory Management
 
 - (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 - (void)dealloc {
@@ -210,6 +212,7 @@
     
     // Display the table after all data is acquired.
     [self displayTable];
+    
     if(DEBUG_MODE) TDLog(@"Roster table configured. Reloading...");
 }
 

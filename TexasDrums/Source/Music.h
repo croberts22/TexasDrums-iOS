@@ -26,7 +26,6 @@
 @property (nonatomic, copy) NSString *status;
 @property (nonatomic, assign) BOOL valid;
 
-- (id)init;
 + (Music *)createNewMusic:(NSDictionary *)item;
 
 @end

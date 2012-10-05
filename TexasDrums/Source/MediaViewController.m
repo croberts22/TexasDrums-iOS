@@ -17,16 +17,13 @@
 
 #pragma mark - Memory management
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
 - (void)dealloc {
     [mediaOptions release], mediaOptions = nil;
     [super dealloc];
-}
-
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 #pragma mark - View lifecycle
@@ -48,12 +45,9 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
@@ -71,19 +65,15 @@
 }
 
 - (IBAction)audioButtonPressed:(id)sender {
-    AudioViewController *AVC = [[AudioViewController alloc] initWithNibName:@"AudioView" bundle:[NSBundle mainBundle]];
+    AudioViewController *AVC = [[[AudioViewController alloc] initWithNibName:@"AudioView" bundle:[NSBundle mainBundle]] autorelease];
     
     [self.navigationController pushViewController:AVC animated:YES];
-    
-    [AVC release];
 }
 
 - (IBAction)videoButtonPressed:(id)sender {
-    VideoViewController *VVC = [[VideoViewController alloc] initWithNibName:@"VideoView" bundle:[NSBundle mainBundle]];
+    VideoViewController *VVC = [[[VideoViewController alloc] initWithNibName:@"VideoView" bundle:[NSBundle mainBundle]] autorelease];
     
     [self.navigationController pushViewController:VVC animated:YES];
-    
-    [VVC release];
 }
 
 @end

@@ -31,7 +31,6 @@
 @property (nonatomic, assign) BOOL sticky;
 @property (nonatomic, assign) int timestamp;
 
-- (id)init;
 + (News *)createNewPost:(NSDictionary *)item;
 
 @end

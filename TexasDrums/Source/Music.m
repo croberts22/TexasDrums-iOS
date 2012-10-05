@@ -12,6 +12,8 @@
 
 @synthesize filename, location, instrument, year, filetype, status, valid;
 
+#pragma mark - Memory Management
+
 - (id)init {
     if ( (self = [super init]) ) {
         self.filename = @"";
@@ -26,6 +28,16 @@
     return self;
 }
 
+- (void)dealloc {
+    [filename release], filename = nil;
+    [location release], location = nil;
+    [instrument release], instrument = nil;
+    [filetype release], filetype = nil;
+    [status release], status = nil;
+    [super dealloc];
+}
+
+#pragma mark - Class Methods
 
 + (Music *)createNewMusic:(NSDictionary *)item {
     Music *music = [[[Music alloc] init] autorelease];

@@ -40,7 +40,6 @@
 @property (nonatomic, assign) int position;
 @property (nonatomic, assign) int valid;
 
-- (id)init;
 + (RosterMember *)createNewRosterMember:(NSDictionary *)item;
 
 @end

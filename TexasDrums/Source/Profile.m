@@ -12,6 +12,8 @@
 
 @synthesize firstname, lastname, username, password, section, years, status, sl, instructor, admin, phonenumber, email, birthday, valid, lastlogin, paid, alphabet_last, alphabet_first, user_id;
 
+#pragma mark - Memory Management
+
 - (id)init {
     if( (self = [super init])) {
         self.firstname = @"";
@@ -37,6 +39,12 @@
     return self;
 }
 
+- (void)dealloc {
+    [super dealloc];
+}
+
+#pragma mark - Class Methods
+
 + (Profile *)createNewProfile:(NSDictionary *)dictionary {
     Profile *profile = [[[Profile alloc] init] autorelease];
     
@@ -59,6 +67,8 @@
     
     return profile;
 }
+
+#pragma mark - Instance Methods
 
 - (NSString *)fullName {
     return [NSString stringWithFormat:@"%@ %@", self.firstname, self.lastname];

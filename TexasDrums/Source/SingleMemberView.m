@@ -15,6 +15,8 @@
 @synthesize member;
 @synthesize memberData, memberName, data, categories;
 
+#pragma mark - Memory Management
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -23,7 +25,9 @@
     return self;
 }
 
-#pragma mark - Memory Management
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
 
 - (void)dealloc {
     [member release], member = nil;
@@ -32,10 +36,6 @@
     data = nil;
     categories = nil;
     [super dealloc];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
 }
 
 #pragma mark - View lifecycle
@@ -80,7 +80,6 @@
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
@@ -112,7 +111,7 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellData] autorelease];
     }
     
-    //UITableViewCell Properties
+    // UITableViewCell Properties
     cell.detailTextLabel.textColor = [UIColor TexasDrumsGrayColor];
     cell.textLabel.textColor = [UIColor TexasDrumsOrangeColor];
     cell.detailTextLabel.font = [UIFont TexasDrumsFontOfSize:FONT_SIZE];
@@ -143,7 +142,7 @@
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     cell.contentView.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.1f];
     cell.backgroundColor = [UIColor clearColor];
     cell.backgroundView.backgroundColor = [UIColor clearColor];

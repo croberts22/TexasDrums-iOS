@@ -20,7 +20,6 @@
     BOOL loadPost;
 }
 
-
 @property (nonatomic, retain) News *post;
 @property (nonatomic, retain) UIWebView *webView;
 @property (nonatomic, retain) UILabel *titleOfPost;
@@ -28,8 +27,5 @@
 @property (nonatomic, copy) NSString *content;
 @property (nonatomic, assign) BOOL isMemberPost;
 @property (nonatomic, assign) BOOL loadPost;
-
-- (void)createHeader;
-- (NSString *)createPost;
 
 @end

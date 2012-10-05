@@ -15,6 +15,8 @@
 @synthesize instrument, classification, year, amajor;
 @synthesize hometown, quote, position, phone, email, valid;
 
+#pragma mark - Memory Management
+
 - (id)init {
     if((self = [super init])) {
         self.firstname = @"";
@@ -35,6 +37,24 @@
     
     return self;
 }
+
+- (void)dealloc {
+    [firstname release], firstname = nil;
+    [nickname release], nickname = nil;
+    [lastname release], lastname = nil;
+    [fullname release], fullname = nil;
+    [instrument release], instrument = nil;
+    [classification release], classification = nil;
+    [year release], year = nil;
+    [amajor release], amajor = nil;
+    [hometown release], hometown = nil;
+    [quote release], quote = nil;
+    [phone release], phone = nil;
+    [email release], email = nil;
+    [super dealloc];
+}
+
+#pragma mark - Class Methods
 
 + (RosterMember *)createNewRosterMember:(NSDictionary *)item {
     RosterMember *member = [[[RosterMember alloc] init] autorelease];

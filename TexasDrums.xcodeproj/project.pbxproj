@@ -66,6 +66,7 @@
 		6313B38615B67BBD00E23C25 /* note@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6313B38215B67BBD00E23C25 /* note@2x.png */; };
 		6313B38715B67BBD00E23C25 /* note@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6313B38215B67BBD00E23C25 /* note@2x.png */; };
 		6313B38815B67BBD00E23C25 /* note@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6313B38215B67BBD00E23C25 /* note@2x.png */; };
+		6316B4E5161E725700548CA2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 635292131605AFCC00260734 /* Default-568h@2x.png */; };
 		63292FB215BCFEF800CB383B /* DateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63292FB015BCFEF800CB383B /* DateViewController.m */; };
 		63292FB315BCFEF800CB383B /* DateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63292FB015BCFEF800CB383B /* DateViewController.m */; };
 		63292FB415BCFEF800CB383B /* DateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63292FB015BCFEF800CB383B /* DateViewController.m */; };
@@ -2334,6 +2335,7 @@
 				635D6E2A15D213660019B677 /* video@2x.png in Resources */,
 				635D6E2F15D21BD60019B677 /* orangeArrow.png in Resources */,
 				635D6E3215D21BD60019B677 /* orangeArrow@2x.png in Resources */,
+				6316B4E5161E725700548CA2 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

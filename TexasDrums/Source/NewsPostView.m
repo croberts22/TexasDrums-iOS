@@ -10,12 +10,18 @@
 #import "News.h"
 #import "TexasDrumsWebViewController.h"
 
+@interface NewsPostView()
+
+- (void)createHeader;
+- (NSString *)createPost;
+
+@end
 
 @implementation NewsPostView
 
 @synthesize webView, titleOfPost, dateAndAuthor, content, post, isMemberPost, loadPost;
 
-#pragma mark - Memory management
+#pragma mark - Memory Management
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -66,13 +72,13 @@
         self.titleOfPost.textColor = [UIColor TexasDrumsOrangeColor];
     }
     
-    // Create header
+    // Create header.
     [self createHeader];
     
-    // Create body
+    // Create body.
     NSString *HTMLString = [self createPost];
     
-    // Load WebView
+    // Load web view.
     [self.webView loadHTMLString:HTMLString baseURL:nil];
 }
 

@@ -16,15 +16,17 @@
 
 @synthesize roster, year, singleRosterTable;
 
+#pragma mark - Memory Management
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
 - (void)dealloc {
     [roster release], roster = nil;
     [year release], year = nil;
     [singleRosterTable release], singleRosterTable = nil;
     [super dealloc];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
 }
 
 #pragma mark - View lifecycle
@@ -81,7 +83,7 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark - Table view data source
+#pragma mark - Table View Data Source Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 4;
@@ -197,7 +199,7 @@
     return cell;
 }
 
-#pragma mark - Table view delegate
+#pragma mark - Table View Delegate Methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     SingleMemberView *SMV = [[SingleMemberView alloc] initWithNibName:@"SingleMemberView" bundle:[NSBundle mainBundle]];

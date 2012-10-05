@@ -10,9 +10,23 @@
 #import "CJSONDeserializer.h"
 #import "TexasDrumsTableViewCell.h"
 
+@interface AudioViewController() {
+    int currentTrack;
+}
+
+@property (nonatomic, assign) int currentTrack;
+
+- (void)pausePlayer;
+- (void)resumePlayer;
+- (NSString *)grabFilenameWithIndex:(int)index;
+
+@end
+
 @implementation AudioViewController
 
 @synthesize audioTable, currentTrack, pauseButton, playButton, audioPlayer, audioArray;
+
+#pragma mark - Memory Management
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -21,8 +35,6 @@
     }
     return self;
 }
-
-#pragma mark - Memory Management
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -65,6 +77,7 @@
     self.currentTrack = -1;
     
     // Allocate things as necessary.
+#warning - move this to init.
     if(audioArray == nil){
         self.audioArray = [[NSMutableArray alloc] initWithObjects:@"Go Horns Go", @"Go, Go Horns", @"Texas Texas Yee Haw", @"Gourdhead", @"Tenor Intro", @"Defense", @"Push 'em Back", @"Hold 'em Horns, Hold 'em", @"D-D-D, Defense", @"Cheerleader", @"Buck Buck", @"Full Cadence Run", nil];
     }
@@ -78,8 +91,6 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -170,7 +181,7 @@
     return nil;
 }
 
-#pragma mark - Table view data source
+#pragma mark - UITableView Data Source Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;

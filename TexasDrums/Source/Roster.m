@@ -13,6 +13,8 @@
 
 @synthesize the_year, snares, tenors, basses, cymbals, instructor;
 
+#pragma mark - Memory Management
+
 - (id)initWithYear:(NSString *)year {
     if ((self = [super init])) {
         self.snares = [[NSMutableArray alloc] init];
@@ -25,6 +27,18 @@
     
     return self;
 }
+
+- (void)dealloc {
+    [the_year release], the_year = nil;
+    [snares release], snares = nil;
+    [tenors release], tenors = nil;
+    [basses release], basses = nil;
+    [cymbals release], cymbals = nil;
+    [instructor release], instructor = nil;
+    [super dealloc];
+}
+
+#pragma mark - Instance Methods
 
 - (void)addMember:(RosterMember *)member {
     if([member.instrument isEqualToString:@"Snare"]){

@@ -34,8 +34,6 @@
 @property (nonatomic, assign) int timestamp;
 @property (nonatomic, assign) BOOL valid;
 
-- (id)init;
 + (Video *)createNewVideo:(NSDictionary *)item;
-- (NSURL *)createThumbnailURL;
 
 @end

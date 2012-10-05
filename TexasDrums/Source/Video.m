@@ -8,9 +8,17 @@
 
 #import "Video.h"
 
+@interface Video()
+
+- (NSURL *)createThumbnailURL;
+
+@end
+
 @implementation Video
 
 @synthesize videoTitle, type, link, videoID, description, videoYear, videoDate, time, timestamp, valid, thumbnail;
+
+#pragma mark - Memory Management
 
 - (id)init {
     if((self = [super init])) {
@@ -29,6 +37,22 @@
     
     return self;
 }
+
+- (void)dealloc {
+    [videoTitle release], videoTitle = nil;
+    [type release], type = nil;
+    [link release], link = nil;
+    [videoID release], videoID = nil;
+    [description release], description = nil;
+    [videoYear release], videoYear = nil;
+    [videoDate release], videoDate = nil;
+    [time release], time = nil;
+    [thumbnail release], thumbnail = nil;
+    
+    [super dealloc];
+}
+
+#pragma mark - Class Methods
 
 + (Video *)createNewVideo:(NSDictionary *)item {
     Video *video = [[[Video alloc] init] autorelease];
@@ -49,6 +73,8 @@
     
     return video;
 }
+
+#pragma mark - Instance Methods
 
 - (NSURL *)createThumbnailURL {
     NSString *string = [NSString stringWithFormat:@"http://img.youtube.com/vi/%@/hqdefault.jpg", self.videoID];
