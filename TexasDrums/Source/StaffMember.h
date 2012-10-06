@@ -30,7 +30,6 @@
 @property (nonatomic, copy) NSString *email;
 @property (nonatomic, assign) int sortfield;
 
-- (id)init;
 + (StaffMember *)createNewStaffMember:(NSDictionary *)item;
 
 @end

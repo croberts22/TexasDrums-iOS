@@ -20,7 +20,6 @@
     IBOutlet UIBarButtonItem *login;
     IBOutlet UIButton *background;
     IBOutlet UINavigationItem *navbar;
-    
     TexasDrumsAppDelegate *delegate;
 }
 
@@ -30,13 +29,6 @@
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *login;;
 @property (nonatomic, retain) IBOutlet UIButton *background;
 @property (nonatomic, retain) UINavigationItem *navbar;
-
 @property (nonatomic, retain) TexasDrumsAppDelegate *delegate;
-
-- (void)removeLoginScreen;
-- (void)disableUI;
-- (void)enableUI;
-- (IBAction)cancelButtonPressed:(id)sender;
-- (IBAction)loginButtonPressed:(id)sender;
 
 @end

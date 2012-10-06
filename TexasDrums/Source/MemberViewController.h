@@ -28,9 +28,4 @@ typedef enum {
 @property (nonatomic, retain) NSArray *membersOptions;
 @property (nonatomic, retain) NSArray *adminOptions;
 
-- (void)setButton:(ButtonType)buttonType;
-- (void)showMemberLoginScreen;
-- (void)logoutButtonPressed;
-- (void)logout;
-
 @end

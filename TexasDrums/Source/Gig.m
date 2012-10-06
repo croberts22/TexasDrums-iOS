@@ -14,6 +14,8 @@
 @synthesize timestamp, snares_required, snares_current, tenors_required, tenors_current, basses_required, basses_current, cymbals_required, cymbals_current;
 @synthesize users;
 
+#pragma mark - Memory Management
+
 - (id)init {
     if (self = [super init]) {
         gig_name = @"";
@@ -36,9 +38,15 @@
 }
 
 - (void)dealloc {
-    [users release];
+    [gig_name release], gig_name = nil;
+    [location release], location = nil;
+    [description release], description = nil;
+    [timestamp_string release], timestamp_string = nil;
+    [users release], users = nil;;
     [super dealloc];
 }
+
+#pragma mark - Instance Methods
 
 - (void)convertTimestampToString {
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:self.timestamp];

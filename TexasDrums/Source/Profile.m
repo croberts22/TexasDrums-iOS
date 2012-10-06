@@ -40,6 +40,19 @@
 }
 
 - (void)dealloc {
+    [firstname release], firstname = nil;
+    [lastname release], lastname = nil;
+    [username release], username = nil;
+    [password release], password = nil;
+    [section release], section = nil;
+    [years release], years = nil;
+    [status release], status = nil;
+    [phonenumber release], phonenumber = nil;
+    [email release], email = nil;
+    [birthday release], birthday = nil;
+    [lastlogin release], lastlogin = nil;
+    [alphabet_first release], alphabet_first = nil;
+    [alphabet_last release], alphabet_last = nil;
     [super dealloc];
 }
 

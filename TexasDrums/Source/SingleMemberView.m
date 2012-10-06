@@ -117,7 +117,6 @@
     cell.detailTextLabel.font = [UIFont TexasDrumsFontOfSize:FONT_SIZE];
     cell.textLabel.font = [UIFont TexasDrumsFontOfSize:SMALL_FONT_SIZE];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
 
     cell.detailTextLabel.numberOfLines = 0;
     cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;    

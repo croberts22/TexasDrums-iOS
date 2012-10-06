@@ -12,6 +12,8 @@
 
 @synthesize first, last, fullname, instrument, year, bio, email, sortfield, image_url;
 
+#pragma mark - Memory Management
+
 - (id)init {
     if((self = [super init])) {
         self.first = @"";
@@ -27,6 +29,20 @@
     
     return self;
 }
+
+- (void)dealloc {
+    [first release], first = nil;
+    [last release], last = nil;
+    [fullname release], fullname = nil;
+    [instrument release], instrument = nil;
+    [year release], year = nil;
+    [bio release], bio = nil;
+    [image_url release], image_url = nil;
+    [email release], email = nil;
+    [super dealloc];
+}
+
+#pragma mark - Class Methods
 
 + (StaffMember *)createNewStaffMember:(NSDictionary *)item {
     StaffMember *member = [[[StaffMember alloc] init] autorelease];

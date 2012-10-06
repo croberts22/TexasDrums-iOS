@@ -27,14 +27,11 @@
 }
 
 - (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 - (void)dealloc {
-    [self.aboutTable release];
+    [aboutTable release], aboutTable = nil;
     [super dealloc];
 }
 
@@ -89,8 +86,7 @@
     return 2;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if(section == 0){
         return 3;
     }
@@ -189,8 +185,7 @@
 
 #pragma mark - UITableView Delegate Methods
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == 0){
         if(indexPath.row == 0){
             AboutUsViewController *AUVC = [[AboutUsViewController alloc] initWithNibName:@"AboutUsView" bundle:[NSBundle mainBundle]];

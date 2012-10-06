@@ -32,6 +32,14 @@
     return self;
 }
 
+- (void)dealloc {
+    [member release], member = nil;
+    [picture release], picture = nil;
+    [bio release], bio = nil;
+    [scroll release], scroll = nil;
+    [super dealloc];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -62,8 +70,6 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

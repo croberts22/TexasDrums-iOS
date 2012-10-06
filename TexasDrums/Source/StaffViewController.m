@@ -13,6 +13,13 @@
 #import "StaffMemberViewController.h"
 #import "TexasDrumsGetStaff.h"
 
+@interface StaffViewController()
+
+- (void)displayTable;
+- (void)parseStaffData:(NSDictionary *)results;
+
+@end
+
 @implementation StaffViewController
 
 @synthesize staffTable, staff;
@@ -28,10 +35,13 @@
 }
 
 - (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
+}
+
+- (void)dealloc {
+    [staffTable release], staffTable = nil;
+    [staff release], staff = nil;
+    [super dealloc];
 }
 
 #pragma mark - View lifecycle

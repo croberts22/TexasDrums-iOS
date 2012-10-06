@@ -19,9 +19,20 @@
 #import "TexasDrumsAppDelegate.h"
 #import "CJSONDeserializer.h"
 
+@interface MemberLoginViewController()
+
+- (void)setButton:(ButtonType)buttonType;
+- (void)showMemberLoginScreen;
+- (void)logoutButtonPressed;
+- (void)logout;
+
+@end
+
 @implementation MemberViewController
 
 @synthesize membersOptions, memberTable, loginPrompt, adminOptions;
+
+#pragma mark - Memory Management
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -30,7 +41,6 @@
     return self;
 }
 
-#pragma mark - Memory Management
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

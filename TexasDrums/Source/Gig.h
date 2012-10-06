@@ -26,11 +26,11 @@
     NSMutableArray *users;
 }
 
-@property (nonatomic, retain) NSString *gig_name;
+@property (nonatomic, copy) NSString *gig_name;
 @property (nonatomic, assign) int gig_id;
-@property (nonatomic, retain) NSString *location;
-@property (nonatomic, retain) NSString *description;
-@property (nonatomic, retain) NSString *timestamp_string;
+@property (nonatomic, copy) NSString *location;
+@property (nonatomic, copy) NSString *description;
+@property (nonatomic, copy) NSString *timestamp_string;
 @property (nonatomic, assign) int timestamp;
 @property (nonatomic, assign) int snares_required;
 @property (nonatomic, assign) int tenors_required;

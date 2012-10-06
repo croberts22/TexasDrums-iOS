@@ -17,7 +17,4 @@
 @property (nonatomic, retain) UITableView *staffTable;
 @property (nonatomic, retain) NSMutableArray *staff;
 
-- (void)displayTable;
-- (void)parseStaffData:(NSDictionary *)results;
-
 @end

@@ -12,6 +12,16 @@
 #import "TexasDrumsAppDelegate.h"
 #import "CJSONDeserializer.h"
 
+@interface MemberLoginViewController()
+
+- (void)removeLoginScreen;
+- (void)disableUI;
+- (void)enableUI;
+- (IBAction)cancelButtonPressed:(id)sender;
+- (IBAction)loginButtonPressed:(id)sender;
+
+@end
+
 @implementation MemberLoginViewController
 
 @synthesize username, password, cancel, login, background, navbar, delegate;
@@ -31,6 +41,8 @@
     [password release], password = nil;
     [cancel release], cancel = nil;
     [login release], login = nil;
+    [background release], background = nil;
+    [navbar release], navbar = nil;
     [super dealloc];
 }
 

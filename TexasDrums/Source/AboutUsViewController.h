@@ -17,7 +17,4 @@
 @property (nonatomic, retain) UIImageView *image;
 @property (nonatomic, retain) UITextView *info;
 
-- (void)displayText:(NSString *)text;
-- (void)parseAboutData:(NSDictionary *)results;
-
 @end

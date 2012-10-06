@@ -10,6 +10,13 @@
 #import "CJSONDeserializer.h"
 #import "TexasDrumsGetAbout.h"
 
+@interface AboutUsViewController()
+
+- (void)displayText:(NSString *)text;
+- (void)parseAboutData:(NSDictionary *)results;
+
+@end
+
 @implementation AboutUsViewController
 
 @synthesize image, info;
@@ -25,10 +32,7 @@
 }
 
 - (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 #pragma mark - View lifecycle
@@ -56,7 +60,6 @@
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 

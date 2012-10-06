@@ -11,6 +11,13 @@
 #import "FAQ.h"
 #import "CJSONDeserializer.h"
 
+@interface FAQViewController()
+
+- (void)parseFAQData:(NSDictionary *)results;
+- (void)countCategories;
+
+@end
+
 @implementation FAQViewController
 
 @synthesize FAQTable, faq, categories;
@@ -26,10 +33,14 @@
 }
 
 - (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
+}
+
+- (void)dealloc {
+    [FAQTable release], FAQTable = nil;
+    [faq release], faq = nil;
+    [categories release], categories = nil;
+    [super dealloc];
 }
 
 #pragma mark - View lifecycle
@@ -68,9 +79,7 @@
     [super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
