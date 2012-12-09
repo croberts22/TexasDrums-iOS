@@ -7,13 +7,7 @@
 //
 
 #import "EditProfile.h"
-
-#import "GANTracker.h"
-#import "SVProgressHUD.h"
-#import "UIColor+TexasDrums.h"
-#import "UIFont+TexasDrums.h"
 #import "CJSONDeserializer.h"
-#import "Common.h"
 
 @implementation EditProfile
 

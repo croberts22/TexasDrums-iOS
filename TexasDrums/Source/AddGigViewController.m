@@ -34,16 +34,14 @@
 @synthesize currentPeople = currentPeople_;
 @synthesize dateViewController = dateViewController_;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
     }
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setTitle:@"Add Gig"];
@@ -79,31 +77,17 @@
     [dateFormatter release];
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - UI Methods
-
-- (void)setTitle:(NSString *)title
-{
-    [super setTitle:title];
-    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
-    if (!titleView) {
-        titleView = [UILabel TexasDrumsNavigationBar];
-        self.navigationItem.titleView = titleView;
-    }
-    titleView.text = title;
-    [titleView sizeToFit];
-}
 
 - (IBAction)dateButtonPressed:(id)sender {
     [self removeKeyboards];

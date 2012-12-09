@@ -56,9 +56,6 @@ static NSMutableDictionary *full_name = nil;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    // Google Analytics
-    [[GANTracker sharedTracker] trackPageview:[[self class] description] withError:nil];
-    
     NSIndexPath *indexPath = [self.addressBookTable indexPathForSelectedRow];
     if(indexPath) {
         [self.addressBookTable deselectRowAtIndexPath:indexPath animated:YES];
@@ -105,17 +102,6 @@ static NSMutableDictionary *full_name = nil;
 }
 
 #pragma mark - UI Methods
-
-- (void)setTitle:(NSString *)title {
-    [super setTitle:title];
-    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
-    if (!titleView) {
-        titleView = [UILabel TexasDrumsNavigationBar];
-        self.navigationItem.titleView = titleView;
-    }
-    titleView.text = title;
-    [titleView sizeToFit];
-}
 
 - (void)refreshPressed {
     // Fetch music from the server.

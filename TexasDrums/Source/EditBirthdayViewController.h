@@ -11,7 +11,7 @@
 
 @protocol TexasDrumsAPIConnection;
 
-@interface EditBirthdayViewController : UIViewController<TexasDrumsAPIConnection> {
+@interface EditBirthdayViewController : TexasDrumsViewController<TexasDrumsAPIConnection> {
     IBOutlet UIDatePicker *picker;
     IBOutlet UILabel *birthdayLabel;
     IBOutlet UILabel *status;

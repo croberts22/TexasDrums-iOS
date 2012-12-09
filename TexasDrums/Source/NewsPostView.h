@@ -10,7 +10,7 @@
 
 @class News;
 
-@interface NewsPostView : UIViewController<UIWebViewDelegate> {
+@interface NewsPostView : TexasDrumsViewController<UIWebViewDelegate> {
     News *post;
     IBOutlet UIWebView *webView;
     IBOutlet UILabel *titleOfPost;

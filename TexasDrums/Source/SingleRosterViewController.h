@@ -10,7 +10,7 @@
 
 @class Roster;
 
-@interface SingleRosterViewController : UIViewController {
+@interface SingleRosterViewController : TexasDrumsViewController {
     NSString *year;
     Roster *roster;
     IBOutlet UITableView *singleRosterTable;

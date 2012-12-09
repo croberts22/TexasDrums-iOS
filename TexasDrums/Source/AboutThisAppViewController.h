@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AboutThisAppViewController : UIViewController {
+@interface AboutThisAppViewController : TexasDrumsViewController {
     IBOutlet UITextView *aboutInfo;
 }
 

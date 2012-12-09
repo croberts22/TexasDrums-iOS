@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TexasDrumsAPIConnection.h"
 
-@interface EditPasswordViewController : UIViewController<UITextFieldDelegate, TexasDrumsAPIConnection> {
+@interface EditPasswordViewController : TexasDrumsViewController<UITextFieldDelegate, TexasDrumsAPIConnection> {
     IBOutlet UITextField *original_password;
     IBOutlet UITextField *a_new_password;
     IBOutlet UITextField *a_new_password_again;

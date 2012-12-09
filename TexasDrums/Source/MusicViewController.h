@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MusicViewController : UIViewController {
+@interface MusicViewController : TexasDrumsViewController {
     IBOutlet UIWebView *webView;
     UIPrintInteractionController *printController;
     NSString *filename;

@@ -10,7 +10,7 @@
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 
-@interface InfoViewController : UIViewController<MFMailComposeViewControllerDelegate> {
+@interface InfoViewController : TexasDrumsViewController<MFMailComposeViewControllerDelegate> {
     IBOutlet UITableView *aboutTable;
 }
 

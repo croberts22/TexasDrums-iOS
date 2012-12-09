@@ -13,7 +13,7 @@
 
 @class StaffMember;
 
-@interface StaffMemberViewController : UIViewController<UIWebViewDelegate, MFMailComposeViewControllerDelegate> {
+@interface StaffMemberViewController : TexasDrumsViewController<UIWebViewDelegate, MFMailComposeViewControllerDelegate> {
     StaffMember *member;
     UIImageView *picture;
     UIWebView *bio;

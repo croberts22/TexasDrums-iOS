@@ -53,9 +53,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    // Google Analytics
-    [[GANTracker sharedTracker] trackPageview:[[self class] description] withError:nil];
 }
 
 - (void)viewDidLoad {

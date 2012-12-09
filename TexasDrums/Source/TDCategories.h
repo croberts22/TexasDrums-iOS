@@ -14,6 +14,7 @@
 #import "UIView+TexasDrums.h"
 #import "UILabel+TexasDrums.h"
 #import "NSString+TexasDrums.h"
+#import "UIImage+TexasDrums.h"
 
 #import "NSString+RegEx.h"
 

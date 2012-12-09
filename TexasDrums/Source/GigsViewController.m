@@ -15,16 +15,20 @@
 #import "Gig.h"
 #import "GigUser.h"
 
-@interface GigsViewController ()
+@interface GigsViewController () {
+    TexasDrumsGetGigs *getGigs;
+}
+
+@property (nonatomic, retain) TexasDrumsGetGigs *getGigs;
 
 @end
 
 @implementation GigsViewController
 
+@synthesize getGigs;
 @synthesize gigsTable, gigs;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         gigs = [[NSMutableArray alloc] init];
@@ -32,8 +36,15 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)dealloc {
+    self.getGigs.delegate = nil;
+    [getGigs release], getGigs = nil;
+    [gigsTable release], gigsTable = nil;
+    [gigs release], gigs = nil;
+    [super dealloc];
+}
+
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setTitle:@"Gigs"];
@@ -54,31 +65,22 @@
     [self connect];
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    self.getGigs.delegate = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - UI Methods
-
-- (void)setTitle:(NSString *)title
-{
-    [super setTitle:title];
-    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
-    if (!titleView) {
-        titleView = [UILabel TexasDrumsNavigationBar];
-        self.navigationItem.titleView = titleView;
-    }
-    titleView.text = title;
-    [titleView sizeToFit];
-}
 
 - (void)dismissWithSuccess {
     [SVProgressHUD dismiss];
@@ -99,9 +101,9 @@
 
 - (void)connect {
     [SVProgressHUD showWithStatus:@"Loading..."];
-    TexasDrumsGetGigs *get = [[TexasDrumsGetGigs alloc] initWithUsername:[UserProfile sharedInstance].username andPassword:[UserProfile sharedInstance].hash];
-    get.delegate = self;
-    [get startRequest];
+    self.getGigs = [[TexasDrumsGetGigs alloc] initWithUsername:[UserProfile sharedInstance].username andPassword:[UserProfile sharedInstance].hash];
+    self.getGigs.delegate = self;
+    [self.getGigs startRequest];
 }
 
 - (void)parseGigData:(NSDictionary *)results {
@@ -145,13 +147,11 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [gigs count];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if([UserProfile sharedInstance].sl || [UserProfile sharedInstance].admin || [UserProfile sharedInstance].instructor) {
         return 6;
     }
@@ -159,13 +159,11 @@
     return 5;
 }
 
-- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 	return HEADER_HEIGHT;
 }
 
-- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section 
-{
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section  {
     Gig *gig = [gigs objectAtIndex:section];
     
     UIView *header = [UIView TexasDrumsGroupedTableHeaderViewWithTitle:gig.gig_name andAlignment:UITextAlignmentLeft];
@@ -173,8 +171,7 @@
 	return header;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     Gig *gig = [gigs objectAtIndex:indexPath.section];
     NSString *text;
     
@@ -209,8 +206,7 @@
     return height;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];

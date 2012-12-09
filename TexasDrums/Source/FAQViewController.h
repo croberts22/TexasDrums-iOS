@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TexasDrumsAPIConnection.h"
 
-@interface FAQViewController : UIViewController<TexasDrumsAPIConnection> {
+@interface FAQViewController : TexasDrumsViewController<TexasDrumsAPIConnection> {
     IBOutlet UITableView *FAQTable;
     NSMutableArray *faq;
     NSMutableDictionary *categories;

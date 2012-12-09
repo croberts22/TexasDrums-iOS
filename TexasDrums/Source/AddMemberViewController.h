@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddMemberViewController : UIViewController<UITextFieldDelegate> {
+@interface AddMemberViewController : TexasDrumsViewController<UITextFieldDelegate> {
     IBOutlet UIButton *backgroundButton;
     IBOutlet UITableView *addMemberTable;
     UITextField *firstname_field;

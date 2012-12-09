@@ -44,9 +44,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    // Google Analytics
-    [[GANTracker sharedTracker] trackPageview:[[self class] description] withError:nil];
-    
     NSIndexPath *indexPath = [self.profileTable indexPathForSelectedRow];
     
     [self.profileTable reloadData];
@@ -75,19 +72,6 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-#pragma mark - UI Methods
-
-- (void)setTitle:(NSString *)title {
-    [super setTitle:title];
-    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
-    if (!titleView) {
-        titleView = [UILabel TexasDrumsNavigationBar];
-        self.navigationItem.titleView = titleView;
-    }
-    titleView.text = title;
-    [titleView sizeToFit];
 }
 
 #pragma mark - UITableView Data Source Methods

@@ -10,7 +10,7 @@
 
 @class Profile;
 
-@interface ProfileViewController : UIViewController {
+@interface ProfileViewController : TexasDrumsViewController {
     IBOutlet UITableView *profileTable;
 }
 

@@ -12,7 +12,7 @@
 
 @class Profile;
 
-@interface AddressBookMemberViewController : UIViewController<MFMailComposeViewControllerDelegate, UIActionSheetDelegate> {
+@interface AddressBookMemberViewController : TexasDrumsViewController<MFMailComposeViewControllerDelegate, UIActionSheetDelegate> {
     IBOutlet UILabel *member_name;
     IBOutlet UILabel *member_status;
     IBOutlet UILabel *member_header;

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TexasDrumsAPIConnection.h"
 
-@interface EditNameViewController : UIViewController<UITextFieldDelegate, TexasDrumsAPIConnection> {
+@interface EditNameViewController : TexasDrumsViewController<UITextFieldDelegate, TexasDrumsAPIConnection> {
     IBOutlet UITextField *firstname;
     IBOutlet UITextField *lastname;
     IBOutlet UIButton *submit;

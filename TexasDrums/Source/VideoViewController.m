@@ -56,9 +56,6 @@ static NSMutableArray *years = nil;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    // Google Analytics
-    [[GANTracker sharedTracker] trackPageview:[[self class] description] withError:nil];
-    
     NSIndexPath *indexPath = [self.videoTable indexPathForSelectedRow];
     if(indexPath) {
         [self.videoTable deselectRowAtIndexPath:indexPath animated:YES];
@@ -104,17 +101,6 @@ static NSMutableArray *years = nil;
 }
 
 #pragma mark - UI Methods
-
-- (void)setTitle:(NSString *)title {
-    [super setTitle:title];
-    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
-    if (!titleView) {
-        titleView = [UILabel TexasDrumsNavigationBar];
-        self.navigationItem.titleView = titleView;
-    }
-    titleView.text = title;
-    [titleView sizeToFit];
-}
 
 - (void)refreshPressed {
     // Fetch videos from the server.

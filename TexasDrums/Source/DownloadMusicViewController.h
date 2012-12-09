@@ -13,7 +13,7 @@
 
 @class Music;
 
-@interface DownloadMusicViewController : UIViewController<TexasDrumsAPIConnection, UITableViewDataSource, UITableViewDelegate> {
+@interface DownloadMusicViewController : TexasDrumsViewController<TexasDrumsAPIConnection, UITableViewDataSource, UITableViewDelegate> {
     
     IBOutlet UITableView *musicTable;
     NSMutableArray *musicArray;

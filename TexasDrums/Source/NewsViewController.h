@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "TexasDrumsAPIConnection.h"
 #import "EGORefreshTableHeaderView.h"
+#import "TexasDrumsViewController.h"
 
 @class News;
 
-@interface NewsViewController : UIViewController<TexasDrumsAPIConnection, EGORefreshTableHeaderDelegate, UITableViewDataSource, UITableViewDelegate> {
+@interface NewsViewController : TexasDrumsViewController<TexasDrumsAPIConnection, EGORefreshTableHeaderDelegate, UITableViewDataSource, UITableViewDelegate> {
     EGORefreshTableHeaderView *_refreshHeaderView;
     IBOutlet UITableView *newsTable;
     IBOutlet UILabel *status;

@@ -11,7 +11,7 @@
 
 @protocol TexasDrumsAPIConnection;
 
-@interface EditEmailViewController : UIViewController<UITextFieldDelegate, TexasDrumsAPIConnection> {
+@interface EditEmailViewController : TexasDrumsViewController<UITextFieldDelegate, TexasDrumsAPIConnection> {
     IBOutlet UITextField *email;
     IBOutlet UIButton *submit;
     IBOutlet UIButton *backgroundButton;

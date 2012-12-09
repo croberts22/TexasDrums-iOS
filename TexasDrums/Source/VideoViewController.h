@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TexasDrumsAPIConnection.h"
 
-@interface VideoViewController : UIViewController<TexasDrumsAPIConnection, UITableViewDelegate> {
+@interface VideoViewController : TexasDrumsViewController<TexasDrumsAPIConnection, UITableViewDelegate> {
     IBOutlet UITableView *videoTable;
 }
 

@@ -12,7 +12,7 @@
 
 @class DateViewController;
 
-@interface AddGigViewController : UIViewController<UITextFieldDelegate, UITextViewDelegate, GigRequirementsViewControllerDelegate, MemberListViewControllerDelegate> {
+@interface AddGigViewController : TexasDrumsViewController<UITextFieldDelegate, UITextViewDelegate, GigRequirementsViewControllerDelegate, MemberListViewControllerDelegate> {
     IBOutlet UIScrollView *detailView;
     IBOutlet UIButton *backgroundButton_;
     IBOutlet UITextField *name_;

@@ -11,6 +11,7 @@
 #import "CJSONDeserializer.h"
 #import "Crittercism.h"
 #import "TexasDrumsGetMemberLogin.h"
+#import "GANTracker.h"
 
 // Dispatch period in seconds
 static const NSInteger kGANDispatchPeriodSec = 10;

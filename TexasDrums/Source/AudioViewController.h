@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface AudioViewController : UIViewController<AVAudioPlayerDelegate> {
+@interface AudioViewController : TexasDrumsViewController<AVAudioPlayerDelegate> {
     IBOutlet UITableView *audioTable;
     UIBarButtonItem *pauseButton;
     UIBarButtonItem *playButton;

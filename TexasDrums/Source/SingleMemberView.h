@@ -12,7 +12,7 @@
 
 @class RosterMember;
 
-@interface SingleMemberView : UIViewController <MFMailComposeViewControllerDelegate, UIActionSheetDelegate> {
+@interface SingleMemberView : TexasDrumsViewController <MFMailComposeViewControllerDelegate, UIActionSheetDelegate> {
     RosterMember *member;    
     IBOutlet UILabel *memberName;
     IBOutlet UITableView *memberData;

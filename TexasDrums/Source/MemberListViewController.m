@@ -68,17 +68,6 @@ static NSMutableArray *members = nil;
 
 #pragma mark - UI Methods
 
-- (void)setTitle:(NSString *)title {
-    [super setTitle:title];
-    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
-    if (!titleView) {
-        titleView = [UILabel TexasDrumsNavigationBar];
-        self.navigationItem.titleView = titleView;
-    }
-    titleView.text = title;
-    [titleView sizeToFit];
-}
-
 - (void)refreshPressed {
     // Fetch list from the server.
     [self connect];

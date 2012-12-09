@@ -13,7 +13,7 @@
 @class Roster;
 @class RosterMember;
 
-@interface RosterViewController : UIViewController<TexasDrumsAPIConnection> {
+@interface RosterViewController : TexasDrumsViewController<TexasDrumsAPIConnection> {
     NSMutableArray *rosters;
     IBOutlet UITableView *rosterTable;
     UIBarButtonItem *refresh;

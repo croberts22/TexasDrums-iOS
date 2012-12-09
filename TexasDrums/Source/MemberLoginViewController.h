@@ -13,7 +13,7 @@
 
 @class TexasDrumsAppDelegate;
 
-@interface MemberLoginViewController : UIViewController<TexasDrumsAPIConnection, UITextFieldDelegate> {
+@interface MemberLoginViewController : TexasDrumsViewController<TexasDrumsAPIConnection, UITextFieldDelegate> {
     IBOutlet UITextField *username;
     IBOutlet UITextField *password;
     IBOutlet UIBarButtonItem *cancel;

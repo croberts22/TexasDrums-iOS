@@ -11,7 +11,7 @@
 
 @protocol TexasDrumsAPIConnection;
 
-@interface AddressBookViewController : UIViewController<TexasDrumsAPIConnection, UITableViewDataSource, UITableViewDelegate> {
+@interface AddressBookViewController : TexasDrumsViewController<TexasDrumsAPIConnection, UITableViewDataSource, UITableViewDelegate> {
     IBOutlet UITableView *addressBookTable;
 }
 

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface MediaViewController : UIViewController {
+@interface MediaViewController : TexasDrumsViewController {
     NSArray *mediaOptions;
 }
 

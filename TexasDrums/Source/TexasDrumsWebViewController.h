@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TexasDrumsWebViewController : UIViewController<UIWebViewDelegate> {
+@interface TexasDrumsWebViewController : TexasDrumsViewController<UIWebViewDelegate> {
     IBOutlet UIWebView<UIWebViewDelegate> *browser;
     IBOutlet UIBarButtonItem *fixedSpaceLeft;
     IBOutlet UIBarButtonItem *backButton;

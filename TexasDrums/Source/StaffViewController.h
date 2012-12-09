@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TexasDrumsAPIConnection.h"
 
-@interface StaffViewController : UIViewController<TexasDrumsAPIConnection> {
+@interface StaffViewController : TexasDrumsViewController<TexasDrumsAPIConnection> {
     IBOutlet UITableView *staffTable;
     NSMutableArray *staff;
 }

@@ -50,9 +50,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    // Google Analytics
-    [[GANTracker sharedTracker] trackPageview:[[self class] description] withError:nil];
-    
     // If we're coming back from reading a news post, deselect the cell.
     NSIndexPath *indexPath = [self.newsTable indexPathForSelectedRow];
     if(indexPath) {
@@ -104,7 +101,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
     [self.newsTable reloadData];
 }
 
@@ -114,7 +110,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
     [SVProgressHUD dismiss];
 }
 
@@ -123,22 +118,10 @@
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - UI Methods
-
-- (void)setTitle:(NSString *)title {
-    [super setTitle:title];
-    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
-    if (!titleView) {
-        titleView = [UILabel TexasDrumsNavigationBar];
-        self.navigationItem.titleView = titleView;
-    }
-    titleView.text = title;
-    [titleView sizeToFit];
-}
 
 - (void)refreshPressed {
     // We haven't stored anything in the posts array, so timestamp is 0.
@@ -287,14 +270,14 @@
         if([[allposts objectAtIndex:indexPath.row] sticky]){
             cell.textLabel.textColor = [UIColor whiteColor];
             cell.detailTextLabel.textColor = [UIColor lightGrayColor];
-            cell.imageView.image = [UIImage imageNamed:@"star.png"];
+            cell.imageView.image = [UIImage stickyIcon];
         }
     }
     else{
         if([[posts objectAtIndex:indexPath.row] sticky]){
             cell.textLabel.textColor = [UIColor whiteColor];
             cell.detailTextLabel.textColor = [UIColor lightGrayColor];
-            cell.imageView.image = [UIImage imageNamed:@"star.png"];
+            cell.imageView.image = [UIImage stickyIcon];
         }
         cell.textLabel.text = [[posts objectAtIndex:indexPath.row] titleOfPost];
         cell.detailTextLabel.text = [[posts objectAtIndex:indexPath.row] subtitle];

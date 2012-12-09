@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TexasDrumsAPIConnection.h"
 
-@interface AboutUsViewController : UIViewController<TexasDrumsAPIConnection> {
+@interface AboutUsViewController : TexasDrumsViewController<TexasDrumsAPIConnection> {
     IBOutlet UIImageView *image;
     IBOutlet UITextView *info;
 }

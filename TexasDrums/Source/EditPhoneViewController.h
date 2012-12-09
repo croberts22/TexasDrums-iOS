@@ -11,7 +11,7 @@
 
 @protocol TexasDrumsAPIConnection;
 
-@interface EditPhoneViewController : UIViewController<UITextFieldDelegate, TexasDrumsAPIConnection> {
+@interface EditPhoneViewController : TexasDrumsViewController<UITextFieldDelegate, TexasDrumsAPIConnection> {
     IBOutlet UITextField *phone;
     IBOutlet UIButton *submit;
     IBOutlet UIButton *background_button;
