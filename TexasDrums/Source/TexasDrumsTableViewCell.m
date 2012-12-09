@@ -7,7 +7,6 @@
 //
 
 #import "TexasDrumsTableViewCell.h"
-#import "UIFont+TexasDrums.h"
 
 @implementation TexasDrumsTableViewCell
 

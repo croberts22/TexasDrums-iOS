@@ -20,6 +20,19 @@
 @property (nonatomic, retain) TexasDrumsGetNews *getNews;
 @property (nonatomic, assign) BOOL _reloading;
 
+- (void)refreshPressed;
+- (void)hideRefreshButton;
+- (void)dismissWithSuccess;
+- (void)dismissWithError;
+- (void)displayTable;
+
+- (void)connect;
+- (void)parseNewsData:(NSDictionary *)results;
+- (void)sortTable;
+
+- (void)reloadTableViewDataSource;
+- (void)doneLoadingTableViewData;
+
 @end
 
 @implementation NewsViewController
@@ -130,7 +143,6 @@
     }
     
     // Begin fetching news from the server.
-    [self hideRefreshButton];
     [self connect];
 }
 
@@ -173,6 +185,7 @@
 #pragma mark - Data Methods
 
 - (void)connect {
+    [self hideRefreshButton];
     TexasDrumsGetNews *get = [[TexasDrumsGetNews alloc] initWithTimestamp:timestamp];
     get.delegate = self;
     [get startRequest];    

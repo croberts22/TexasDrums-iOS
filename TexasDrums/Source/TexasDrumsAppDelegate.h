@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface TexasDrumsAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
+@interface TexasDrumsAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate, TexasDrumsRequestDelegate> {
     UIImageView *splashView;
 }
 
@@ -17,8 +17,6 @@
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 @property (nonatomic, retain) UIImageView *splashView;
 
-- (void)registerAppDefaults;
-- (void)fetchUserProfile;
 - (void)createProfile:(NSDictionary *)results;
 - (void)destroyProfile;
 

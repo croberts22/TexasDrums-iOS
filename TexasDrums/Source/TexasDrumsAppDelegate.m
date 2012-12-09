@@ -17,6 +17,8 @@
 static const NSInteger kGANDispatchPeriodSec = 10;
 
 @interface TexasDrumsAppDelegate ()
+- (void)registerAppDefaults;
+- (void)fetchUserProfile;
 - (void)forceLogout;
 @end
 
@@ -26,8 +28,7 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 @synthesize tabBarController=_tabBarController;
 @synthesize splashView;
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     // Initialize Google Analytics.
     [[GANTracker sharedTracker] startTrackerWithAccountID:@"UA-30605087-1"
@@ -67,7 +68,7 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 	[_window addSubview:splashView];
 	[_window bringSubviewToFront:splashView];
     
-    [UIView animateWithDuration:0.5f animations:^{
+    [UIView animateWithDuration:0.3f animations:^{
         splashView.alpha = 0.0;
     }];
     
@@ -82,38 +83,33 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     [defaults registerDefaults:appDefaults];
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application
-{
+- (void)applicationWillResignActive:(UIApplication *)application {
     /*
      Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
      Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
      */
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
+- (void)applicationDidEnterBackground:(UIApplication *)application {
     /*
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
      */
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
+- (void)applicationWillEnterForeground:(UIApplication *)application {
     /*
      Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
      */
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
+- (void)applicationDidBecomeActive:(UIApplication *)application {
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application
-{
+- (void)applicationWillTerminate:(UIApplication *)application {
     /*
      Called when the application is about to terminate.
      Save data if appropriate.
@@ -121,8 +117,7 @@ static const NSInteger kGANDispatchPeriodSec = 10;
      */
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [_window release];
     [_tabBarController release];
     [splashView release];
@@ -153,6 +148,7 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     [defaults setObject:@"" forKey:@"username"];
     [defaults setObject:@"" forKey:@"password"];
     [defaults setBool:NO forKey:@"login_valid"];
+    [defaults synchronize];
     
     [self destroyProfile];
 }
@@ -169,6 +165,7 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     [defaults setObject:[UserProfile sharedInstance].hash forKey:@"password"];
     [defaults setBool:YES forKey:@"member"];
     [defaults setBool:YES forKey:@"login_valid"];
+    [defaults synchronize];
     
     TDLog(@"Profile for user '%@' has been fetched and saved.", [UserProfile sharedInstance].username);
 }
@@ -177,6 +174,8 @@ static const NSInteger kGANDispatchPeriodSec = 10;
     TDLog(@"Destroying profile.");
     [[UserProfile sharedInstance] destroyProfile];
 }
+
+#pragma mark - TexasDrumsRequest Delegate Methods
 
 - (void)request:(TexasDrumsRequest *)request receivedData:(id)data {
     TDLog(@"Login request succeeded.");

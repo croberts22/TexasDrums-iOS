@@ -8,8 +8,6 @@
 
 #import "TexasDrumsGroupedTableViewCell.h"
 
-#import "UIFont+TexasDrums.h"
-
 @implementation TexasDrumsGroupedTableViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier

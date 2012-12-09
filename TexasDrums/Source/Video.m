@@ -77,7 +77,7 @@
 #pragma mark - Instance Methods
 
 - (NSURL *)createThumbnailURL {
-    NSString *string = [NSString stringWithFormat:@"http://img.youtube.com/vi/%@/hqdefault.jpg", self.videoID];
+    NSString *string = [NSString stringWithFormat:@"http://img.youtube.com/vi/%@/0.jpg", self.videoID];
     NSURL *url = [[[NSURL alloc] initWithString:string] autorelease];
 
     return url;

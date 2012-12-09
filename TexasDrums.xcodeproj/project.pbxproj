@@ -289,6 +289,9 @@
 		63D969CE1674616700765304 /* UIImage+TexasDrums.m in Sources */ = {isa = PBXBuildFile; fileRef = 63D969CD1674616700765304 /* UIImage+TexasDrums.m */; };
 		63D969CF1674616700765304 /* UIImage+TexasDrums.m in Sources */ = {isa = PBXBuildFile; fileRef = 63D969CD1674616700765304 /* UIImage+TexasDrums.m */; };
 		63D969D01674616700765304 /* UIImage+TexasDrums.m in Sources */ = {isa = PBXBuildFile; fileRef = 63D969CD1674616700765304 /* UIImage+TexasDrums.m */; };
+		63D969D31674EA0800765304 /* NewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63D969D21674EA0700765304 /* NewsCell.m */; };
+		63D969D41674EA0800765304 /* NewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63D969D21674EA0700765304 /* NewsCell.m */; };
+		63D969D51674EA0800765304 /* NewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63D969D21674EA0700765304 /* NewsCell.m */; };
 		63E2EDA415C0FE81006C826E /* TexasDrumsGetEditProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E2EDA315C0FE81006C826E /* TexasDrumsGetEditProfile.m */; };
 		63E2EDA515C0FE81006C826E /* TexasDrumsGetEditProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E2EDA315C0FE81006C826E /* TexasDrumsGetEditProfile.m */; };
 		63E2EDA615C0FE81006C826E /* TexasDrumsGetEditProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E2EDA315C0FE81006C826E /* TexasDrumsGetEditProfile.m */; };
@@ -799,6 +802,8 @@
 		63D969C816745FE600765304 /* TexasDrumsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsViewController.m; sourceTree = "<group>"; };
 		63D969CC1674616700765304 /* UIImage+TexasDrums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+TexasDrums.h"; sourceTree = "<group>"; };
 		63D969CD1674616700765304 /* UIImage+TexasDrums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+TexasDrums.m"; sourceTree = "<group>"; };
+		63D969D11674EA0700765304 /* NewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCell.h; sourceTree = "<group>"; };
+		63D969D21674EA0700765304 /* NewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCell.m; sourceTree = "<group>"; };
 		63E2EDA215C0FE81006C826E /* TexasDrumsGetEditProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexasDrumsGetEditProfile.h; sourceTree = "<group>"; };
 		63E2EDA315C0FE81006C826E /* TexasDrumsGetEditProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsGetEditProfile.m; sourceTree = "<group>"; };
 		63E4D6AA15C361EC003EC59E /* EditProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfile.h; sourceTree = "<group>"; };
@@ -1701,6 +1706,8 @@
 			children = (
 				04E9AB3013B4E5B700F207EA /* News.h */,
 				04E9AB3113B4E5B700F207EA /* News.m */,
+				63D969D11674EA0700765304 /* NewsCell.h */,
+				63D969D21674EA0700765304 /* NewsCell.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -2487,6 +2494,7 @@
 				6347CABB15CE11A4004412BB /* GigRequirementsViewController.m in Sources */,
 				63D969C916745FE600765304 /* TexasDrumsViewController.m in Sources */,
 				63D969CE1674616700765304 /* UIImage+TexasDrums.m in Sources */,
+				63D969D31674EA0800765304 /* NewsCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2518,6 +2526,7 @@
 				6347CABC15CE11A4004412BB /* GigRequirementsViewController.m in Sources */,
 				63D969CA16745FE600765304 /* TexasDrumsViewController.m in Sources */,
 				63D969CF1674616700765304 /* UIImage+TexasDrums.m in Sources */,
+				63D969D41674EA0800765304 /* NewsCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2638,6 +2647,7 @@
 				6347CABD15CE11A4004412BB /* GigRequirementsViewController.m in Sources */,
 				63D969CB16745FE600765304 /* TexasDrumsViewController.m in Sources */,
 				63D969D01674616700765304 /* UIImage+TexasDrums.m in Sources */,
+				63D969D51674EA0800765304 /* NewsCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

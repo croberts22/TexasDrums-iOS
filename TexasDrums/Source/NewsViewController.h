@@ -32,17 +32,4 @@
 @property (nonatomic, assign) int num_member_posts;
 @property (nonatomic, retain) UIBarButtonItem *refresh;
 
-- (void)refreshPressed;
-- (void)hideRefreshButton;
-- (void)dismissWithSuccess;
-- (void)dismissWithError;
-- (void)displayTable;
-
-- (void)connect;
-- (void)parseNewsData:(NSDictionary *)results;
-- (void)sortTable;
-
-- (void)reloadTableViewDataSource;
-- (void)doneLoadingTableViewData;
-
 @end
