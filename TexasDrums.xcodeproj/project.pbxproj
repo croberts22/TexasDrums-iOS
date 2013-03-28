@@ -283,6 +283,8 @@
 		6398DF9B157BB8CF004A11DA /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6398DF9A157BB8CF004A11DA /* MobileCoreServices.framework */; };
 		6398DF9D157BB8EA004A11DA /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6398DF9C157BB8EA004A11DA /* libz.dylib */; };
 		6398DFA4157C1A65004A11DA /* UIColor+TexasDrums.m in Sources */ = {isa = PBXBuildFile; fileRef = 6398DFA3157C1A65004A11DA /* UIColor+TexasDrums.m */; };
+		63B0D6ED1704115C002C94C8 /* reveal-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 63B0D6EB1704115C002C94C8 /* reveal-icon.png */; };
+		63B0D6EE1704115C002C94C8 /* reveal-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63B0D6EC1704115C002C94C8 /* reveal-icon@2x.png */; };
 		63BD89A7158848E600593E48 /* TexasDrumsGetFAQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 63BD89A6158848E600593E48 /* TexasDrumsGetFAQ.m */; };
 		63D969C916745FE600765304 /* TexasDrumsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63D969C816745FE600765304 /* TexasDrumsViewController.m */; };
 		63D969CA16745FE600765304 /* TexasDrumsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63D969C816745FE600765304 /* TexasDrumsViewController.m */; };
@@ -772,6 +774,8 @@
 		6398DF9C157BB8EA004A11DA /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		6398DFA2157C1A65004A11DA /* UIColor+TexasDrums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+TexasDrums.h"; sourceTree = "<group>"; };
 		6398DFA3157C1A65004A11DA /* UIColor+TexasDrums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+TexasDrums.m"; sourceTree = "<group>"; };
+		63B0D6EB1704115C002C94C8 /* reveal-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reveal-icon.png"; sourceTree = "<group>"; };
+		63B0D6EC1704115C002C94C8 /* reveal-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reveal-icon@2x.png"; sourceTree = "<group>"; };
 		63BD89A5158848E600593E48 /* TexasDrumsGetFAQ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexasDrumsGetFAQ.h; sourceTree = "<group>"; };
 		63BD89A6158848E600593E48 /* TexasDrumsGetFAQ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexasDrumsGetFAQ.m; sourceTree = "<group>"; };
 		63BE6C2D157D7AF300E4097B /* CrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrashReporter.h; sourceTree = "<group>"; };
@@ -1631,6 +1635,8 @@
 		63EF607B16FABC3500077A87 /* SWRevealViewController */ = {
 			isa = PBXGroup;
 			children = (
+				63B0D6EB1704115C002C94C8 /* reveal-icon.png */,
+				63B0D6EC1704115C002C94C8 /* reveal-icon@2x.png */,
 				63EF607D16FABC6300077A87 /* SWRevealViewController.h */,
 				63EF607E16FABC6300077A87 /* SWRevealViewController.m */,
 			);
@@ -2229,6 +2235,8 @@
 				635D6E2D15D21BD60019B677 /* orangeArrow.png in Resources */,
 				635D6E3015D21BD60019B677 /* orangeArrow@2x.png in Resources */,
 				635292141605AFCC00260734 /* Default-568h@2x.png in Resources */,
+				63B0D6ED1704115C002C94C8 /* reveal-icon.png in Resources */,
+				63B0D6EE1704115C002C94C8 /* reveal-icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

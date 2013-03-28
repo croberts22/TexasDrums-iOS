@@ -13,6 +13,8 @@
 #import "TexasDrumsGetNews.h"
 #import "CJSONDeserializer.h"
 
+#import "SWRevealViewController.h"
+
 @interface NewsViewController() {
     TexasDrumsGetNews *getNews;
 }
@@ -67,6 +69,15 @@
     [super viewDidLoad];
     
     [self setTitle:@"News"];
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    
+    [self.navigationController.navigationBar addGestureRecognizer:revealController.panGestureRecognizer];
+    
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
+                                                                         style:UIBarButtonItemStyleBordered target:revealController action:@selector(revealToggle:)];
+    
+    self.navigationItem.leftBarButtonItem = revealButtonItem;
 
     // Set properties.
     self.timestamp = 0;
@@ -177,6 +188,7 @@
 #pragma mark - Data Methods
 
 - (void)connect {
+    [SVProgressHUD dismiss]; return;
     [self hideRefreshButton];
     TexasDrumsGetNews *get = [[TexasDrumsGetNews alloc] initWithTimestamp:timestamp];
     get.delegate = self;
