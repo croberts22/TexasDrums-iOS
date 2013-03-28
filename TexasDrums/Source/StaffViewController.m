@@ -38,12 +38,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)dealloc {
-    [staffTable release], staffTable = nil;
-    [staff release], staff = nil;
-    [super dealloc];
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -154,7 +148,7 @@
     
     if (cell == nil)
     {
-        cell = [[[TexasDrumsTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[TexasDrumsTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         
         cell.textLabel.font = [UIFont TexasDrumsBoldFontOfSize:18];
         cell.textLabel.adjustsFontSizeToFitWidth = YES;
@@ -178,7 +172,7 @@
 #pragma mark - UITableView Delegate Methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    StaffMemberViewController *SMVC = [[[StaffMemberViewController alloc] initWithNibName:@"StaffMemberViewController" bundle:[NSBundle mainBundle]] autorelease];
+    StaffMemberViewController *SMVC = [[StaffMemberViewController alloc] initWithNibName:@"StaffMemberViewController" bundle:[NSBundle mainBundle]];
     SMVC.member = [staff objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:SMVC animated:YES];
 }

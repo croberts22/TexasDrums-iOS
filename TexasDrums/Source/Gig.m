@@ -37,20 +37,11 @@
     return self;
 }
 
-- (void)dealloc {
-    [gig_name release], gig_name = nil;
-    [location release], location = nil;
-    [description release], description = nil;
-    [timestamp_string release], timestamp_string = nil;
-    [users release], users = nil;;
-    [super dealloc];
-}
-
 #pragma mark - Instance Methods
 
 - (void)convertTimestampToString {
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:self.timestamp];
-    NSDateFormatter *format = [[[NSDateFormatter alloc] init] autorelease];
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setDateStyle:NSDateFormatterMediumStyle];
     [format setTimeStyle:NSDateFormatterShortStyle];
     self.timestamp_string = [format stringFromDate:date];

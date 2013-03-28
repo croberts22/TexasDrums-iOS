@@ -30,9 +30,9 @@ static int max_retry_count = 3;
 
 + (void)initialize {
     if (self == [TexasDrumsRequest class]) {
-        TexasDrumsAPIVersion = [[NSString alloc] initWithString:@"1.1"];
+        TexasDrumsAPIVersion = @"1.1";
         TexasDrumsServerURL = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://www.texasdrums.com/api/%@/", TexasDrumsAPIVersion]];
-        TexasDrumsAPIKey = [[NSString alloc] initWithString:@"LwtP6NB2Y0hooXVZj29fwceVfp93D"];
+        TexasDrumsAPIKey = @"LwtP6NB2Y0hooXVZj29fwceVfp93D";
     }
 }
 
@@ -47,26 +47,21 @@ static int max_retry_count = 3;
 
 - (void)dealloc {
     [request cancel];
-    
-    [request release], request = nil;
-    [downloaded_data release], downloaded_data = nil;
-    
-    [super dealloc];
 }
 
 # pragma mark -
 # pragma mark Class Methods
 
 + (NSURL *)TexasDrumsServerURL {
-    return [[TexasDrumsServerURL copy] autorelease];
+    return TexasDrumsServerURL;
 }
 
 + (NSString *)TexasDrumsAPIVersion {
-    return [[TexasDrumsAPIVersion copy] autorelease];
+    return TexasDrumsAPIVersion;
 }
 
 + (NSString *)TexasDrumsAPIKey {
-    return [[TexasDrumsAPIKey copy] autorelease];
+    return TexasDrumsAPIKey;
 }
 
 # pragma mark -
@@ -122,7 +117,7 @@ static int max_retry_count = 3;
         self.request_succeeded = YES;
     }
     
-    downloaded_data = [[[NSData alloc] initWithData:[request_ responseData]] autorelease];
+    downloaded_data = [[NSData alloc] initWithData:[request_ responseData]];
 
     if(self.request_succeeded){
         switch (self.response_code){

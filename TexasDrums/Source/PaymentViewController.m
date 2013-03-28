@@ -32,18 +32,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)dealloc {
-    self.getAccounts.delegate = nil;
-    [self.getAccounts cancelRequest];
-    self.getPayment.delegate = nil;
-    [self.getPayment cancelRequest];
-    [getAccounts release], getAccounts = nil;
-    [getPayment release], getPayment = nil;
-    [paymentTable release], paymentTable = nil;
-    [memberList release], memberList = nil;
-    [super dealloc];
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -145,7 +133,6 @@
 - (void)sortMembersByName {
     NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"firstname" ascending:YES];
     [memberList sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
-    [descriptor release];
 }
 
 - (void)updateUser:(NSString *)user withPayment:(NSNumber *)paid {
@@ -172,11 +159,11 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 
         cell.backgroundColor = [UIColor clearColor];
         cell.textLabel.font = [UIFont TexasDrumsBoldFontOfSize:16];
-        cell.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"uitableviewselection-orange-44.png"]] autorelease];
+        cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"uitableviewselection-orange-44.png"]];
     }
     
     Profile *member = [memberList objectAtIndex:indexPath.row];

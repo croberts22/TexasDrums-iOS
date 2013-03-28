@@ -38,10 +38,6 @@
 
 - (void)dealloc {
     self.getGigs.delegate = nil;
-    [getGigs release], getGigs = nil;
-    [gigsTable release], gigsTable = nil;
-    [gigs release], gigs = nil;
-    [super dealloc];
 }
 
 - (void)viewDidLoad {
@@ -57,7 +53,7 @@
     
     // If user is a section leader/admin/instructor, create an add button.
     if([defaults boolForKey:@"SL"] || [defaults boolForKey:@"admin"] || [defaults boolForKey:@"instructor"]) {
-        UIBarButtonItem *plusButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewGig)] autorelease];
+        UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewGig)];
         self.navigationItem.rightBarButtonItem = plusButton;
     }
     
@@ -108,7 +104,7 @@
 
 - (void)parseGigData:(NSDictionary *)results {
     for(NSDictionary *item in results) {
-        Gig *gig = [[[Gig alloc] init] autorelease];
+        Gig *gig = [[Gig alloc] init];
         
         gig.gig_name = [item objectForKey:@"name"];
         gig.gig_id = [[item objectForKey:@"gig_id"] intValue];
@@ -124,7 +120,7 @@
         [gig convertTimestampToString];
         
         for(NSDictionary *users in [item objectForKey:@"users"]) {
-            GigUser *user = [[[GigUser alloc] init] autorelease];
+            GigUser *user = [[GigUser alloc] init];
             user.firstname = [users objectForKey:@"first_name"];
             user.lastname = [users objectForKey:@"last_name"];
             user.section = [users objectForKey:@"section"];
@@ -140,7 +136,7 @@
 }
 
 - (void)addNewGig {
-    AddGigViewController *AGVC = [[[AddGigViewController alloc] initWithNibName:@"AddGigViewController" bundle:[NSBundle mainBundle]] autorelease];
+    AddGigViewController *AGVC = [[AddGigViewController alloc] initWithNibName:@"AddGigViewController" bundle:[NSBundle mainBundle]];
     AGVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:AGVC animated:YES];
 }
@@ -211,7 +207,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
         
         // Override TexasDrumsGroupedTableViewCell properties. 
         cell.detailTextLabel.textColor = [UIColor TexasDrumsGrayColor];

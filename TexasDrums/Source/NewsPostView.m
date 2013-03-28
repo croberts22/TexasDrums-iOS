@@ -38,11 +38,6 @@
 
 - (void)dealloc {
     self.webView.delegate = nil;
-    [webView release], webView = nil;
-    [titleOfPost release], titleOfPost = nil;
-    [dateAndAuthor release], dateAndAuthor = nil;
-    [post release], post = nil;
-    [super dealloc];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -93,7 +88,7 @@
     self.titleOfPost.text = post.titleOfPost;
     
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:post.timestamp];
-    NSDateFormatter *format = [[[NSDateFormatter alloc] init] autorelease];
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setDateFormat:@"MMMM d, yyyy 'at' h:m a"];
     
     NSString *dateString = [format stringFromDate:date];
@@ -126,7 +121,7 @@
         return YES;
     }
     else {
-        TexasDrumsWebViewController *TDWBC = [[[TexasDrumsWebViewController alloc] init] autorelease];
+        TexasDrumsWebViewController *TDWBC = [[TexasDrumsWebViewController alloc] init];
         TDWBC.url = request;
         [self.navigationController pushViewController:TDWBC animated:YES];
         return NO;

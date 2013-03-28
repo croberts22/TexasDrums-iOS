@@ -44,14 +44,7 @@
 
 - (void)dealloc {
     self.getNews.delegate = nil;
-    [getNews release], getNews = nil;
-    [newsTable release], newsTable = nil;
-    [posts release], posts = nil;
-    [allposts release], allposts = nil;
-    [refresh release], refresh = nil;
-    [status release], status = nil;
     _refreshHeaderView = nil;
-    [super dealloc];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -72,7 +65,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     [self setTitle:@"News"];
 
     // Set properties.
@@ -100,7 +93,6 @@
 		view.delegate = self;
 		[self.newsTable addSubview:view];
 		_refreshHeaderView = view;
-		[view release];
 	}
 	
 	// Update the last update date.
@@ -226,12 +218,10 @@
     NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:NO];
     [allposts sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
     [posts sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
-    [descriptor release];
     
     descriptor = [[NSSortDescriptor alloc] initWithKey:@"sticky" ascending:NO];
     [allposts sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
-    [posts sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];    
-    [descriptor release];
+    [posts sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
 }
 
 #pragma mark - UITableView Data Source
@@ -259,7 +249,7 @@
     
     TexasDrumsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[TexasDrumsTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[TexasDrumsTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         
         cell.textLabel.font = [UIFont TexasDrumsBoldFontOfSize:14];
         
@@ -319,7 +309,6 @@
     }
     
     [self.navigationController pushViewController:NPV animated:YES];
-    [NPV release];
 }
 
 #pragma mark -

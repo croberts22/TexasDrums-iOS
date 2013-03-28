@@ -31,14 +31,6 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (void)dealloc {
-    [firstname release], firstname = nil;
-    [lastname release], lastname = nil;
-    [submit release], submit = nil;
-    [status release], status = nil;
-    [super dealloc];
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -138,7 +130,6 @@
                                               cancelButtonTitle:@"Okay"
                                               otherButtonTitles:nil, nil];
         [alert show];
-        [alert release];
         return NO;
     }
     else if([firstname.text isEqualToString:[UserProfile sharedInstance].firstname] && [lastname.text isEqualToString:[UserProfile sharedInstance].lastname]) {
@@ -148,7 +139,6 @@
                                               cancelButtonTitle:@"Okay"
                                               otherButtonTitles:nil, nil];
         [alert show];
-        [alert release];
         return NO;
     }
     else return YES;

@@ -32,14 +32,6 @@
     return self;
 }
 
-- (void)dealloc {
-    [member release], member = nil;
-    [picture release], picture = nil;
-    [bio release], bio = nil;
-    [scroll release], scroll = nil;
-    [super dealloc];
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -79,7 +71,7 @@
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", DOMAIN_PATH, member.image_url]];
     
     // Since the UIImageView is set first, set the inital coordinates to (0,0).
-    picture = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)] autorelease];
+    picture = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
     
     [self.picture setImageWithURL:url placeholderImage:[UIImage imageNamed:@"Thumbnail.png"]];
     
@@ -96,7 +88,7 @@
     NSString *HTMLString = [NSString stringWithFormat:@"%@%@%@", header, member.bio, footer];
     
     // Set the frame to start at (0, height of picture).
-    bio = [[[UIWebView alloc] initWithFrame:CGRectMake(0, picture.frame.size.height, 320, 167)] autorelease];
+    bio = [[UIWebView alloc] initWithFrame:CGRectMake(0, picture.frame.size.height, 320, 167)];
     
     [self.bio loadHTMLString:HTMLString baseURL:nil];
     
@@ -110,7 +102,7 @@
 
 - (void)initializeScroll {
     // Set UIScrollView's frame to be the UIView (not including space for the UINavigationBar or UITabBar) = (320, 367).
-    scroll = [[[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, VIEW_HEIGHT)] autorelease];
+    scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, VIEW_HEIGHT)];
     
     // Set UIScrollView properties.
     self.scroll.backgroundColor = [UIColor clearColor];
@@ -147,7 +139,7 @@
     else {
         // If the link is not a mail link, then push to the TexasDrumsWebViewController.
         if([[[request URL] absoluteString] rangeOfString:@"mailto:"].location == NSNotFound){
-            TexasDrumsWebViewController *TDWBC = [[[TexasDrumsWebViewController alloc] init] autorelease];
+            TexasDrumsWebViewController *TDWBC = [[TexasDrumsWebViewController alloc] init];
             TDWBC.url = request;
             [self.navigationController pushViewController:TDWBC animated:YES];
         }
@@ -159,7 +151,6 @@
                 [mailVC setToRecipients:[NSArray arrayWithObject:member.email]];
                 [mailVC setSubject:@"Question about Texas Drums"];
                 [self presentModalViewController:mailVC animated:YES];
-                [mailVC release];
             }
         }
         return NO;

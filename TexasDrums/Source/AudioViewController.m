@@ -40,15 +40,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)dealloc {
-    [audioTable release], audioTable = nil;
-    [pauseButton release], pauseButton = nil;
-    [playButton release], playButton = nil;
-    [audioPlayer release], audioPlayer = nil;
-    [audioArray release], audioArray = nil;
-    [super dealloc];
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -186,13 +177,13 @@
     
     TexasDrumsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[TexasDrumsTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[TexasDrumsTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
 
         cell.textLabel.font = [UIFont TexasDrumsBoldFontOfSize:18];
     }
     
     if(currentTrack == indexPath.row) {
-        cell.accessoryView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"note.png"]] autorelease];
+        cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"note.png"]];
         cell.textLabel.textColor = [UIColor TexasDrumsOrangeColor];
     }
     else {
@@ -232,7 +223,6 @@
     self.navigationItem.rightBarButtonItem.enabled = YES;
     
     [audioPlayer stop];
-    [audioPlayer release];
     self.audioPlayer = nil;
     
     // Fetch the file directory path.
@@ -251,7 +241,7 @@
     
     // Set the new cell properties.
     cell = [self.audioTable cellForRowAtIndexPath:indexPath];
-    cell.accessoryView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"note.png"]] autorelease];;
+    cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"note.png"]];
     cell.textLabel.textColor = [UIColor TexasDrumsOrangeColor];
 }
 

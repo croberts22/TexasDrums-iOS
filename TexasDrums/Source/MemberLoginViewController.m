@@ -36,16 +36,6 @@
     return self;
 }
 
-- (void)dealloc {
-    [username release], username = nil;
-    [password release], password = nil;
-    [cancel release], cancel = nil;
-    [login release], login = nil;
-    [background release], background = nil;
-    [navbar release], navbar = nil;
-    [super dealloc];
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }

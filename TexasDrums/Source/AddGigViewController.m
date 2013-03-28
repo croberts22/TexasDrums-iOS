@@ -10,6 +10,8 @@
 #import "DateViewController.h"
 #import "GigRequirementsViewController.h"
 #import "MemberListViewController.h"
+#import "Profile.h"
+#import "UILabel+TexasDrums.h"
 
 @interface AddGigViewController ()
 
@@ -62,9 +64,9 @@
     self.peopleRequired.font = [UIFont TexasDrumsItalicFontOfSize:14];
     self.peopleRequired.text = NSLocalizedString(@"tap to edit", nil);
     self.peopleRequired.textAlignment = UITextAlignmentLeft;
-    self.currentSelection = [[[NSArray alloc] initWithObjects:@"3", @"2", @"2", @"3", nil] autorelease];
-    self.currentPeople = [[[NSMutableArray alloc] init] autorelease];
-    self.dateViewController = [[[DateViewController alloc] initWithNibName:@"DateViewController" bundle:[NSBundle mainBundle]] autorelease];
+    self.currentSelection = [[NSArray alloc] initWithObjects:@"3", @"2", @"2", @"3", nil];
+    self.currentPeople = [[NSMutableArray alloc] init];
+    self.dateViewController = [[DateViewController alloc] initWithNibName:@"DateViewController" bundle:[NSBundle mainBundle]];
     self.dateViewController.view.frame = CGRectMake(0, self.view.frame.size.height, self.dateViewController.view.frame.size.width, self.dateViewController.view.frame.size.height);
     self.dateViewController.currentDate = [NSDate date];
     self.dateViewController.datePicker.date = [NSDate date];
@@ -74,7 +76,6 @@
     dateFormatter.dateFormat = @"MMMM d, yyyy' at 'h:mm a";
     NSString *current_date = [dateFormatter stringFromDate:[NSDate date]]; 
     self.date.text = current_date;
-    [dateFormatter release];
 }
 
 - (void)viewDidUnload {
@@ -105,7 +106,6 @@
     dateFormatter.dateFormat = @"MMMM d, yyyy' at 'h:mm a";
     NSString *current_date = [dateFormatter stringFromDate:self.dateViewController.datePicker.date];
     self.date.text = current_date;
-    [dateFormatter release];
     [UIView animateWithDuration:0.2
                           delay:0
                         options:UIViewAnimationCurveEaseInOut
@@ -131,7 +131,7 @@
 }
 
 - (IBAction)peopleButtonPressed:(id)sender {
-    GigRequirementsViewController *GRVC = [[[GigRequirementsViewController alloc] initWithNibName:@"GigRequirementsViewController" bundle:[NSBundle mainBundle]] autorelease];
+    GigRequirementsViewController *GRVC = [[GigRequirementsViewController alloc] initWithNibName:@"GigRequirementsViewController" bundle:[NSBundle mainBundle]];
     GRVC.delegate = self;
     GRVC.peopleRequired = self.currentSelection;
     
@@ -139,7 +139,7 @@
 }
 
 - (IBAction)chooseMemberSelected:(id)sender {
-    MemberListViewController *MLVC = [[[MemberListViewController alloc] initWithNibName:@"MemberListViewController" bundle:[NSBundle mainBundle]] autorelease];
+    MemberListViewController *MLVC = [[MemberListViewController alloc] initWithNibName:@"MemberListViewController" bundle:[NSBundle mainBundle]];
     MLVC.delegate = self;
     MLVC.currentSelection = currentPeople_;
     [self.navigationController pushViewController:MLVC animated:YES];

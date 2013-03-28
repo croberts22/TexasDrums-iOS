@@ -22,13 +22,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)dealloc {
-    [roster release], roster = nil;
-    [year release], year = nil;
-    [singleRosterTable release], singleRosterTable = nil;
-    [super dealloc];
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
@@ -130,7 +123,7 @@
     
     TexasDrumsGroupedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[TexasDrumsGroupedTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[TexasDrumsGroupedTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     switch(indexPath.section){
@@ -158,8 +151,8 @@
     
     // Since a cell's background views are not compatible with UIImageView,
     // set them both as UIImageView.
-    cell.backgroundView = [[[UIImageView alloc] init] autorelease];
-    cell.selectedBackgroundView = [[[UIImageView alloc] init] autorelease];
+    cell.backgroundView = [[UIImageView alloc] init];
+    cell.selectedBackgroundView = [[UIImageView alloc] init];
     
     // Cell Background images.
     // TODO: Change the selected background image to something else.
@@ -208,7 +201,6 @@
     }
     
     [self.navigationController pushViewController:SMV animated:YES];
-    [SMV release];
 }
 
 @end

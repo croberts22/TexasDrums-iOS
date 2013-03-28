@@ -46,9 +46,6 @@ static NSMutableArray *years = nil;
 
 - (void)dealloc {
     self.getVideos.delegate = nil;
-    [getVideos release], getVideos = nil;
-    [videoTable release], videoTable = nil;
-    [super dealloc];
 }
 
 #pragma mark - View lifecycle
@@ -117,7 +114,7 @@ static NSMutableArray *years = nil;
 }
 
 - (void)dismissWithError {
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshPressed)] autorelease];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshPressed)];
     self.navigationItem.rightBarButtonItem.enabled = YES;
     [SVProgressHUD showErrorWithStatus:@"Could not fetch data."];
 }
@@ -150,7 +147,7 @@ static NSMutableArray *years = nil;
     // Instantiate variables.
     NSString *current_year = @"";
     int i = 0;
-    NSMutableArray *first_year = [[[NSMutableArray alloc] init] autorelease];
+    NSMutableArray *first_year = [[NSMutableArray alloc] init];
     [videos addObject:first_year];
     
     for(NSDictionary *item in results) {
@@ -174,7 +171,7 @@ static NSMutableArray *years = nil;
             current_year = video.videoYear;
             i++;
             
-            NSMutableArray *this_year = [[[NSMutableArray alloc] init] autorelease];
+            NSMutableArray *this_year = [[NSMutableArray alloc] init];
             [videos addObject:this_year];
             [years addObject:current_year];
             [[videos objectAtIndex:i] addObject:video];
@@ -212,7 +209,7 @@ static NSMutableArray *years = nil;
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     // Set cell properties.
@@ -223,7 +220,7 @@ static NSMutableArray *years = nil;
     cell.detailTextLabel.numberOfLines = 3;
     cell.detailTextLabel.font = [UIFont TexasDrumsFontOfSize:12];
     
-    cell.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"uitableviewselection-orange-60.png"]] autorelease];
+    cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"uitableviewselection-orange-60.png"]];
     
     // Find the correct video to display according to section and row.
     Video *this_video = [[videos objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
@@ -249,7 +246,6 @@ static NSMutableArray *years = nil;
     TDWVC.hidesBottomBarWhenPushed = YES;
     
     [self.navigationController pushViewController:TDWVC animated:YES];
-    [TDWVC release];
 }
 
 #pragma mark - TexasDrumsRequest Delegate Methods

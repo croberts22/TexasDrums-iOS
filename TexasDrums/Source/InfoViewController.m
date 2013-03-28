@@ -30,11 +30,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)dealloc {
-    [aboutTable release], aboutTable = nil;
-    [super dealloc];
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -113,7 +108,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
         cell.textLabel.textColor = [UIColor TexasDrumsGrayColor];
         cell.textLabel.font = [UIFont TexasDrumsBoldFontOfSize:16];
@@ -123,8 +118,8 @@
         
         // Since a cell's background views are not compatible with UIImageView,
         // set them both as UIImageView.
-        cell.backgroundView = [[[UIImageView alloc] init] autorelease];
-        cell.selectedBackgroundView = [[[UIImageView alloc] init] autorelease];
+        cell.backgroundView = [[UIImageView alloc] init];
+        cell.selectedBackgroundView = [[UIImageView alloc] init];
     }
 
     UIImage *background;
@@ -174,24 +169,20 @@
         if(indexPath.row == 0){
             AboutUsViewController *AUVC = [[AboutUsViewController alloc] initWithNibName:@"AboutUsView" bundle:[NSBundle mainBundle]];
             [self.navigationController pushViewController:AUVC animated:YES];
-            [AUVC release];
         }
         else if(indexPath.row == 1){
             FAQViewController *FVC = [[FAQViewController alloc] initWithNibName:@"FAQView" bundle:[NSBundle mainBundle]];
             [self.navigationController pushViewController:FVC animated:YES];
-            [FVC release];
         }
         else if(indexPath.row == 2){
             StaffViewController *SVC = [[StaffViewController alloc] initWithNibName:@"StaffView" bundle:[NSBundle mainBundle]];
             [self.navigationController pushViewController:SVC animated:YES];
-            [SVC release];
         }
     }
     else if(indexPath.section == 1){
         if(indexPath.row == 0){
             AboutThisAppViewController *ATAVC = [[AboutThisAppViewController alloc] initWithNibName:@"AboutThisAppView" bundle:[NSBundle mainBundle]];
             [self.navigationController pushViewController:ATAVC animated:YES];
-            [ATAVC release];
         }
         else if(indexPath.row == 1){
             if([MFMailComposeViewController canSendMail]){
@@ -204,7 +195,6 @@
                 [mailVC setToRecipients:[NSArray arrayWithObject:@"support@texasdrums.com"]];
                 [mailVC setSubject:@"Texas Drums (iOS) Comments"];
                 [self presentModalViewController:mailVC animated:YES];
-                [mailVC release];
             }
         }
     }

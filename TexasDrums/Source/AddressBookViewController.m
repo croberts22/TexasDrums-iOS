@@ -46,9 +46,6 @@ static NSMutableDictionary *full_name = nil;
 
 - (void)dealloc {
     self.getAccounts.delegate = nil;
-    [getAccounts release], getAccounts = nil;
-    [addressBookTable release], addressBookTable = nil;
-    [super dealloc];
 }
 
 #pragma mark - View lifecycle
@@ -157,7 +154,6 @@ static NSMutableDictionary *full_name = nil;
 - (void)sortMembersByName {
     NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"firstname" ascending:YES];
     [addressBook sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
-    [descriptor release];
     
     //now, grab all alpha characters
     [self grabCharacters];
@@ -225,9 +221,9 @@ static NSMutableDictionary *full_name = nil;
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if(cell == nil){
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
-        cell.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"uitableviewselection-orange-44.png"]] autorelease];
+        cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"uitableviewselection-orange-44.png"]];
         
         cell.textLabel.font = [UIFont TexasDrumsBoldFontOfSize:16];
         cell.textLabel.textColor = [UIColor TexasDrumsGrayColor];
@@ -248,7 +244,6 @@ static NSMutableDictionary *full_name = nil;
     AddressBookMemberViewController *ABMVC = [[AddressBookMemberViewController alloc] init];
     ABMVC.profile = [[full_name valueForKey:[[[full_name allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:ABMVC animated:YES];
-    [ABMVC release];
 }
 
 #pragma mark - TexasDrumsRequest Delegate Methods

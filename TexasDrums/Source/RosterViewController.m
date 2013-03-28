@@ -42,11 +42,6 @@
 
 - (void)dealloc {
     self.getRosters.delegate = nil;
-    [getRosters release], getRosters = nil;
-    [rosters release], rosters = nil;
-    [rosterTable release], rosterTable = nil;
-    [refresh release], refresh = nil;
-    [super dealloc];
 }
 
 #pragma mark - View lifecycle
@@ -178,7 +173,6 @@
             // Sort and add the roster to the full roster list.
             [roster sortSections];
             [rosters addObject:roster];
-            [roster release];
             
             // If last object in the JSON response is NULL, break the loop.
             if([member objectForKey:@"year"] == [NSNull null]){
@@ -227,7 +221,7 @@
     
     TexasDrumsGroupedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[TexasDrumsGroupedTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[TexasDrumsGroupedTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
         cell.textLabel.textAlignment = UITextAlignmentCenter;
     }
@@ -237,8 +231,8 @@
     
     // Since a cell's background views are not compatible with UIImageView,
     // set them both as UIImageView.
-    cell.backgroundView = [[[UIImageView alloc] init] autorelease];
-    cell.selectedBackgroundView = [[[UIImageView alloc] init] autorelease];
+    cell.backgroundView = [[UIImageView alloc] init];
+    cell.selectedBackgroundView = [[UIImageView alloc] init];
     
     // Cell Background images.
     // TODO: Change the selected background image to something else; 
@@ -268,7 +262,7 @@
 #pragma mark - Table View Delegate Methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    SingleRosterViewController *SRVC = [[[SingleRosterViewController alloc] initWithNibName:@"SingleRosterView" bundle:[NSBundle mainBundle]] autorelease];
+    SingleRosterViewController *SRVC = [[SingleRosterViewController alloc] initWithNibName:@"SingleRosterView" bundle:[NSBundle mainBundle]];
     
     SRVC.roster = [rosters objectAtIndex:indexPath.row];
     SRVC.year = [[rosters objectAtIndex:indexPath.row] the_year];

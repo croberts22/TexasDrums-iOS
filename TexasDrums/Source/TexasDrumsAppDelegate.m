@@ -12,6 +12,9 @@
 #import "Crittercism.h"
 #import "TexasDrumsGetMemberLogin.h"
 #import "GANTracker.h"
+#import "SWRevealViewController.h"
+
+#import "NewsViewController.h"
 
 // Dispatch period in seconds
 static const NSInteger kGANDispatchPeriodSec = 10;
@@ -40,21 +43,38 @@ static const NSInteger kGANDispatchPeriodSec = 10;
                      andSecret:@"pat1ikup9agryyrlhh7mt2cv5k8gsnjx"
          andMainViewController:self.window.rootViewController];
     
+    // Fire up Crashlytics.
+    [Crashlytics startWithAPIKey:@"c01aa6f0d36b5000da6aa8c83dda558c23be54f8"];
     
     // Get User Profile (if already logged in previously).
     [self fetchUserProfile];
+    
+    UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+	self.window = window;
     
     // Set AVAudio properties to play audio files on the silent thread of AVFoundation.
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
 
     [self registerAppDefaults];
+    
+    UITableViewController *controller = [[UITableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    NewsViewController *NV = [[NewsViewController alloc] initWithNibName:@"NewsView" bundle:[NSBundle mainBundle]];
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:NV];
 
-    self.window.rootViewController = self.tabBarController;
+    SWRevealViewController *rootController = [[SWRevealViewController alloc] initWithRearViewController:controller frontViewController:navigationController];
+    rootController.delegate = self;
+    
+    self.viewController = rootController;
+    
+    self.window.rootViewController = self.viewController;
+    
+//    self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     
-    if ([self.tabBarController.tabBar respondsToSelector:@selector(setSelectedImageTintColor:)]) {
-        self.tabBarController.tabBar.selectedImageTintColor = [UIColor TexasDrumsOrangeColor];
-    }
+//    if ([self.tabBarController.tabBar respondsToSelector:@selector(setSelectedImageTintColor:)]) {
+//        self.tabBarController.tabBar.selectedImageTintColor = [UIColor TexasDrumsOrangeColor];
+//    }
     
     splashView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, [UIScreen mainScreen].bounds.size.height)];
     splashView.alpha = 1.0;
@@ -77,8 +97,8 @@ static const NSInteger kGANDispatchPeriodSec = 10;
 
 - (void)registerAppDefaults {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSArray *keys = [[[NSArray alloc] initWithObjects:@"login_valid", @"SL", @"instructor", @"admin", @"member", nil] autorelease];
-    NSArray *objects = [[[NSArray alloc] initWithObjects:@"NO", @"NO", @"NO", @"NO", @"NO", nil] autorelease];
+    NSArray *keys = [[NSArray alloc] initWithObjects:@"login_valid", @"SL", @"instructor", @"admin", @"member", nil];
+    NSArray *objects = [[NSArray alloc] initWithObjects:@"NO", @"NO", @"NO", @"NO", @"NO", nil];
     NSDictionary *appDefaults = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
     [defaults registerDefaults:appDefaults];
 }
@@ -115,13 +135,6 @@ static const NSInteger kGANDispatchPeriodSec = 10;
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
-}
-
-- (void)dealloc {
-    [_window release];
-    [_tabBarController release];
-    [splashView release];
-    [super dealloc];
 }
 
 #pragma mark - Data Methods

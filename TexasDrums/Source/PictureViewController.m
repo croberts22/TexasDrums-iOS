@@ -25,10 +25,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)dealloc {
-    [super dealloc];
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -11,8 +11,8 @@
 @implementation UIView (TexasDrums)
 
 + (UIView *)TexasDrumsGroupedTableHeaderViewWithTitle:(NSString *)title andAlignment:(UITextAlignment)alignment {
-    UIView *header = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, HEADER_HEIGHT)] autorelease];
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(10, 20, 300, 30)] autorelease];
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, HEADER_HEIGHT)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, 300, 30)];
     
     label.textAlignment = alignment;
     label.textColor = [UIColor TexasDrumsOrangeColor];
@@ -29,8 +29,8 @@
 
 + (UIView *)TexasDrumsAddressBookTableHeaderViewWithTitle:(NSString *)title {
     
-    UIView *header = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 25)] autorelease];
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, 25)] autorelease];
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 25)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, 25)];
     
     header.backgroundColor = [UIColor blackColor];
     
@@ -49,12 +49,12 @@
 
 + (UIView *)TexasDrumsFAQTableHeaderViewWithTitle:(NSString *)title {
     
-    UIView *header = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, STANDARD_HEADER_HEIGHT)] autorelease];
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, STANDARD_HEADER_HEIGHT)];
     UIImage *headerImage = [UIImage imageNamed:@"header.png"];
-    UIImageView *headerImageView = [[[UIImageView alloc] initWithImage:headerImage] autorelease];
+    UIImageView *headerImageView = [[UIImageView alloc] initWithImage:headerImage];
     headerImageView.frame = CGRectMake(0, 0, 320, 30);
 
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, 25)] autorelease];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, 25)];
     
     header.backgroundColor = [UIColor blackColor];
     
@@ -74,8 +74,8 @@
 
 + (UIView *)TexasDrumsVideoHeaderWithTitle:(NSString *)title {
     // Create a custom header.
-    UIView *header = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, STANDARD_HEADER_HEIGHT)] autorelease];
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, 20)] autorelease];
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, STANDARD_HEADER_HEIGHT)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, 20)];
     
     // Set header title properties.
     label.text = title;
@@ -87,7 +87,7 @@
     
     // Set black gradient background behind header.
     UIImage *headerImage = [UIImage imageNamed:@"header.png"];
-    UIImageView *headerImageView = [[[UIImageView alloc] initWithImage:headerImage] autorelease];
+    UIImageView *headerImageView = [[UIImageView alloc] initWithImage:headerImage];
     headerImageView.frame = CGRectMake(0, 0, 320, 30);
     
     [header addSubview:headerImageView];
@@ -98,8 +98,8 @@
 
 + (UIView *)TexasDrumsVersionFooter {
     
-    UIView *footer = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 10)] autorelease];
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 30)] autorelease];
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 10)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 30)];
     
     label.textAlignment = UITextAlignmentCenter;
     label.textColor = [UIColor darkGrayColor];
@@ -115,7 +115,7 @@
 }
 
 + (UIView *)TexasDrumsCheckmarkAccessoryView {
-    return [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkmark.png"]] autorelease];
+    return [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkmark.png"]];
 }
 
 @end

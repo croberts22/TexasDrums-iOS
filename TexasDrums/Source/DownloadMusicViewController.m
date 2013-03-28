@@ -39,10 +39,6 @@
 
 - (void)dealloc {
     self.getMusic.delegate = nil;
-    [getMusic release], getMusic = nil;
-    [musicTable release], musicTable = nil;
-    [musicArray release], musicArray = nil;
-    [super dealloc];
 }
 
 #pragma mark - View lifecycle
@@ -179,7 +175,7 @@
     
     TexasDrumsGroupedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if(cell == nil){
-        cell = [[[TexasDrumsGroupedTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[TexasDrumsGroupedTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 
             cell.textLabel.font = [UIFont TexasDrumsBoldFontOfSize:16];
     }
@@ -189,8 +185,8 @@
     
     // Since a cell's background views are not compatible with UIImageView,
     // set them both as UIImageView.
-    cell.backgroundView = [[[UIImageView alloc] init] autorelease];
-    cell.selectedBackgroundView = [[[UIImageView alloc] init] autorelease];
+    cell.backgroundView = [[UIImageView alloc] init];
+    cell.selectedBackgroundView = [[UIImageView alloc] init];
     
     // Cell Background images.
     // TODO: Change the selected background image to something else.
@@ -221,7 +217,7 @@
 #pragma mark - Table View Delegate Methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    TexasDrumsWebViewController *TDWVC = [[[TexasDrumsWebViewController alloc] init] autorelease];
+    TexasDrumsWebViewController *TDWVC = [[TexasDrumsWebViewController alloc] init];
     
     Music *music = [self.musicArray objectAtIndex:indexPath.row];
     NSString *url = music.location;

@@ -31,14 +31,6 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (void)dealloc {
-    [phone release], phone = nil;
-    [status release], status = nil;
-    [submit release], submit = nil;
-    [background_button release], background_button = nil;
-    [super dealloc];
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -139,7 +131,6 @@
                                               cancelButtonTitle:@"Okay"
                                               otherButtonTitles:nil, nil];
         [alert show];
-        [alert release];
         return NO;
     }
     else if([self.phone.text length] != 10){
@@ -149,7 +140,6 @@
                                               cancelButtonTitle:@"Okay"
                                               otherButtonTitles:nil, nil];
         [alert show];
-        [alert release];
         return NO;
     }
     else return YES;

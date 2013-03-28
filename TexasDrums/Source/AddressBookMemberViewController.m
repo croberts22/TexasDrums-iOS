@@ -27,15 +27,6 @@
     return self;
 }
 
-- (void)dealloc {
-    [member_name release], member_name = nil;
-    [member_header release], member_header = nil;
-    [member_status release], member_status = nil;
-    [profile release], profile = nil;
-    [member_contact release], member_contact = nil;
-    [super dealloc];
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -72,7 +63,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ProfileCell];
     if(cell == nil){
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:ProfileCell] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:ProfileCell];
         
         cell.textLabel.font = [UIFont TexasDrumsFontOfSize:12];
         cell.textLabel.textColor = [UIColor TexasDrumsOrangeColor];
@@ -85,8 +76,8 @@
         cell.textLabel.backgroundColor = [UIColor clearColor];
         cell.detailTextLabel.backgroundColor = [UIColor clearColor];
         
-        cell.backgroundView = [[[UIImageView alloc] init] autorelease];
-        cell.selectedBackgroundView = [[[UIImageView alloc] init] autorelease];
+        cell.backgroundView = [[UIImageView alloc] init];
+        cell.selectedBackgroundView = [[UIImageView alloc] init];
     }    
     
     if(indexPath.section == 0){
@@ -128,7 +119,6 @@
                                                         otherButtonTitles:@"Yes!", nil];
         actionSheet.tag = 1;
         [actionSheet showFromTabBar:self.parentViewController.tabBarController.tabBar];
-        [actionSheet release];
     }
     else if(indexPath.row == 1){
         // User wants to call.
@@ -140,7 +130,6 @@
                                                         otherButtonTitles:@"Yes!", nil];
         actionSheet.tag = 2;
         [actionSheet showFromTabBar:self.parentViewController.tabBarController.tabBar];
-        [actionSheet release];
     }
 }
 
@@ -165,7 +154,6 @@
                                                                      alpha:1.0];
                     [mailVC setToRecipients:[NSArray arrayWithObject:profile.email]];
                     [self presentModalViewController:mailVC animated:YES];
-                    [mailVC release];
                 }
                 else{
                     TDLog(@"Mail client not configured.");
@@ -175,7 +163,6 @@
                                                           cancelButtonTitle:@"Okay"
                                                           otherButtonTitles:nil, nil];
                     [alert show];
-                    [alert release];
                 }
             }
             // User does not want to send an email.

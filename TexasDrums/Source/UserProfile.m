@@ -51,34 +51,6 @@ static UserProfile *sharedInstance = nil;
     return self;
 }
 
-- (void)dealloc {
-    [super dealloc];
-}
-
-+ (id)allocWithZone:(NSZone *)zone {
-    return [[self sharedInstance] retain];
-}
-
-- (id)copyWithZone:(NSZone *)zone {
-    return self;
-}
-
-- (id)retain {
-    return self;
-}
-
-- (NSUInteger)retainCount {
-    return NSUIntegerMax;
-}
-
-- (oneway void)release {
-    // Do nothing.
-}
-
-- (id)autorelease {
-    return self;
-}
-
 #pragma mark - Instance Methods
 
 - (void)createProfile:(NSDictionary *)dictionary {

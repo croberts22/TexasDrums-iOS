@@ -35,13 +35,6 @@
     return self;
 }
 
-- (void)dealloc {
-    [super cancelRequest];
-    self.delegate = nil;
-    
-	[super dealloc];
-}
-
 #pragma mark -
 #pragma mark TexasDrumsRequest Methods
 

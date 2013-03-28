@@ -16,7 +16,7 @@
     if (self) {
         if(style == UITableViewCellStyleSubtitle){
             self.backgroundColor = [UIColor clearColor];
-            self.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"uitableviewselection-orange-60.png"]] autorelease];
+            self.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"uitableviewselection-orange-60.png"]];
             
             self.textLabel.numberOfLines = 1;
             self.textLabel.font = [UIFont TexasDrumsFontOfSize:14];

@@ -28,16 +28,6 @@
     return self;
 }
 
-- (void)dealloc {
-    [the_year release], the_year = nil;
-    [snares release], snares = nil;
-    [tenors release], tenors = nil;
-    [basses release], basses = nil;
-    [cymbals release], cymbals = nil;
-    [instructor release], instructor = nil;
-    [super dealloc];
-}
-
 #pragma mark - Instance Methods
 
 - (void)addMember:(RosterMember *)member {
@@ -62,12 +52,10 @@
     // Snares are positioned opposite of everyone else because we're rebels.
     NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"position" ascending:NO];
     [self.snares sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
-    [descriptor release];
     descriptor = [[NSSortDescriptor alloc] initWithKey:@"position" ascending:YES];
     [self.basses sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
     [self.tenors sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
     [self.cymbals sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
-    [descriptor release];
 }
 
 

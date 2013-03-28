@@ -46,14 +46,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)dealloc {
-    [membersOptions release], membersOptions = nil;
-    [memberTable release], memberTable = nil;
-    [loginPrompt release], loginPrompt = nil;
-    [adminOptions release], adminOptions = nil;
-    [super dealloc];
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -123,16 +115,16 @@
     UIBarButtonItem *button;
     
     if(buttonType == kLogin) {
-        button = [[[UIBarButtonItem alloc] initWithTitle:@"Login" 
-                                                   style:UIBarButtonItemStyleDone 
-                                                  target:self 
-                                                  action:@selector(showMemberLoginScreen)] autorelease];
+        button = [[UIBarButtonItem alloc] initWithTitle:@"Login"
+                                                  style:UIBarButtonItemStyleDone
+                                                 target:self
+                                                 action:@selector(showMemberLoginScreen)];
     }
     else if(buttonType == kLogout) {
-        button = [[[UIBarButtonItem alloc] initWithTitle:@"Logout" 
-                                                   style:UIBarButtonItemStyleDone 
-                                                  target:self 
-                                                  action:@selector(logoutButtonPressed)] autorelease];
+        button = [[UIBarButtonItem alloc] initWithTitle:@"Logout"
+                                                  style:UIBarButtonItemStyleDone
+                                                 target:self
+                                                 action:@selector(logoutButtonPressed)];
     }
     else return;
     
@@ -149,7 +141,7 @@
 }
 
 - (void)showMemberLoginScreen {
-    MemberLoginViewController *MLVC = [[[MemberLoginViewController alloc] init] autorelease];
+    MemberLoginViewController *MLVC = [[MemberLoginViewController alloc] init];
     [MLVC setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     [self.navigationController presentModalViewController:MLVC animated:YES];
 }   
@@ -229,7 +221,7 @@
     
     TexasDrumsGroupedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[TexasDrumsGroupedTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[TexasDrumsGroupedTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     // Override TexasDrumsGroupedTableViewCell properties.
@@ -261,8 +253,8 @@
     
     // Since a cell's background views are not compatible with UIImageView,
     // set them both as UIImageView.
-    cell.backgroundView = [[[UIImageView alloc] init] autorelease];
-    cell.selectedBackgroundView = [[[UIImageView alloc] init] autorelease];
+    cell.backgroundView = [[UIImageView alloc] init];
+    cell.selectedBackgroundView = [[UIImageView alloc] init];
     
     // Cell Background images.
     // TODO: Change the selected background image to something else; 
@@ -296,15 +288,15 @@
     
     if(indexPath.section == 0){
         if(indexPath.row == 0){
-            DownloadMusicViewController *DMVC = [[[DownloadMusicViewController alloc] initWithNibName:@"DownloadMusicView" bundle:[NSBundle mainBundle]] autorelease];
+            DownloadMusicViewController *DMVC = [[DownloadMusicViewController alloc] initWithNibName:@"DownloadMusicView" bundle:[NSBundle mainBundle]];
             [self.navigationController pushViewController:DMVC animated:YES];
         }
         if(indexPath.row == 1){
-            AddressBookViewController *ABVC = [[[AddressBookViewController alloc] initWithNibName:@"AddressBookView" bundle:[NSBundle mainBundle]] autorelease];
+            AddressBookViewController *ABVC = [[AddressBookViewController alloc] initWithNibName:@"AddressBookView" bundle:[NSBundle mainBundle]];
             [self.navigationController pushViewController:ABVC animated:YES];
         }
         if(indexPath.row == 2){
-            ProfileViewController *PVC = [[[ProfileViewController alloc] initWithNibName:@"ProfileView" bundle:[NSBundle mainBundle]] autorelease];
+            ProfileViewController *PVC = [[ProfileViewController alloc] initWithNibName:@"ProfileView" bundle:[NSBundle mainBundle]];
             [self.navigationController pushViewController:PVC animated:YES];
         }
         if(indexPath.row == 3){
@@ -316,11 +308,11 @@
     }
     else{
         if(indexPath.row == 0){
-            PaymentViewController *PVC = [[[PaymentViewController alloc] initWithNibName:@"PaymentView" bundle:[NSBundle mainBundle]] autorelease];
+            PaymentViewController *PVC = [[PaymentViewController alloc] initWithNibName:@"PaymentView" bundle:[NSBundle mainBundle]];
             [self.navigationController pushViewController:PVC animated:YES];
         }
         if(indexPath.row == 1){
-            AddMemberViewController *AMVC = [[[AddMemberViewController alloc] initWithNibName:@"AddMemberView" bundle:[NSBundle mainBundle]] autorelease];
+            AddMemberViewController *AMVC = [[AddMemberViewController alloc] initWithNibName:@"AddMemberView" bundle:[NSBundle mainBundle]];
             [self.navigationController pushViewController:AMVC animated:YES];
         }
     }

@@ -36,7 +36,7 @@
     [self setTitle:self.filename];
     
     //add a 'print' button for now.
-    UIBarButtonItem *print = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(print_PDF)] autorelease];
+    UIBarButtonItem *print = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(print_PDF)];
     
     self.navigationItem.rightBarButtonItem = print;
     

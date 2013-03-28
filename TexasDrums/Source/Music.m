@@ -28,19 +28,10 @@
     return self;
 }
 
-- (void)dealloc {
-    [filename release], filename = nil;
-    [location release], location = nil;
-    [instrument release], instrument = nil;
-    [filetype release], filetype = nil;
-    [status release], status = nil;
-    [super dealloc];
-}
-
 #pragma mark - Class Methods
 
 + (Music *)createNewMusic:(NSDictionary *)item {
-    Music *music = [[[Music alloc] init] autorelease];
+    Music *music = [[Music alloc] init];
     
     music.filename = [item objectForKey:@"name"];
     music.location = [[item objectForKey:@"location"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];

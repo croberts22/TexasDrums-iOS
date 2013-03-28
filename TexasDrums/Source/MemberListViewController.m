@@ -122,7 +122,6 @@ static NSMutableArray *members = nil;
 - (void)sortMembersByName {
     NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"firstname" ascending:YES];
     [members sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
-    [descriptor release];
 }
 
 - (void)sortCurrentSelection {
@@ -177,9 +176,9 @@ static NSMutableArray *members = nil;
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if(cell == nil){
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
-        cell.selectedBackgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"uitableviewselection-orange-44.png"]] autorelease];
+        cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"uitableviewselection-orange-44.png"]];
         
         cell.textLabel.font = [UIFont TexasDrumsBoldFontOfSize:16];
         cell.textLabel.textColor = [UIColor TexasDrumsGrayColor];

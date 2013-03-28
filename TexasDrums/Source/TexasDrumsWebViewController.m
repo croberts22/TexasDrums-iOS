@@ -46,7 +46,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.indicator = [[[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)] autorelease];
+    self.indicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
     
     [self.indicator sizeToFit];
     [self.indicator setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin)];
@@ -108,7 +108,7 @@
 
 - (void)hideRefreshButton {
     
-    UIBarButtonItem *loading = [[[UIBarButtonItem alloc] initWithCustomView:indicator] autorelease];
+    UIBarButtonItem *loading = [[UIBarButtonItem alloc] initWithCustomView:indicator];
     
     [indicator startAnimating];
     [toolbarItems replaceObjectAtIndex:[toolbarItems count] - 1 withObject:loading];

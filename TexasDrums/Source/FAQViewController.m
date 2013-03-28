@@ -36,13 +36,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)dealloc {
-    [FAQTable release], FAQTable = nil;
-    [faq release], faq = nil;
-    [categories release], categories = nil;
-    [super dealloc];
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -227,10 +220,10 @@
     if (cell == nil)
     {
         // Set cell properties.
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
-        label = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+        label = [[UILabel alloc] initWithFrame:CGRectZero];
         label.lineBreakMode = UILineBreakModeWordWrap;
         label.numberOfLines = 0; 
         label.backgroundColor = [UIColor clearColor];

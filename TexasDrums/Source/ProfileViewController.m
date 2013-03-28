@@ -34,11 +34,6 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (void)dealloc {
-    [profileTable release], profileTable = nil;
-    [super dealloc];
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -112,7 +107,7 @@
     if(indexPath.section == 2){
         cell = [tableView dequeueReusableCellWithIdentifier:Status];
         if(cell == nil){
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Status] autorelease];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Status];
             
             // UITableViewCell Properties
             cell.backgroundColor = [UIColor clearColor];
@@ -124,14 +119,14 @@
             
             // Since a cell's background views are not compatible with UIImageView,
             // set them both as UIImageView.
-            cell.backgroundView = [[[UIImageView alloc] init] autorelease];
-            cell.selectedBackgroundView = [[[UIImageView alloc] init] autorelease];
+            cell.backgroundView = [[UIImageView alloc] init];
+            cell.selectedBackgroundView = [[UIImageView alloc] init];
         }
     }
     else {
         cell = [tableView dequeueReusableCellWithIdentifier:ProfileCell];
         if(cell == nil){
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:ProfileCell] autorelease];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:ProfileCell];
                         
             //UITableViewCell properties
             cell.backgroundColor = [UIColor clearColor];
@@ -143,8 +138,8 @@
             cell.detailTextLabel.font = [UIFont TexasDrumsFontOfSize:16];
             cell.detailTextLabel.textColor = [UIColor TexasDrumsGrayColor];
             
-            cell.backgroundView = [[[UIImageView alloc] init] autorelease];
-            cell.selectedBackgroundView = [[[UIImageView alloc] init] autorelease];
+            cell.backgroundView = [[UIImageView alloc] init];
+            cell.selectedBackgroundView = [[UIImageView alloc] init];
             
             background = [UIImage imageNamed:@"table_cell.png"];
             selected_background = [UIImage imageNamed:@"table_cell.png"];
@@ -250,25 +245,25 @@
 
     if(indexPath.section == 0){
         if(indexPath.row == 0){
-            EditNameViewController *ENVC = [[[EditNameViewController alloc] initWithNibName:@"EditNameView" bundle:[NSBundle mainBundle]] autorelease];
+            EditNameViewController *ENVC = [[EditNameViewController alloc] initWithNibName:@"EditNameView" bundle:[NSBundle mainBundle]];
             [self.navigationController pushViewController:ENVC animated:YES];
         }
         else if(indexPath.row == 2){
-            EditPasswordViewController *EPVC = [[[EditPasswordViewController alloc] initWithNibName:@"EditPasswordView" bundle:[NSBundle mainBundle]] autorelease];
+            EditPasswordViewController *EPVC = [[EditPasswordViewController alloc] initWithNibName:@"EditPasswordView" bundle:[NSBundle mainBundle]];
             [self.navigationController pushViewController:EPVC animated:YES];
         }
     }
     else if(indexPath.section == 1){
         if(indexPath.row == 0){
-            EditPhoneViewController *EPVC = [[[EditPhoneViewController alloc] initWithNibName:@"EditPhoneView" bundle:[NSBundle mainBundle]] autorelease];
+            EditPhoneViewController *EPVC = [[EditPhoneViewController alloc] initWithNibName:@"EditPhoneView" bundle:[NSBundle mainBundle]];
             [self.navigationController pushViewController:EPVC animated:YES];
         }
         else if(indexPath.row == 1){
-            EditEmailViewController *EEVC = [[[EditEmailViewController alloc] initWithNibName:@"EditEmailView" bundle:[NSBundle mainBundle]] autorelease];
+            EditEmailViewController *EEVC = [[EditEmailViewController alloc] initWithNibName:@"EditEmailView" bundle:[NSBundle mainBundle]];
             [self.navigationController pushViewController:EEVC animated:YES];
         }
         else{
-            EditBirthdayViewController *EBVC = [[[EditBirthdayViewController alloc] initWithNibName:@"EditBirthdayView" bundle:[NSBundle mainBundle]] autorelease];
+            EditBirthdayViewController *EBVC = [[EditBirthdayViewController alloc] initWithNibName:@"EditBirthdayView" bundle:[NSBundle mainBundle]];
             [self.navigationController pushViewController:EBVC animated:YES];
         }
     }

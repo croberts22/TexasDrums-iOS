@@ -8,10 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
+#import <Crashlytics/Crashlytics.h>
 
-@interface TexasDrumsAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate, TexasDrumsRequestDelegate> {
+#import "SWRevealViewController.h"
+
+@interface TexasDrumsAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate, TexasDrumsRequestDelegate, SWRevealViewControllerDelegate> {
     UIImageView *splashView;
 }
+
+@property (strong, nonatomic) SWRevealViewController *viewController;
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;

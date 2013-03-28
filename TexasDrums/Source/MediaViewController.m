@@ -21,11 +21,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)dealloc {
-    [mediaOptions release], mediaOptions = nil;
-    [super dealloc];
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -51,13 +46,13 @@
 #pragma mark - UI Methods
 
 - (IBAction)audioButtonPressed:(id)sender {
-    AudioViewController *AVC = [[[AudioViewController alloc] initWithNibName:@"AudioView" bundle:[NSBundle mainBundle]] autorelease];
+    AudioViewController *AVC = [[AudioViewController alloc] initWithNibName:@"AudioView" bundle:[NSBundle mainBundle]];
     
     [self.navigationController pushViewController:AVC animated:YES];
 }
 
 - (IBAction)videoButtonPressed:(id)sender {
-    VideoViewController *VVC = [[[VideoViewController alloc] initWithNibName:@"VideoView" bundle:[NSBundle mainBundle]] autorelease];
+    VideoViewController *VVC = [[VideoViewController alloc] initWithNibName:@"VideoView" bundle:[NSBundle mainBundle]];
     
     [self.navigationController pushViewController:VVC animated:YES];
 }

@@ -32,11 +32,6 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (void)dealloc {
-    [backgroundButton release];
-    [super dealloc];
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -57,15 +52,15 @@
     self.instrument = @"";
     self.admin = @"";
     
-    self.firstname_field = [[[UITextField alloc] init] autorelease];
-    self.lastname_field = [[[UITextField alloc] init] autorelease];
-    self.username_field = [[[UITextField alloc] init] autorelease];
-    self.email_field = [[[UITextField alloc] init] autorelease];
-    self.phone_field = [[[UITextField alloc] init] autorelease];
-    self.birthday_field = [[[UITextField alloc] init] autorelease];
-    self.classification_controller = [[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Current", @"Alumni", nil]] autorelease];
-    self.instrument_controller = [[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Snare", @"Tenors", @"Bass", @"Cymbals", nil]] autorelease];
-    self.admin_controller = [[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Yes", @"No", nil]] autorelease];
+    self.firstname_field = [[UITextField alloc] init];
+    self.lastname_field = [[UITextField alloc] init];
+    self.username_field = [[UITextField alloc] init];
+    self.email_field = [[UITextField alloc] init];
+    self.phone_field = [[UITextField alloc] init];
+    self.birthday_field = [[UITextField alloc] init];
+    self.classification_controller = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Current", @"Alumni", nil]];
+    self.instrument_controller = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Snare", @"Tenors", @"Bass", @"Cymbals", nil]];
+    self.admin_controller = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Yes", @"No", nil]];
 }
 
 - (void)viewDidUnload
@@ -105,7 +100,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     cell.accessoryType = UITableViewCellAccessoryNone;
@@ -268,7 +263,7 @@
 
 - (NSString *)generateUsernameWithFirstName:(NSString *)first AndLastName:(NSString *)last {
 
-    return [[[NSString alloc] initWithFormat:@"%@%@", [[first lowercaseString] substringToIndex:1], [last lowercaseString]] autorelease];
+    return [[NSString alloc] initWithFormat:@"%@%@", [[first lowercaseString] substringToIndex:1], [last lowercaseString]];
 }
 
 #pragma mark - Table view delegate

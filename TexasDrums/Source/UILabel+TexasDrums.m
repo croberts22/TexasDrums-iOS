@@ -11,7 +11,7 @@
 @implementation UILabel (TexasDrums)
 
 + (UILabel *)TexasDrumsNavigationBar; {
-    UILabel *navigationBarView = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+    UILabel *navigationBarView = [[UILabel alloc] initWithFrame:CGRectZero];
     navigationBarView.backgroundColor = [UIColor clearColor];
     navigationBarView.font = [UIFont TexasDrumsBoldFontOfSize:20];
     navigationBarView.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];

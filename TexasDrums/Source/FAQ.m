@@ -25,17 +25,10 @@
     return self;
 }
 
-- (void)dealloc {
-    [category release], category = nil;
-    [question release], question = nil;
-    [answer release], answer = nil;
-    [super dealloc];
-}
-
 #pragma mark - Class Methods
 
 + (FAQ *)createNewFAQ:(NSDictionary *)item {
-    FAQ *question = [[[FAQ alloc] init] autorelease];
+    FAQ *question = [[FAQ alloc] init];
     
     question.category = [item objectForKey:@"category"];
     question.question = [item objectForKey:@"question"];

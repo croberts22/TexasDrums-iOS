@@ -31,18 +31,6 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (void)dealloc {
-    [original_password release], original_password = nil;
-    [a_new_password release], a_new_password = nil;
-    [a_new_password_again release], a_new_password_again = nil;
-    [length_constraint release], length_constraint = nil;
-    [alpha_constraint release], alpha_constraint = nil;
-    [numerical_constraint release], numerical_constraint = nil;
-    [background_button release], background_button = nil;
-    [status release], status = nil;
-    [super dealloc];
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -153,11 +141,11 @@
 
 - (BOOL)checkConstraints {
     
-    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
                                                      message:@""
                                                     delegate:self
                                            cancelButtonTitle:@"Okay"
-                                           otherButtonTitles:nil, nil] autorelease];
+                                           otherButtonTitles:nil, nil];
     
     // Check for empty fields
     if(original_password.text.length == 0 || a_new_password.text.length == 0 || a_new_password_again.text.length == 0){

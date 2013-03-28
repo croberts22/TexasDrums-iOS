@@ -31,15 +31,6 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (void)dealloc {
-    [picker release], picker = nil;
-    [birthdayLabel release], birthdayLabel = nil;
-    [submitButton release], submitButton = nil;
-    [updatedBirthday release], updatedBirthday = nil;
-    [status release], status = nil;
-    [super dealloc];
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -60,7 +51,7 @@
         self.picker.date = [NSDate date];
     }
     else {
-        NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"MMddyyyy"];
         NSDate *current_date = [dateFormatter dateFromString:[UserProfile sharedInstance].birthday];
         
@@ -153,7 +144,6 @@
                                               cancelButtonTitle:@"Okay"
                                               otherButtonTitles:nil, nil];
         [alert show];
-        [alert release];
         
         return NO;
     }

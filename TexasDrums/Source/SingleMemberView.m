@@ -29,15 +29,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)dealloc {
-    [member release], member = nil;
-    [memberName release], memberName = nil;
-    [memberData release], memberData = nil;
-    data = nil;
-    categories = nil;
-    [super dealloc];
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -105,7 +96,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellData];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellData] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellData];
     }
     
     // UITableViewCell Properties
@@ -188,7 +179,6 @@
         }
 
         [actionSheet showFromTabBar:self.parentViewController.tabBarController.tabBar];
-        [actionSheet release];
     }
 }
 
@@ -207,8 +197,6 @@
                     mailVC.mailComposeDelegate = self;
                     [mailVC setToRecipients:[NSArray arrayWithObject:member.email]];
                     [self presentModalViewController:mailVC animated:YES];
-                    [mailVC release];
-                    
                 }
                 else{ // User has not set up mail.
                     TDLog(@"Mail client not configured.");
@@ -218,7 +206,6 @@
                                                           cancelButtonTitle:@"Okay" 
                                                           otherButtonTitles:nil, nil];
                     [alert show];
-                    [alert release];
                 }
             }
             else { // User declines.

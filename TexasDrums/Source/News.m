@@ -31,20 +31,10 @@
     return self;
 }
 
-- (void)dealloc {
-    [titleOfPost release], titleOfPost = nil;
-    [post release], post = nil;
-    [subtitle release], subtitle = nil;
-    [author release], author = nil;
-    [postDate release], postDate = nil;
-    [time release], time = nil;
-    [super dealloc];
-}
-
 #pragma mark - Class Methods
 
 + (News *)createNewPost:(NSDictionary *)item {
-    News *post = [[[News alloc] init] autorelease];
+    News *post = [[News alloc] init];
     
     post.post = [item objectForKey:@"content"];
     post.postDate = [item objectForKey:@"date"];

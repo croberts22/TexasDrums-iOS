@@ -30,8 +30,6 @@
 - (void)dealloc {
     [super cancelRequest];
     self.delegate = nil;
-    
-	[super dealloc];
 }
 
 #pragma mark -

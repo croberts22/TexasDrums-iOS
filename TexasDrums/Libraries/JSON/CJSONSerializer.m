@@ -39,7 +39,7 @@ static NSData *kTrue = NULL;
 
 + (void)initialize
     {
-    NSAutoreleasePool *thePool = [[NSAutoreleasePool alloc] init];
+//    NSAutoreleasePool *thePool = [[NSAutoreleasePool alloc] init];
 
     if (self == [CJSONSerializer class])
         {
@@ -50,7 +50,7 @@ static NSData *kTrue = NULL;
         if (kTrue == NULL)
             kTrue = [[NSData alloc] initWithBytesNoCopy:(void *)"true" length:4 freeWhenDone:NO];
 
-        [thePool release];
+//        [thePool release];
         }
     }
 

@@ -38,24 +38,10 @@
     return self;
 }
 
-- (void)dealloc {
-    [videoTitle release], videoTitle = nil;
-    [type release], type = nil;
-    [link release], link = nil;
-    [videoID release], videoID = nil;
-    [description release], description = nil;
-    [videoYear release], videoYear = nil;
-    [videoDate release], videoDate = nil;
-    [time release], time = nil;
-    [thumbnail release], thumbnail = nil;
-    
-    [super dealloc];
-}
-
 #pragma mark - Class Methods
 
 + (Video *)createNewVideo:(NSDictionary *)item {
-    Video *video = [[[Video alloc] init] autorelease];
+    Video *video = [[Video alloc] init];
     
     video.videoTitle = [item objectForKey:@"title"];
     video.type = [item objectForKey:@"videotype"];
@@ -78,7 +64,7 @@
 
 - (NSURL *)createThumbnailURL {
     NSString *string = [NSString stringWithFormat:@"http://img.youtube.com/vi/%@/0.jpg", self.videoID];
-    NSURL *url = [[[NSURL alloc] initWithString:string] autorelease];
+    NSURL *url = [[NSURL alloc] initWithString:string];
 
     return url;
 }
