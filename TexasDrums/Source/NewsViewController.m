@@ -10,16 +10,15 @@
 #import "News.h"
 #import "NewsPostView.h"
 #import "TexasDrumsTableViewCell.h"
-#import "TexasDrumsGetNews.h"
 #import "CJSONDeserializer.h"
 
-#import "SWRevealViewController.h"
+#import "AFJSONRequestOperation.h"
+#import "TexasDrumsAppDelegate.h"
 
-@interface NewsViewController() {
-    TexasDrumsGetNews *getNews;
-}
+#import "NSString+RegEx.h"
 
-@property (nonatomic, retain) TexasDrumsGetNews *getNews;
+@interface NewsViewController()
+
 @property (nonatomic, assign) BOOL _reloading;
 
 - (void)refreshPressed;
@@ -39,13 +38,20 @@
 
 @implementation NewsViewController
 
-@synthesize getNews, _reloading;
+@synthesize _reloading;
 @synthesize newsTable, posts, allposts, timestamp, refresh, num_member_posts, status;
 
 #pragma mark - Memory Management
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if(self) {
+        self.managedObjectContext = [((TexasDrumsAppDelegate *)[[UIApplication sharedApplication] delegate]) managedObjectContext];
+    }
+    return self;
+}
+
 - (void)dealloc {
-    self.getNews.delegate = nil;
     _refreshHeaderView = nil;
 }
 
@@ -70,18 +76,16 @@
     
     [self setTitle:@"News"];
     
-    SWRevealViewController *revealController = [self revealViewController];
-    
-    [self.navigationController.navigationBar addGestureRecognizer:revealController.panGestureRecognizer];
+    [self.navigationController.navigationBar addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     
     UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
-                                                                         style:UIBarButtonItemStyleBordered target:revealController action:@selector(revealToggle:)];
+                                                                         style:UIBarButtonItemStyleBordered target:self.revealViewController action:@selector(revealToggle:)];
     
     self.navigationItem.leftBarButtonItem = revealButtonItem;
 
     // Set properties.
     self.timestamp = 0;
-    self.newsTable.alpha = 0.0f;
+//    self.newsTable.alpha = 0.0f;
     self.newsTable.separatorColor = [UIColor darkGrayColor];
     
     // Allocate things as necessary.
@@ -151,7 +155,7 @@
 
 - (void)hideRefreshButton {
     self.navigationItem.rightBarButtonItem = nil;
-    [SVProgressHUD showWithStatus:@"Loading..." maskType:SVProgressHUDMaskTypeClear];
+//    [SVProgressHUD showWithStatus:@"Loading..." maskType:SVProgressHUDMaskTypeClear];
 }
 
 - (void)dismissWithSuccess {
@@ -188,11 +192,40 @@
 #pragma mark - Data Methods
 
 - (void)connect {
-    [SVProgressHUD dismiss]; return;
-    [self hideRefreshButton];
-    TexasDrumsGetNews *get = [[TexasDrumsGetNews alloc] initWithTimestamp:timestamp];
-    get.delegate = self;
-    [get startRequest];    
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.texasdrums.com/api/2.0/news.php?apikey=LwtP6NB2Y0hooXVZj29fwceVfp93D&since=0"]];
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        TDLog(@"Success!");
+        
+        for(NSDictionary *item in JSON) {
+            News *news = [NSEntityDescription insertNewObjectForEntityForName:@"News" inManagedObjectContext:self.managedObjectContext];
+            news.title = item[@"title"];
+            news.content = item[@"content"];
+            news.subtitle = [NSString extractHTML:news.content];
+            news.subtitle = [NSString stripExcessEscapes:news.subtitle];
+            news.timestamp = @([item[@"timestamp"] intValue]);
+        }
+        
+        
+        
+        /*
+         post.post = [item objectForKey:@"content"];
+         post.postDate = [item objectForKey:@"date"];
+         post.author = [item objectForKey:@"firstname"];
+         post.time = [item objectForKey:@"time"];
+         post.timestamp = [[item objectForKey:@"timestamp"] intValue];
+         post.titleOfPost = [item objectForKey:@"title"];
+         post.memberPost = [[item objectForKey:@"membernews"] boolValue];
+         post.sticky = [[item objectForKey:@"sticky"] boolValue];
+         post.subtitle = [NSString extractHTML:post.post];
+         post.subtitle = [NSString stripExcessEscapes:post.subtitle];*/
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        TDLog(@"Failure.");
+        
+    }];
+    
+    [operation start];
 }
 
 - (void)parseNewsData:(NSDictionary *)results {
@@ -204,21 +237,21 @@
     for(NSDictionary *item in results){
         if(DEBUG_MODE) TDLog(@"%@", item);
         
-        News *post = [News createNewPost:item];
+        //News *post = [News createNewPost:item];
         
         // If we make it in this loop, then we know this post
         // to be the most recent timestamp.
         if(!timestamp_updated){
-            self.timestamp = post.timestamp;
+//            self.timestamp = post.timestamp;
             timestamp_updated = YES;
-            TDLog(@"Timestamp updated to %d.", post.timestamp);
+//            TDLog(@"Timestamp updated to %d.", post.timestamp);
         }
         
-        if(!post.memberPost){
-            [posts addObject:post];
-        }
-        
-        [allposts addObject:post];
+//        if(!post.memberPost){
+//            [posts addObject:post];
+//        }
+//        
+//        [allposts addObject:post];
     }
     
     // Still need to sort the data in the event that we have new posts coming up through the refresh.
@@ -238,18 +271,15 @@
 
 #pragma mark - UITableView Data Source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return [[self.fetchedResultsController sections] count];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // If user logged in, show all posts. Otherwise, just regular posts.
-    if([UserProfile sharedInstance].loggedIn) {
-        return [allposts count];
-    }
-    else{
-        return [posts count];
-    }
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
+    return [sectionInfo numberOfObjects];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -272,32 +302,34 @@
     cell.detailTextLabel.textColor = [UIColor grayColor];
     cell.imageView.image = nil;
     
-    // If logged in, set defaults and allow member posts to be displayed.
-    if([UserProfile sharedInstance].loggedIn){
-        cell.textLabel.text = [[allposts objectAtIndex:indexPath.row] titleOfPost];
-        cell.detailTextLabel.text = [[allposts objectAtIndex:indexPath.row] subtitle];
-
-        if([[allposts objectAtIndex:indexPath.row] memberPost]){
-            cell.textLabel.textColor = [UIColor TexasDrumsOrangeColor];
-            cell.detailTextLabel.textColor = [UIColor TexasDrumsOrangeColor];
-        }
-        
-        if([[allposts objectAtIndex:indexPath.row] sticky]){
-            cell.textLabel.textColor = [UIColor whiteColor];
-            cell.detailTextLabel.textColor = [UIColor lightGrayColor];
-            cell.imageView.image = [UIImage stickyIcon];
-        }
-    }
-    else{
-        if([[posts objectAtIndex:indexPath.row] sticky]){
-            cell.textLabel.textColor = [UIColor whiteColor];
-            cell.detailTextLabel.textColor = [UIColor lightGrayColor];
-            cell.imageView.image = [UIImage stickyIcon];
-        }
-        cell.textLabel.text = [[posts objectAtIndex:indexPath.row] titleOfPost];
-        cell.detailTextLabel.text = [[posts objectAtIndex:indexPath.row] subtitle];
-    }
-     
+    [self configureCell:cell atIndexPath:indexPath];
+//    
+//    // If logged in, set defaults and allow member posts to be displayed.
+//    if([UserProfile sharedInstance].loggedIn){
+//        cell.textLabel.text = [[allposts objectAtIndex:indexPath.row] titleOfPost];
+//        cell.detailTextLabel.text = [[allposts objectAtIndex:indexPath.row] subtitle];
+//
+//        if([[allposts objectAtIndex:indexPath.row] memberPost]){
+//            cell.textLabel.textColor = [UIColor TexasDrumsOrangeColor];
+//            cell.detailTextLabel.textColor = [UIColor TexasDrumsOrangeColor];
+//        }
+//        
+//        if([[allposts objectAtIndex:indexPath.row] sticky]){
+//            cell.textLabel.textColor = [UIColor whiteColor];
+//            cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+//            cell.imageView.image = [UIImage stickyIcon];
+//        }
+//    }
+//    else{
+//        if([[posts objectAtIndex:indexPath.row] sticky]){
+//            cell.textLabel.textColor = [UIColor whiteColor];
+//            cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+//            cell.imageView.image = [UIImage stickyIcon];
+//        }
+//        cell.textLabel.text = [[posts objectAtIndex:indexPath.row] titleOfPost];
+//        cell.detailTextLabel.text = [[posts objectAtIndex:indexPath.row] subtitle];
+//    }
+    
     return cell;
 }
 
@@ -400,6 +432,119 @@
     // Show error message.
     [self dismissWithError];
     [self doneLoadingTableViewData];
+}
+
+#pragma mark - Fetched results controller
+
+- (NSFetchedResultsController *)fetchedResultsController
+{
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    // Edit the entity name as appropriate.
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"News" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    // Set the batch size to a suitable number.
+    [fetchRequest setFetchBatchSize:20];
+    
+    // Edit the sort key as appropriate.
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:NO];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    // Edit the section name key path and cache name if appropriate.
+    // nil for section name key path means "no sections".
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"News"];
+    aFetchedResultsController.delegate = self;
+    self.fetchedResultsController = aFetchedResultsController;
+    
+	NSError *error = nil;
+	if (![self.fetchedResultsController performFetch:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+	    abort();
+	}
+    
+    return _fetchedResultsController;
+}
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.newsTable beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
+           atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
+{
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [self.newsTable insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.newsTable deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath
+{
+    UITableView *tableView = self.newsTable;
+    
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.newsTable endUpdates];
+}
+
+/*
+ // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
+ 
+ - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+ {
+ // In the simplest, most efficient, case, reload the table view.
+ [self.tableView reloadData];
+ }
+ */
+
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    News *news = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    if([news.sticky boolValue]) {
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+        cell.imageView.image = [UIImage stickyIcon];
+    }
+    
+    cell.textLabel.text = news.title;
+    cell.detailTextLabel.text = news.subtitle;
 }
 
 @end

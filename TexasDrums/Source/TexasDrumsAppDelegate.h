@@ -16,14 +16,21 @@
     UIImageView *splashView;
 }
 
+@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
 @property (strong, nonatomic) SWRevealViewController *viewController;
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
-@property (nonatomic, retain) UIImageView *splashView;
+@property (nonatomic, strong) IBOutlet UIWindow *window;
+@property (nonatomic, strong) IBOutlet UITabBarController *tabBarController;
+@property (nonatomic, strong) UIImageView *splashView;
 
 - (void)createProfile:(NSDictionary *)results;
 - (void)destroyProfile;
+
+- (void)saveContext;
+- (NSURL *)applicationDocumentsDirectory;
 
 
 @end

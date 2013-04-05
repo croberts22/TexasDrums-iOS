@@ -13,7 +13,7 @@
 
 @class News;
 
-@interface NewsViewController : TexasDrumsViewController<TexasDrumsAPIConnection, EGORefreshTableHeaderDelegate, UITableViewDataSource, UITableViewDelegate> {
+@interface NewsViewController : TexasDrumsViewController<EGORefreshTableHeaderDelegate, NSFetchedResultsControllerDelegate> {
     EGORefreshTableHeaderView *_refreshHeaderView;
     IBOutlet UITableView *newsTable;
     IBOutlet UILabel *status;
@@ -23,6 +23,9 @@
     int num_member_posts;
     UIBarButtonItem *refresh;
 }
+
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @property (nonatomic, retain) UITableView *newsTable;
 @property (nonatomic, retain) UILabel *status;

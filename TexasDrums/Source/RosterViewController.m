@@ -141,6 +141,7 @@
 #pragma mark - Data Methods
 
 - (void)connect {
+    return;
     [self hideRefreshButton];
     [SVProgressHUD showWithStatus:@"Loading..."];
     TexasDrumsGetRosters *get = [[TexasDrumsGetRosters alloc] init];

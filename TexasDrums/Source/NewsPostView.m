@@ -85,22 +85,22 @@
 #pragma mark - Data Methods
 
 - (void)createHeader {
-    self.titleOfPost.text = post.titleOfPost;
-    
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:post.timestamp];
-    NSDateFormatter *format = [[NSDateFormatter alloc] init];
-    [format setDateFormat:@"MMMM d, yyyy 'at' h:m a"];
-    
-    NSString *dateString = [format stringFromDate:date];
-    
-    self.dateAndAuthor.text = [NSString stringWithFormat:@"Posted by %@ on %@", post.author, dateString];
-}
-
-- (NSString *)createPost {
-    NSString *header = @"<html><body link=#FF792A vlink=#CE792A alink=#FF792A><p style = 'font-family: Georgia; font-size: 14px; background-color: #000000; color: #999999'><br />";
-    NSString *footer = @"</p><br /></body></html>";
-    
-    return [NSString stringWithFormat:@"%@%@%@", header, post.post, footer];
+//    self.titleOfPost.text = post.titleOfPost;
+//    
+//    NSDate *date = [NSDate dateWithTimeIntervalSince1970:post.timestamp];
+//    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+//    [format setDateFormat:@"MMMM d, yyyy 'at' h:m a"];
+//    
+//    NSString *dateString = [format stringFromDate:date];
+//    
+//    self.dateAndAuthor.text = [NSString stringWithFormat:@"Posted by %@ on %@", post.author, dateString];
+//}
+//
+//- (NSString *)createPost {
+//    NSString *header = @"<html><body link=#FF792A vlink=#CE792A alink=#FF792A><p style = 'font-family: Georgia; font-size: 14px; background-color: #000000; color: #999999'><br />";
+//    NSString *footer = @"</p><br /></body></html>";
+//    
+//    return [NSString stringWithFormat:@"%@%@%@", header, post.post, footer];
 }
 
 #pragma mark - UIWebView Delegate Methods
